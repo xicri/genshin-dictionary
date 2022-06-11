@@ -1,0 +1,8 @@
+$color-dark: #013770;
+$color-darkest: darken($color-dark, 10%);
+$color-light: lighten($color-dark, 60%);
+$color-lightest: lighten($color-dark, 70%);
+
+$max-width: 840px;
+$side-margin: 12px;
+$search-font-size: 15px;
