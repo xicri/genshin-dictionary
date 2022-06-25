@@ -37,7 +37,7 @@ describe("The Genshin English Dictionary", () => {
 
     const word = words[0];
     const ja = await word.$("span[data-e2e='ja']");
-    const en = await word.$(".results__en");
+    const en = await word.$("*[data-e2e='en']");
     const pronunciationJa = await word.$(".results__pronunciation-ja");
     const notes = await word.$("div[data-e2e='notes']");
     const permalink = await word.$(".results__permalink > a");

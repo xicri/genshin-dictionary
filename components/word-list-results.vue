@@ -14,7 +14,7 @@
 
         <div class="results__translation">
           <span class="results__langname results__translation-item">English: </span>
-          <span class="results__translation-item">{{ word.en }}</span>
+          <span class="results__translation-item" data-e2e="en">{{ word.en }}</span>
         </div>
 
         <div v-if="word.zhCN" class="results__translation">
