@@ -2,13 +2,19 @@
   <div>
     <div class="layout-default__nav-wrapper">
       <nav class="layout-default__nav">
-        <h1 class="layout-default__title">
-          <a href="/">原神 英語辞典</a>
+        <h1>
+          <a href="/" class="layout-default__title">
+            <span>原神 英語・</span><span>中国語辞典</span>
+          </a>
         </h1>
 
         <a href="https://translate.genshin-dictionary.com/" class="layout-default__translator-link-pc layout-default__translator-link">
           原神 自動翻訳<sup class="layout-default__new">New!</sup>
         </a>
+
+        <spacer />
+
+        <hamburger-menu class="layout-default__menu" />
       </nav>
     </div>
     <div class="layout-default__translator-link-mobile">
@@ -16,8 +22,6 @@
         原神 自動翻訳<sup class="layout-default__new">New!</sup>
       </a>
     </div>
-
-    <hamburger-menu class="layout-default__menu" />
 
     <Nuxt />
   </div>
@@ -44,13 +48,14 @@
 
     display: flex;
     justify-content: flex-start;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 4em;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
   }
 
   &__title {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
     font-weight: 300;
     font-size: 32px;
     color: vars.$color-dark;
@@ -84,12 +89,6 @@
 
   &__new {
     font-size: 0.7em;
-  }
-
-  &__menu {
-    position: absolute;
-    top: 32px;
-    right: 64px;
   }
 }
 </style>

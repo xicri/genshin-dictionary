@@ -63,7 +63,6 @@ a {
 .menu {
   &__icon {
     display: block;
-    position: absolute;
     cursor: pointer;
     z-index: 20;
   }

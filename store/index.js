@@ -20,6 +20,7 @@ export const useDictionaryStore = defineStore("dictionary", {
             return (
               candidate(word.ja).includes(state.query) ||
               candidate(word.en).includes(state.query) ||
+              candidate(word.zhCN).includes(state.query) ||
               candidate(word.pronunciationJa).includes(state.query) ||
               candidate(word.notes).includes(state.query) ||
               word.variants?.ja?.some(variant => candidate(variant).includes(state.query)) ||

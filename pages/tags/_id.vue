@@ -13,7 +13,7 @@ export default defineComponent({
     const store = useDictionaryStore($pinia);
 
     const tagID = params.value.id;
-    const title = ref((tags[tagID].title ?? `原神に登場する${tags[tagID].ja}の英語表記一覧`) + " | 原神 英語辞典");
+    const title = ref((tags[tagID].title ?? `原神に登場する${tags[tagID].ja}の英語表記一覧`) + " | 原神 英語・中国語辞典");
 
     useMeta({
       title,
@@ -38,7 +38,7 @@ export default defineComponent({
     const onSearch = () => {
       if (window.location.pathname !== "/") {
         history.pushState({}, "", "/");
-        title.value = "原神 英語辞典";
+        title.value = "原神 英語・中国語辞典";
       }
     };
 

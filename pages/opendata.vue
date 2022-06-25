@@ -133,7 +133,7 @@ import tags from "~/static/dataset/tags.json";
 
 export default defineComponent({
   setup() {
-    const title = "オープンデータ・API | 原神 英語辞典";
+    const title = "オープンデータ・API | 原神 英語・中国語辞典";
 
     useMeta({
       title,

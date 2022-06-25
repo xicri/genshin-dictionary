@@ -8,7 +8,7 @@ import { defineComponent, useMeta } from "@nuxtjs/composition-api";
 
 export default defineComponent({
   setup() {
-    const title = "原神 英語辞典 ― 原神の固有名詞の英語表記一覧";
+    const title = "原神 英語・中国語辞典 ― 原神の固有名詞の英語・中国語表記一覧";
 
     useMeta({
       title,

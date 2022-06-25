@@ -8,7 +8,6 @@
           このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「<a href="https://genshin.hoyoverse.com" target="_blank" rel="noopener">原神</a>」で用いられる固有名詞等の日本語・英語対訳表です。
         </p>
         <p>現在の収録単語数は{{ wordCount }}語です。</p>
-        <p>更新情報は <a href="https://twitter.com/phol_si" target="_blank" rel="noopener">Twitter</a> からご確認下さい。</p>
 
         <h3>ご利用にあたっての注意・免責事項</h3>
         <p>本サイトはゲームの固有名詞等の対訳を掲載している都合上、意訳が多く、一般的な意味とは訳が異なる場合がありますので、ご注意下さい。</p>
@@ -25,6 +24,18 @@
         <p>
           本サイトの対訳表データは CSV 形式 (一般向け) 及び JSON 形式 (技術者向け) で配布しています。<br>
           詳細は<a href="/opendata/">オープンデータ・API についてのページ</a>をご確認下さい。
+        </p>
+
+        <h3>運営者・貢献者</h3>
+        <ul>
+          <li>運営者: ふぉる (<a href="https://twitter.com/phol_si" target="_blank" rel="noopener">Twitter</a> / <a href="https://github.com/xicri" target="_blank" rel="noopener">GitHub</a>)</li>
+          <li>中国語翻訳データ作成: Bill Haku (<a href="https://space.bilibili.com/158463764" target="_blank" rel="noopener">BiliBili</a> / <a href="https://twitter.com/Haku_Bill" target="_blank" rel="noopener">Twitter</a> / <a href="https://github.com/Bill-Haku" target="_blank" rel="noopener">GitHub</a>)</li>
+        </ul>
+
+        <p>
+          お問い合わせなどの際は <a href="https://twitter.com/phol_si" target="_blank" rel="noopener">Twitter</a> からご連絡下さい。(DM 可)<br>
+          バグ報告やオープンデータ・API 関連、その他技術的なお問い合わせについては、GitHub の <a href="https://github.com/xicri/genshin-dictionary/issues" target="_blank" rel="noopener">Issues</a> や <a href="https://github.com/xicri/genshin-dictionary/discussions" target="_blank" rel="noopener">Discussions</a> からお問い合わせ頂いても構いません。<br>
+          お問い合わせの際は、できるだけ日本語又は英語でお願いします。
         </p>
 
         <h3 id="credits">
@@ -50,7 +61,7 @@ import words from "~/static/dataset/words.json";
 
 export default defineComponent({
   setup() {
-    const title = "このサイトについて | 原神 英語辞典";
+    const title = "このサイトについて | 原神 英語・中国語辞典";
 
     useMeta({
       title,
