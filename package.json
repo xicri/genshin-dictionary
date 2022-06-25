@@ -40,6 +40,7 @@
     "@playwright/test": "^1.14.1",
     "babel-jest": "^28.1.0",
     "eslint": "latest",
+    "eslint-config-xicri": "latest",
     "express": "^4.17.1",
     "jest": "^28.1.0",
     "json5": "^2.2.0"
