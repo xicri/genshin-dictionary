@@ -19,7 +19,7 @@
 
         <div v-if="word.zhCN" class="results__translation">
           <span class="results__langname results__translation-item">简体中文: </span>
-          <span class="results__translation-item">{{ word.zhCN }}</span>
+          <span class="results__translation-item" data-e2e="zh-CN">{{ word.zhCN }}</span>
         </div>
       </h4>
       <div class="results__description">

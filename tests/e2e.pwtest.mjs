@@ -25,7 +25,7 @@ describe("The Genshin English Dictionary", () => {
     server.close();
   });
 
-  test("search", async ({ page }) => {
+  test("search by Japanese", async ({ page }) => {
     await page.goto(rootURL);
     const searchBox = await page.$("input[name='searchbox']");
     await searchBox.fill("狂戦士の仮面");
@@ -56,6 +56,64 @@ describe("The Genshin English Dictionary", () => {
 
     expect(await tagName.innerText()).toBe("聖遺物（個別名）");
     expect(await tag.getAttribute("href")).toBe("/tags/artifact-piece/");
+
+    // error message is NOT shown
+    expect(await page.$("p[data-e2e='empty']")).toBeNull();
+
+    return;
+  });
+
+  test("search by English", async ({ page }) => {
+    await page.goto(rootURL);
+    const searchBox = await page.$("input[name='searchbox']");
+    await searchBox.fill("Dull Blade");
+
+    await page.waitForTimeout(1400); // Wait for the search results to be shown
+
+    const words = await page.$$(".results__word");
+    await expect(words).toHaveLength(1);
+
+    const word = words[0];
+    const ja = await word.$("span[data-e2e='ja']");
+    const en = await word.$("*[data-e2e='en']");
+    const pronunciationJa = await word.$(".results__pronunciation-ja");
+
+    expect(await ja.innerText()).toBe("無鋒の剣");
+    expect(await en.innerText()).toBe("Dull Blade");
+    expect(await pronunciationJa.innerText()).toBe("(むほうのけん)");
+
+    const tags = await word.$$(".results__tags > a");
+    await expect(tags).toHaveLength(2);
+
+    // error message is NOT shown
+    expect(await page.$("p[data-e2e='empty']")).toBeNull();
+
+    return;
+  });
+
+  test("search by Chinese", async ({ page }) => {
+    await page.goto(rootURL);
+    const searchBox = await page.$("input[name='searchbox']");
+    await searchBox.fill("炽烈的炎之魔女");
+
+    await page.waitForTimeout(1400); // Wait for the search results to be shown
+
+    const words = await page.$$(".results__word");
+    await expect(words).toHaveLength(1);
+
+    const word = words[0];
+    const ja = await word.$("span[data-e2e='ja']");
+    const en = await word.$("*[data-e2e='en']");
+    const zhCN = await word.$("*[data-e2e='zh-CN']");
+    const pronunciationJa = await word.$(".results__pronunciation-ja");
+
+    expect(await ja.innerText()).toBe("燃え盛る炎の魔女");
+    expect(await en.innerText()).toBe("Crimson Witch of Flames");
+    expect(await zhCN.innerText()).toBe("炽烈的炎之魔女");
+    expect(await pronunciationJa.innerText()).toBe("(もえさかるほのおのまじょ)");
+
+    const tags = await word.$$(".results__tags > a");
+    await expect(tags).toHaveLength(1);
 
     // error message is NOT shown
     expect(await page.$("p[data-e2e='empty']")).toBeNull();
