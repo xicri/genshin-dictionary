@@ -101,7 +101,7 @@ describe("The Genshin English Dictionary", () => {
   test("title", async ({ page }) => {
     await page.goto(`${rootURL}/lumine/`);
 
-    expect(await page.title()).toBe("「蛍」は英語で \"Lumine\" | 原神 英語辞典");
+    expect(await page.title()).toBe("「蛍」は英語で \"Lumine\" | 原神 英語・中国語辞典");
 
     return;
   });

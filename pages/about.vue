@@ -50,7 +50,7 @@ import words from "~/static/dataset/words.json";
 
 export default defineComponent({
   setup() {
-    const title = "このサイトについて | 原神 英語辞典";
+    const title = "このサイトについて | 原神 英語・中国語辞典";
 
     useMeta({
       title,

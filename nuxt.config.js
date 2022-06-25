@@ -28,7 +28,7 @@ export default async () => {
         { hid: "og:description", property: "og:description", content: "原神に登場する固有名詞の英和・和英辞典です。" },
         { hid: "og:type", property: "og:type", content: "website" },
         { hid: "og:locale", property: "og:locale", content: "ja_JP" },
-        { hid: "og:site_name", property: "og:site_name", content: "原神英語辞典" },
+        { hid: "og:site_name", property: "og:site_name", content: "原神 英語・中国語辞典" },
         { hid: "twitter:card", property: "twitter:card", content: "summary" },
         { hid: "twitter:site", property: "twitter:site", content: "@phol_si" },
         { hid: "twitter:creator", property: "twitter:creator", content: "@phol_si" },

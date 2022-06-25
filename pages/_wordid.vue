@@ -14,7 +14,7 @@ export default defineComponent({
     const onSearch = () => {
       if (window.location.pathname !== "/") {
         history.pushState({}, "", "/");
-        document.title = "原神 英語辞典";
+        document.title = "原神 英語・中国語辞典";
       }
     };
 
@@ -27,7 +27,7 @@ export default defineComponent({
       error({ statusCode: 404 });
     }
 
-    const title = `「${word.ja}」は英語で "${word.en}" | 原神 英語辞典`;
+    const title = `「${word.ja}」は英語で "${word.en}" | 原神 英語・中国語辞典`;
     const description = `「${word.ja}」の英語表記は "${word.en}"`;
 
     useMeta({

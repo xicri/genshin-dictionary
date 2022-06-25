@@ -21,7 +21,7 @@ import { getHistory } from "~/libs/utils";
 
 export default defineComponent({
   setup() {
-    const title = "更新履歴 | 原神 英語辞典";
+    const title = "更新履歴 | 原神 英語・中国語辞典";
 
     useMeta({
       title,
