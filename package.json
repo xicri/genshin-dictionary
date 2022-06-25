@@ -1,5 +1,16 @@
 {
   "name": "genshin-dictionary",
+  "description": "An online Japanese-English dictionary for terms in Genshin Impact",
+  "license": "Apache-2.0",
+  "author": "Xicri <xicri@proton.me> (https://genshin-dictionary.com/)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xicri/genshin-dictionary.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xicri/genshin-dictionary/issues"
+  },
+  "homepage": "https://genshin-dictionary.com",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -32,5 +43,9 @@
     "express": "^4.17.1",
     "jest": "^28.1.0",
     "json5": "^2.2.0"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": ">=8.x"
   }
 }
