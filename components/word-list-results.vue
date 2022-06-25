@@ -1,10 +1,26 @@
 <template>
   <main class="results">
     <div v-for="word in words" :key="word.en" ref="wordList" class="results__word">
-      <h4 class="results__translation">
-        <span data-e2e="ja">{{ word.ja }}</span>
-        <span v-if="word.pronunciationJa" class="results__pronunciation-ja">({{ word.pronunciationJa }})</span>
-        <span class="results__en">{{ word.en }}</span>
+      <h4 class="results__translations">
+        <div v-if="word.ja" class="results__translation">
+          <span class="results__langname results__translation-item">日本語: </span>
+          <div class="results__translation-item">
+            <div class="results__ja">
+              <span data-e2e="ja">{{ word.ja }}</span>
+              <span v-if="word.pronunciationJa" class="results__pronunciation-ja">({{ word.pronunciationJa }})</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="results__translation">
+          <span class="results__langname results__translation-item">English: </span>
+          <span class="results__translation-item">{{ word.en }}</span>
+        </div>
+
+        <div v-if="word.zhCN" class="results__translation">
+          <span class="results__langname results__translation-item">简体中文: </span>
+          <span class="results__translation-item">{{ word.zhCN }}</span>
+        </div>
       </h4>
       <div class="results__description">
         <div class="results__tags results__description-section">
@@ -179,26 +195,41 @@ h5.linebreak {
     }
   }
 
-  &__translation {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
+  &__translations {
+    display: table;
+    border-spacing: 0.2rem;
 
     font-size: 16px;
 
     margin-bottom: 0.7em;
   }
 
-  &__pronunciation-ja {
-    font-size: 0.7em;
-    margin-left: 0.5em;
+  &__translation {
+    display: table-row;
   }
 
-  &__en::before {
-    content: "―";
-    font-weight: 100;
-    margin-left: 12px;
-    margin-right: 8px;
+  &__translation-item {
+    display: table-cell;
+  }
+
+  &__langname {
+    font-size: 0.7em;
+    width: 4.5em;
+  }
+
+
+  &__ja {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 0.25em;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  &__pronunciation-ja {
+    font-size: 0.7em;
   }
 
   &__description {
