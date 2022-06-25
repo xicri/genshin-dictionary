@@ -29,6 +29,7 @@
         <h3>運営者・貢献者</h3>
         <ul>
           <li>運営者: ふぉる (<a href="https://twitter.com/phol_si" target="_blank" rel="noopener">Twitter</a> / <a href="https://github.com/xicri" target="_blank" rel="noopener">GitHub</a>)</li>
+          <li>中国語翻訳データ作成: Bill Haku (<a href="https://twitter.com/Haku_Bill" target="_blank" rel="noopener">Twitter</a> / <a href="https://github.com/Bill-Haku" target="_blank" rel="noopener">GitHub</a>)</li>
         </ul>
 
         <p>
