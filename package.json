@@ -16,6 +16,7 @@
     "dev": "nuxt",
     "build": "nuxt generate --fail-on-error",
     "start": "nuxt start",
+    "wrangler": "wrangler pages dev ./dist",
     "test": "jest && playwright test",
     "lint": "eslint --ext .js,.mjs,.cjs,.ts,.vue --ignore-path .gitignore .",
     "postinstall": "node ./scripts/postinstall.mjs && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
@@ -44,7 +45,8 @@
     "eslint-config-xicri": "latest",
     "express": "^4.17.1",
     "jest": "^28.1.0",
-    "json5": "^2.2.0"
+    "json5": "^2.2.0",
+    "wrangler": "^0.0.17"
   },
   "engines": {
     "node": "16.x",
