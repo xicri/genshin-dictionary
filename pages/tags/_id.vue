@@ -13,7 +13,7 @@ export default defineComponent({
     const store = useDictionaryStore($pinia);
 
     const tagID = params.value.id;
-    const title = ref((tags[tagID].title ?? `原神に登場する${tags[tagID].ja}の英語表記一覧`) + " | " + this.$t("siteTitle"));
+    const title = ref(`${tags[tagID].title} | ${this.$t("siteTitle")}`);
 
     useMeta({
       title,
