@@ -75,6 +75,7 @@ export default async () => {
     },
 
     modules: [
+      "@nuxtjs/i18n",
       "@nuxtjs/robots",
       "@nuxtjs/sentry",
       "@nuxtjs/sitemap",
@@ -83,6 +84,33 @@ export default async () => {
       "@nuxtjs/composition-api/module",
       "@pinia/nuxt",
     ],
+
+    i18n: {
+      locales: [
+        {
+          code: "en",
+          iso: "en",
+          name: "English",
+        },
+        {
+          code: "ja",
+          iso: "ja-JP",
+          name: "日本語",
+        },
+        // {
+        //   code: "zh-CN",
+        //   iso: "zh-CN",
+        //   name: "简体中文",
+        // },
+      ],
+      strategy: "prefix",
+      defaultLocale: "en",
+      baseUrl: "https://genshin-dictionary.com",
+      vueI18nLoader: true,
+      vueI18n: {
+        fallbackLocale: "en",
+      },
+    },
 
     robots: {
       UserAgent: "*",
