@@ -20,7 +20,7 @@ export default defineComponent({
       redirect(`/tags/${destTagID}/`);
     }
 
-    const title = ref((tags[tagID].title ?? `原神に登場する${tags[tagID].ja}の英語表記一覧`) + " | " + i18n.t("siteTitle"));
+    const title = ref(`${tags[tagID].title} | ${i18n.t("siteTitle")}`);
 
     useMeta({
       title,
