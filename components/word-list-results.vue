@@ -28,7 +28,7 @@
             <tag :tagid="tag" />
           </a>
         </div>
-        <div v-if="word.notes" class="results__description-section" data-e2e="notes" v-html="word.notes"></div>
+        <div v-if="word.notes && $i18n.locale === 'ja'" class="results__description-section" data-e2e="notes" v-html="word.notes"></div>
         <div v-if="word.examples && 0 < word.examples.length" class="results__description-section">
           <h5 class="linebreak">
             {{ $t("example") }}
@@ -36,7 +36,7 @@
           <div v-for="example in word.examples" :key="example.en" class="results__description-section-level2">
             <p>&quot;{{ example.en }}&quot;</p>
             <p>「{{ example.ja }}」</p>
-            <template v-if="example.ref">
+            <template v-if="example.ref && $i18n.locale === 'ja'">
               <p class="results__example-ref">
                 <template v-if="example.refURL">
                   ― <a :href="example.refURL" target="_blank" rel="noopener">{{ example.ref }}</a>
