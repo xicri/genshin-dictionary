@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@nuxtjs/composition-api": "^0.33.0",
+    "@nuxtjs/i18n": "^7.2.0",
     "@nuxtjs/robots": "^2.5.0",
     "@nuxtjs/sentry": "^5.1.0",
     "@nuxtjs/sitemap": "^2.4.0",
