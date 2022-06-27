@@ -62,8 +62,7 @@ export default defineComponent({
     //
     const searchBox = ref(null);
     const { tags } = storeToRefs(store);
-
-    let displayTagListOnMobile = ref(false);
+    const displayTagListOnMobile = ref(false);
 
     //
     // Computed
@@ -104,10 +103,10 @@ export default defineComponent({
       el.focus();
     };
     const closeTagList = () => {
-      displayTagListOnMobile = false;
+      displayTagListOnMobile.value = false;
     };
     const toggleTagList = () => {
-      displayTagListOnMobile = !displayTagListOnMobile;
+      displayTagListOnMobile.value = !displayTagListOnMobile.value;
     };
     const addTag = async (tagID) => {
       store.addTags(tagID);

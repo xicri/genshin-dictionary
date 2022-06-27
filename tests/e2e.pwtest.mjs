@@ -163,5 +163,20 @@ describe("The Genshin English Dictionary", () => {
 
     return;
   });
+
+  test("open tag list", async ({ page }) => {
+    await page.goto(rootURL);
+
+    // Do not run test on Desktop
+    if (840 < await page.evaluate(() => window.innerWidth)) {
+      return;
+    }
+
+    await page.locator(".search__taglist-icon").click();
+    await page.waitForTimeout(800);
+    expect(await page.locator(".search__taglist").isVisible()).toBe(true);
+
+    return;
+  });
 });
 

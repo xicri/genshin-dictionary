@@ -9,7 +9,11 @@ module.exports = {
       name: "Chromium - Desktop",
       use: {
         browserName: "chromium",
-        // headless: false, // add this to show window
+        // ▼▼ Debug Options ▼▼
+        // headless: false,
+        // launchOptions: {
+        //   slowMo: 50,
+        // },
       },
     },
     {
@@ -30,6 +34,12 @@ module.exports = {
     // },
     {
       name: "Firefox - Desktop",
+      use: {
+        browserName: "firefox",
+      },
+    },
+    {
+      name: "Firefox - Mobile",
       use: {
         browserName: "firefox",
         viewport: { width: 800, height: 600 },
