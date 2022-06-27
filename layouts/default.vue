@@ -4,7 +4,7 @@
       <nav class="layout-default__nav">
         <h1>
           <a :href="localePath('/')" class="layout-default__title">
-            <span>原神 英語・</span><span>中国語辞典</span>
+            <span>{{ $t("siteTitleL1") }}</span><span>{{ $t("siteTitleL2") }}</span>
           </a>
         </h1>
 
@@ -16,6 +16,19 @@
     <Nuxt />
   </div>
 </template>
+
+<i18n>
+{
+  "en": {
+    "siteTitleL1": "Genshin",
+    "siteTitleL2": "Dictionary"
+  },
+  "ja": {
+    "siteTitleL1": "原神 英語・",
+    "siteTitleL2": "中国語辞典"
+  }
+}
+</i18n>
 
 <style lang="scss" scoped>
 @use "~/assets/styles/variables.scss" as vars;

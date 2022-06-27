@@ -1,7 +1,7 @@
 <template>
   <div class="article__wrapper-outer">
     <div class="article__wrapper-inner">
-      <h2>このサイトについて</h2>
+      <h2>{{ $t("aboutTitle") }}</h2>
 
       <main>
         <p>
@@ -56,12 +56,13 @@
 </template>
 
 <script>
-import { defineComponent, useAsync, useMeta } from "@nuxtjs/composition-api";
+import { defineComponent, useAsync, useContext, useMeta } from "@nuxtjs/composition-api";
 import words from "~/static/dataset/words.json";
 
 export default defineComponent({
   setup() {
-    const title = "このサイトについて | 原神 英語・中国語辞典";
+    const { i18n } = useContext();
+    const title = `${i18n.t("aboutTitle")} | ${i18n.t("siteTitle")}`;
 
     useMeta({
       title,

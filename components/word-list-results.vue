@@ -31,7 +31,7 @@
         <div v-if="word.notes" class="results__description-section" data-e2e="notes" v-html="word.notes"></div>
         <div v-if="word.examples && 0 < word.examples.length" class="results__description-section">
           <h5 class="linebreak">
-            例文
+            {{ $t("example") }}
           </h5>
           <div v-for="example in word.examples" :key="example.en" class="results__description-section-level2">
             <p>&quot;{{ example.en }}&quot;</p>
@@ -58,16 +58,16 @@
               src="~/assets/vendor/octicons/link.svg"
               width="12"
               height="12"
-              :alt="`${word.ja}のページへのリンク`"
+              :alt="$t('permalinkAlt', { word: word[$i18n.locale] })"
               decoding="async"
               class="results__permalink--icon"
-            > 固定リンク
+            > {{ $t("permalink") }}
           </a>
           <img
             src="~/assets/vendor/octicons/copy.svg"
             width="12"
             height="12"
-            :alt="`${word.ja}のページへのリンクをコピー`"
+            :alt="$t('copyLink', { word: word[$i18n.locale] })"
             decoding="async"
             class="results__permalink--copy"
             @click="copyLink(word.id, $event)"
@@ -76,7 +76,7 @@
             src="~/assets/vendor/octicons/check.svg"
             width="12"
             height="12"
-            :alt="`${word.ja}のページへのリンクのコピーが完了しました`"
+            :alt="$t('copyLinkDone', { word: word[$i18n.locale] })"
             decoding="async"
             class="results__permalink--copied"
             style="display: none;"
@@ -86,6 +86,25 @@
     </div>
   </main>
 </template>
+
+<i18n>
+{
+  "en": {
+    "example": "Example",
+    "permalink": "Permalink",
+    "permalinkAlt": "Link to {word}",
+    "copyLink": "Copy link to {word}",
+    "copyLinkDone": "Copied link to {word}"
+  },
+  "ja": {
+    "example": "例文",
+    "permalink": "固定リンク",
+    "permalinkAlt": "{word}のページへのリンク",
+    "copyLink": "{word}のページへのリンクをコピー",
+    "copyLinkDone": "{word}のページへのリンクのコピーが完了しました"
+  }
+}
+</i18n>
 
 <script>
 import { defineComponent, nextTick, onMounted, onUpdated, ref, useContext } from "@nuxtjs/composition-api";

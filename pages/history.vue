@@ -1,27 +1,41 @@
 <template>
   <div class="history">
-    <h2>更新履歴</h2>
+    <h2>{{ $t("historyTitle") }}</h2>
     <div v-for="(words, createdAt) in history" :key="createdAt" class="history__wrapper">
       <h3 class="history__updated-at">
-        {{ createdAt }}更新
+        {{ $t("updatedOn", { createdAt: createdAt }) }}
       </h3>
       <word-list-results :words="words" />
     </div>
 
     <p v-if="empty" class="history__empty">
-      直近の更新はありません。
+      {{ $t("noRecentUpdates") }}
     </p>
   </div>
 </template>
 
+<i18n>
+{
+  "en": {
+    "updatedOn": "Updated on {createdAt}",
+    "noRecentUpdates": "No recent updates."
+  },
+  "ja": {
+    "updatedOn": "{createdAt} 更新",
+    "noRecentUpdates": "直近の更新はありません。"
+  }
+}
+</i18n>
+
 <script>
-import { defineComponent, useAsync, useMeta } from "@nuxtjs/composition-api";
+import { defineComponent, useAsync, useContext, useMeta } from "@nuxtjs/composition-api";
 import { isEmpty } from "lodash";
 import { getHistory } from "~/libs/utils";
 
 export default defineComponent({
   setup() {
-    const title = "更新履歴 | 原神 英語・中国語辞典";
+    const { i18n } = useContext();
+    const title = `${i18n.t("historyTitle")} | ${i18n.t("siteTitle")}`;
 
     useMeta({
       title,
