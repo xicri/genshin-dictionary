@@ -9,13 +9,13 @@
     <nav class="menu__nav">
       <ul class="menu__items">
         <li class="menu__item">
-          <a href="/about/">このサイトについて</a>
+          <a :href="localePath('/about/')">このサイトについて</a>
         </li>
         <li class="menu__item">
-          <a href="/opendata/">オープンデータ・API</a>
+          <a :href="localePath('/opendata/')">オープンデータ・API</a>
         </li>
         <li class="menu__item">
-          <a href="/history/">更新履歴</a>
+          <a :href="localePath('/history/')">更新履歴</a>
         </li>
         <li class="menu__item">
           <a href="https://translate.genshin-dictionary.com/" target="_blank" rel="noopener">原神 自動翻訳</a>

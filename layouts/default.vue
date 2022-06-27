@@ -3,7 +3,7 @@
     <div class="layout-default__nav-wrapper">
       <nav class="layout-default__nav">
         <h1>
-          <a href="/" class="layout-default__title">
+          <a :href="localePath('/')" class="layout-default__title">
             <span>原神 英語・</span><span>中国語辞典</span>
           </a>
         </h1>
