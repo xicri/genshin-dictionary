@@ -9,11 +9,11 @@ import tags from "~/static/dataset/tags.json";
 
 export default defineComponent({
   setup() {
-    const { $pinia, params } = useContext();
+    const { $pinia, i18n, params } = useContext();
     const store = useDictionaryStore($pinia);
 
     const tagID = params.value.id;
-    const title = ref(`${tags[tagID].title} | ${this.$t("siteTitle")}`);
+    const title = ref(`${ tags[tagID].title[i18n.locale] } | ${ i18n.t("siteTitle") }`);
 
     useMeta({
       title,
