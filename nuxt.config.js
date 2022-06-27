@@ -49,7 +49,15 @@ export default async () => {
           ...meta,
         ],
         link,
-        script: [],
+        script: [
+          ...(process.env.NODE_ENV === "production" ? [{
+            hid: "cloudflare-wa",
+            src: "https://static.cloudflareinsights.com/beacon.min.js",
+            "data-cf-beacon": "{\"token\": \"59caa95b4e654d118af6761046577a6b\"}",
+            defer: true,
+            body: true,
+          }] : []),
+        ],
       };
     },
 
@@ -154,16 +162,6 @@ export default async () => {
       ],
     }),
   };
-
-  if (process.env.NODE_ENV === "production") {
-    config.head.script.push({
-      hid: "cloudflare-wa",
-      src: "https://static.cloudflareinsights.com/beacon.min.js",
-      "data-cf-beacon": "{\"token\": \"59caa95b4e654d118af6761046577a6b\"}",
-      defer: true,
-      body: true,
-    });
-  }
 
   return config;
 };
