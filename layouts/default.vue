@@ -9,6 +9,7 @@
         </h1>
 
         <spacer />
+        <lang-switcher />
         <hamburger-menu />
       </nav>
     </div>
@@ -53,7 +54,7 @@
     justify-content: flex-start;
     align-items: center;
     flex-wrap: nowrap;
-    gap: 0.5rem;
+    gap: 2rem;
   }
 
   &__title {
