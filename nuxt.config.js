@@ -19,23 +19,38 @@ export default async () => {
     components: true,
     modern: "client",
 
-    head: {
-      htmlAttrs: { lang: "ja" },
-      meta: [
-        { charset: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { name: "format-detection", content: "telephone=no" },
-        { hid: "description", name: "description", content: "原神に登場する固有名詞の英和・和英辞典です。" },
-        { hid: "og:description", property: "og:description", content: "原神に登場する固有名詞の英和・和英辞典です。" },
-        { hid: "og:type", property: "og:type", content: "website" },
-        { hid: "og:locale", property: "og:locale", content: "ja_JP" },
-        { hid: "og:site_name", property: "og:site_name", content: "原神 英語・中国語辞典" },
-        { hid: "twitter:card", property: "twitter:card", content: "summary" },
-        { hid: "twitter:site", property: "twitter:site", content: "@xicri_gi" },
-        { hid: "twitter:creator", property: "twitter:creator", content: "@xicri_gi" },
-        { hid: "google-site-verification", name: "google-site-verification", content: "fPZCIib8QFE52LeBEGqBoapTwL6v9vqHl9lKqcreMDQ" },
-      ],
-      script: [],
+    head() {
+      if (!this.$nuxtI18nHead) {
+        return {};
+      }
+
+      const { htmlAttrs, meta, link } = this.$nuxtI18nHead({ addSeoAttributes: true });
+      const { lang } = htmlAttrs;
+
+      const siteName = lang === "en" ? "Genshin Dictionary" : "原神英語・中国語辞典";
+      const description = lang === "en"
+        ? "An online English-Japanese dictionary for proprietary nouns in Genshin Impact"
+        : "原神に登場する固有名詞の英和・和英辞典です。";
+
+      return {
+        htmlAttrs,
+        meta: [
+          { charset: "utf-8" },
+          { name: "viewport", content: "width=device-width, initial-scale=1" },
+          { name: "format-detection", content: "telephone=no" },
+          { hid: "description", name: "description", content: description },
+          { hid: "og:description", property: "og:description", content: description },
+          { hid: "og:type", property: "og:type", content: "website" },
+          { hid: "og:site_name", property: "og:site_name", content: siteName },
+          { hid: "twitter:card", property: "twitter:card", content: "summary" },
+          { hid: "twitter:site", property: "twitter:site", content: "@xicri_gi" },
+          { hid: "twitter:creator", property: "twitter:creator", content: "@xicri_gi" },
+          { hid: "google-site-verification", name: "google-site-verification", content: "fPZCIib8QFE52LeBEGqBoapTwL6v9vqHl9lKqcreMDQ" },
+          ...meta,
+        ],
+        link,
+        script: [],
+      };
     },
 
     css: [ "~/assets/styles/global.scss" ],
