@@ -7,24 +7,41 @@
       <div class="menu__icon-line"></div>
     </label>
     <nav class="menu__nav">
-      <ul class="menu__items">
-        <li class="menu__item">
-          <a :href="localePath('/about/')">{{ $t("about") }}</a>
-        </li>
-        <li class="menu__item">
-          <a :href="localePath('/opendata/')">{{ $t("opendata") }}</a>
-        </li>
-        <li class="menu__item">
-          <a :href="localePath('/history/')">{{ $t("history") }}</a>
-        </li>
-        <li class="menu__item">
-          <a href="https://translate.genshin-dictionary.com/" target="_blank" rel="noopener">{{ $t("translate") }}</a>
-          <img src="~/assets/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14">
-        </li>
-      </ul>
-      <div class="menu__bottomline">
-        <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">Twitter</a>
+      <div class="menu__nav-padding">
+        <ul class="menu__items">
+          <li class="menu__item">
+            <a :href="localePath('/about/')">{{ $t("about") }}</a>
+          </li>
+          <li class="menu__item">
+            <a :href="localePath('/opendata/')">{{ $t("opendata") }}</a>
+          </li>
+          <li class="menu__item">
+            <a :href="localePath('/history/')">{{ $t("history") }}</a>
+          </li>
+          <li class="menu__item">
+            <a href="https://translate.genshin-dictionary.com/" target="_blank" rel="noopener">{{ $t("translate") }}</a>
+            <img src="~/assets/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14">
+          </li>
+        </ul>
+
+        <h2 class="menu__languages-title">
+          Languages
+        </h2>
+        <div class="menu__languages-list">
+          <span
+            v-for="locale in $i18n.locales"
+            :key="locale.code"
+            class="menu__languages-item"
+            @click.prevent.stop="$i18n.setLocale(locale.code)"
+          >
+            {{ locale.name }}
+          </span>
+        </div>
+
+        <div class="menu__bottomline">
+          <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">Twitter</a>
+        </div>
       </div>
     </nav>
     <closing-layer :enabled="open" @close="closeMenu" />
@@ -115,19 +132,42 @@ a {
     width: 240px;
   }
 
+  &__nav-padding {
+    width: 100%;
+    height: 100%;
+    padding-left: 2.5rem;
+  }
+
   &__items {
     margin-top: 7em;
-    padding-left: 2.5rem;
+    margin-bottom: 3rem;
+    padding: 0;
   }
   &__item {
     margin-bottom: 2em;
   }
 
+  &__languages-title {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  &__languages-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5em;
+
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  &__languages-item {
+    color: vars.$color-dark;
+    cursor: pointer;
+  }
+
   &__bottomline {
     display: flex;
     column-gap: 1.5em;
-    margin-top: 3rem;
-    padding-left: 2.5rem;
     font-size: 0.7rem;
   }
 }
