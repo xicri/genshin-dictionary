@@ -51,7 +51,7 @@ export const getHistory = () => {
   for (const word of allWords) {
     const createdAt = DateTime.fromISO(word.createdAt);
     const threeMonthsAgo = DateTime.now().minus({ months: 3 });
-    const createdAtJa = createdAt.toFormat("yyyy年MM月dd日");
+    const createdAtJa = createdAt.toFormat("yyyy/MM/dd");
 
     // Ignore words updated before one month ago
     if (createdAt < threeMonthsAgo) {
