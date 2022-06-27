@@ -9,7 +9,11 @@ module.exports = {
       name: "Chromium - Desktop",
       use: {
         browserName: "chromium",
-        // headless: false, // add this to show window
+        // ▼▼ Debug Options ▼▼
+        // headless: false,
+        // launchOptions: {
+        //   slowMo: 50,
+        // },
       },
     },
     {
