@@ -9,16 +9,16 @@
     <nav class="menu__nav">
       <ul class="menu__items">
         <li class="menu__item">
-          <a :href="localePath('/about/')">このサイトについて</a>
+          <a :href="localePath('/about/')">{{ $t("about") }}</a>
         </li>
         <li class="menu__item">
-          <a :href="localePath('/opendata/')">オープンデータ・API</a>
+          <a :href="localePath('/opendata/')">{{ $t("opendata") }}</a>
         </li>
         <li class="menu__item">
-          <a :href="localePath('/history/')">更新履歴</a>
+          <a :href="localePath('/history/')">{{ $t("history") }}</a>
         </li>
         <li class="menu__item">
-          <a href="https://translate.genshin-dictionary.com/" target="_blank" rel="noopener">原神 自動翻訳</a>
+          <a href="https://translate.genshin-dictionary.com/" target="_blank" rel="noopener">{{ $t("translate") }}</a>
           <img src="~/assets/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14">
         </li>
       </ul>
@@ -30,6 +30,23 @@
     <closing-layer :enabled="open" @close="closeMenu" />
   </div>
 </template>
+
+<i18n>
+{
+  "en": {
+    "about": "About",
+    "opendata": "Opendata / API",
+    "history": "History",
+    "translate": "Genshin Machine Translate (Japanese)"
+  },
+  "ja": {
+    "about": "このサイトについて",
+    "opendata": "オープンデータ・API",
+    "history": "更新履歴",
+    "translate": "原神 自動翻訳"
+  }
+}
+</i18n>
 
 <script>
 import { defineComponent, ref } from "@nuxtjs/composition-api";

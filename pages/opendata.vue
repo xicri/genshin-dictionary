@@ -1,7 +1,7 @@
 <template>
   <div class="article__wrapper-outer">
     <div class="article__wrapper-inner">
-      <h2>オープンデータ・API (β)</h2>
+      <h2>{{ $t("opendataTitle") }}</h2>
 
       <main>
         <p>
@@ -128,12 +128,13 @@
 </template>
 
 <script>
-import { defineComponent, useAsync, useMeta } from "@nuxtjs/composition-api";
+import { defineComponent, useAsync, useContext, useMeta } from "@nuxtjs/composition-api";
 import tags from "~/static/dataset/tags.json";
 
 export default defineComponent({
   setup() {
-    const title = "オープンデータ・API | 原神 英語・中国語辞典";
+    const { i18n } = useContext();
+    const title = `${ i18n.t("opendataTitle") } | ${ i18n.t("siteTitle") }`;
 
     useMeta({
       title,

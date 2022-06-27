@@ -8,13 +8,13 @@ import { useDictionaryStore } from "~/store/index.js";
 
 export default defineComponent({
   setup() {
-    const { $pinia, params } = useContext();
+    const { $pinia, i18n, params } = useContext();
     const store = useDictionaryStore($pinia);
 
     const onSearch = () => {
       if (window.location.pathname !== "/") {
         history.pushState({}, "", "/");
-        document.title = "原神 英語・中国語辞典";
+        document.title = i18n.t("siteTitle");
       }
     };
 
@@ -28,8 +28,8 @@ export default defineComponent({
       return;
     }
 
-    const title = `「${word.ja}」は英語で "${word.en}" | 原神 英語・中国語辞典`;
-    const description = `「${word.ja}」の英語表記は "${word.en}"`;
+    const title = `${ i18n.t("wordIdTitle", { ja: word.ja, en: word.en }) } | ${ i18n.t("siteTitle") }`;
+    const description = i18n.t("wordIdDescription", { ja: word.ja, en: word.en });
 
     useMeta({
       title,

@@ -3,12 +3,12 @@
 </template>
 
 <script>
-import { defineComponent, useMeta } from "@nuxtjs/composition-api";
-
+import { defineComponent, useContext, useMeta } from "@nuxtjs/composition-api";
 
 export default defineComponent({
   setup() {
-    const title = "原神 英語・中国語辞典 ― 原神の固有名詞の英語・中国語表記一覧";
+    const { i18n } = useContext();
+    const title = `${ i18n.t("siteTitle") } ― ${ i18n.t("indexTitleDesc") }`;
 
     useMeta({
       title,
