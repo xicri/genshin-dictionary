@@ -24,10 +24,12 @@
         >
       </div>
       <div ref="taglist" :class="{ search__taglist: true, 'search__taglist-display-mobile': displayTagListOnMobile }">
-        <span class="search__taglist-title">{{ $t("tags") }}:</span>
-        <span v-for="(availableTag, id) in AvailableTags" :key="id" class="search__tag" @click="addTag(id)">
-          {{ availableTag[$i18n.locale] }} <span class="search__tag-add">+</span>
-        </span>
+        <div class="search__taglist-inner">
+          <span class="search__taglist-title">{{ $t("tags") }}:</span>
+          <span v-for="(availableTag, id) in AvailableTags" :key="id" class="search__tag" @click="addTag(id)">
+            {{ availableTag[$i18n.locale] }} <span class="search__tag-add">+</span>
+          </span>
+        </div>
 
         <img
           src="~/assets/vendor/octicons/x.svg"
@@ -231,7 +233,8 @@ export default defineComponent({
   }
   &__taglist {
     border: 0;
-
+  }
+  &__taglist-inner {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -289,7 +292,6 @@ export default defineComponent({
 
       margin-left: vars.$side-margin;
       margin-right: vars.$side-margin;
-      padding: 0.5em;
 
       background-color: rgba($color: #ffffff, $alpha: 0.9);
       border-radius: 5px;
@@ -329,7 +331,13 @@ export default defineComponent({
     }
 
     &__taglist-display-mobile {
+      display: block;
+    }
+    &__taglist-inner {
       display: flex;
+      overflow-y: scroll;
+      max-height: calc(100vh - 170px);
+      padding: 0.5em;
     }
   }
 }
