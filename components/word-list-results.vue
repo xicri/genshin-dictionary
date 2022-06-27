@@ -24,7 +24,7 @@
       </h4>
       <div class="results__description">
         <div class="results__tags results__description-section">
-          <a v-for="tag in word.tags" :key="tag" :href="`/tags/${tag}/`">
+          <a v-for="tag in word.tags" :key="tag" :href="localePath(`/tags/${tag}/`)">
             <tag :tagid="tag" />
           </a>
         </div>
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="results__permalink">
-          <a :href="`/${word.id}/`">
+          <a :href="localePath(`/${word.id}/`)">
             <!--
               Approximate values of width & height are specified in HTML to mitigate Comulative Layout Shift,
               but actual values are specified in SCSS.
