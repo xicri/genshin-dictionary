@@ -32,6 +32,12 @@ module.exports = {
       name: "Firefox - Desktop",
       use: {
         browserName: "firefox",
+      },
+    },
+    {
+      name: "Firefox - Mobile",
+      use: {
+        browserName: "firefox",
         viewport: { width: 800, height: 600 },
       },
     },
