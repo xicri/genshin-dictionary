@@ -63,7 +63,6 @@
     font-size: 32px;
     color: vars.$color-dark;
     letter-spacing: 1px;
-    text-align: center;
   }
 }
 </style>
