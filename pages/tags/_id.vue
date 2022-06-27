@@ -43,8 +43,10 @@ export default defineComponent({
     });
 
     const onSearch = () => {
-      if (window.location.pathname !== "/") {
-        history.pushState({}, "", "/");
+      const root = `/${i18n.locale}/`;
+
+      if (window.location.pathname !== root) {
+        history.pushState({}, "", root);
         title.value = "原神 英語・中国語辞典";
       }
     };

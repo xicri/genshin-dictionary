@@ -9,12 +9,12 @@ import { useDictionaryStore } from "~/store/index.js";
 
 export default defineComponent({
   setup() {
-    const { $pinia, params, redirect } = useContext();
+    const { $pinia, i18n, params, redirect } = useContext();
     const store = useDictionaryStore($pinia);
 
     const onSearch = () => {
       if (window.location.pathname !== "/") {
-        history.pushState({}, "", "/");
+        history.pushState({}, "", `/${i18n.locale}/`);
         document.title = "原神 英語・中国語辞典";
       }
     };
