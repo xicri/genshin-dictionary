@@ -4,6 +4,9 @@
       <h2>{{ $t("aboutTitle") }}</h2>
 
       <main>
+        <p v-if="$i18n.locale !== 'ja'">
+          <strong>This page is not translated to English yet.</strong>
+        </p>
         <p>
           このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「<a href="https://genshin.hoyoverse.com" target="_blank" rel="noopener">原神</a>」で用いられる固有名詞等の日本語・英語対訳表です。
         </p>
