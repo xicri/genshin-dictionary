@@ -20,7 +20,7 @@ export default defineComponent({
       redirect(`/tags/${destTagID}/`);
     }
 
-    const title = ref(`${tags[tagID].title} | ${i18n.t("siteTitle")}`);
+    const title = ref(`${tags[tagID].title[i18n.locale]} | ${i18n.t("siteTitle")}`);
 
     useMeta({
       title,
