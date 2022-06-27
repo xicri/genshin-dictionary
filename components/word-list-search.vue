@@ -5,7 +5,7 @@
         <div class="search__scrollable" @click="focusOnSearchBox" @dblclick="selectAll">
           <div class="search__active-tags">
             <div v-for="(tag, i) in tags" :key="tag" class="search__active-tag">
-              <span>{{ allTags[tag].ja }}</span>
+              <span>{{ allTags[tag][$i18n.locale] }}</span>
               <span class="search__remove-tag" @click="removeTag(i)">☓</span>
             </div>
           </div>
@@ -25,8 +25,8 @@
       </div>
       <div ref="taglist" :class="{ search__taglist: true, 'search__taglist-display-mobile': displayTagListOnMobile }">
         <span class="search__taglist-title">{{ $t("tags") }}:</span>
-        <span v-for="({ ja }, id) in AvailableTags" :key="ja" class="search__tag" @click="addTag(id)">
-          {{ ja }} <span class="search__tag-add">+</span>
+        <span v-for="(availableTag, id) in AvailableTags" :key="id" class="search__tag" @click="addTag(id)">
+          {{ availableTag[$i18n.locale] }} <span class="search__tag-add">+</span>
         </span>
 
         <img

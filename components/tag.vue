@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { computed, defineComponent } from "@nuxtjs/composition-api";
+import { computed, defineComponent, useContext } from "@nuxtjs/composition-api";
 import allTags from "~/static/dataset/tags.json";
 
 export default defineComponent({
@@ -16,8 +16,10 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const { i18n } = useContext();
+
     return {
-      TagName: computed(() => allTags[props.tagid].ja),
+      TagName: computed(() => allTags[props.tagid][i18n.locale]),
     };
   },
 });
