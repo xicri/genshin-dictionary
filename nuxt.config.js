@@ -132,6 +132,28 @@ export default async () => {
       vueI18nLoader: true,
       vueI18n: {
         fallbackLocale: "en",
+        messages: {
+          en: {
+            siteTitle: "Genshin Dictionary",
+            indexTitleDesc: "an online English-Japanese dictionary for the words in Genshin Impact",
+            wordIdTitle: "\"{en}\" is \"{ja}\" in Japanese",
+            wordIdDescription: "Japanese expression for \"{en}\" is \"{ja}\".",
+            aboutTitle: "About this website",
+            aboutDescription: "About Genshin Dictionary. This website is an online English-Chinese-Japanese dictionary for the proprietary nouns and words for Genshin Impact.",
+            historyTitle: "Update History",
+            opendataTitle: "Open Data / API (β)",
+          },
+          ja: {
+            siteTitle: "原神 英語・中国語辞典",
+            indexTitleDesc: "原神の固有名詞の英語表記一覧",
+            wordIdTitle: "「{ja}」は英語で \"{en}\"",
+            wordIdDescription: "「{ja}」の英語表記は \"{en}\"",
+            aboutTitle: "このサイトについて",
+            aboutDescription: "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
+            historyTitle: "更新履歴",
+            opendataTitle: "オープンデータ・API (β)",
+          },
+        },
       },
     },
 

@@ -10,21 +10,21 @@
             </div>
           </div>
 
-          <elastic-searchbox ref="searchBox" class="search__input" name="searchbox" placeholder="検索ワードを入力…" autocomplete="off" @input="updateSearchQuery" />
+          <elastic-searchbox ref="searchBox" class="search__input" name="searchbox" :placeholder="$t('enterSearchTerms')" autocomplete="off" @input="updateSearchQuery" />
         </div>
 
         <img
           src="~/assets/vendor/octicons/tag.svg"
           width="24"
           height="24"
-          alt="タグ一覧を開く"
+          :alt="$t('openListOfTags')"
           decoding="async"
           class="search__taglist-icon"
           @click="toggleTagList"
         >
       </div>
       <div ref="taglist" :class="{ search__taglist: true, 'search__taglist-display-mobile': displayTagListOnMobile }">
-        <span class="search__taglist-title">タグ:</span>
+        <span class="search__taglist-title">{{ $t("tags") }}:</span>
         <span v-for="({ ja }, id) in AvailableTags" :key="ja" class="search__tag" @click="addTag(id)">
           {{ ja }} <span class="search__tag-add">+</span>
         </span>
@@ -33,7 +33,7 @@
           src="~/assets/vendor/octicons/x.svg"
           width="24"
           height="24"
-          alt="タグ一覧を閉じる"
+          :alt="$t('closeListOfTags')"
           decoding="async"
           class="search__taglist-close"
           @click="closeTagList"
@@ -43,6 +43,23 @@
     <closing-layer :enabled="displayTagListOnMobile" @close="closeTagList" />
   </div>
 </template>
+
+<i18n>
+{
+  "en": {
+    "enterSearchTerms": "Enter search terms...",
+    "tags": "Tags",
+    "openListOfTags": "Open the list of tags",
+    "closeListOfTags": "Close the list of tags"
+  },
+  "ja": {
+    "enterSearchTerms": "検索ワードを入力…",
+    "tags": "タグ",
+    "openListOfTags": "タグ一覧を開く",
+    "closeListOfTags": "タグ一覧を閉じる"
+  }
+}
+</i18n>
 
 <script>
 import { computed, defineComponent, ref, useContext } from "@nuxtjs/composition-api";

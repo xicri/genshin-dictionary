@@ -10,7 +10,7 @@ import tags from "~/static/dataset/tags.json";
 
 export default defineComponent({
   setup() {
-    const { $pinia, params, redirect } = useContext();
+    const { $pinia, i18n, params, redirect } = useContext();
     const store = useDictionaryStore($pinia);
 
     const tagID = params.value.id;
@@ -20,7 +20,7 @@ export default defineComponent({
       redirect(`/tags/${destTagID}/`);
     }
 
-    const title = ref((tags[tagID].title ?? `原神に登場する${tags[tagID].ja}の英語表記一覧`) + " | 原神 英語・中国語辞典");
+    const title = ref((tags[tagID].title ?? `原神に登場する${tags[tagID].ja}の英語表記一覧`) + " | " + i18n.t("siteTitle"));
 
     useMeta({
       title,
@@ -47,7 +47,7 @@ export default defineComponent({
 
       if (window.location.pathname !== root) {
         history.pushState({}, "", root);
-        title.value = "原神 英語・中国語辞典";
+        title.value = i18n.t("siteTitle");
       }
     };
 
