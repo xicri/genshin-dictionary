@@ -82,7 +82,6 @@ export default async () => {
     buildModules: [
       "@nuxtjs/composition-api/module",
       "@pinia/nuxt",
-      "nuxt-canonical-ogurl",
     ],
 
     robots: {
@@ -111,10 +110,6 @@ export default async () => {
         ...(Object.keys(tags).map(tagID => ({ url: `/tags/${tagID}/` }))),
       ],
     }),
-
-    canonicalOgUrl: {
-      baseURL: "https://genshin-dictionary.com",
-    },
   };
 
   if (process.env.NODE_ENV === "production") {
