@@ -15,6 +15,13 @@ async function routes() {
 }
 
 const config = {
+  // ▼▼ Workaround for Nuxt 3 bug ▼▼
+  // @see https://github.com/nuxt/framework/issues/1151#issuecomment-983531703
+  alias: {
+    tslib: "tslib/tslib.es6.js",
+  },
+  // ▲▲ Workaround for Nuxt 3 bug ▲▲
+
   target: "static",
   components: true,
   modern: "client",
