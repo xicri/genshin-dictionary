@@ -30,9 +30,6 @@ Thumbs.db
 .idea/
 .vscode/
 
-# Built files
-dist/
-
 # dotenv environment variables file
 .env
 
@@ -54,6 +51,7 @@ yarn-error.log*
 
 # Nuxt
 .nuxt
+.output/
 
 # npm is the package manager for this project.
 yarn.lock

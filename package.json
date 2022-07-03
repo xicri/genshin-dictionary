@@ -13,14 +13,15 @@
   "homepage": "https://genshin-dictionary.com",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt generate --fail-on-error",
-    "start": "nuxt start",
+    "dev": "nuxi dev",
+    "build": "nuxi generate --fail-on-error",
+    "start": "nuxi start",
     "test": "jest && playwright test",
     "lint": "eslint --ext .js,.mjs,.cjs,.ts,.vue --ignore-path .gitignore .",
     "postinstall": "node ./scripts/postinstall.mjs && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
+    "@nuxt/bridge": "npm:@nuxt/bridge-edge@^3.0.0-27498038.f18e68b",
     "@nuxtjs/composition-api": "^0.32.0",
     "@nuxtjs/robots": "^2.5.0",
     "@nuxtjs/sentry": "^5.1.0",
@@ -29,8 +30,8 @@
     "klona": "^2.0.4",
     "lodash": "^4.17.21",
     "luxon": "^2.3.0",
-    "nuxt": "^2.14.6",
     "nuxt-canonical-ogurl": "^1.0.1",
+    "nuxt-edge": "latest",
     "pinia": "^2.0.13",
     "sass": "^1.32.10",
     "sass-loader": "^10.1.1",
