@@ -22,6 +22,10 @@ const config = {
   },
   // ▲▲ Workaround for Nuxt 3 bug ▲▲
 
+  bridge: {
+    meta: true,
+  },
+
   target: "static",
   components: true,
   modern: "client",
@@ -85,7 +89,6 @@ const config = {
     "@nuxtjs/sitemap",
   ],
   buildModules: [
-    "@nuxtjs/composition-api/module",
     "@pinia/nuxt",
     "nuxt-canonical-ogurl",
   ],

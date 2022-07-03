@@ -88,7 +88,6 @@
 </template>
 
 <script>
-import { defineComponent, nextTick, onMounted, onUpdated, ref, useContext } from "@nuxtjs/composition-api";
 import { useDictionaryStore } from "~/store/index.js";
 import { sleep } from "~/libs/utils.js";
 
@@ -100,7 +99,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const { $pinia } = useContext();
+    const { $pinia } = useNuxtApp();
     const store = useDictionaryStore($pinia);
 
     //

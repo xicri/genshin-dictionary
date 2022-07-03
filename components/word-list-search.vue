@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import { computed, defineComponent, ref, useContext } from "@nuxtjs/composition-api";
 import allTags from "~/static/dataset/tags.json";
 import { klona } from "klona/json";
 import { debounce } from "lodash";
@@ -54,7 +53,7 @@ import { useDictionaryStore } from "~/store/index.js";
 
 export default defineComponent({
   setup(_, context) {
-    const { $pinia, $sentry } = useContext();
+    const { $pinia, $sentry } = useNuxtApp();
     const store = useDictionaryStore($pinia);
 
     //

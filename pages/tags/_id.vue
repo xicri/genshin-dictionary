@@ -3,26 +3,25 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, ref, useAsync, useContext, useMeta } from "@nuxtjs/composition-api";
 import { useDictionaryStore } from "~/store/index.js";
 import tags from "~/static/dataset/tags.json";
 
 export default defineComponent({
   setup() {
-    const { $pinia, params } = useContext();
+    const { $pinia, params } = useNuxtApp();
     const store = useDictionaryStore($pinia);
 
     const tagID = params.value.id;
     const title = ref((tags[tagID].title ?? `原神に登場する${tags[tagID].ja}の英語表記一覧`) + " | 原神 英語・中国語辞典");
 
-    useMeta({
+    useHead({
       title,
       meta: [
         { hid: "og:title", property: "og:title", content: title.value },
       ],
     });
 
-    useAsync(() => {
+    useLazyAsyncData("initTag", () => {
       store.$reset();
       store.addTags(tagID);
     });

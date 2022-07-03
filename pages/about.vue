@@ -56,21 +56,20 @@
 </template>
 
 <script>
-import { defineComponent, useAsync, useMeta } from "@nuxtjs/composition-api";
 import words from "~/static/dataset/words.json";
 
 export default defineComponent({
   setup() {
     const title = "このサイトについて | 原神 英語・中国語辞典";
 
-    useMeta({
+    useHead({
       title,
       meta: [
         { hid: "og:title", property: "og:title", content: title },
       ],
     });
 
-    const wordCount = useAsync(() => words.length);
+    const { data: wordCount } = useLazyAsyncData("wordCount", () => words.length);
 
     return {
       wordCount,

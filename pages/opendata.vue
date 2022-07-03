@@ -128,22 +128,23 @@
 </template>
 
 <script>
-import { defineComponent, useAsync, useMeta } from "@nuxtjs/composition-api";
 import tags from "~/static/dataset/tags.json";
 
 export default defineComponent({
   setup() {
     const title = "オープンデータ・API | 原神 英語・中国語辞典";
 
-    useMeta({
+    useHead({
       title,
       meta: [
         { hid: "og:title", property: "og:title", content: title },
       ],
     });
 
+    const { data: tags } = useLazyAsyncData("tags", () => tags);
+
     return {
-      tags: useAsync(() => tags),
+      tags,
     };
   },
   head: {}, // empty head required

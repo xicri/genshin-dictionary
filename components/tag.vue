@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { computed, defineComponent } from "@nuxtjs/composition-api";
 import allTags from "~/static/dataset/tags.json";
 
 export default defineComponent({

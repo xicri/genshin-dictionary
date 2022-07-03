@@ -3,12 +3,11 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, useContext, useMeta } from "@nuxtjs/composition-api";
 import { useDictionaryStore } from "~/store/index.js";
 
 export default defineComponent({
   setup() {
-    const { $pinia, params } = useContext();
+    const { $pinia, params } = useNuxtApp();
     const store = useDictionaryStore($pinia);
 
     const onSearch = () => {
@@ -23,14 +22,14 @@ export default defineComponent({
     const word = store.searchResults[0];
 
     if (!word) {
-      const { error } = useContext();
+      const { error } = useNuxtApp();
       error({ statusCode: 404 });
     }
 
     const title = `「${word.ja}」は英語で "${word.en}" | 原神 英語・中国語辞典`;
     const description = `「${word.ja}」の英語表記は "${word.en}"`;
 
-    useMeta({
+    useHead({
       title,
       meta: [
         { hid: "og:title", property: "og:title", content: title },

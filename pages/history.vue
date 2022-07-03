@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import { defineComponent, useAsync, useMeta } from "@nuxtjs/composition-api";
 import { isEmpty } from "lodash";
 import { getHistory } from "~/libs/utils";
 
@@ -23,18 +22,19 @@ export default defineComponent({
   setup() {
     const title = "更新履歴 | 原神 英語・中国語辞典";
 
-    useMeta({
+    useHead({
       title,
       meta: [
         { hid: "og:title", property: "og:title", content: title },
       ],
     });
 
-    const history = useAsync(() => getHistory());
+    const { data: history } = useLazyAsyncData("history", () => getHistory());
+    const { data: empty } = useLazyAsyncData("empty", () => isEmpty(history.value));
 
     return {
       history,
-      empty: useAsync(() => isEmpty(history.value)),
+      empty,
     };
   },
   head: {}, // empty head required

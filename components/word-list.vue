@@ -12,13 +12,12 @@
 </template>
 
 <script>
-import { defineComponent, useContext } from "@nuxtjs/composition-api";
 import { storeToRefs } from "pinia";
 import { useDictionaryStore } from "~/store/index.js";
 
 export default defineComponent({
   setup() {
-    const { $pinia } = useContext();
+    const { $pinia } = useNuxtApp();
     const store = useDictionaryStore($pinia);
     const { searchResults } = storeToRefs(store);
 
