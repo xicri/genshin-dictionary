@@ -4,7 +4,7 @@
     <div class="results__translation-item">
       <div class="results__ja">
         <span v-if="wordWithPinyin" lang="zh-CN" data-e2e="zh-CN" v-html="wordWithPinyin"></span>
-        <span v-else :lang="langCode" :data-e2e="langCode">{{ word }}</span>
+        <span v-else :lang="lang" :data-e2e="lang">{{ word }}</span>
 
         <span v-if="kana" class="results__pronunciation-ja">({{ kana }})</span>
       </div>
@@ -12,61 +12,51 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, useContext } from "@nuxtjs/composition-api";
+<script setup>
 import { escapeHtmlString } from "@/libs/utils";
 
-export default defineComponent({
-  props: {
-    lang: {
-      type: String,
-      required: true,
-      validator(val) {
-        return [ "en", "ja", "zh-CN" ].includes(val);
-      },
-    },
-    word: {
-      type: String,
-      required: true,
-    },
-    kana: {
-      type: String,
-      default: "",
-    },
-    pinyins: {
-      type: Array,
-      default: () => [],
+const props = defineProps({
+  lang: {
+    type: String,
+    required: true,
+    validator(val) {
+      return [ "en", "ja", "zh-CN" ].includes(val);
     },
   },
-  setup(props) {
-    const { i18n } = useContext();
-    let langName;
-    let wordWithPinyin;
-
-    if (props.lang === "en") {
-      langName = i18n.t("langNameEn");
-    } else if (props.lang === "ja") {
-      langName = i18n.t("langNameJa");
-    } else if (props.lang === "zh-CN") {
-      langName = i18n.t("langNameZhCN");
-    }
-    if (0 < props.pinyins.length) {
-      wordWithPinyin = escapeHtmlString(props.word);
-      for (const { char, pron } of props.pinyins) {
-        const escapedChar = escapeHtmlString(char);
-        const escapedPron = escapeHtmlString(pron);
-
-        wordWithPinyin = wordWithPinyin.replaceAll(escapedChar, `<ruby>${escapedChar}<rp>(</rp><rt class="results__pinyin">${escapedPron}</rt><rp>)</rp></ruby>`);
-      }
-    }
-
-    return {
-      langCode: props.lang,
-      langName,
-      wordWithPinyin,
-    };
+  word: {
+    type: String,
+    required: true,
+  },
+  kana: {
+    type: String,
+    default: "",
+  },
+  pinyins: {
+    type: Array,
+    default: () => [],
   },
 });
+
+const { i18n } = useNuxtApp();
+let langName;
+let wordWithPinyin;
+
+if (props.lang === "en") {
+  langName = i18n.t("langNameEn");
+} else if (props.lang === "ja") {
+  langName = i18n.t("langNameJa");
+} else if (props.lang === "zh-CN") {
+  langName = i18n.t("langNameZhCN");
+}
+if (0 < props.pinyins.length) {
+  wordWithPinyin = escapeHtmlString(props.word);
+  for (const { char, pron } of props.pinyins) {
+    const escapedChar = escapeHtmlString(char);
+    const escapedPron = escapeHtmlString(pron);
+
+    wordWithPinyin = wordWithPinyin.replaceAll(escapedChar, `<ruby>${escapedChar}<rp>(</rp><rt class="results__pinyin">${escapedPron}</rt><rp>)</rp></ruby>`);
+  }
+}
 </script>
 
 <style lang="scss" scoped>

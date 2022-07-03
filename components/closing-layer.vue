@@ -2,15 +2,15 @@
   <div :style="{ display: enabled ? 'block' : 'none' }" class="closer" @click="$emit('close')"></div>
 </template>
 
-<script>
-export default {
-  props: {
-    enabled: {
-      type: Boolean,
-      default: false,
-    },
+<script setup>
+defineEmits([ "close" ]);
+
+defineProps({
+  enabled: {
+    type: Boolean,
+    default: false,
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

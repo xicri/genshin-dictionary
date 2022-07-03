@@ -11,60 +11,55 @@
   >
 </template>
 
-<script>
-import { defineComponent, onMounted, ref } from "@nuxtjs/composition-api";
+<script setup>
+const emit = defineEmits([ "input" ]);
 
-export default defineComponent({
-  props: {
-    name: {
-      type: String,
-      default: "",
-    },
-    placeholder: {
-      type: String,
-      default: "",
-    },
-    autocomplete: {
-      type: String,
-      default: "",
-    },
+const props = defineProps({
+  name: {
+    type: String,
+    default: "",
   },
-  setup(props, context) {
-    //
-    // refs
-    //
-    const searchBox = ref(null);
-
-    //
-    // methods
-    //
-    const updateSearchBoxWidth = () => {
-      const el = searchBox.value;
-      const textLength = (0 < el.value.length) ? el.value.length : props.placeholder.length;
-      el.style.width = `${textLength * 1.05}em`;
-    };
-
-    //
-    // Lifecycle Hooks
-    //
-    onMounted(() => {
-      updateSearchBoxWidth();
-    });
-
-    return {
-      // refs
-      searchBox,
-      // event handlers
-      onInput(evt) {
-        updateSearchBoxWidth();
-        context.emit("input", evt);
-      },
-      stopPropagation(evt) {
-        evt.stopPropagation();
-      },
-    };
+  placeholder: {
+    type: String,
+    default: "",
+  },
+  autocomplete: {
+    type: String,
+    default: "",
   },
 });
+
+//
+// refs
+//
+const searchBox = ref(null);
+
+//
+// methods
+//
+const updateSearchBoxWidth = () => {
+  const el = searchBox.value;
+  const textLength = (0 < el.value.length) ? el.value.length : props.placeholder.length;
+  el.style.width = `${textLength * 1.05}em`;
+};
+
+//
+// Lifecycle Hooks
+//
+onMounted(() => {
+  updateSearchBoxWidth();
+});
+
+//
+// event handlers
+//
+const onInput = (evt) => {
+  updateSearchBoxWidth();
+  emit("input", evt);
+};
+const stopPropagation = (evt) => {
+  evt.stopPropagation();
+};
 </script>
 
 <style lang="scss" scoped>

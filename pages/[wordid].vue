@@ -2,14 +2,12 @@
   <word-list @search="onSearch" />
 </template>
 
-<script>
-import { defineComponent, onMounted, useContext, useMeta } from "@nuxtjs/composition-api";
+<script setup>
 import { getWordRedirectDestination } from "~/libs/redirect.js";
 import { useDictionaryStore } from "~/store/index.js";
 
-export default defineComponent({
-  setup() {
-    const { $pinia, i18n, params, redirect } = useContext();
+const { $pinia, i18n, redirect } = useNuxtApp();
+const route = useRoute();
     const store = useDictionaryStore($pinia);
 
     const onSearch = () => {
@@ -19,19 +17,17 @@ export default defineComponent({
       }
     };
 
-    const destWordID = getWordRedirectDestination(params.value.wordid);
+const destWordID = getWordRedirectDestination(route.params.wordid);
     if (destWordID) {
       redirect(301, `/${i18n.locale}/${destWordID}/`);
     }
 
     store.$reset();
-    store.queryByID(params.value.wordid);
+store.queryByID(route.params.wordid);
     const word = store.searchResults[0];
 
     if (!word) {
-      const { error } = useContext();
-      error({ statusCode: 404 });
-      return;
+  throw createError({ statusCode: 404, fatal: true });
     }
 
     //
@@ -59,7 +55,7 @@ export default defineComponent({
       throw new Error(`Unexpected locale: ${i18n.locale}`);
     }
 
-    useMeta({
+useHead({
       title,
       meta: [
         { hid: "og:title", property: "og:title", content: title },
@@ -75,11 +71,4 @@ export default defineComponent({
         store.queryByID(word.id);
       };
     });
-
-    return {
-      onSearch,
-    };
-  },
-  head: {},
-});
 </script>

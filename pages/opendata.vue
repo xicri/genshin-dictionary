@@ -130,34 +130,24 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, useAsync, useContext, useMeta } from "@nuxtjs/composition-api";
+<script setup>
 import tags from "~/static/dataset/tags.json";
 
-export default defineComponent({
-  setup() {
-    const { i18n } = useContext();
-    const title = `${ i18n.t("opendataTitle") } | ${ i18n.t("siteTitle") }`;
+const { i18n } = useNuxtApp();
+const title = `${ i18n.t("opendataTitle") } | ${ i18n.t("siteTitle") }`;
 
-    useMeta({
-      title,
-      meta: [
-        { hid: "og:title", property: "og:title", content: title },
+useHead({
+  title,
+  meta: [
+    { hid: "og:title", property: "og:title", content: title },
 
-        // noindex untranslated pages
-        ...(i18n.locale !== "ja" ? [{
-          hid: "noindex",
-          name: "robots",
-          content: "noindex",
-        }] : []),
-      ],
-    });
-
-    return {
-      tags: useAsync(() => tags),
-    };
-  },
-  head: {}, // empty head required
+    // noindex untranslated pages
+    ...(i18n.locale !== "ja" ? [{
+      hid: "noindex",
+      name: "robots",
+      content: "noindex",
+    }] : []),
+  ],
 });
 </script>
 

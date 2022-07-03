@@ -71,26 +71,21 @@
 }
 </i18n>
 
-<script>
-import { defineComponent, ref } from "@nuxtjs/composition-api";
+<script setup>
+//
+// refs
+//
+const open = ref(false);
 
-export default defineComponent({
-  setup() {
-    const open = ref(false);
-
-    return {
-      // refs
-      open,
-      // event handlers
-      toggleMenu(evt) {
-        open.value = evt.target.checked;
-      },
-      closeMenu() {
-        open.value = false;
-      },
-    };
-  },
-});
+//
+// event handlers
+//
+const toggleMenu = (evt) => {
+  open.value = evt.target.checked;
+};
+const closeMenu = () => {
+  open.value = false;
+};
 </script>
 
 <style lang="scss" scoped>

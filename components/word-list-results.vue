@@ -110,81 +110,75 @@
 }
 </i18n>
 
-<script>
-import { defineComponent, nextTick, onMounted, onUpdated, ref, useContext } from "@nuxtjs/composition-api";
+<script setup>
 import { useDictionaryStore } from "~/store/index.js";
 import { sleep } from "~/libs/utils.js";
 
-export default defineComponent({
-  props: {
-    words: {
-      type: Array,
-      required: true,
-    },
-  },
-  setup() {
-    const { $pinia, i18n } = useContext();
-    const store = useDictionaryStore($pinia);
-
-    //
-    // refs
-    //
-    const wordList = ref(null);
-
-    //
-    // methods
-    //
-    const observer = process.client ? new IntersectionObserver((entries, observer) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) {
-          return;
-        }
-
-        observer.unobserve(entry.target);
-        store.loadMore();
-      }
-    }) : null;
-
-    const addIntersectionObserver = () => {
-      const wordEls = wordList.value;
-
-      if (0 < wordEls.length) {
-        observer.observe(wordEls[wordEls.length - 1]); // add observer to the last word element
-      }
-    };
-
-    //
-    // Lifecycle Hooks
-    //
-    onMounted(() => {
-      addIntersectionObserver();
-    });
-
-    onUpdated(async () => {
-      await nextTick();
-      addIntersectionObserver();
-    });
-
-    return {
-      // refs
-      wordList,
-      // event handlers
-      async copyLink(wordId, $event) {
-        navigator.clipboard.writeText(`https://genshin-dictionary.com/${i18n.locale}/${wordId}/`);
-
-        const copyImg = $event.target;
-        const copiedImg = copyImg.parentElement.getElementsByClassName("results__permalink--copied")[0];
-        copyImg.style.display = "none";
-        copiedImg.style.display = "inline";
-
-        await sleep(1000);
-
-        copiedImg.style.display = "none";
-        copyImg.style.display = "inline";
-      },
-    };
+defineProps({
+  words: {
+    type: Array,
+    required: true,
   },
 });
+
+const { $pinia, i18n } = useNuxtApp();
+const store = useDictionaryStore($pinia);
+
+//
+// refs
+//
+const wordList = ref(null);
+
+//
+// methods
+//
+const observer = process.client ? new IntersectionObserver((entries, observer) => {
+  for (const entry of entries) {
+    if (!entry.isIntersecting) {
+      return;
+    }
+
+    observer.unobserve(entry.target);
+    store.loadMore();
+  }
+}) : null;
+
+const addIntersectionObserver = () => {
+  const wordEls = wordList.value;
+
+  if (0 < wordEls.length) {
+    observer.observe(wordEls[wordEls.length - 1]); // add observer to the last word element
+  }
+};
+
+//
+// Lifecycle Hooks
+//
+onMounted(() => {
+  addIntersectionObserver();
+});
+
+onUpdated(async () => {
+  await nextTick();
+  addIntersectionObserver();
+});
+
+//
+// event handlers
+//
+const copyLink = async (wordId, $event) => {
+  navigator.clipboard.writeText(`https://genshin-dictionary.com/${i18n.locale}/${wordId}/`);
+
+  const copyImg = $event.target;
+  const copiedImg = copyImg.parentElement.getElementsByClassName("results__permalink--copied")[0];
+  copyImg.style.display = "none";
+  copiedImg.style.display = "inline";
+
+  await sleep(1000);
+
+  copiedImg.style.display = "none";
+  copyImg.style.display = "inline";
+};
 </script>
 
 <style lang="scss" scoped>

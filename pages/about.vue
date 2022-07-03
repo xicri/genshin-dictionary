@@ -61,40 +61,30 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, useAsync, useContext, useMeta } from "@nuxtjs/composition-api";
+<script setup>
 import words from "~/static/dataset/words.json";
 
-export default defineComponent({
-  setup() {
-    const { i18n } = useContext();
-    const title = `${i18n.t("aboutTitle")} | ${i18n.t("siteTitle")}`;
-    const description = i18n.t("aboutDescription");
+const { i18n } = useContext();
+const title = `${i18n.t("aboutTitle")} | ${i18n.t("siteTitle")}`;
+const description = i18n.t("aboutDescription");
 
-    useMeta({
-      title,
-      meta: [
-        { hid: "og:title", property: "og:title", content: title },
-        { hid: "description", name: "description", content: description },
-        { hid: "og:description", property: "og:description", content: description },
+useHead({
+  title,
+  meta: [
+    { hid: "og:title", property: "og:title", content: title },
+    { hid: "description", name: "description", content: description },
+    { hid: "og:description", property: "og:description", content: description },
 
-        // noindex untranslated pages
-        ...(i18n.locale !== "ja" ? [{
-          hid: "noindex",
-          name: "robots",
-          content: "noindex",
-        }] : []),
-      ],
-    });
-
-    const wordCount = useAsync(() => words.length);
-
-    return {
-      wordCount,
-    };
-  },
-  head: {},
+    // noindex untranslated pages
+    ...(i18n.locale !== "ja" ? [{
+      hid: "noindex",
+      name: "robots",
+      content: "noindex",
+    }] : []),
+  ],
 });
+
+const { data: wordCount } = useLazyAsyncData("wordCount", () => words.length);
 </script>
 
 <style lang="scss" src="~/assets/styles/articles.scss" scoped></style>

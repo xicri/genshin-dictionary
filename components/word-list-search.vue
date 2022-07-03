@@ -69,100 +69,77 @@
 }
 </i18n>
 
-<script>
-import { computed, defineComponent, ref, useContext } from "@nuxtjs/composition-api";
+<script setup>
 import allTags from "~/static/dataset/tags.json";
 import { klona } from "klona/json";
 import { debounce } from "lodash";
 import { storeToRefs } from "pinia";
 import { useDictionaryStore } from "~/store/index.js";
 
-export default defineComponent({
-  setup(_, context) {
-    const { $pinia, $sentry } = useContext();
-    const store = useDictionaryStore($pinia);
+const emit = defineEmits([ "search" ]);
+const { $pinia, $sentry } = useNuxtApp();
+const store = useDictionaryStore($pinia);
 
-    //
-    // Refs
-    //
-    const searchBox = ref(null);
-    const { tags } = storeToRefs(store);
-    const displayTagListOnMobile = ref(false);
+//
+// Refs
+//
+const searchBox = ref(null);
+const { tags } = storeToRefs(store);
+const displayTagListOnMobile = ref(false);
 
-    //
-    // Computed
-    //
-    const AvailableTags = computed(() => {
-      const availableTags = klona(allTags);
+//
+// Computed
+//
+const AvailableTags = computed(() => {
+  const availableTags = klona(allTags);
 
-      for (const searchTag of tags.value) {
-        delete availableTags[searchTag];
-      }
+  for (const searchTag of tags.value) {
+    delete availableTags[searchTag];
+  }
 
-      return availableTags;
-    });
-
-    //
-    // Event handlers
-    //
-    const updateSearchQuery = debounce((evt) => {
-      store.updateSearchQuery(evt.target.value);
-      context.emit("search");
-
-      if (store.query && store.searchResults.length <= 0) {
-        $sentry.captureMessage(store.query, {
-          tags: {
-            analysis: "search",
-          },
-        });
-      }
-    }, 500);
-    const focusOnSearchBox = () => {
-      const el = searchBox.value.$el;
-      el.setSelectionRange(el.value.length, el.value.length);
-      el.focus();
-    };
-    const selectAll = () => {
-      const el = searchBox.value.$el;
-      el.setSelectionRange(0, el.value.length);
-      el.focus();
-    };
-    const closeTagList = () => {
-      displayTagListOnMobile.value = false;
-    };
-    const toggleTagList = () => {
-      displayTagListOnMobile.value = !displayTagListOnMobile.value;
-    };
-    const addTag = async (tagID) => {
-      store.addTags(tagID);
-      context.emit("search");
-      closeTagList();
-    };
-    const removeTag = async (tagIndex) => {
-      store.removeTag(tagIndex);
-      context.emit("search");
-    };
-
-    return {
-      // refs
-      searchBox,
-      displayTagListOnMobile,
-      // computed
-      AvailableTags,
-      tags,
-      // event handlers
-      updateSearchQuery,
-      focusOnSearchBox,
-      selectAll,
-      closeTagList,
-      toggleTagList,
-      addTag,
-      removeTag,
-      // constant
-      allTags,
-    };
-  },
+  return availableTags;
 });
+
+//
+// Event handlers
+//
+const updateSearchQuery = debounce((evt) => {
+  store.updateSearchQuery(evt.target.value);
+  emit("search");
+
+  if (store.query && store.searchResults.length <= 0) {
+    $sentry.captureMessage(store.query, {
+      tags: {
+        analysis: "search",
+      },
+    });
+  }
+}, 500);
+const focusOnSearchBox = () => {
+  const el = searchBox.value.$el;
+  el.setSelectionRange(el.value.length, el.value.length);
+  el.focus();
+};
+const selectAll = () => {
+  const el = searchBox.value.$el;
+  el.setSelectionRange(0, el.value.length);
+  el.focus();
+};
+const closeTagList = () => {
+  displayTagListOnMobile.value = false;
+};
+const toggleTagList = () => {
+  displayTagListOnMobile.value = !displayTagListOnMobile.value;
+};
+const addTag = async (tagID) => {
+  store.addTags(tagID);
+  emit("search");
+  closeTagList();
+};
+const removeTag = async (tagIndex) => {
+  store.removeTag(tagIndex);
+  emit("search");
+};
 </script>
 
 <style lang="scss" scoped>

@@ -31,33 +31,22 @@
 }
 </i18n>
 
-<script>
-import { defineComponent, useAsync, useContext, useMeta } from "@nuxtjs/composition-api";
+<script setup>
 import { isEmpty } from "lodash";
 import { getHistory } from "~/libs/utils";
 
-export default defineComponent({
-  setup() {
-    const { i18n } = useContext();
-    const title = `${i18n.t("historyTitle")} | ${i18n.t("siteTitle")}`;
+const { i18n } = useNuxtApp();
+const title = `${i18n.t("historyTitle")} | ${i18n.t("siteTitle")}`;
 
-    useMeta({
-      title,
-      meta: [
-        { hid: "og:title", property: "og:title", content: title },
-      ],
-    });
-
-    const history = useAsync(() => getHistory());
-    const empty = useAsync(() => isEmpty(getHistory()));
-
-    return {
-      history,
-      empty,
-    };
-  },
-  head: {}, // empty head required
+useHead({
+  title,
+  meta: [
+    { hid: "og:title", property: "og:title", content: title },
+  ],
 });
+
+const { data: history } = useLazyAsyncData("history", () => getHistory());
+const { data: empty } = useLazyAsyncData("empty", () => isEmpty(getHistory()));
 </script>
 
 <style lang="scss" scoped>
