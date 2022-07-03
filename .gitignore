@@ -31,9 +31,6 @@ Thumbs.db
 .idea/
 .vscode/
 
-# Built files
-dist/
-
 # Temporary files
 tmp/
 
@@ -58,6 +55,7 @@ yarn-error.log*
 
 # Nuxt
 .nuxt
+/.output/
 
 # npm is the package manager for this project.
 yarn.lock
