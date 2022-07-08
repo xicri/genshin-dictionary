@@ -84,13 +84,13 @@ const config = {
   },
 
   modules: [
-    "@nuxtjs/robots",
-    "@nuxtjs/sentry",
-    "@nuxtjs/sitemap",
+    // "@nuxtjs/robots",
+    // "@nuxtjs/sentry",
+    // "@nuxtjs/sitemap",
   ],
   buildModules: [
     "@pinia/nuxt",
-    "nuxt-canonical-ogurl",
+    //"nuxt-canonical-ogurl",
   ],
 
   robots: {

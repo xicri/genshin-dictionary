@@ -37,7 +37,6 @@ export default defineComponent({
       empty,
     };
   },
-  head: {}, // empty head required
 });
 </script>
 

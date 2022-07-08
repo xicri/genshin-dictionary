@@ -45,6 +45,5 @@ export default defineComponent({
       onSearch,
     };
   },
-  head: {}, // empty head required
 });
 </script>

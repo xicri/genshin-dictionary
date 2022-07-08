@@ -75,7 +75,6 @@ export default defineComponent({
       wordCount,
     };
   },
-  head: {},
 });
 </script>
 

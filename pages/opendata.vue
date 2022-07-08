@@ -147,7 +147,6 @@ export default defineComponent({
       tags,
     };
   },
-  head: {}, // empty head required
 });
 </script>
 

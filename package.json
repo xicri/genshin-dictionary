@@ -12,16 +12,17 @@
   },
   "homepage": "https://genshin-dictionary.com",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi generate --fail-on-error",
-    "start": "nuxi start",
+    "start": "nuxi preview",
     "test": "jest && playwright test",
     "lint": "eslint --ext .js,.mjs,.cjs,.ts,.vue --ignore-path .gitignore .",
     "postinstall": "node ./scripts/postinstall.mjs && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
-    "@nuxt/bridge": "npm:@nuxt/bridge-edge@^3.0.0-27498038.f18e68b",
+    "@nuxt/bridge": "npm:@nuxt/bridge-edge@^3.0.0-27613421.b55dc9d",
     "@nuxtjs/robots": "^2.5.0",
     "@nuxtjs/sentry": "^5.1.0",
     "@nuxtjs/sitemap": "^2.4.0",
