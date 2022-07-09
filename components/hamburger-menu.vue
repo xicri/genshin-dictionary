@@ -22,6 +22,10 @@
           <img src="~/assets/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14">
         </li>
       </ul>
+      <div class="menu__bottomline">
+        <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">Twitter</a>
+      </div>
     </nav>
     <closing-layer :enabled="open" @close="closeMenu" />
   </div>
@@ -96,9 +100,18 @@ a {
 
   &__items {
     margin-top: 7em;
+    padding-left: 2.5rem;
   }
   &__item {
     margin-bottom: 2em;
+  }
+
+  &__bottomline {
+    display: flex;
+    column-gap: 1.5em;
+    margin-top: 3rem;
+    padding-left: 2.5rem;
+    font-size: 0.7rem;
   }
 }
 </style>
