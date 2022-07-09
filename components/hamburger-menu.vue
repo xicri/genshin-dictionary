@@ -43,10 +43,10 @@ export default defineComponent({
       open,
       // event handlers
       toggleMenu(evt) {
-        this.open = evt.target.checked;
+        open.value = evt.target.checked;
       },
       closeMenu() {
-        this.open = false;
+        open.value = false;
       },
     };
   },
