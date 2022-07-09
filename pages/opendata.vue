@@ -120,7 +120,7 @@
           <li>本データの利用・加工・掲載・再配布に伴い、あなたや第三者に何らかの損害が生じた場合、当サイトの運営者は一切の責任を負いません。</li>
         </ul>
         <p>
-          ご不明点があれば、<a href="https://twitter.com/phol_si" target="_blank" rel="noopener">Twitter</a> にてお問い合わせ下さい。(フォロー外から DM をお送り頂くことも可能です。)
+          ご不明点があれば、<a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">Twitter</a> にてお問い合わせ下さい。(フォロー外から DM をお送り頂くことも可能です。)
         </p>
       </main>
     </div>

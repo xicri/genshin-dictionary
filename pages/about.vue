@@ -28,12 +28,12 @@
 
         <h3>運営者・貢献者</h3>
         <ul>
-          <li>運営者: ふぉる (<a href="https://twitter.com/phol_si" target="_blank" rel="noopener">Twitter</a> / <a href="https://github.com/xicri" target="_blank" rel="noopener">GitHub</a>)</li>
+          <li>運営者: シクリ (<a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">Twitter</a> / <a href="https://github.com/xicri" target="_blank" rel="noopener">GitHub</a>)</li>
           <li>中国語翻訳データ作成: Bill Haku (<a href="https://space.bilibili.com/158463764" target="_blank" rel="noopener">BiliBili</a> / <a href="https://twitter.com/Haku_Bill" target="_blank" rel="noopener">Twitter</a> / <a href="https://github.com/Bill-Haku" target="_blank" rel="noopener">GitHub</a>)</li>
         </ul>
 
         <p>
-          お問い合わせなどの際は <a href="https://twitter.com/phol_si" target="_blank" rel="noopener">Twitter</a> からご連絡下さい。(DM 可)<br>
+          お問い合わせなどの際は <a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">Twitter</a> からご連絡下さい。(DM 可)<br>
           バグ報告やオープンデータ・API 関連、その他技術的なお問い合わせについては、GitHub の <a href="https://github.com/xicri/genshin-dictionary/issues" target="_blank" rel="noopener">Issues</a> や <a href="https://github.com/xicri/genshin-dictionary/discussions" target="_blank" rel="noopener">Discussions</a> からお問い合わせ頂いても構いません。<br>
           お問い合わせの際は、できるだけ日本語又は英語でお願いします。
         </p>
