@@ -21,7 +21,7 @@
     "postinstall": "node ./scripts/postinstall.mjs && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
-    "@nuxtjs/composition-api": "^0.32.0",
+    "@nuxtjs/composition-api": "^0.33.0",
     "@nuxtjs/robots": "^2.5.0",
     "@nuxtjs/sentry": "^5.1.0",
     "@nuxtjs/sitemap": "^2.4.0",
