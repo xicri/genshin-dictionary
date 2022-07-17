@@ -188,7 +188,7 @@ h5.linebreak {
     padding-top: 16px;
     padding-bottom: 16px;
 
-    border-bottom: 1px solid vars.$color-light;
+    border-bottom: 1px solid vars.$color-lighter;
 
     &:last-child {
       border-bottom: 0 none;
