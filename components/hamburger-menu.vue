@@ -18,7 +18,7 @@
           <a href="/history/">更新履歴</a>
         </li>
         <li class="menu__item">
-          <a href="https://translate.genshin-dictionary.com/" target="_blank">原神 自動翻訳</a>
+          <a href="https://translate.genshin-dictionary.com/" target="_blank" rel="noopener">原神 自動翻訳</a>
           <img src="~/assets/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14">
         </li>
       </ul>
