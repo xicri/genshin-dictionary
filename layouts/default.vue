@@ -8,19 +8,10 @@
           </a>
         </h1>
 
-        <a href="https://translate.genshin-dictionary.com/" class="layout-default__translator-link-pc layout-default__translator-link">
-          原神 自動翻訳<sup class="layout-default__new">New!</sup>
-        </a>
-
         <spacer />
 
         <hamburger-menu class="layout-default__menu" />
       </nav>
-    </div>
-    <div class="layout-default__translator-link-mobile">
-      <a href="https://translate.genshin-dictionary.com/" class="layout-default__translator-link">
-        原神 自動翻訳<sup class="layout-default__new">New!</sup>
-      </a>
     </div>
 
     <Nuxt />
@@ -61,34 +52,6 @@
     color: vars.$color-dark;
     letter-spacing: 1px;
     text-align: center;
-  }
-
-  @media (min-width: vars.$max-width) { // PC
-    &__translator-link-pc {
-      display: block;
-    }
-    &__translator-link-mobile {
-      display: none;
-    }
-  }
-
-  @media (max-width: vars.$max-width) { // Mobile
-    &__translator-link-pc {
-      display: none;
-    }
-    &__translator-link-mobile {
-      display: flex;
-      justify-content: center;
-
-      background-color: lighten(vars.$color-dark, 75%);
-
-      padding: 2em;
-      margin-bottom: 2em;
-    }
-  }
-
-  &__new {
-    font-size: 0.7em;
   }
 }
 </style>
