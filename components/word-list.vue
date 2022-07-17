@@ -70,7 +70,7 @@ export default defineComponent({
       padding-left: vars.$side-margin;
       padding-right: vars.$side-margin;
       background-color: vars.$color-lightest;
-      box-shadow: 0 -0.2em 5px vars.$color-dark;
+      box-shadow: 0 -0.2rem 5px #00000030;
     }
 
     &__results {
