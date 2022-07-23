@@ -25,6 +25,7 @@ export default defineComponent({
     if (!word) {
       const { error } = useContext();
       error({ statusCode: 404 });
+      return;
     }
 
     const title = `「${word.ja}」は英語で "${word.en}" | 原神 英語・中国語辞典`;

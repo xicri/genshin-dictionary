@@ -8,7 +8,7 @@ module.exports = {
     {
       name: "Chromium - Desktop",
       use: {
-        browserName: "chromium",
+        ...devices["Desktop Chrome"],
         // ▼▼ Debug Options ▼▼
         // headless: false,
         // launchOptions: {
@@ -20,29 +20,32 @@ module.exports = {
       name: "Chrome - Mobile",
       use: devices["Pixel 5"],
     },
-    // TODO Temporarily disable Safari tests due to unknown bugs
-    // {
-    //   name: "Safari - Desktop",
-    //   use: {
-    //     browserName: "webkit",
-    //     viewport: { width: 1200, height: 750 },
-    //   },
-    // },
-    // {
-    //   name: "Safari - Mobile",
-    //   use: devices["iPhone 12"],
-    // },
+    {
+      name: "Safari - Desktop",
+      use: {
+        ...devices["Desktop Safari"],
+      },
+    },
+    {
+      name: "Safari - Mobile",
+      use: {
+        ...devices["iPhone 12"],
+        isMobile: false, // Workaround: without this, "search by tag" test fails
+      },
+    },
     {
       name: "Firefox - Desktop",
       use: {
-        browserName: "firefox",
+        ...devices["Desktop Firefox"],
       },
     },
     {
       name: "Firefox - Mobile",
       use: {
-        browserName: "firefox",
-        viewport: { width: 800, height: 600 },
+        ...devices["Pixel 5"],
+        defaultBrowserType: "firefox",
+        userAgent: "Mozilla/5.0 (Android 12; Mobile; rv:102.0) Gecko/102.0 Firefox/102.0",
+        isMobile: false, // Workaround: without this, "search by tag" test fails
       },
     },
   ],

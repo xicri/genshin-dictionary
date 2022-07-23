@@ -12,12 +12,12 @@ export default defineComponent({
   props: {
     tagid: {
       type: String,
-      default: "",
+      required: true,
     },
   },
   setup(props) {
     return {
-      TagName: computed(() => allTags[props.tagid]?.ja),
+      TagName: computed(() => allTags[props.tagid].ja),
     };
   },
 });

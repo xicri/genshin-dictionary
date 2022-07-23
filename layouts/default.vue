@@ -9,8 +9,7 @@
         </h1>
 
         <spacer />
-
-        <hamburger-menu class="layout-default__menu" />
+        <hamburger-menu />
       </nav>
     </div>
 
