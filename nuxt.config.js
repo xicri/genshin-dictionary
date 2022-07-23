@@ -153,10 +153,20 @@ export default async () => {
 
     sitemap: async () => ({
       hostname: "https://genshin-dictionary.com",
+      // disable automatic sitemap generation to exclude URLs without locale:
+      // e.g. https://genshin-dictionary.com/about/
+      exclude: [ "/**" ],
       gzip: false,
+      i18n: true,
       routes: [
-        ...(words.map(word => ({ url: `/${word.id}/`, lastmod: word.updatedAt }))),
-        ...(Object.keys(tags).map(tagID => ({ url: `/tags/${tagID}/` }))),
+        ...([ "en", "ja" /* , "zh-CN" */ ].map(lang => ([
+          { url: `/${lang}/` },
+          { url: `/${lang}/about/` },
+          { url: `/${lang}/history/` },
+          { url: `/${lang}/opendata/` },
+          ...(words.map(word => ({ url: `/${lang}/${word.id}/`, lastmod: word.updatedAt }))),
+          ...(Object.keys(tags).map(tagID => ({ url: `/${lang}/tags/${tagID}/` }))),
+        ])).flat()),
       ],
     }),
   };
