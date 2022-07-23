@@ -11,6 +11,8 @@ module.exports = {
   ],
   transform: {
     "^.+\\.js$": "babel-jest",
-    ".*\\.(vue)$": "vue-jest",
+    // TODO Temporarily disable vue-jest because it still uses deprecated `babel-core` package and it prevents running Jest properly.
+    // see: https://stackoverflow.com/questions/56289348/cannot-find-module-babel-core-but-babel-core-is-installed
+    // ".*\\.(vue)$": "vue-jest",
   },
 };
