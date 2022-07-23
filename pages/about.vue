@@ -74,6 +74,13 @@ export default defineComponent({
         { hid: "og:title", property: "og:title", content: title },
         { hid: "description", name: "description", content: description },
         { hid: "og:description", property: "og:description", content: description },
+
+        // noindex untranslated pages
+        ...(i18n.locale !== "ja" ? [{
+          hid: "noindex",
+          name: "robots",
+          content: "noindex",
+        }] : []),
       ],
     });
 

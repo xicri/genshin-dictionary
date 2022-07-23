@@ -143,6 +143,13 @@ export default defineComponent({
       title,
       meta: [
         { hid: "og:title", property: "og:title", content: title },
+
+        // noindex untranslated pages
+        ...(i18n.locale !== "ja" ? [{
+          hid: "noindex",
+          name: "robots",
+          content: "noindex",
+        }] : []),
       ],
     });
 
