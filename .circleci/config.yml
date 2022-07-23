@@ -16,7 +16,7 @@ jobs:
 
       - restore_cache:
           key: playwright-browsers-{{ checksum "package-lock.json" }}
-      - node/install-packages
+      - run: npm ci --legacy-peer-deps
       - save_cache:
           key: playwright-browsers-{{ checksum "package-lock.json" }}
           paths:
