@@ -164,6 +164,33 @@ describe("The Genshin English Dictionary", () => {
     return;
   });
 
+  test("search by tag", async ({ page }) => {
+    await page.goto(rootURL);
+
+    const mobileTagBoxToggle = page.locator(".search__taglist-icon");
+
+    if (await mobileTagBoxToggle.isVisible() === true) {
+      await mobileTagBoxToggle.tap();
+    }
+
+    const firstTag = page.locator(".search__tag").first();
+    const selectedTagName = (await firstTag.innerText()).replace("+", "").trim();
+
+    await firstTag.click();
+    await page.waitForTimeout(1400); // Wait for words loaded
+
+    const words = await page.locator(".results__word");
+
+    for (let i = 0; i < await words.count(); i++) {
+      const tagEls = await (words.nth(i)).locator(".results__tags > a");
+      const resultTagNames = (await tagEls.allInnerTexts()).map(resultTagName => resultTagName.trim());
+
+      expect(resultTagNames).toContain(selectedTagName);
+    }
+
+    return;
+  });
+
   test("open tag list", async ({ page }) => {
     await page.goto(rootURL);
 
