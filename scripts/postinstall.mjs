@@ -26,14 +26,14 @@ if (process.env.LANGDATA_PATH) {
 
   console.info(`Copied dataset from ${process.env.LANGDATA_PATH}`);
 } else {
-  console.info("Fetching dataset from dataset.genshin-dictionary.com...");
+  console.info("Fetching dataset from i18n.genshin-langdata-6ku.pages.dev...");
 
   await Promise.all([
-    copyFromURL("https://dataset.genshin-dictionary.com/words.json", resolve(__dirname, "../static/dataset/words.json")),
-    copyFromURL("https://dataset.genshin-dictionary.com/words.csv", resolve(__dirname, "../static/dataset/words.csv")),
-    copyFromURL("https://dataset.genshin-dictionary.com/words-sjis.csv", resolve(__dirname, "../static/dataset/words-sjis.csv")),
-    copyFromURL("https://dataset.genshin-dictionary.com/tags.json", resolve(__dirname, "../static/dataset/tags.json")),
+    copyFromURL("https://i18n.genshin-langdata-6ku.pages.dev/words.json", resolve(__dirname, "../static/dataset/words.json")),
+    copyFromURL("https://i18n.genshin-langdata-6ku.pages.dev/words.csv", resolve(__dirname, "../static/dataset/words.csv")),
+    copyFromURL("https://i18n.genshin-langdata-6ku.pages.dev/words-sjis.csv", resolve(__dirname, "../static/dataset/words-sjis.csv")),
+    copyFromURL("https://i18n.genshin-langdata-6ku.pages.dev/tags.json", resolve(__dirname, "../static/dataset/tags.json")),
   ]);
 
-  console.info("Fetched dataset from dataset.genshin-dictionary.com.");
+  console.info("Fetched dataset from i18n.genshin-langdata-6ku.pages.dev.");
 }
