@@ -9,11 +9,11 @@ import tags from "~/static/dataset/tags.json";
 
 export default defineComponent({
   setup() {
-    const { $pinia, params } = useContext();
+    const { $pinia, i18n, params } = useContext();
     const store = useDictionaryStore($pinia);
 
     const tagID = params.value.id;
-    const title = ref((tags[tagID].title ?? `原神に登場する${tags[tagID].ja}の英語表記一覧`) + " | 原神 英語・中国語辞典");
+    const title = ref(`${ tags[tagID].title[i18n.locale] } | ${ i18n.t("siteTitle") }`);
 
     useMeta({
       title,
@@ -36,9 +36,11 @@ export default defineComponent({
     });
 
     const onSearch = () => {
-      if (window.location.pathname !== "/") {
-        history.pushState({}, "", "/");
-        title.value = "原神 英語・中国語辞典";
+      const root = `/${i18n.locale}/`;
+
+      if (window.location.pathname !== root) {
+        history.pushState({}, "", root);
+        title.value = i18n.t("siteTitle");
       }
     };
 

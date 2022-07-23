@@ -6,10 +6,21 @@
     </div>
 
     <p v-if="searchResults.length <= 0" data-e2e="empty">
-      該当する語彙が見つかりませんでした。
+      {{ $t("notFound") }}
     </p>
   </div>
 </template>
+
+<i18n>
+{
+  "en": {
+    "notFound": "Your search did not match any words in this dictionary."
+  },
+  "ja": {
+    "notFound": "該当する語彙が見つかりませんでした。"
+  }
+}
+</i18n>
 
 <script>
 import { defineComponent, useContext } from "@nuxtjs/composition-api";

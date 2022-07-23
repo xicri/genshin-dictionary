@@ -1,9 +1,12 @@
 <template>
   <div class="article__wrapper-outer">
     <div class="article__wrapper-inner">
-      <h2>オープンデータ・API (β)</h2>
+      <h2>{{ $t("opendataTitle") }}</h2>
 
       <main>
+        <p v-if="$i18n.locale !== 'ja'">
+          <strong>This page is not translated to English yet.</strong>
+        </p>
         <p>
           本サイトの対訳表データは CSV 形式 (一般向け) 及び JSON 形式 (技術者向け) で配布しています。<br>
           データは、基本的に自由に加工し掲載・再配布して頂いて構いません。(詳細は利用上の注意の項をお読み下さい)
@@ -128,17 +131,25 @@
 </template>
 
 <script>
-import { defineComponent, useAsync, useMeta } from "@nuxtjs/composition-api";
+import { defineComponent, useAsync, useContext, useMeta } from "@nuxtjs/composition-api";
 import tags from "~/static/dataset/tags.json";
 
 export default defineComponent({
   setup() {
-    const title = "オープンデータ・API | 原神 英語・中国語辞典";
+    const { i18n } = useContext();
+    const title = `${ i18n.t("opendataTitle") } | ${ i18n.t("siteTitle") }`;
 
     useMeta({
       title,
       meta: [
         { hid: "og:title", property: "og:title", content: title },
+
+        // noindex untranslated pages
+        ...(i18n.locale !== "ja" ? [{
+          hid: "noindex",
+          name: "robots",
+          content: "noindex",
+        }] : []),
       ],
     });
 
