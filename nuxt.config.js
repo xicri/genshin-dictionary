@@ -107,11 +107,6 @@ export default async () => {
       routes: [
         ...(words.map(word => ({ url: `/${word.id}/`, lastmod: word.updatedAt }))),
         ...(Object.keys(tags).map(tagID => ({ url: `/tags/${tagID}/` }))),
-
-        { url: "/teachings-of-transience", lastmod: "2022-03-19T13:30:00.000Z" },
-        { url: "/electro-crystalfly", lastmod: "2022-03-19T13:30:00.000Z" },
-        // Redirect error
-        { url: "/dmg", lastmod: "2022-01-23T11:30:00.000Z" },
       ],
     }),
 
