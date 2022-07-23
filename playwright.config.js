@@ -20,18 +20,17 @@ module.exports = {
       name: "Chrome - Mobile",
       use: devices["Pixel 5"],
     },
-    // TODO Temporarily disable Safari tests due to unknown bugs
-    // {
-    //   name: "Safari - Desktop",
-    //   use: {
-    //     browserName: "webkit",
-    //     viewport: { width: 1200, height: 750 },
-    //   },
-    // },
-    // {
-    //   name: "Safari - Mobile",
-    //   use: devices["iPhone 12"],
-    // },
+    {
+      name: "Safari - Desktop",
+      use: {
+        browserName: "webkit",
+        viewport: { width: 1200, height: 750 },
+      },
+    },
+    {
+      name: "Safari - Mobile",
+      use: devices["iPhone 12"],
+    },
     {
       name: "Firefox - Desktop",
       use: {
