@@ -1,5 +1,8 @@
 <template>
   <div class="word-list">
+    <!-- For centering, add empty space which is same size as ads -->
+    <div class="word-list__ads"></div>
+
     <div class="word-list__wrapper">
       <word-list-search class="word-list__search" @search="$emit('search')" />
       <word-list-results :words="searchResults" class="word-list__results" />
@@ -8,6 +11,8 @@
     <p v-if="searchResults.length <= 0" data-e2e="empty">
       {{ t("notFound") }}
     </p>
+
+    <ads class="word-list__ads" />
   </div>
 </template>
 
@@ -49,10 +54,15 @@ const { searchResults } = storeToRefs(store);
 
 .word-list {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  column-gap: 0.75rem;
 
   width: 100%;
+
+  &__ads {
+    width: 300px;
+    height: 250px;
+  }
 
   &__wrapper {
     max-width: vars.$max-width;
