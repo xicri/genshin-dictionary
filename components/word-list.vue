@@ -8,10 +8,6 @@
       <word-list-results :words="searchResults" class="word-list__results" />
     </div>
 
-    <p v-if="searchResults.length <= 0" data-e2e="empty">
-      該当する語彙が見つかりませんでした。
-    </p>
-
     <ads class="word-list__ads" />
   </div>
 </template>

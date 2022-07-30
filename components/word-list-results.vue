@@ -84,6 +84,10 @@
         </div>
       </div>
     </div>
+
+    <p v-if="words.length <= 0" class="results__empty" data-e2e="empty">
+      該当する語彙が見つかりませんでした。
+    </p>
   </main>
 </template>
 
@@ -275,6 +279,10 @@ h5.linebreak {
   &__permalink--icon {
     width: 1em;
     height: 1em;
+  }
+
+  &__empty {
+    text-align: center;
   }
 }
 
