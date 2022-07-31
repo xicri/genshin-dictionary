@@ -15,7 +15,7 @@ export default async () => {
   }
 
   const config = {
-    target: "static",
+    target: "server",
     components: true,
     modern: "client",
 
