@@ -8,6 +8,12 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 async function copyFromURL(src, dest) {
   const res = await fetch(src);
+
+  if (400 <= res.status) {
+    throw new Error(`Failed to fetch ${src}
+Status code: ${res.status}`);
+  }
+
   const str = await res.text();
   await writeFile(dest, str);
 }
