@@ -71,6 +71,7 @@ export default async () => {
     },
     router: {
       trailingSlash: true,
+      middleware: "trailing-slash",
     },
 
     modules: [
