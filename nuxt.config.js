@@ -24,6 +24,7 @@ export default async () => {
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { name: "format-detection", content: "telephone=no" },
         { hid: "description", name: "description", content: "原神に登場する固有名詞の英和・和英辞典です。" },
         { hid: "og:description", property: "og:description", content: "原神に登場する固有名詞の英和・和英辞典です。" },
         { hid: "og:type", property: "og:type", content: "website" },
