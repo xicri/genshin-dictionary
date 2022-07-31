@@ -4,11 +4,12 @@
 
 <script>
 import { defineComponent, onMounted, useContext, useMeta } from "@nuxtjs/composition-api";
+import { getWordRedirectDestination } from "~/libs/redirect.js";
 import { useDictionaryStore } from "~/store/index.js";
 
 export default defineComponent({
   setup() {
-    const { $pinia, params } = useContext();
+    const { $pinia, params, redirect } = useContext();
     const store = useDictionaryStore($pinia);
 
     const onSearch = () => {
@@ -17,6 +18,11 @@ export default defineComponent({
         document.title = "原神 英語・中国語辞典";
       }
     };
+
+    const destWordID = getWordRedirectDestination(params.value.wordid);
+    if (destWordID) {
+      redirect(`/${destWordID}/`);
+    }
 
     store.$reset();
     store.queryByID(params.value.wordid);
