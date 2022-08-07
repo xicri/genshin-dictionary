@@ -2,6 +2,7 @@
 # Project-specific
 #
 static/dataset/
+fly-staging.toml
 
 #
 # System
