@@ -5,7 +5,7 @@
 
       <main>
         <p>
-          このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「<a href="https://genshin.hoyoverse.com" target="_blank" rel="noopener">原神</a>」で用いられる固有名詞等の日本語・英語対訳表です。
+          このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「<a href="https://genshin.hoyoverse.com" target="_blank" rel="noopener">原神</a>」で用いられる固有名詞等の日本語・英語・中国語対訳表です。
         </p>
         <p>現在の収録単語数は{{ wordCount }}語です。</p>
 
@@ -15,7 +15,7 @@
           読み仮名は検索精度の向上を目的として付けており、その正確性について十分な調査をしておりません。間違いが多く含まれる可能性があることをご了承下さい。読み仮名について、より正確な情報を収集されたい場合、<a href="http://anemoarchon.s205.xrea.com/#/gdic" target="_blank" rel="noopener">原神用語辞書</a>の<a href="http://anemoarchon.s205.xrea.com/#/gdic/list" target="_blank" rel="noopener">収録単語確認ページ</a>を参照されることをおすすめします。
         </p>
         <p>
-          このサイトは一プレイヤーが運営しているファンサイトであり、開発元である Hoyoverse (Cognosphere 社・miHoYo 社)とは関係ありません。
+          このサイトは一プレイヤーが運営しているファンサイトであり、開発元である HoYoverse (Cognosphere 社・miHoYo 社)とは関係ありません。
         </p>
 
         <h3 id="opendata">
@@ -42,7 +42,7 @@
           クレジット
         </h3>
         <p>
-          本サイトの読み仮名データの一部は、<a href="http://anemoarchon.s205.xrea.com/#/gdic" target="_blank" rel="noopener">原神用語辞書</a>を参照しています。
+          本サイトの読み仮名データの一部は、<a href="http://anemoarchon.s205.xrea.com/#/gdic" target="_blank" rel="noopener">原神用語辞書</a>及び<a href="https://twitter.com/genshin_kanji" target="_blank" rel="noopener">原神漢字研究所</a>を参照しています。
         </p>
         <p>
           本サイトの単語は、原則としてゲームや公式から配信される YouTube 動画、ツイート等を参照していますが、聖遺物など一部の単語については <a href="https://genshin-impact.fandom.com/wiki/Genshin_Impact_Wiki" target="_blank" rel="noopener">Genshin Impact Wiki (Fandom)</a> を参照しています。
@@ -62,11 +62,14 @@ import words from "~/static/dataset/words.json";
 export default defineComponent({
   setup() {
     const title = "このサイトについて | 原神 英語・中国語辞典";
+    const description = "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。";
 
     useMeta({
       title,
       meta: [
         { hid: "og:title", property: "og:title", content: title },
+        { hid: "description", name: "description", content: description },
+        { hid: "og:description", property: "og:description", content: description },
       ],
     });
 
