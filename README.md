@@ -26,11 +26,9 @@ You may need experience in (or need to learn) following technology stack to cont
 
 ### Setup
 
-You need to append `--legacy-peer-deps` option to `npm ci` or `npm install` due to a bug in npm. See [this issue](https://github.com/vuejs/pinia/issues/853) for details.
-
 ```shell
 $ cd /path/to/genshin-dictionary
-$ npm ci --legacy-peer-deps
+$ npm ci
 $ npm run dev
 ```
 
