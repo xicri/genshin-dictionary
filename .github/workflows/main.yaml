@@ -1,0 +1,41 @@
+name: "actions"
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    timeout-minutes: 10
+    env:
+      NODE_ENV: local
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+
+      - name: cache playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ hashFiles('**/package-lock.json') }}
+
+      - run: npm ci
+      - run: npx playwright install-deps
+      - run: npm run build
+      - run: npm test
+      - run: npm run lint
