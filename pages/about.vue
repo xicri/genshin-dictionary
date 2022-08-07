@@ -62,11 +62,14 @@ import words from "~/static/dataset/words.json";
 export default defineComponent({
   setup() {
     const title = "このサイトについて | 原神 英語・中国語辞典";
+    const description = "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。";
 
     useMeta({
       title,
       meta: [
         { hid: "og:title", property: "og:title", content: title },
+        { hid: "description", name: "description", content: description },
+        { hid: "og:description", property: "og:description", content: description },
       ],
     });
 
