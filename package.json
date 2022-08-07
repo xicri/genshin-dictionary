@@ -14,7 +14,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt generate --fail-on-error",
+    "build": "nuxt build --fail-on-error",
     "start": "nuxt start",
     "test": "jest && playwright test",
     "lint": "eslint --ext .js,.mjs,.cjs,.ts,.vue --ignore-path .gitignore .",
