@@ -55,11 +55,11 @@ jobs:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
-      - name: generate fly-staging.toml
+      - name: generate Dockerfile_staging
         run: |
-          cp fly.toml fly-staging.toml
-          sed -i -e 's/"genshin-dictionary"/"genshin-dictionary-staging"/' fly-staging.toml
-      - run: flyctl deploy --remote-only --config=fly-staging.toml
+          cp Dockerfile Dockerfile_staging
+          sed -i -e 's/production/staging/g' Dockerfile_staging
+      - run: flyctl deploy --remote-only --app=genshin-dictionary-staging --dockerfile=Dockerfile_staging
 
   production:
     if: ${{ github.ref == 'refs/heads/main' && github.repository_owner == 'xicri' }}
