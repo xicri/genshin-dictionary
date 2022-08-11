@@ -17,5 +17,6 @@ COPY --from=builder /app .
 
 ENV HOST 0.0.0.0
 ENV PORT 8080
+ENV SERVER_ENV production
 
 CMD [ "npm", "start" ]
