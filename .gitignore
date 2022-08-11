@@ -2,7 +2,7 @@
 # Project-specific
 #
 static/dataset/
-fly-staging.toml
+Dockerfile_staging
 
 #
 # System

@@ -14,13 +14,13 @@ on:
       - main
   repository_dispatch:
     types:
-      - webhook
+      - langdata-update
 
 jobs:
   test:
     timeout-minutes: 15
     env:
-      NODE_ENV: local
+      SERVER_ENV: local
     runs-on: ubuntu-latest
 
     steps:
@@ -47,7 +47,7 @@ jobs:
     if: ${{ github.ref != 'refs/heads/main' && github.repository_owner == 'xicri' }}
     timeout-minutes: 5
     env:
-      NODE_ENV: staging
+      SERVER_ENV: staging
       FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
     runs-on: ubuntu-latest
 
@@ -55,18 +55,18 @@ jobs:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
-      - name: generate fly-staging.toml
+      - name: generate Dockerfile_staging
         run: |
-          cp fly.toml fly-staging.toml
-          sed -i -e 's/"genshin-dictionary"/"genshin-dictionary-staging"/' fly-staging.toml
-      - run: flyctl deploy --remote-only --config=fly-staging.toml
+          cp Dockerfile Dockerfile_staging
+          sed -i -e 's/production/staging/g' Dockerfile_staging
+      - run: flyctl deploy --remote-only --app=genshin-dictionary-staging --dockerfile=Dockerfile_staging
 
   production:
     if: ${{ github.ref == 'refs/heads/main' && github.repository_owner == 'xicri' }}
     needs: test
     timeout-minutes: 5
     env:
-      NODE_ENV: production
+      SERVER_ENV: production
       FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
     runs-on: ubuntu-latest
 

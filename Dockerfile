@@ -4,7 +4,9 @@ WORKDIR /app
 
 COPY . .
 
-RUN NODE_ENV=production npm ci --prefer-offline --omit=dev
+ENV SERVER_ENV production
+
+RUN npm ci --prefer-offline --omit=dev
 RUN npm run build
 
 FROM node:lts
