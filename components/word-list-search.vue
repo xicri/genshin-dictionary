@@ -5,35 +5,37 @@
         <div class="search__scrollable" @click="focusOnSearchBox" @dblclick="selectAll">
           <div class="search__active-tags">
             <div v-for="(tag, i) in tags" :key="tag" class="search__active-tag">
-              <span>{{ allTags[tag].ja }}</span>
+              <span>{{ allTags[tag][$i18n.locale] }}</span>
               <span class="search__remove-tag" @click="removeTag(i)">☓</span>
             </div>
           </div>
 
-          <elastic-searchbox ref="searchBox" class="search__input" name="searchbox" placeholder="検索ワードを入力…" autocomplete="off" @input="updateSearchQuery" />
+          <elastic-searchbox ref="searchBox" class="search__input" name="searchbox" :placeholder="$t('enterSearchTerms')" autocomplete="off" @input="updateSearchQuery" />
         </div>
 
         <img
           src="~/assets/vendor/octicons/tag.svg"
           width="24"
           height="24"
-          alt="タグ一覧を開く"
+          :alt="$t('openListOfTags')"
           decoding="async"
           class="search__taglist-icon"
           @click="toggleTagList"
         >
       </div>
       <div ref="taglist" :class="{ search__taglist: true, 'search__taglist-display-mobile': displayTagListOnMobile }">
-        <span class="search__taglist-title">タグ:</span>
-        <span v-for="({ ja }, id) in AvailableTags" :key="ja" class="search__tag" @click="addTag(id)">
-          {{ ja }} <span class="search__tag-add">+</span>
-        </span>
+        <div class="search__taglist-inner">
+          <span class="search__taglist-title">{{ $t("tags") }}:</span>
+          <span v-for="(availableTag, id) in AvailableTags" :key="id" class="search__tag" @click="addTag(id)">
+            {{ availableTag[$i18n.locale] }} <span class="search__tag-add">+</span>
+          </span>
+        </div>
 
         <img
           src="~/assets/vendor/octicons/x.svg"
           width="24"
           height="24"
-          alt="タグ一覧を閉じる"
+          :alt="$t('closeListOfTags')"
           decoding="async"
           class="search__taglist-close"
           @click="closeTagList"
@@ -43,6 +45,23 @@
     <closing-layer :enabled="displayTagListOnMobile" @close="closeTagList" />
   </div>
 </template>
+
+<i18n>
+{
+  "en": {
+    "enterSearchTerms": "Enter search terms...",
+    "tags": "Tags",
+    "openListOfTags": "Open the list of tags",
+    "closeListOfTags": "Close the list of tags"
+  },
+  "ja": {
+    "enterSearchTerms": "検索ワードを入力…",
+    "tags": "タグ",
+    "openListOfTags": "タグ一覧を開く",
+    "closeListOfTags": "タグ一覧を閉じる"
+  }
+}
+</i18n>
 
 <script>
 import { computed, defineComponent, ref, useContext } from "@nuxtjs/composition-api";
@@ -214,7 +233,8 @@ export default defineComponent({
   }
   &__taglist {
     border: 0;
-
+  }
+  &__taglist-inner {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -272,7 +292,6 @@ export default defineComponent({
 
       margin-left: vars.$side-margin;
       margin-right: vars.$side-margin;
-      padding: 0.5em;
 
       background-color: rgba($color: #ffffff, $alpha: 0.9);
       border-radius: 5px;
@@ -312,7 +331,13 @@ export default defineComponent({
     }
 
     &__taglist-display-mobile {
+      display: block;
+    }
+    &__taglist-inner {
       display: flex;
+      overflow-y: scroll;
+      max-height: calc(100vh - 170px);
+      padding: 0.5em;
     }
   }
 }

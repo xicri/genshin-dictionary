@@ -24,19 +24,19 @@
       </h4>
       <div class="results__description">
         <div class="results__tags results__description-section">
-          <a v-for="tag in word.tags" :key="tag" :href="`/tags/${tag}/`">
+          <a v-for="tag in word.tags" :key="tag" :href="localePath(`/tags/${tag}/`)">
             <tag :tagid="tag" />
           </a>
         </div>
-        <div v-if="word.notes" class="results__description-section" data-e2e="notes" v-html="word.notes"></div>
+        <div v-if="word.notes && $i18n.locale === 'ja'" class="results__description-section" data-e2e="notes" v-html="word.notes"></div>
         <div v-if="word.examples && 0 < word.examples.length" class="results__description-section">
           <h5 class="linebreak">
-            例文
+            {{ $t("example") }}
           </h5>
           <div v-for="example in word.examples" :key="example.en" class="results__description-section-level2">
             <p>&quot;{{ example.en }}&quot;</p>
             <p>「{{ example.ja }}」</p>
-            <template v-if="example.ref">
+            <template v-if="example.ref && $i18n.locale === 'ja'">
               <p class="results__example-ref">
                 <template v-if="example.refURL">
                   ― <a :href="example.refURL" target="_blank" rel="noopener">{{ example.ref }}</a>
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="results__permalink">
-          <a :href="`/${word.id}/`">
+          <a :href="localePath(`/${word.id}/`)">
             <!--
               Approximate values of width & height are specified in HTML to mitigate Comulative Layout Shift,
               but actual values are specified in SCSS.
@@ -58,16 +58,16 @@
               src="~/assets/vendor/octicons/link.svg"
               width="12"
               height="12"
-              :alt="`${word.ja}のページへのリンク`"
+              :alt="$t('permalinkAlt', { word: word[$i18n.locale] })"
               decoding="async"
               class="results__permalink--icon"
-            > 固定リンク
+            > {{ $t("permalink") }}
           </a>
           <img
             src="~/assets/vendor/octicons/copy.svg"
             width="12"
             height="12"
-            :alt="`${word.ja}のページへのリンクをコピー`"
+            :alt="$t('copyLink', { word: word[$i18n.locale] })"
             decoding="async"
             class="results__permalink--copy"
             @click="copyLink(word.id, $event)"
@@ -76,7 +76,7 @@
             src="~/assets/vendor/octicons/check.svg"
             width="12"
             height="12"
-            :alt="`${word.ja}のページへのリンクのコピーが完了しました`"
+            :alt="$t('copyLinkDone', { word: word[$i18n.locale] })"
             decoding="async"
             class="results__permalink--copied"
             style="display: none;"
@@ -86,6 +86,25 @@
     </div>
   </main>
 </template>
+
+<i18n>
+{
+  "en": {
+    "example": "Example",
+    "permalink": "Permalink",
+    "permalinkAlt": "Link to {word}",
+    "copyLink": "Copy link to {word}",
+    "copyLinkDone": "Copied link to {word}"
+  },
+  "ja": {
+    "example": "例文",
+    "permalink": "固定リンク",
+    "permalinkAlt": "{word}のページへのリンク",
+    "copyLink": "{word}のページへのリンクをコピー",
+    "copyLinkDone": "{word}のページへのリンクのコピーが完了しました"
+  }
+}
+</i18n>
 
 <script>
 import { defineComponent, nextTick, onMounted, onUpdated, ref, useContext } from "@nuxtjs/composition-api";
@@ -100,7 +119,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const { $pinia } = useContext();
+    const { $pinia, i18n } = useContext();
     const store = useDictionaryStore($pinia);
 
     //
@@ -147,7 +166,7 @@ export default defineComponent({
       wordList,
       // event handlers
       async copyLink(wordId, $event) {
-        navigator.clipboard.writeText(`https://genshin-dictionary.com/${wordId}/`);
+        navigator.clipboard.writeText(`https://genshin-dictionary.com/${i18n.locale}/${wordId}/`);
 
         const copyImg = $event.target;
         const copiedImg = copyImg.parentElement.getElementsByClassName("results__permalink--copied")[0];

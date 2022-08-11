@@ -1,9 +1,12 @@
 <template>
   <div class="article__wrapper-outer">
     <div class="article__wrapper-inner">
-      <h2>このサイトについて</h2>
+      <h2>{{ $t("aboutTitle") }}</h2>
 
       <main>
+        <p v-if="$i18n.locale !== 'ja'">
+          <strong>This page is not translated to English yet.</strong>
+        </p>
         <p>
           このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「<a href="https://genshin.hoyoverse.com" target="_blank" rel="noopener">原神</a>」で用いられる固有名詞等の日本語・英語・中国語対訳表です。
         </p>
@@ -56,13 +59,14 @@
 </template>
 
 <script>
-import { defineComponent, useAsync, useMeta } from "@nuxtjs/composition-api";
+import { defineComponent, useAsync, useContext, useMeta } from "@nuxtjs/composition-api";
 import words from "~/static/dataset/words.json";
 
 export default defineComponent({
   setup() {
-    const title = "このサイトについて | 原神 英語・中国語辞典";
-    const description = "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。";
+    const { i18n } = useContext();
+    const title = `${i18n.t("aboutTitle")} | ${i18n.t("siteTitle")}`;
+    const description = i18n.t("aboutDescription");
 
     useMeta({
       title,
@@ -70,6 +74,13 @@ export default defineComponent({
         { hid: "og:title", property: "og:title", content: title },
         { hid: "description", name: "description", content: description },
         { hid: "og:description", property: "og:description", content: description },
+
+        // noindex untranslated pages
+        ...(i18n.locale !== "ja" ? [{
+          hid: "noindex",
+          name: "robots",
+          content: "noindex",
+        }] : []),
       ],
     });
 

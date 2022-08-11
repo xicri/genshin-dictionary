@@ -19,23 +19,46 @@ export default async () => {
     components: true,
     modern: "client",
 
-    head: {
-      htmlAttrs: { lang: "ja" },
-      meta: [
-        { charset: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { name: "format-detection", content: "telephone=no" },
-        { hid: "description", name: "description", content: "原神に登場する固有名詞の英和・和英辞典です。" },
-        { hid: "og:description", property: "og:description", content: "原神に登場する固有名詞の英和・和英辞典です。" },
-        { hid: "og:type", property: "og:type", content: "website" },
-        { hid: "og:locale", property: "og:locale", content: "ja_JP" },
-        { hid: "og:site_name", property: "og:site_name", content: "原神 英語・中国語辞典" },
-        { hid: "twitter:card", property: "twitter:card", content: "summary" },
-        { hid: "twitter:site", property: "twitter:site", content: "@xicri_gi" },
-        { hid: "twitter:creator", property: "twitter:creator", content: "@xicri_gi" },
-        { hid: "google-site-verification", name: "google-site-verification", content: "fPZCIib8QFE52LeBEGqBoapTwL6v9vqHl9lKqcreMDQ" },
-      ],
-      script: [],
+    head() {
+      if (!this.$nuxtI18nHead) {
+        return {};
+      }
+
+      const { htmlAttrs, meta, link } = this.$nuxtI18nHead({ addSeoAttributes: true });
+      const { lang } = htmlAttrs;
+
+      const siteName = lang === "en" ? "Genshin Dictionary" : "原神英語・中国語辞典";
+      const description = lang === "en"
+        ? "An online English-Japanese dictionary for proprietary nouns in Genshin Impact"
+        : "原神に登場する固有名詞の英和・和英辞典です。";
+
+      return {
+        htmlAttrs,
+        meta: [
+          { charset: "utf-8" },
+          { name: "viewport", content: "width=device-width, initial-scale=1" },
+          { name: "format-detection", content: "telephone=no" },
+          { hid: "description", name: "description", content: description },
+          { hid: "og:description", property: "og:description", content: description },
+          { hid: "og:type", property: "og:type", content: "website" },
+          { hid: "og:site_name", property: "og:site_name", content: siteName },
+          { hid: "twitter:card", property: "twitter:card", content: "summary" },
+          { hid: "twitter:site", property: "twitter:site", content: "@xicri_gi" },
+          { hid: "twitter:creator", property: "twitter:creator", content: "@xicri_gi" },
+          { hid: "google-site-verification", name: "google-site-verification", content: "fPZCIib8QFE52LeBEGqBoapTwL6v9vqHl9lKqcreMDQ" },
+          ...meta,
+        ],
+        link,
+        script: [
+          ...(process.env.NODE_ENV === "production" ? [{
+            hid: "cloudflare-wa",
+            src: "https://static.cloudflareinsights.com/beacon.min.js",
+            "data-cf-beacon": "{\"token\": \"59caa95b4e654d118af6761046577a6b\"}",
+            defer: true,
+            body: true,
+          }] : []),
+        ],
+      };
     },
 
     css: [ "~/assets/styles/global.scss" ],
@@ -75,6 +98,7 @@ export default async () => {
     },
 
     modules: [
+      "@nuxtjs/i18n",
       "@nuxtjs/robots",
       "@nuxtjs/sentry",
       "@nuxtjs/sitemap",
@@ -82,8 +106,56 @@ export default async () => {
     buildModules: [
       "@nuxtjs/composition-api/module",
       "@pinia/nuxt",
-      "nuxt-canonical-ogurl",
     ],
+
+    i18n: {
+      locales: [
+        {
+          code: "en",
+          iso: "en",
+          name: "English",
+        },
+        {
+          code: "ja",
+          iso: "ja-JP",
+          name: "日本語",
+        },
+        // {
+        //   code: "zh-CN",
+        //   iso: "zh-CN",
+        //   name: "简体中文",
+        // },
+      ],
+      strategy: "prefix",
+      defaultLocale: "en",
+      baseUrl: "https://genshin-dictionary.com",
+      vueI18nLoader: true,
+      vueI18n: {
+        fallbackLocale: "en",
+        messages: {
+          en: {
+            siteTitle: "Genshin Dictionary",
+            indexTitleDesc: "an online English-Japanese dictionary for the words in Genshin Impact",
+            wordIdTitle: "\"{en}\" is \"{ja}\" in Japanese",
+            wordIdDescription: "Japanese expression for \"{en}\" is \"{ja}\".",
+            aboutTitle: "About this website",
+            aboutDescription: "About Genshin Dictionary. This website is an online English-Chinese-Japanese dictionary for the proprietary nouns and words for Genshin Impact.",
+            historyTitle: "Update History",
+            opendataTitle: "Open Data / API (β)",
+          },
+          ja: {
+            siteTitle: "原神 英語・中国語辞典",
+            indexTitleDesc: "原神の固有名詞の英語表記一覧",
+            wordIdTitle: "「{ja}」は英語で \"{en}\"",
+            wordIdDescription: "「{ja}」の英語表記は \"{en}\"",
+            aboutTitle: "このサイトについて",
+            aboutDescription: "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
+            historyTitle: "更新履歴",
+            opendataTitle: "オープンデータ・API (β)",
+          },
+        },
+      },
+    },
 
     robots: {
       UserAgent: "*",
@@ -105,27 +177,23 @@ export default async () => {
 
     sitemap: async () => ({
       hostname: "https://genshin-dictionary.com",
+      // disable automatic sitemap generation to exclude URLs without locale:
+      // e.g. https://genshin-dictionary.com/about/
+      exclude: [ "/**" ],
       gzip: false,
+      i18n: true,
       routes: [
-        ...(words.map(word => ({ url: `/${word.id}/`, lastmod: word.updatedAt }))),
-        ...(Object.keys(tags).map(tagID => ({ url: `/tags/${tagID}/` }))),
+        ...([ "en", "ja" /* , "zh-CN" */ ].map(lang => ([
+          { url: `/${lang}/` },
+          { url: `/${lang}/about/` },
+          { url: `/${lang}/history/` },
+          { url: `/${lang}/opendata/` },
+          ...(words.map(word => ({ url: `/${lang}/${word.id}/`, lastmod: word.updatedAt }))),
+          ...(Object.keys(tags).map(tagID => ({ url: `/${lang}/tags/${tagID}/` }))),
+        ])).flat()),
       ],
     }),
-
-    canonicalOgUrl: {
-      baseURL: "https://genshin-dictionary.com",
-    },
   };
-
-  if (process.env.NODE_ENV === "production") {
-    config.head.script.push({
-      hid: "cloudflare-wa",
-      src: "https://static.cloudflareinsights.com/beacon.min.js",
-      "data-cf-beacon": "{\"token\": \"59caa95b4e654d118af6761046577a6b\"}",
-      defer: true,
-      body: true,
-    });
-  }
 
   return config;
 };
