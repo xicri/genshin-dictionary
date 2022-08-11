@@ -50,7 +50,7 @@ export default async () => {
         ],
         link,
         script: [
-          ...(process.env.NODE_ENV === "production" ? [{
+          ...(process.env.SERVER_ENV === "production" ? [{
             hid: "cloudflare-wa",
             src: "https://static.cloudflareinsights.com/beacon.min.js",
             "data-cf-beacon": "{\"token\": \"59caa95b4e654d118af6761046577a6b\"}",
@@ -159,7 +159,7 @@ export default async () => {
 
     robots: {
       UserAgent: "*",
-      ...(process.env.NODE_ENV === "production" ? {
+      ...(process.env.SERVER_ENV === "production" ? {
         Allow: "/",
         Sitemap: "https://genshin-dictionary.com/sitemap.xml",
       } : {
@@ -171,7 +171,7 @@ export default async () => {
       dsn: "https://1588b1ae11f340479b57e3913b92d72f@o287069.ingest.sentry.io/5887130",
       disableServerSide: true,
       config: {
-        environment: process.env.NODE_ENV || "local",
+        environment: process.env.SERVER_ENV || "local",
       },
     },
 
