@@ -14,7 +14,7 @@ on:
       - main
   repository_dispatch:
     types:
-      - webhook
+      - langdata-update
 
 jobs:
   test:
