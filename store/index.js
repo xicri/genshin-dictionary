@@ -13,7 +13,8 @@ export const useDictionaryStore = defineStore("dictionary", {
   getters: {
     searchResults: (state) => {
       if (state.wordID) {
-        return [ words.find(word => word.id === state.wordID) ];
+        const word = words.find(word => word.id === state.wordID);
+        return word ? [ word ] : [];
       } else {
         const results = words.filter(word => {
           if (state.query) {
