@@ -130,6 +130,12 @@ export default async () => {
       defaultLocale: "en",
       baseUrl: "https://genshin-dictionary.com",
       vueI18nLoader: true,
+      detectBrowserLanguage: {
+        useCookie: true,
+        cookieSecure: true,
+        fallbackLocale: "en",
+        redirectOn: "no prefix",
+      },
       vueI18n: {
         fallbackLocale: "en",
         messages: {
