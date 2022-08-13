@@ -175,7 +175,6 @@ export default async () => {
 
     sentry: {
       dsn: "https://1588b1ae11f340479b57e3913b92d72f@o287069.ingest.sentry.io/5887130",
-      disableServerSide: true,
       config: {
         environment: process.env.SERVER_ENV || "local",
       },
