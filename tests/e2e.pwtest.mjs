@@ -1,13 +1,15 @@
 import { test, expect } from "@playwright/test";
 import express from "express";
+import fetch from "node-fetch";
 import { loadNuxt, build } from "nuxt";
 import { getRandomPort } from "./testutils.mjs";
 
 const { describe, beforeAll, afterAll } = test;
 
+const ip = "127.0.0.1";
+const port = getRandomPort();
+
 describe("The Genshin English Dictionary", () => {
-  const ip = "127.0.0.1";
-  const port = getRandomPort();
   const rootURLEn = `http://${ip}:${port}/en/`;
 
   let server;
@@ -217,4 +219,58 @@ describe("The Genshin English Dictionary", () => {
 
     return;
   });
+});
+
+describe("redirection by language settings works properly", () => {
+  const rootURL = `http://${ip}:${port}`;
+  const langs = [
+    { code: "ja", url: `${rootURL}/ja/` },
+    { code: "ja-JP", url: `${rootURL}/ja/` },
+    { code: "en", url: `${rootURL}/en/` },
+    { code: "en-US", url: `${rootURL}/en/` },
+    { code: "en-GB", url: `${rootURL}/en/` },
+    // { code: "zh", url: `${rootURL}/zh-CN/` },
+    // { code: "zh-CN", url: `${rootURL}/zh-CN/` },
+    { code: "fr", url: `${rootURL}/en/` }, // fallback to English
+  ];
+
+  let server;
+
+  beforeAll(async () => {
+    const app = express();
+    const nuxt = await loadNuxt("dev");
+
+    app.use(nuxt.render);
+    build(nuxt);
+
+    server = app.listen(port, ip);
+  });
+
+  afterAll(() => {
+    server.close();
+  });
+
+  for (const { code, url } of langs) {
+    test(`/ (${code})`, async () => {
+      const res = await fetch(rootURL, {
+        headers: {
+          "Accept-Language": code,
+        },
+      });
+
+      expect(res.redirected).toBe(true);
+      expect(res.url).toBe(url);
+    });
+
+    test(`/[wordid] (${code})`, async () => {
+      const res = await fetch(`${rootURL}/artifact/`, {
+        headers: {
+          "Accept-Language": code,
+        },
+      });
+
+      expect(res.redirected).toBe(true);
+      expect(res.url).toBe(`${url}artifact/`);
+    });
+  }
 });
