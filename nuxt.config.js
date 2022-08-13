@@ -53,7 +53,7 @@ export default async () => {
           ...(process.env.SERVER_ENV === "production" ? [{
             hid: "cloudflare-wa",
             src: "https://static.cloudflareinsights.com/beacon.min.js",
-            "data-cf-beacon": "{\"token\": \"59caa95b4e654d118af6761046577a6b\"}",
+            "data-cf-beacon": "{\"token\": \"1f401150384f4aaa9d14b208aac9fdba\"}",
             defer: true,
             body: true,
           }] : []),
