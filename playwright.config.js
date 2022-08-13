@@ -21,12 +21,6 @@ module.exports = {
       use: devices["Pixel 5"],
     },
     {
-      name: "Safari - Desktop",
-      use: {
-        ...devices["Desktop Safari"],
-      },
-    },
-    {
       name: "Safari - Mobile",
       use: {
         ...devices["iPhone 12"],
@@ -37,15 +31,6 @@ module.exports = {
       name: "Firefox - Desktop",
       use: {
         ...devices["Desktop Firefox"],
-      },
-    },
-    {
-      name: "Firefox - Mobile",
-      use: {
-        ...devices["Pixel 5"],
-        defaultBrowserType: "firefox",
-        userAgent: "Mozilla/5.0 (Android 12; Mobile; rv:102.0) Gecko/102.0 Firefox/102.0",
-        isMobile: false, // Workaround: without this, "search by tag" test fails
       },
     },
   ],

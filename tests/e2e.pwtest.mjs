@@ -1,12 +1,13 @@
 import { test, expect } from "@playwright/test";
 import express from "express";
 import { loadNuxt, build } from "nuxt";
+import { getRandomPort } from "./testutils.mjs";
 
 const { describe, beforeAll, afterAll } = test;
 
 describe("The Genshin English Dictionary", () => {
   const ip = "127.0.0.1";
-  const port = 5678;
+  const port = getRandomPort();
   const rootURLEn = `http://${ip}:${port}/en/`;
 
   let server;
