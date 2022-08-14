@@ -76,7 +76,6 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/i18n",
     "@nuxtjs/robots",
-    "@nuxtjs/sentry",
     "@nuxtjs/sitemap",
     "@pinia/nuxt",
   ],
@@ -157,13 +156,6 @@ export default defineNuxtConfig({
     } : {
       Disallow: "/",
     }),
-  },
-
-  sentry: {
-    dsn: "https://1588b1ae11f340479b57e3913b92d72f@o287069.ingest.sentry.io/5887130",
-    config: {
-      environment: process.env.SERVER_ENV || "local",
-    },
   },
 
   sitemap: async () => ({
