@@ -45,10 +45,11 @@ export default defineComponent({
     });
 
     const history = useAsync(() => getHistory());
+    const empty = useAsync(() => isEmpty(getHistory()));
 
     return {
       history,
-      empty: useAsync(() => isEmpty(history.value)),
+      empty,
     };
   },
   head: {}, // empty head required
