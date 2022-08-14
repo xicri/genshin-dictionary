@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 
-import allWords from "~/static/dataset/words.json";
+import allWords from "../../public/dataset/words.json";
 
 class CandidateString {
   constructor(candidate) {
