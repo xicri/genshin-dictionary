@@ -24,10 +24,13 @@
 }
 </i18n>
 
-<script>
-export default {
-  layout: "default",
-};
+<script setup>
+const props = defineProps({
+  error: {
+    type: Object,
+    required: true,
+  },
+});
 </script>
 
 <style lang="scss" scoped>
