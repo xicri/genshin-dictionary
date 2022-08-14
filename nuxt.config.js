@@ -190,12 +190,13 @@ export default async () => {
       routes: [
         ...([ "en", "ja" /* , "zh-CN" */ ].map(lang => ([
           { url: `/${lang}/` },
-          { url: `/${lang}/about/` },
           { url: `/${lang}/history/` },
-          { url: `/${lang}/opendata/` },
           ...(words.map(word => ({ url: `/${lang}/${word.id}/`, lastmod: word.updatedAt }))),
           ...(Object.keys(tags).map(tagID => ({ url: `/${lang}/tags/${tagID}/` }))),
         ])).flat()),
+        // Pages not translated yet
+        { url: "/ja/about/" },
+        { url: "/ja/opendata/" },
       ],
     }),
   };
