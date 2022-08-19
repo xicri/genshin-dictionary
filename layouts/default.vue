@@ -13,7 +13,7 @@
       </nav>
     </div>
 
-    <Nuxt />
+    <slot />
   </div>
 </template>
 
