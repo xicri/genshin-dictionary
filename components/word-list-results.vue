@@ -3,7 +3,7 @@
     <div v-for="word in words" :key="word.en" ref="wordList" class="results__word">
       <h4 class="results__translations">
         <div v-if="word.ja" class="results__translation">
-          <span class="results__langname results__translation-item">日本語: </span>
+          <span class="results__langname results__translation-item">{{ $t("japanese") }}: </span>
           <div class="results__translation-item">
             <div class="results__ja">
               <span data-e2e="ja">{{ word.ja }}</span>
@@ -13,12 +13,12 @@
         </div>
 
         <div class="results__translation">
-          <span class="results__langname results__translation-item">English: </span>
+          <span class="results__langname results__translation-item">{{ $t("english") }}: </span>
           <span class="results__translation-item" data-e2e="en">{{ word.en }}</span>
         </div>
 
         <div v-if="word.zhCN" class="results__translation">
-          <span class="results__langname results__translation-item">简体中文: </span>
+          <span class="results__langname results__translation-item">{{ $t("simplifiedChinese") }}: </span>
           <span class="results__translation-item" data-e2e="zh-CN">{{ word.zhCN }}</span>
         </div>
       </h4>
@@ -90,6 +90,9 @@
 <i18n>
 {
   "en": {
+    "english": "English",
+    "simplifiedChinese": "Chinese",
+    "japanese": "Japanese",
     "example": "Example",
     "permalink": "Permalink",
     "permalinkAlt": "Link to {word}",
@@ -97,6 +100,9 @@
     "copyLinkDone": "Copied link to {word}"
   },
   "ja": {
+    "english": "英語",
+    "simplifiedChinese": "中国語",
+    "japanese": "日本語",
     "example": "例文",
     "permalink": "固定リンク",
     "permalinkAlt": "{word}のページへのリンク",
