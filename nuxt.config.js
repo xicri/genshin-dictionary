@@ -2,16 +2,6 @@ import words from "./static/dataset/words.json";
 import tags from "./static/dataset/tags.json";
 
 export default async () => {
-  async function routes() {
-    const tagIDs = Object.keys(tags);
-
-    return [
-      "/",
-      ...(words.map(word => `/${word.id}/`)),
-      ...(tagIDs.map(tagID => `/tags/${tagID}/`)),
-    ];
-  }
-
   const config = {
     target: "server",
     components: true,
@@ -73,10 +63,6 @@ export default async () => {
 
     css: [ "~/assets/styles/global.scss" ],
 
-    generate: {
-      fallback: "404.html",
-      routes,
-    },
     router: {
       trailingSlash: true,
       middleware: [
