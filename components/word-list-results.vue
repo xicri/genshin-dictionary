@@ -2,17 +2,17 @@
   <main class="results">
     <div v-for="word in words" :key="word.en" ref="wordList" class="results__word">
       <h4 class="results__translations">
-        <template v-if="$i18n.locale === 'en'">
+        <template v-if="locale === 'en'">
           <translation lang="en" :word="word.en" />
           <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
           <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
         </template>
-        <template v-if="$i18n.locale === 'ja'">
+        <template v-if="locale === 'ja'">
           <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
           <translation lang="en" :word="word.en" />
           <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
         </template>
-        <template v-if="$i18n.locale === 'zh-CN'">
+        <template v-if="locale === 'zh-CN'">
           <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
           <translation lang="en" :word="word.en" />
           <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
@@ -24,16 +24,16 @@
             <tag :tagid="tag" />
           </a>
         </div>
-        <div v-if="word.notes && $i18n.locale === 'ja'" class="results__description-section" data-e2e="notes" v-html="word.notes"></div>
-        <div v-if="word.notesZh && $i18n.locale === 'zh-CN'" class="results__description-section" data-e2e="notesZh" v-html="word.notesZh"></div>
+        <div v-if="word.notes && locale === 'ja'" class="results__description-section" data-e2e="notes" v-html="word.notes"></div>
+        <div v-if="word.notesZh && locale === 'zh-CN'" class="results__description-section" data-e2e="notesZh" v-html="word.notesZh"></div>
         <div v-if="word.examples && 0 < word.examples.length" class="results__description-section">
           <h5 class="linebreak">
-            {{ $t("example") }}
+            {{ t("example") }}
           </h5>
           <div v-for="example in word.examples" :key="example.en" class="results__description-section-level2">
             <p>&quot;{{ example.en }}&quot;</p>
             <p>「{{ example.ja }}」</p>
-            <template v-if="example.ref && $i18n.locale === 'ja'">
+            <template v-if="example.ref && locale === 'ja'">
               <p class="results__example-ref">
                 <template v-if="example.refURL">
                   ― <a :href="example.refURL" target="_blank" rel="noopener">{{ example.ref }}</a>
@@ -55,16 +55,16 @@
               src="~/assets/vendor/octicons/link.svg"
               width="12"
               height="12"
-              :alt="$t('permalinkAlt', { word: word[$i18n.locale] })"
+              :alt="t('permalinkAlt', { word: word[locale] })"
               decoding="async"
               class="results__permalink--icon"
-            > {{ $t("permalink") }}
+            > {{ t("permalink") }}
           </a>
           <img
             src="~/assets/vendor/octicons/copy.svg"
             width="12"
             height="12"
-            :alt="$t('copyLink', { word: word[$i18n.locale] })"
+            :alt="t('copyLink', { word: word[locale] })"
             decoding="async"
             class="results__permalink--copy"
             @click="copyLink(word.id, $event)"
@@ -73,7 +73,7 @@
             src="~/assets/vendor/octicons/check.svg"
             width="12"
             height="12"
-            :alt="$t('copyLinkDone', { word: word[$i18n.locale] })"
+            :alt="t('copyLinkDone', { word: word[locale] })"
             decoding="async"
             class="results__permalink--copied"
             style="display: none;"
@@ -114,14 +114,16 @@
 import { useDictionaryStore } from "~/store/index.js";
 import { sleep } from "~/libs/utils.js";
 
-defineProps({
+const props = defineProps({
   words: {
     type: Array,
     required: true,
   },
 });
 
-const { $pinia, i18n } = useNuxtApp();
+const { $pinia } = useNuxtApp();
+const { locale, t } = useI18n();
+
 const store = useDictionaryStore($pinia);
 
 //
@@ -166,8 +168,9 @@ onUpdated(async () => {
 //
 // event handlers
 //
+const localePath = useLocalePath()
 const copyLink = async (wordId, $event) => {
-  navigator.clipboard.writeText(`https://genshin-dictionary.com/${i18n.locale}/${wordId}/`);
+  navigator.clipboard.writeText(`https://genshin-dictionary.com/${locale}/${wordId}/`);
 
   const copyImg = $event.target;
   const copiedImg = copyImg.parentElement.getElementsByClassName("results__permalink--copied")[0];

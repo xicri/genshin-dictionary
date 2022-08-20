@@ -9,60 +9,6 @@ export default defineNuxtConfig({
     preset: "node-server",
   },
 
-  head() {
-    if (!this.$nuxtI18nHead) {
-      return {};
-    }
-
-    const { htmlAttrs, meta, link } = this.$nuxtI18nHead({ addSeoAttributes: true });
-    const { lang } = htmlAttrs;
-
-    let siteName;
-    let description;
-
-    if (lang === "zh-CN") {
-      siteName = "原神中英日辞典";
-      description = "一个在线的中英日三语原神游戏用语辞典";
-    } else if (lang === "ja") {
-      siteName = "原神英語・中国語辞典";
-      description = "原神の固有名詞等の英語表記、及び中国語表記の一覧を掲載しています。";
-    } else {
-      siteName = "Genshin Dictionary";
-      description = "An online English-Chinese-Japanese dictionary for terms in Genshin Impact";
-    }
-
-    return {
-      htmlAttrs,
-      meta: [
-        { charset: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { name: "format-detection", content: "telephone=no" },
-        { hid: "description", name: "description", content: description },
-        { hid: "og:description", property: "og:description", content: description },
-        { hid: "og:type", property: "og:type", content: "website" },
-        { hid: "og:site_name", property: "og:site_name", content: siteName },
-        { hid: "twitter:card", property: "twitter:card", content: "summary" },
-        { hid: "twitter:site", property: "twitter:site", content: "@xicri_gi" },
-        { hid: "twitter:creator", property: "twitter:creator", content: "@xicri_gi" },
-        { hid: "google-site-verification", name: "google-site-verification", content: "fPZCIib8QFE52LeBEGqBoapTwL6v9vqHl9lKqcreMDQ" },
-        ...meta,
-      ],
-      link: [
-        { rel: "icon", href: "/images/favicon.svg", type: "image/svg+xml" },
-        ...link,
-      ],
-      script: [
-        ...(process.env.SERVER_ENV === "production" ? [{
-          hid: "cloudflare-wa",
-          src: "https://static.cloudflareinsights.com/beacon.min.js",
-          "data-cf-beacon": "{\"token\": \"1f401150384f4aaa9d14b208aac9fdba\"}",
-          defer: true,
-          body: true,
-        }] : []),
-      ],
-    };
-  },
-
   css: [ "~/assets/styles/global.scss" ],
 
   modules: [
@@ -93,7 +39,6 @@ export default defineNuxtConfig({
     strategy: "prefix",
     defaultLocale: "en",
     baseUrl: "https://genshin-dictionary.com",
-    vueI18nLoader: true,
     detectBrowserLanguage: {
       useCookie: true,
       cookieSecure: true,
@@ -101,6 +46,7 @@ export default defineNuxtConfig({
       redirectOn: "no prefix",
     },
     vueI18n: {
+      legacy: false,
       fallbackLocale: "en",
       messages: {
         en: {

@@ -64,9 +64,9 @@
 <script setup>
 import words from "~/dataset/words.json";
 
-const { i18n } = useContext();
-const title = `${i18n.t("aboutTitle")} | ${i18n.t("siteTitle")}`;
-const description = i18n.t("aboutDescription");
+const { locale, t } = useI18n();
+const title = `${t("aboutTitle")} | ${t("siteTitle")}`;
+const description = t("aboutDescription");
 
 useHead({
   title,
@@ -76,7 +76,7 @@ useHead({
     { hid: "og:description", property: "og:description", content: description },
 
     // noindex untranslated pages
-    ...(i18n.locale !== "ja" ? [{
+    ...(locale !== "ja" ? [{
       hid: "noindex",
       name: "robots",
       content: "noindex",

@@ -10,14 +10,14 @@
             </div>
           </div>
 
-          <elastic-searchbox ref="searchBox" class="search__input" name="searchbox" :placeholder="$t('enterSearchTerms')" autocomplete="off" @input="updateSearchQuery" />
+          <elastic-searchbox ref="searchBox" class="search__input" name="searchbox" :placeholder="t('enterSearchTerms')" autocomplete="off" @input="updateSearchQuery" />
         </div>
 
         <img
           src="~/assets/vendor/octicons/tag.svg"
           width="24"
           height="24"
-          :alt="$t('openListOfTags')"
+          :alt="t('openListOfTags')"
           decoding="async"
           class="search__taglist-icon"
           @click="toggleTagList"
@@ -25,7 +25,7 @@
       </div>
       <div ref="taglist" :class="{ search__taglist: true, 'search__taglist-display-mobile': displayTagListOnMobile }">
         <div class="search__taglist-inner">
-          <span class="search__taglist-title">{{ $t("tags") }}:</span>
+          <span class="search__taglist-title">{{ t("tags") }}:</span>
           <span v-for="(availableTag, id) in AvailableTags" :key="id" class="search__tag" @click="addTag(id)">
             {{ availableTag[$i18n.locale] }} <span class="search__tag-add">+</span>
           </span>
@@ -35,7 +35,7 @@
           src="~/assets/vendor/octicons/x.svg"
           width="24"
           height="24"
-          :alt="$t('closeListOfTags')"
+          :alt="t('closeListOfTags')"
           decoding="async"
           class="search__taglist-close"
           @click="closeTagList"
@@ -79,6 +79,10 @@ import { useDictionaryStore } from "~/store/index.js";
 const emit = defineEmits([ "search" ]);
 const { $pinia, $sentry } = useNuxtApp();
 const store = useDictionaryStore($pinia);
+
+const { t } = useI18n({
+  useScope: "local",
+});
 
 //
 // Refs

@@ -3,8 +3,8 @@
 </template>
 
 <script setup>
-const { i18n } = useContext();
-const title = `${ i18n.t("siteTitle") } ― ${ i18n.t("indexTitleDesc") }`;
+const { t } = useI18n();
+const title = `${ t("siteTitle") } ― ${ t("indexTitleDesc") }`;
 
 useHead({
   title,

@@ -9,17 +9,18 @@
     <nav class="menu__nav">
       <div class="menu__nav-padding">
         <ul class="menu__items">
+          <!-- localePath() generates path without trailing slash, so append manually -->
           <li class="menu__item">
-            <a :href="localePath('/about/')">{{ $t("about") }}</a>
+            <a :href="localePath('/about')">{{ t("about") }}</a>
           </li>
           <li class="menu__item">
-            <a :href="localePath('/opendata/')">{{ $t("opendata") }}</a>
+            <a :href="localePath('/opendata')">{{ t("opendata") }}</a>
           </li>
           <li class="menu__item">
-            <a :href="localePath('/history/')">{{ $t("history") }}</a>
+            <a :href="localePath('/history')">{{ t("history") }}</a>
           </li>
           <li class="menu__item">
-            <a href="https://translate.genshin-dictionary.com/" target="_blank" rel="noopener">{{ $t("translate") }}</a>
+            <a href="https://translate.genshin-dictionary.com/" target="_blank" rel="noopener">{{ t("translate") }}</a>
             <img src="~/assets/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14">
           </li>
         </ul>
@@ -28,14 +29,14 @@
           Languages
         </h2>
         <div class="menu__languages-list">
-          <span
-            v-for="locale in $i18n.locales"
+          <NuxtLink
+            v-for="locale in locales"
             :key="locale.code"
             class="menu__languages-item"
-            @click.prevent.stop="$i18n.setLocale(locale.code)"
+            :to="switchLocalePath(locale.code)"
           >
             {{ locale.name }}
-          </span>
+          </NuxtLink>
         </div>
 
         <div class="menu__bottomline">
@@ -75,11 +76,16 @@
 //
 // refs
 //
+const { locales, t } = useI18n({
+  useScope: "local",
+});
 const open = ref(false);
 
 //
 // event handlers
 //
+const localePath = useLocalePath();
+const switchLocalePath = useSwitchLocalePath();
 const toggleMenu = (evt) => {
   open.value = evt.target.checked;
 };

@@ -6,13 +6,16 @@
 import { useDictionaryStore } from "~/store/index.js";
 import tags from "~/dataset/tags.json";
 
-const { $pinia, i18n } = useNuxtApp();
+const { $pinia } = useNuxtApp();
+const { locale, t } = useI18n({
+  useScope: "local",
+});
 const route = useRoute();
 const store = useDictionaryStore($pinia);
 
 const tagID = route.params.id;
 
-const title = ref(`${tags[tagID].title[i18n.locale]} | ${i18n.t("siteTitle")}`);
+const title = ref(`${tags[tagID].title[locale.value]} | ${t("siteTitle")}`);
 
 useHead({
   title,
@@ -35,11 +38,11 @@ onMounted(() => {
 });
 
 const onSearch = () => {
-  const root = `/${i18n.locale}/`;
+  const root = `/${locale.value}/`;
 
   if (window.location.pathname !== root) {
     history.pushState({}, "", root);
-    title.value = i18n.t("siteTitle");
+    title.value = t("siteTitle");
   }
 };
 </script>

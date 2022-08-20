@@ -37,16 +37,17 @@ const props = defineProps({
   },
 });
 
-const { i18n } = useNuxtApp();
+const { t } = useI18n();
+
 let langName;
 let wordWithPinyin;
 
 if (props.lang === "en") {
-  langName = i18n.t("langNameEn");
+  langName = t("langNameEn");
 } else if (props.lang === "ja") {
-  langName = i18n.t("langNameJa");
+  langName = t("langNameJa");
 } else if (props.lang === "zh-CN") {
-  langName = i18n.t("langNameZhCN");
+  langName = t("langNameZhCN");
 }
 if (0 < props.pinyins.length) {
   wordWithPinyin = escapeHtmlString(props.word);

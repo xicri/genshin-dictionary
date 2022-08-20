@@ -6,7 +6,7 @@
     </div>
 
     <p v-if="searchResults.length <= 0" data-e2e="empty">
-      {{ $t("notFound") }}
+      {{ t("notFound") }}
     </p>
   </div>
 </template>
@@ -32,6 +32,9 @@ import { useDictionaryStore } from "~/store/index.js";
 defineEmits([ "search" ]);
 
 const { $pinia } = useNuxtApp();
+const { t } = useI18n({
+  useScope: "local",
+});
 const store = useDictionaryStore($pinia);
 const { searchResults } = storeToRefs(store);
 </script>

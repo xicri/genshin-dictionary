@@ -4,7 +4,7 @@
       <nav class="layout-default__nav">
         <h1>
           <a :href="localePath('/')" class="layout-default__title">
-            <span>{{ $t("siteTitleL1") }}</span><span>{{ $t("siteTitleL2") }}</span>
+            <span>{{ t("siteTitleL1") }}</span><span>{{ t("siteTitleL2") }}</span>
           </a>
         </h1>
 
@@ -33,6 +33,13 @@
   }
 }
 </i18n>
+
+<script setup>
+const { t } = useI18n({
+  useScope: "local",
+});
+const localePath = useLocalePath();
+</script>
 
 <style lang="scss" scoped>
 @use "~/assets/styles/variables.scss" as vars;

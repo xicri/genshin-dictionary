@@ -1,15 +1,15 @@
 <template>
   <div class="history">
-    <h2>{{ $t("historyTitle") }}</h2>
+    <h2>{{ t("historyTitle") }}</h2>
     <div v-for="(words, createdAt) in history" :key="createdAt" class="history__wrapper">
       <h3 class="history__updated-at">
-        {{ $t("updatedOn", { createdAt: createdAt }) }}
+        {{ t("updatedOn", { createdAt: createdAt }) }}
       </h3>
       <word-list-results :words="words" />
     </div>
 
     <p v-if="empty" class="history__empty">
-      {{ $t("noRecentUpdates") }}
+      {{ t("noRecentUpdates") }}
     </p>
   </div>
 </template>
@@ -35,8 +35,8 @@
 import { isEmpty } from "lodash";
 import { getHistory } from "~/libs/utils";
 
-const { i18n } = useNuxtApp();
-const title = `${i18n.t("historyTitle")} | ${i18n.t("siteTitle")}`;
+const { t } = useI18n();
+const title = `${t("historyTitle")} | ${t("siteTitle")}`;
 
 useHead({
   title,

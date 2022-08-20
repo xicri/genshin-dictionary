@@ -133,8 +133,8 @@
 <script setup>
 import tags from "~/dataset/tags.json";
 
-const { i18n } = useNuxtApp();
-const title = `${ i18n.t("opendataTitle") } | ${ i18n.t("siteTitle") }`;
+const { locale, t } = useI18n();
+const title = `${ t("opendataTitle") } | ${ t("siteTitle") }`;
 
 useHead({
   title,
@@ -142,7 +142,7 @@ useHead({
     { hid: "og:title", property: "og:title", content: title },
 
     // noindex untranslated pages
-    ...(i18n.locale !== "ja" ? [{
+    ...(locale !== "ja" ? [{
       hid: "noindex",
       name: "robots",
       content: "noindex",

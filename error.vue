@@ -1,9 +1,9 @@
 <template>
   <div>
     <h1 class="error__title">
-      {{ $t("notfound") }}
+      {{ t("notfound") }}
     </h1>
-    <h2><a href="/">{{ $t("returnToIndex") }}</a></h2>
+    <h2><a href="/">{{ t("returnToIndex") }}</a></h2>
   </div>
 </template>
 
@@ -30,6 +30,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+});
+
+const { t } = useI18n({
+  useScope: "local",
 });
 </script>
 

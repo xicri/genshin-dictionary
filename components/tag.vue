@@ -7,7 +7,7 @@
 <script setup>
 import allTags from "~/dataset/tags.json";
 
-const { i18n } = useContext();
+const { locale } = useI18n();
 
 const props = defineProps({
   tagid: {
@@ -16,7 +16,7 @@ const props = defineProps({
   },
 });
 
-const TagName = computed(() => allTags[props.tagid][i18n.locale]);
+const TagName = computed(() => allTags[props.tagid][locale.value]);
 </script>
 
 <style lang="scss" scoped>
