@@ -34,4 +34,14 @@ module.exports = {
       },
     },
   ],
+
+  webServer: {
+    command: "npm start",
+    url: "http://localhost:3000/ja/",
+    timeout: 120 * 1000,
+    reuseExistingServer: !process.env.CI,
+  },
+  use: {
+    baseURL: "http://localhost:3000/ja/",
+  },
 };
