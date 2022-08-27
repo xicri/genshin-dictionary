@@ -45,7 +45,7 @@ jobs:
 
   staging:
     if: ${{ github.ref != 'refs/heads/main' && github.repository_owner == 'xicri' }}
-    timeout-minutes: 5
+    timeout-minutes: 10
     env:
       SERVER_ENV: staging
       FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
@@ -64,7 +64,7 @@ jobs:
   production:
     if: ${{ github.ref == 'refs/heads/main' && github.repository_owner == 'xicri' }}
     needs: test
-    timeout-minutes: 5
+    timeout-minutes: 10
     env:
       SERVER_ENV: production
       FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

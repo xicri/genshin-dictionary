@@ -1,32 +1,13 @@
 import { test, expect } from "@playwright/test";
-import express from "express";
 import fetch from "node-fetch";
-import { loadNuxt, build } from "nuxt";
-import { getRandomPort } from "./testutils.mjs";
 
-const { describe, beforeAll, afterAll } = test;
+const { describe } = test;
 
 const ip = "127.0.0.1";
-const port = getRandomPort();
+const port = 3000;
 
 describe("The Genshin English Dictionary", () => {
   const rootURLEn = `http://${ip}:${port}/en/`;
-
-  let server;
-
-  beforeAll(async () => {
-    const app = express();
-    const nuxt = await loadNuxt("dev");
-
-    app.use(nuxt.render);
-    build(nuxt);
-
-    server = app.listen(port, ip);
-  });
-
-  afterAll(() => {
-    server.close();
-  });
 
   for (const lang of [ "en", "ja" ]) {
     const rootURL = `http://${ip}:${port}/${lang}/`;
@@ -233,22 +214,6 @@ describe("redirection by language settings works properly", () => {
     // { code: "zh-CN", url: `${rootURL}/zh-CN/` },
     { code: "fr", url: `${rootURL}/en/` }, // fallback to English
   ];
-
-  let server;
-
-  beforeAll(async () => {
-    const app = express();
-    const nuxt = await loadNuxt("dev");
-
-    app.use(nuxt.render);
-    build(nuxt);
-
-    server = app.listen(port, ip);
-  });
-
-  afterAll(() => {
-    server.close();
-  });
 
   for (const { code, url } of langs) {
     test(`/ (${code})`, async () => {
