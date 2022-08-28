@@ -149,7 +149,7 @@ describe("The Genshin English Dictionary", () => {
 
     test(`title (${lang})`, async ({ page }) => {
       const title = {
-        en: "\"Lumine\" is \"蛍\" in Japanese | Genshin Dictionary",
+        en: "\"Lumine\" is \"荧\" in Chinese | Genshin Dictionary",
         ja: "「蛍」は英語で \"Lumine\" | 原神 英語辞典",
       };
 
