@@ -29,7 +29,7 @@ export default async () => {
 
       const siteName = lang === "en" ? "Genshin Dictionary" : "原神 英語辞典";
       const description = lang === "en"
-        ? "An online English-Japanese dictionary for proprietary nouns in Genshin Impact"
+        ? "An online English-Chinese-Japanese dictionary for terms in Genshin Impact"
         : "原神に登場する固有名詞の英和・和英辞典です。";
 
       return {
@@ -141,17 +141,17 @@ export default async () => {
         messages: {
           en: {
             siteTitle: "Genshin Dictionary",
-            indexTitleDesc: "an online English-Japanese dictionary for the words in Genshin Impact",
-            wordIdTitle: "\"{en}\" is \"{ja}\" in Japanese",
-            wordIdDescription: "Japanese expression for \"{en}\" is \"{ja}\".",
+            indexTitleDesc: "an online English-Chinese-Japanese dictionary for terms in Genshin Impact",
+            wordIdTitle: "\"{en}\" is \"{zhCN}\" in Chinese",
+            wordIdDescription: "\"{en}\" is \"{zhCN}\" in Chinese and \"{ja}\" in Japanese.",
             aboutTitle: "About this website",
-            aboutDescription: "About Genshin Dictionary. This website is an online English-Chinese-Japanese dictionary for the proprietary nouns and words for Genshin Impact.",
+            aboutDescription: "About Genshin Dictionary. This website is an online English-Chinese-Japanese dictionary for the terms in Genshin Impact.",
             historyTitle: "Update History",
             opendataTitle: "Open Data / API (β)",
           },
           ja: {
             siteTitle: "原神 英語辞典",
-            indexTitleDesc: "原神の固有名詞の英語表記一覧",
+            indexTitleDesc: "原神の固有名詞等の英語表記一覧を掲載しています。また、中国語表記も掲載しています。",
             wordIdTitle: "「{ja}」は英語で \"{en}\"",
             wordIdDescription: "「{ja}」の英語表記は \"{en}\"",
             aboutTitle: "このサイトについて",
