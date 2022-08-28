@@ -34,8 +34,8 @@ export default defineComponent({
       return;
     }
 
-    const title = `${ i18n.t("wordIdTitle", { ja: word.ja, en: word.en }) } | ${ i18n.t("siteTitle") }`;
-    const description = i18n.t("wordIdDescription", { ja: word.ja, en: word.en });
+    const title = `${ i18n.t("wordIdTitle", { ja: word.ja, en: word.en, zhCN: word.zhCN }) } | ${ i18n.t("siteTitle") }`;
+    const description = i18n.t("wordIdDescription", { ja: word.ja, en: word.en, zhCN: word.zhCN });
 
     useMeta({
       title,
