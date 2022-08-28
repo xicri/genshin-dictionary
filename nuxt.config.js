@@ -120,11 +120,11 @@ export default async () => {
           iso: "ja-JP",
           name: "日本語",
         },
-        // {
-        //   code: "zh-CN",
-        //   iso: "zh-CN",
-        //   name: "简体中文",
-        // },
+        {
+          code: "zh-CN",
+          iso: "zh-CN",
+          name: "简体中文",
+        },
       ],
       strategy: "prefix",
       defaultLocale: "en",
@@ -188,7 +188,7 @@ export default async () => {
       gzip: false,
       i18n: true,
       routes: [
-        ...([ "en", "ja" /* , "zh-CN" */ ].map(lang => ([
+        ...([ "en", "ja" , "zh-CN" ].map(lang => ([
           { url: `/${lang}/` },
           { url: `/${lang}/history/` },
           ...(words.map(word => ({ url: `/${lang}/${word.id}/`, lastmod: word.updatedAt }))),
