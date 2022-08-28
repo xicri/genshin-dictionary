@@ -27,7 +27,7 @@ export default async () => {
       const { htmlAttrs, meta, link } = this.$nuxtI18nHead({ addSeoAttributes: true });
       const { lang } = htmlAttrs;
 
-      const siteName = lang === "en" ? "Genshin Dictionary" : "原神 英語辞典";
+      const siteName = lang === "en" ? "Genshin Dictionary" : "原神英語・中国語辞典";
       const description = lang === "en"
         ? "An online English-Chinese-Japanese dictionary for terms in Genshin Impact"
         : "原神に登場する固有名詞の英和・和英辞典です。";
@@ -150,12 +150,12 @@ export default async () => {
             opendataTitle: "Open Data / API (β)",
           },
           ja: {
-            siteTitle: "原神 英語辞典",
+            siteTitle: "原神 英語・中国語辞典",
             indexTitleDesc: "原神の固有名詞等の英語表記一覧を掲載しています。また、中国語表記も掲載しています。",
             wordIdTitle: "「{ja}」は英語で \"{en}\"",
             wordIdDescription: "「{ja}」の英語表記は \"{en}\"",
             aboutTitle: "このサイトについて",
-            aboutDescription: "原神 英語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
+            aboutDescription: "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
             historyTitle: "更新履歴",
             opendataTitle: "オープンデータ・API (β)",
           },
