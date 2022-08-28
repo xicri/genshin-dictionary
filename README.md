@@ -1,6 +1,6 @@
 # Genshin Dictionary
 
-Genshin Dictionary (Japanese: 原神英語・中国語辞典) is an online English-Chinese-Japanese dictionary containing the terms in [Genshin Impact](https://genshin.hoyoverse.com/).
+Genshin Dictionary (Japanese: 原神 英語辞典) is an online English-Chinese-Japanese dictionary containing the terms in [Genshin Impact](https://genshin.hoyoverse.com/).
 
 ## Want to add or modify translations?
 
