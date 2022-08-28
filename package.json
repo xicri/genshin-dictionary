@@ -24,13 +24,13 @@
     "@nuxtjs/composition-api": "^0.33.0",
     "@nuxtjs/i18n": "^7.2.0",
     "@nuxtjs/robots": "^2.5.0",
-    "@nuxtjs/sentry": "^5.1.0",
+    "@nuxtjs/sentry": "^6.0.0",
     "@nuxtjs/sitemap": "^2.4.0",
-    "@pinia/nuxt": "^0.1.8",
+    "@pinia/nuxt": "^0.2.1",
     "dotenv": "^16.0.1",
     "klona": "^2.0.4",
     "lodash": "^4.17.21",
-    "luxon": "^2.3.0",
+    "luxon": "^3.0.1",
     "nuxt": "^2.14.6",
     "pinia": "^2.0.13",
     "sass": "^1.32.10",
@@ -38,10 +38,10 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.14.1",
-    "babel-jest": "^28.1.0",
+    "babel-jest": "^29.0.1",
     "eslint": "latest",
     "eslint-config-xicri": "latest",
-    "jest": "^28.1.0"
+    "jest": "^29.0.1"
   },
   "engines": {
     "node": "16.x",
