@@ -2,9 +2,21 @@
   <main class="results">
     <div v-for="word in words" :key="word.en" ref="wordList" class="results__word">
       <h4 class="results__translations">
-        <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
-        <translation lang="en" :word="word.en" />
-        <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" />
+        <template v-if="$i18n.locale === 'en'">
+          <translation lang="en" :word="word.en" />
+          <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" />
+          <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
+        </template>
+        <template v-if="$i18n.locale === 'ja'">
+          <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
+          <translation lang="en" :word="word.en" />
+          <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" />
+        </template>
+        <template v-if="$i18n.locale === 'zh-CN'">
+          <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" />
+          <translation lang="en" :word="word.en" />
+          <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
+        </template>
       </h4>
       <div class="results__description">
         <div class="results__tags results__description-section">
