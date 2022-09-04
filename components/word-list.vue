@@ -20,7 +20,7 @@
     "notFound": "該当する語彙が見つかりませんでした。"
   },
   "zh-CN": {
-    "notFound": "Your search did not match any words in this dictionary."
+    "notFound": "未找到匹配的词汇。"
   }
 }
 </i18n>
