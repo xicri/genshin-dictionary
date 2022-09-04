@@ -25,8 +25,8 @@
     "noRecentUpdates": "直近の更新はありません。"
   },
   "zh-CN": {
-    "updatedOn": "Updated on {createdAt}",
-    "noRecentUpdates": "No recent updates."
+    "updatedOn": "更新于{createdAt}",
+    "noRecentUpdates": "无近期更新。"
   }
 }
 </i18n>
