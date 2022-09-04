@@ -59,6 +59,12 @@
     "tags": "タグ",
     "openListOfTags": "タグ一覧を開く",
     "closeListOfTags": "タグ一覧を閉じる"
+  },
+  "zh-CN": {
+    "enterSearchTerms": "Enter search terms...",
+    "tags": "Tags",
+    "openListOfTags": "Open the list of tags",
+    "closeListOfTags": "Close the list of tags"
   }
 }
 </i18n>
