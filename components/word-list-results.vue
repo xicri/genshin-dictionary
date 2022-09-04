@@ -110,14 +110,14 @@
     "copyLinkDone": "{word}のページへのリンクのコピーが完了しました"
   },
   "zh-CN": {
-    "english": "English",
+    "english": "英语",
     "simplifiedChinese": "简体中文",
-    "japanese": "Japanese",
-    "example": "Example",
-    "permalink": "Permalink",
-    "permalinkAlt": "Link to {word}",
-    "copyLink": "Copy link to {word}",
-    "copyLinkDone": "Copied link to {word}"
+    "japanese": "日语",
+    "example": "例子",
+    "permalink": "永久链接",
+    "permalinkAlt": "{word}的链接",
+    "copyLink": "复制{word}的链接",
+    "copyLinkDone": "复制{word}的链接成功"
   }
 }
 </i18n>
