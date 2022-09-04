@@ -29,7 +29,7 @@
   },
   "zh-CN": {
     "siteTitleL1": "原神",
-    "siteTitleL2": "中英日词典"
+    "siteTitleL2": "中英日辞典"
   }
 }
 </i18n>
