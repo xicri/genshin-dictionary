@@ -28,8 +28,8 @@
     "siteTitleL2": "中国語辞典"
   },
   "zh-CN": {
-    "siteTitleL1": "Genshin",
-    "siteTitleL2": "Dictionary"
+    "siteTitleL1": "原神",
+    "siteTitleL2": "中英日词典"
   }
 }
 </i18n>
