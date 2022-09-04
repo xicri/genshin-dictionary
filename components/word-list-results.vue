@@ -111,6 +111,7 @@
   },
   "zh-CN": {
     "english": "English",
+    "simplifiedChinese": "简体中文",
     "japanese": "Japanese",
     "example": "Example",
     "permalink": "Permalink",
