@@ -61,10 +61,10 @@
     "closeListOfTags": "タグ一覧を閉じる"
   },
   "zh-CN": {
-    "enterSearchTerms": "Enter search terms...",
-    "tags": "Tags",
-    "openListOfTags": "Open the list of tags",
-    "closeListOfTags": "Close the list of tags"
+    "enterSearchTerms": "输入搜索关键词…",
+    "tags": "标签",
+    "openListOfTags": "打开标签列表",
+    "closeListOfTags": "收起标签列表"
   }
 }
 </i18n>

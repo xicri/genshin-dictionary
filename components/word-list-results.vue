@@ -117,7 +117,7 @@
     "permalink": "永久链接",
     "permalinkAlt": "{word}的链接",
     "copyLink": "复制{word}的链接",
-    "copyLinkDone": "复制{word}的链接成功"
+    "copyLinkDone": "已复制{word}的链接"
   }
 }
 </i18n>
