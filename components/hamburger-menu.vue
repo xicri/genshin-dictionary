@@ -63,10 +63,10 @@
     "translate": "原神 自動翻訳"
   },
   "zh-CN": {
-    "about": "About",
-    "opendata": "Opendata·API",
-    "history": "History",
-    "translate": "Genshin Machine Translate (Japanese)"
+    "about": "关于",
+    "opendata": "开放数据 · API",
+    "history": "更新记录",
+    "translate": "原神机器翻译（日语）"
   }
 }
 </i18n>
