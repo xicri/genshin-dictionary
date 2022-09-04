@@ -108,6 +108,15 @@
     "permalinkAlt": "{word}のページへのリンク",
     "copyLink": "{word}のページへのリンクをコピー",
     "copyLinkDone": "{word}のページへのリンクのコピーが完了しました"
+  },
+  "zh-CN": {
+    "english": "English",
+    "japanese": "Japanese",
+    "example": "Example",
+    "permalink": "Permalink",
+    "permalinkAlt": "Link to {word}",
+    "copyLink": "Copy link to {word}",
+    "copyLinkDone": "Copied link to {word}"
   }
 }
 </i18n>

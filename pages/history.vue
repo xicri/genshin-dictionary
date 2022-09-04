@@ -23,6 +23,10 @@
   "ja": {
     "updatedOn": "{createdAt} 更新",
     "noRecentUpdates": "直近の更新はありません。"
+  },
+  "zh-CN": {
+    "updatedOn": "Updated on {createdAt}",
+    "noRecentUpdates": "No recent updates."
   }
 }
 </i18n>

@@ -61,6 +61,12 @@
     "opendata": "オープンデータ・API",
     "history": "更新履歴",
     "translate": "原神 自動翻訳"
+  },
+  "zh-CN": {
+    "about": "About",
+    "opendata": "Opendata·API",
+    "history": "History",
+    "translate": "Genshin Machine Translate (Japanese)"
   }
 }
 </i18n>

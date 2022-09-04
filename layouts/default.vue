@@ -26,6 +26,10 @@
   "ja": {
     "siteTitleL1": "原神 英語・",
     "siteTitleL2": "中国語辞典"
+  },
+  "zh-CN": {
+    "siteTitleL1": "Genshin",
+    "siteTitleL2": "Dictionary"
   }
 }
 </i18n>
