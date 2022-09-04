@@ -113,7 +113,7 @@
     "english": "英语",
     "simplifiedChinese": "简体中文",
     "japanese": "日语",
-    "example": "例子",
+    "example": "示例",
     "permalink": "永久链接",
     "permalinkAlt": "{word}的链接",
     "copyLink": "复制{word}的链接",
