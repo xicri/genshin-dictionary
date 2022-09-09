@@ -120,11 +120,11 @@ export default async () => {
           iso: "ja-JP",
           name: "日本語",
         },
-        // {
-        //   code: "zh-CN",
-        //   iso: "zh-CN",
-        //   name: "简体中文",
-        // },
+        {
+          code: "zh-CN",
+          iso: "zh-CN",
+          name: "简体中文",
+        },
       ],
       strategy: "prefix",
       defaultLocale: "en",
@@ -159,6 +159,16 @@ export default async () => {
             historyTitle: "更新履歴",
             opendataTitle: "オープンデータ・API (β)",
           },
+          "zh-CN": {
+            siteTitle: "原神中英日辞典",
+            indexTitleDesc: "一个在线的中英日三语原神游戏用语辞典",
+            wordIdTitle: "\"{zhCN}\"的英语和日语翻译",
+            wordIdDescription: "\"{zhCN}\"的英语是\"{en}\"，日语是\"{ja}\"。",
+            aboutTitle: "关于本网站",
+            aboutDescription: "关于原神中英日辞典。本网站是一个在线的中英日三语原神游戏用语辞典。",
+            historyTitle: "更新记录",
+            opendataTitle: "开放数据 · API (β)",
+          },
         },
       },
     },
@@ -188,7 +198,7 @@ export default async () => {
       gzip: false,
       i18n: true,
       routes: [
-        ...([ "en", "ja" /* , "zh-CN" */ ].map(lang => ([
+        ...([ "en", "ja" , "zh-CN" ].map(lang => ([
           { url: `/${lang}/` },
           { url: `/${lang}/history/` },
           ...(words.map(word => ({ url: `/${lang}/${word.id}/`, lastmod: word.updatedAt }))),

@@ -59,6 +59,12 @@
     "tags": "タグ",
     "openListOfTags": "タグ一覧を開く",
     "closeListOfTags": "タグ一覧を閉じる"
+  },
+  "zh-CN": {
+    "enterSearchTerms": "输入搜索关键词…",
+    "tags": "标签",
+    "openListOfTags": "打开标签列表",
+    "closeListOfTags": "收起标签列表"
   }
 }
 </i18n>

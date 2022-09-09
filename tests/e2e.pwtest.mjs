@@ -210,8 +210,8 @@ describe("redirection by language settings works properly", () => {
     { code: "en", url: `${rootURL}/en/` },
     { code: "en-US", url: `${rootURL}/en/` },
     { code: "en-GB", url: `${rootURL}/en/` },
-    // { code: "zh", url: `${rootURL}/zh-CN/` },
-    // { code: "zh-CN", url: `${rootURL}/zh-CN/` },
+    { code: "zh", url: `${rootURL}/zh-CN/` },
+    { code: "zh-CN", url: `${rootURL}/zh-CN/` },
     { code: "fr", url: `${rootURL}/en/` }, // fallback to English
   ];
 
