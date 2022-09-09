@@ -5,7 +5,7 @@
 
       <main>
         <p v-if="$i18n.locale !== 'ja'">
-          <strong>This page is not translated to English yet.</strong>
+          <strong>This page is not translated to English/Simplified Chinese yet.</strong>
         </p>
         <p>
           本サイトの対訳表データは CSV 形式 (一般向け) 及び JSON 形式 (技術者向け) で配布しています。<br>
