@@ -27,10 +27,19 @@ export default async () => {
       const { htmlAttrs, meta, link } = this.$nuxtI18nHead({ addSeoAttributes: true });
       const { lang } = htmlAttrs;
 
-      const siteName = lang === "en" ? "Genshin Dictionary" : "原神英語・中国語辞典";
-      const description = lang === "en"
-        ? "An online English-Chinese-Japanese dictionary for terms in Genshin Impact"
-        : "原神に登場する固有名詞の英和・和英辞典です。";
+      let siteName;
+      let description;
+
+      if (lang === "zh-CN") {
+        siteName = "原神中英日辞典";
+        description = "一个在线的中英日三语原神游戏用语辞典";
+      } else if (lang === "ja") {
+        siteName = "原神英語・中国語辞典";
+        description = "原神の固有名詞等の英語表記、及び中国語表記の一覧を掲載しています。";
+      } else {
+        siteName = "Genshin Dictionary";
+        description = "An online English-Chinese-Japanese dictionary for terms in Genshin Impact";
+      }
 
       return {
         htmlAttrs,
@@ -151,7 +160,7 @@ export default async () => {
           },
           ja: {
             siteTitle: "原神 英語・中国語辞典",
-            indexTitleDesc: "原神の固有名詞等の英語表記一覧を掲載しています。また、中国語表記も掲載しています。",
+            indexTitleDesc: "原神の固有名詞等の英語表記、及び中国語表記の一覧を掲載しています。",
             wordIdTitle: "「{ja}」は英語で \"{en}\"",
             wordIdDescription: "「{ja}」の英語表記は \"{en}\"",
             aboutTitle: "このサイトについて",
