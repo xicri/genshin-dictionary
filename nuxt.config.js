@@ -162,7 +162,7 @@ export default async () => {
             siteTitle: "原神 英語・中国語辞典",
             indexTitleDesc: "原神の固有名詞等の英語表記、及び中国語表記の一覧を掲載しています。",
             wordIdTitle: "「{ja}」は英語で \"{en}\"",
-            wordIdDescription: "「{ja}」の英語表記は \"{en}\"",
+            wordIdDescription: "「{ja}」の英語表記は \"{en}\"、中国語表記は「{zhCN}」",
             aboutTitle: "このサイトについて",
             aboutDescription: "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
             historyTitle: "更新履歴",
