@@ -25,7 +25,8 @@ export const useDictionaryStore = defineStore("dictionary", {
               candidate(word.pronunciationJa).includes(state.query) ||
               candidate(word.notes).includes(state.query) ||
               word.variants?.ja?.some(variant => candidate(variant).includes(state.query)) ||
-              word.variants?.en?.some(variant => candidate(variant).includes(state.query))
+              word.variants?.en?.some(variant => candidate(variant).includes(state.query)) ||
+              word.variants?.zhCN?.some(variant => candidate(variant).includes(state.query))
             );
           } else { // If no search terms are specified, do not filter.
             return true;
