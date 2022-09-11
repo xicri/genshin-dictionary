@@ -2,25 +2,21 @@
   <main class="results">
     <div v-for="word in words" :key="word.en" ref="wordList" class="results__word">
       <h4 class="results__translations">
-        <div v-if="word.ja" class="results__translation">
-          <span class="results__langname results__translation-item">{{ $t("japanese") }}: </span>
-          <div class="results__translation-item">
-            <div class="results__ja">
-              <span data-e2e="ja">{{ word.ja }}</span>
-              <span v-if="word.pronunciationJa" class="results__pronunciation-ja">({{ word.pronunciationJa }})</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="results__translation">
-          <span class="results__langname results__translation-item">{{ $t("english") }}: </span>
-          <span class="results__translation-item" data-e2e="en">{{ word.en }}</span>
-        </div>
-
-        <div v-if="word.zhCN" class="results__translation">
-          <span class="results__langname results__translation-item">{{ $t("simplifiedChinese") }}: </span>
-          <span class="results__translation-item" data-e2e="zh-CN">{{ word.zhCN }}</span>
-        </div>
+        <template v-if="$i18n.locale === 'en'">
+          <translation lang="en" :word="word.en" />
+          <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" />
+          <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
+        </template>
+        <template v-if="$i18n.locale === 'ja'">
+          <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
+          <translation lang="en" :word="word.en" />
+          <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" />
+        </template>
+        <template v-if="$i18n.locale === 'zh-CN'">
+          <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" />
+          <translation lang="en" :word="word.en" />
+          <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
+        </template>
       </h4>
       <div class="results__description">
         <div class="results__tags results__description-section">
@@ -90,9 +86,6 @@
 <i18n>
 {
   "en": {
-    "english": "English",
-    "simplifiedChinese": "Chinese",
-    "japanese": "Japanese",
     "example": "Example",
     "permalink": "Permalink",
     "permalinkAlt": "Link to {word}",
@@ -100,9 +93,6 @@
     "copyLinkDone": "Copied link to {word}"
   },
   "ja": {
-    "english": "英語",
-    "simplifiedChinese": "中国語",
-    "japanese": "日本語",
     "example": "例文",
     "permalink": "固定リンク",
     "permalinkAlt": "{word}のページへのリンク",
@@ -110,9 +100,6 @@
     "copyLinkDone": "{word}のページへのリンクのコピーが完了しました"
   },
   "zh-CN": {
-    "english": "英语",
-    "simplifiedChinese": "简体中文",
-    "japanese": "日语",
     "example": "示例",
     "permalink": "永久链接",
     "permalinkAlt": "{word}的链接",
@@ -237,34 +224,6 @@ h5.linebreak {
     font-size: 16px;
 
     margin-bottom: 0.7em;
-  }
-
-  &__translation {
-    display: table-row;
-  }
-
-  &__translation-item {
-    display: table-cell;
-  }
-
-  &__langname {
-    font-size: 0.7em;
-    width: 4.5em;
-  }
-
-
-  &__ja {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    column-gap: 0.25em;
-
-    width: 100%;
-    height: 100%;
-  }
-
-  &__pronunciation-ja {
-    font-size: 0.7em;
   }
 
   &__description {
