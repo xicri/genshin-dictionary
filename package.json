@@ -13,7 +13,7 @@
   "homepage": "https://genshin-dictionary.com",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider nuxt",
     "build": "nuxt build --fail-on-error",
     "start": "nuxt start",
     "test": "jest && playwright test",
@@ -44,7 +44,7 @@
     "jest": "^29.0.1"
   },
   "engines": {
-    "node": "16.x",
+    "node": "18.x",
     "npm": ">=8.x"
   }
 }
