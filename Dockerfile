@@ -1,4 +1,4 @@
-FROM node:lts as builder
+FROM node:18 as builder
 
 WORKDIR /app
 
@@ -9,7 +9,7 @@ ENV SERVER_ENV production
 RUN npm ci --prefer-offline --omit=dev
 RUN npm run build
 
-FROM node:lts
+FROM node:18
 
 WORKDIR /app
 
