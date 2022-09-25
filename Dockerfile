@@ -1,4 +1,4 @@
-FROM node:18 as builder
+FROM node:18-slim as builder
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ ENV NODE_OPTIONS "--openssl-legacy-provider"
 RUN npm ci --prefer-offline --omit=dev
 RUN npm run build
 
-FROM node:18
+FROM node:18-slim
 
 WORKDIR /app
 
