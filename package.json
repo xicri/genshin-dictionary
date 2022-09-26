@@ -26,7 +26,7 @@
     "@nuxtjs/robots": "^2.5.0",
     "@nuxtjs/sentry": "^6.0.0",
     "@nuxtjs/sitemap": "^2.4.0",
-    "@pinia/nuxt": "^0.2.1",
+    "@pinia/nuxt": "^0.4.1",
     "dotenv": "^16.0.1",
     "klona": "^2.0.4",
     "lodash": "^4.17.21",
