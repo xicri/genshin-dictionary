@@ -3,7 +3,7 @@
     <span class="results__langname results__translation-item">{{ langName }}: </span>
     <div class="results__translation-item">
       <div class="results__ja">
-        <span :data-e2e="langCode">{{ word }}</span>
+        <span :lang="langCode" :data-e2e="langCode">{{ word }}</span>
         <span v-if="kana" class="results__pronunciation-ja">({{ kana }})</span>
       </div>
     </div>
