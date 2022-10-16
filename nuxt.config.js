@@ -103,7 +103,10 @@ export default async () => {
     },
     router: {
       trailingSlash: true,
-      middleware: "trailing-slash",
+      middleware: [
+        "headers",
+        "trailing-slash",
+      ],
     },
 
     modules: [
