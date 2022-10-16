@@ -137,7 +137,7 @@ describe("The Genshin English Dictionary", () => {
     return;
   });
 
-  for (const lang of [ "en", "ja" ]) {
+  for (const lang of [ "en", "ja", "zh-CN" ]) {
     const rootURL = `http://${ip}:${port}/${lang}/`;
 
     test(`search by Japanese (${lang})`, async ({ page }) => {
@@ -172,7 +172,14 @@ describe("The Genshin English Dictionary", () => {
       const tag = tags[0];
       const tagName = await tag.$(".tag > span");
 
-      expect(await tagName.innerText()).toBe(lang === "en" ? "A Piece of Artifacts" : "聖遺物（個別名）");
+      if (lang === "en") {
+        expect(await tagName.innerText()).toBe("A Piece of Artifacts");
+      } else if (lang === "ja") {
+        expect(await tagName.innerText()).toBe("聖遺物（個別名）");
+      } else { // if (lang === "zh-CN")
+        expect(await tagName.innerText()).toBe("圣遗物（单件名）");
+      }
+
       expect(await tag.getAttribute("href")).toBe(`/${lang}/tags/artifact-piece/`);
 
       // error message is NOT shown
@@ -198,21 +205,31 @@ describe("The Genshin English Dictionary", () => {
       await expect(await searchBox2.inputValue()).toBe("存在しない語彙");
 
       // error message is shown
-      expect((await page.textContent("p[data-e2e='empty']")).trim())
-        .toBe(lang === "en" ? "Your search did not match any words in this dictionary." : "該当する語彙が見つかりませんでした。");
+      const notFoundMessage = (await page.textContent("p[data-e2e='empty']")).trim();
+
+      if (lang === "en") {
+        expect(notFoundMessage).toBe("Your search did not match any words in this dictionary.");
+      } else if (lang === "ja") {
+        expect(notFoundMessage).toBe("該当する語彙が見つかりませんでした。");
+      } else { // if (lang === "zh-CN")
+        expect(notFoundMessage).toBe("未找到匹配的词汇。");
+      }
 
       return;
     });
 
     test(`title (${lang})`, async ({ page }) => {
-      const title = {
-        en: "\"Lumine\" is \"荧\" in Chinese | Genshin Dictionary",
-        ja: "「蛍」は英語で \"Lumine\" | 原神 英語・中国語辞典",
-      };
-
       await page.goto(`${rootURL}lumine/`);
 
-      return expect(page.title()).resolves.toBe(title[lang]);
+      if (lang === "en") {
+        await expect(page.title()).resolves.toBe("\"Lumine\" is \"荧\" in Chinese | Genshin Dictionary");
+      } else if (lang === "ja") {
+        await expect(page.title()).resolves.toBe("「蛍」は英語で \"Lumine\" | 原神 英語・中国語辞典");
+      } else { // if (lang === "zh-CN")
+        await expect(page.title()).resolves.toBe("\"荧\"的英语和日语翻译 | 原神中英日辞典");
+      }
+
+      return;
     });
   }
 });
