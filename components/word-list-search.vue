@@ -21,7 +21,7 @@
           decoding="async"
           class="search__taglist-icon"
           @click="toggleTagList"
-        >
+        />
       </div>
       <div ref="taglist" :class="{ search__taglist: true, 'search__taglist-display-mobile': displayTagListOnMobile }">
         <div class="search__taglist-inner">
@@ -39,7 +39,7 @@
           decoding="async"
           class="search__taglist-close"
           @click="closeTagList"
-        >
+        />
       </div>
     </div>
     <closing-layer :enabled="displayTagListOnMobile" @close="closeTagList" />

@@ -9,28 +9,28 @@ const { $pinia } = useNuxtApp();
 const { locale, t } = useI18n();
 
 const route = useRoute();
-    const store = useDictionaryStore($pinia);
+const store = useDictionaryStore($pinia);
 
 const onSearch = () => {
   if (window.location.pathname !== "/") {
     history.pushState({}, "", `/${locale.value}/`);
     document.title = t("siteTitle");
-      }
+  }
 };
 
-    store.$reset();
+store.$reset();
 store.queryByID(route.params.wordid);
-    const word = store.searchResults[0];
+const word = store.searchResults[0];
 
-    if (!word) {
+if (!word) {
   throw createError({ statusCode: 404, fatal: true });
-    }
+}
 
-    //
-    // title & description
-    //
-    let title;
-    let description;
+//
+// title & description
+//
+let title;
+let description;
 
 if (locale.value === "en") {
   title = `"${word.en}" is ` + (word.zhCN ? `"${word.zhCN}" in Chinese` : `${word.ja} in Japanese`) + ` | ${ t("siteTitle") }`;
@@ -52,19 +52,19 @@ if (locale.value === "en") {
 }
 
 useHead({
-      title,
-      meta: [
-        { hid: "og:title", property: "og:title", content: title },
-        { hid: "description", name: "description", content: description },
-        { hid: "og:description", property: "og:description", content: description },
-      ],
-    });
+  title,
+  meta: [
+    { hid: "og:title", property: "og:title", content: title },
+    { hid: "description", name: "description", content: description },
+    { hid: "og:description", property: "og:description", content: description },
+  ],
+});
 
-    onMounted(() => {
-      // Reset on browser back
-      window.onpopstate = () => {
-        store.$reset();
-        store.queryByID(word.id);
-      };
-    });
+onMounted(() => {
+  // Reset on browser back
+  window.onpopstate = () => {
+    store.$reset();
+    store.queryByID(word.id);
+  };
+});
 </script>

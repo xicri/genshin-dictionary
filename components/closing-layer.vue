@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ display: enabled ? 'block' : 'none' }" class="closer" @click="$emit('close')"></div>
+  <div :style="{ display: enabled ? 'block' : 'none' }" class="closer" @click="$emit('close')" />
 </template>
 
 <script setup>

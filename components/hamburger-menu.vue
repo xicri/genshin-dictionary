@@ -1,10 +1,10 @@
 <template>
   <div>
-    <input id="menu-switch" type="checkbox" :checked="open" style="display: none;" @click="toggleMenu">
+    <input id="menu-switch" type="checkbox" :checked="open" style="display: none;" @click="toggleMenu" />
     <label class="menu__icon" for="menu-switch">
-      <div class="menu__icon-line"></div>
-      <div class="menu__icon-line"></div>
-      <div class="menu__icon-line"></div>
+      <div class="menu__icon-line" />
+      <div class="menu__icon-line" />
+      <div class="menu__icon-line" />
     </label>
     <nav class="menu__nav">
       <div class="menu__nav-padding">
@@ -21,7 +21,7 @@
           </li>
           <li class="menu__item">
             <a href="https://translate.genshin-dictionary.com/" target="_blank" rel="noopener">{{ t("translate") }}</a>
-            <img src="~/assets/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14">
+            <img src="~/assets/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14" />
           </li>
         </ul>
 

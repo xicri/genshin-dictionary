@@ -25,7 +25,7 @@
           オープンデータ・API (β)
         </h3>
         <p>
-          本サイトの対訳表データは CSV 形式 (一般向け) 及び JSON 形式 (技術者向け) で配布しています。<br>
+          本サイトの対訳表データは CSV 形式 (一般向け) 及び JSON 形式 (技術者向け) で配布しています。<br />
           詳細は<a href="/opendata/">オープンデータ・API についてのページ</a>をご確認下さい。
         </p>
 
@@ -36,8 +36,8 @@
         </ul>
 
         <p>
-          お問い合わせなどの際は <a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">Twitter</a> からご連絡下さい。(DM 可)<br>
-          バグ報告やオープンデータ・API 関連、その他技術的なお問い合わせについては、GitHub の <a href="https://github.com/xicri/genshin-dictionary/issues" target="_blank" rel="noopener">Issues</a> や <a href="https://github.com/xicri/genshin-dictionary/discussions" target="_blank" rel="noopener">Discussions</a> からお問い合わせ頂いても構いません。<br>
+          お問い合わせなどの際は <a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">Twitter</a> からご連絡下さい。(DM 可)<br />
+          バグ報告やオープンデータ・API 関連、その他技術的なお問い合わせについては、GitHub の <a href="https://github.com/xicri/genshin-dictionary/issues" target="_blank" rel="noopener">Issues</a> や <a href="https://github.com/xicri/genshin-dictionary/discussions" target="_blank" rel="noopener">Discussions</a> からお問い合わせ頂いても構いません。<br />
           お問い合わせの際は、できるだけ日本語又は英語でお願いします。
         </p>
 

@@ -1,5 +1,5 @@
 <template>
-  <span class="spacer"></span>
+  <span class="spacer" />
 </template>
 
 <style lang="scss" scoped>

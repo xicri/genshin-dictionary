@@ -8,7 +8,7 @@
     :autocomplete="autocomplete"
     @input="onInput"
     @click="stopPropagation"
-  >
+  />
 </template>
 
 <script setup>
