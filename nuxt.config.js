@@ -159,7 +159,7 @@ export default defineNuxtConfig({
     // e.g. https://genshin-dictionary.com/about/
     exclude: [ "/**" ],
     gzip: false,
-    i18n: true,
+    // i18n: true, // TODO temporarily disable i18n option until nuxt/sitemap supports nuxt/i18n on Nuxt 3
     routes: [
       ...([ "en", "ja" , "zh-CN" ].map(lang => ([
         { url: `/${lang}/` },
