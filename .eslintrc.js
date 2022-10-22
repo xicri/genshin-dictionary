@@ -4,8 +4,6 @@ module.exports = {
     "xicri/nuxt+js",
   ],
 
-  ignorePatterns: [ "*.json", "*.json5" ],
-
   rules: {
     "vue/multi-word-component-names": "off",
     "vue/no-v-html": "off",
