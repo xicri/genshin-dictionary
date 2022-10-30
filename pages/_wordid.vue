@@ -43,11 +43,6 @@ export default defineComponent({
         { hid: "og:title", property: "og:title", content: title },
         { hid: "description", name: "description", content: description },
         { hid: "og:description", property: "og:description", content: description },
-        ...(((i18n.locale === "zh-CN" || i18n.locale === "en") && !word.zhCN) ? [{
-          hid: "noindex",
-          name: "robots",
-          content: "noindex",
-        }] : []),
       ],
     });
 
