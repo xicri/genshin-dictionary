@@ -7,7 +7,7 @@ try {
   const res = await fetch(`https://api.cloudflare.com/client/v4/zones/${zone}/purge_cache`, {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${apiToken}`,
+      Authorization: `Bearer ${apiToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
