@@ -1,7 +1,8 @@
 #
 # Project-specific
 #
-static/dataset/
+/dataset/
+/public/dataset/
 Dockerfile_staging
 
 #

@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import allTags from "~/static/dataset/tags.json";
+import allTags from "~/dataset/tags.json";
 
 const { i18n } = useContext();
 

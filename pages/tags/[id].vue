@@ -5,7 +5,7 @@
 <script setup>
 import { useDictionaryStore } from "~/store/index.js";
 import { getTagRedirectDestination } from "~/libs/redirect.js";
-import tags from "~/static/dataset/tags.json";
+import tags from "~/dataset/tags.json";
 
 const { $pinia, i18n, redirect } = useNuxtApp();
 const route = useRoute();
