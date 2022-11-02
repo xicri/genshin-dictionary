@@ -271,3 +271,19 @@ describe("redirection by language settings works properly", () => {
     });
   }
 });
+
+describe("redirection", () => {
+  const rootURL = `http://localhost:${port}`;
+
+  test("redirection from old word ID works properly", async () => {
+    const srcURL = `${rootURL}/ja/barbara/`;
+    const destURL = `${rootURL}/ja/barbara-pegg/`;
+
+    const res = await fetch(srcURL, {
+      redirect: "manual",
+    });
+
+    expect(res.status).toBe(301);
+    expect(res.headers.get("Location")).toBe(destURL);
+  });
+});
