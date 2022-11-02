@@ -4,19 +4,13 @@
 
 <script setup>
 import { useDictionaryStore } from "~/store/index.js";
-import { getTagRedirectDestination } from "~/libs/redirect.js";
 import tags from "~/dataset/tags.json";
 
-const { $pinia, i18n, redirect } = useNuxtApp();
+const { $pinia, i18n } = useNuxtApp();
 const route = useRoute();
 const store = useDictionaryStore($pinia);
 
 const tagID = route.params.id;
-
-const destTagID = getTagRedirectDestination(tagID);
-if (destTagID) {
-  redirect(`/tags/${destTagID}/`);
-}
 
 const title = ref(`${tags[tagID].title[i18n.locale]} | ${i18n.t("siteTitle")}`);
 

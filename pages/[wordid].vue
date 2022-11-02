@@ -3,10 +3,9 @@
 </template>
 
 <script setup>
-import { getWordRedirectDestination } from "~/libs/redirect.js";
 import { useDictionaryStore } from "~/store/index.js";
 
-const { $pinia, i18n, redirect } = useNuxtApp();
+const { $pinia, i18n } = useNuxtApp();
 const route = useRoute();
     const store = useDictionaryStore($pinia);
 
@@ -16,11 +15,6 @@ const route = useRoute();
         document.title = i18n.t("siteTitle");
       }
     };
-
-const destWordID = getWordRedirectDestination(route.params.wordid);
-    if (destWordID) {
-      redirect(301, `/${i18n.locale}/${destWordID}/`);
-    }
 
     store.$reset();
 store.queryByID(route.params.wordid);
