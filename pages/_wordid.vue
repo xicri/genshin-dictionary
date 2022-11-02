@@ -21,7 +21,7 @@ export default defineComponent({
 
     const destWordID = getWordRedirectDestination(params.value.wordid);
     if (destWordID) {
-      redirect(`/${i18n.locale}/${destWordID}/`);
+      redirect(301, `/${i18n.locale}/${destWordID}/`);
     }
 
     store.$reset();
