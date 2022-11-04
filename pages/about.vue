@@ -53,6 +53,9 @@
         <p>
           本サイトは GitHub 社により <a href="https://github.com/primer/octicons/blob/main/LICENSE" target="_blank" rel="noopener">MIT ライセンス</a>にて提供されている <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> を利用しています。
         </p>
+        <p>
+          本サイトの favicon の一部には<a href="http://www.fontna.com/blog/1226/" target="_blank" rel="noopener">ロゴたいぷゴシック</a>を利用しています。
+        </p>
       </main>
     </div>
   </div>
