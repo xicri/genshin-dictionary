@@ -57,7 +57,10 @@ export default async () => {
           { hid: "google-site-verification", name: "google-site-verification", content: "fPZCIib8QFE52LeBEGqBoapTwL6v9vqHl9lKqcreMDQ" },
           ...meta,
         ],
-        link,
+        link: [
+          { rel: "icon", href: "/images/favicon.svg", type: "image/svg+xml" },
+          ...link,
+        ],
         script: [
           ...(process.env.SERVER_ENV === "production" ? [{
             hid: "cloudflare-wa",
