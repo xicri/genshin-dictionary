@@ -11,6 +11,10 @@ export default defineNuxtConfig({
 
   css: [ "~/assets/styles/global.scss" ],
 
+  runtimeConfig: {
+    serverEnv: process.env.SERVER_ENV,
+  },
+
   modules: [
     "@nuxtjs/i18n",
     "@nuxtjs/robots",

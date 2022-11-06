@@ -28,6 +28,7 @@ if (lang === "zh-CN") {
 }
 
 const route = useRoute();
+const runtimeConfig = useRuntimeConfig();
 
 useHead({
   htmlAttrs,
@@ -50,7 +51,7 @@ useHead({
     ...link,
   ],
   script: [
-    ...(process.env.SERVER_ENV === "production" ? [{
+    ...(runtimeConfig.serverEnv === "production" ? [{
       hid: "cloudflare-wa",
       src: "https://static.cloudflareinsights.com/beacon.min.js",
       "data-cf-beacon": "{\"token\": \"1f401150384f4aaa9d14b208aac9fdba\"}",
