@@ -1,19 +1,7 @@
-import TerserPlugin from "terser-webpack-plugin";
-
 import words from "./static/dataset/words.json";
 import tags from "./static/dataset/tags.json";
 
 export default async () => {
-  async function routes() {
-    const tagIDs = Object.keys(tags);
-
-    return [
-      "/",
-      ...(words.map(word => `/${word.id}/`)),
-      ...(tagIDs.map(tagID => `/tags/${tagID}/`)),
-    ];
-  }
-
   const config = {
     target: "server",
     components: true,
@@ -75,35 +63,6 @@ export default async () => {
 
     css: [ "~/assets/styles/global.scss" ],
 
-    build: {
-      optimization: {
-        splitChunks: {
-          chunks: "all",
-        },
-        sideEffects: false,
-        usedExports: true,
-        // Do not make symbol names unreadable for performance analysis
-        minimizer: [ new TerserPlugin({
-          terserOptions: {
-            compress: {
-              keep_classnames: true,
-              keep_fargs: true,
-              keep_fnames: true,
-            },
-            mangle: {
-              keep_classnames: true,
-              keep_fnames: true,
-            },
-            keep_classnames: true,
-            keep_fnames: true,
-          },
-        }) ],
-      },
-    },
-    generate: {
-      fallback: "404.html",
-      routes,
-    },
     router: {
       trailingSlash: true,
       middleware: [
