@@ -153,6 +153,7 @@ export default defineNuxtConfig({
   },
 
   sitemap: async () => ({
+    generateOnBuild: true,
     hostname: "https://genshin-dictionary.com",
     // disable automatic sitemap generation to exclude URLs without locale:
     // e.g. https://genshin-dictionary.com/about/
