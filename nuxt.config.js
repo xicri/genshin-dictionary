@@ -141,13 +141,15 @@ export default defineNuxtConfig({
   },
 
   robots: {
-    UserAgent: "*",
-    ...(process.env.SERVER_ENV === "production" ? {
-      Allow: "/",
-      Sitemap: "https://genshin-dictionary.com/sitemap.xml",
-    } : {
-      Disallow: "/",
-    }),
+    rules: {
+      UserAgent: "*",
+      ...(process.env.SERVER_ENV === "production" ? {
+        Allow: "/",
+        Sitemap: "https://genshin-dictionary.com/sitemap.xml",
+      } : {
+        Disallow: "/",
+      }),
+    },
   },
 
   sitemap: async () => ({
