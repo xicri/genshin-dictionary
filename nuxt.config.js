@@ -116,8 +116,6 @@ export default async () => {
           en: {
             siteTitle: "Genshin Dictionary",
             indexTitleDesc: "an online English-Chinese-Japanese dictionary for terms in Genshin Impact",
-            wordIdTitle: "\"{en}\" is \"{zhCN}\" in Chinese",
-            wordIdDescription: "\"{en}\" is \"{zhCN}\" in Chinese and \"{ja}\" in Japanese. This website contains English, Chinese, and Japanese translations for terms in Genshin Impact.",
             aboutTitle: "About this website",
             aboutDescription: "About Genshin Dictionary. This website is an online English-Chinese-Japanese dictionary for the terms in Genshin Impact.",
             historyTitle: "Update History",
@@ -129,8 +127,6 @@ export default async () => {
           ja: {
             siteTitle: "原神 英語・中国語辞典",
             indexTitleDesc: "原神の固有名詞等の英語表記、及び中国語表記の一覧を掲載しています。",
-            wordIdTitle: "「{ja}」は英語で \"{en}\"",
-            wordIdDescription: "「{ja}」の英語表記は \"{en}\"、中国語表記は「{zhCN}」 ― このサイトはゲーム「原神」の用語の、日本語・英語・中国語の対訳を掲載しています。",
             aboutTitle: "このサイトについて",
             aboutDescription: "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
             historyTitle: "更新履歴",
@@ -142,8 +138,6 @@ export default async () => {
           "zh-CN": {
             siteTitle: "原神中英日辞典",
             indexTitleDesc: "一个在线的中英日三语原神游戏用语辞典",
-            wordIdTitle: "\"{zhCN}\"的英语和日语翻译",
-            wordIdDescription: "\"{zhCN}\"的英语是\"{en}\"，日语是\"{ja}\"。", // TODO TranslationChanged
             aboutTitle: "关于本网站",
             aboutDescription: "关于原神中英日辞典。本网站是一个在线的中英日三语原神游戏用语辞典。",
             historyTitle: "更新记录",

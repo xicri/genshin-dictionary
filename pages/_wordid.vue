@@ -34,8 +34,24 @@ export default defineComponent({
       return;
     }
 
-    const title = `${ i18n.t("wordIdTitle", { ja: word.ja, en: word.en, zhCN: word.zhCN }) } | ${ i18n.t("siteTitle") }`;
-    const description = i18n.t("wordIdDescription", { ja: word.ja, en: word.en, zhCN: word.zhCN });
+    //
+    // title & description
+    //
+    let title;
+    let description;
+
+    if (i18n.locale === "en") {
+      title = `"${word.en}" is "${word.zhCN}" in Chinese`;
+      description = `"${word.en}" is "${word.zhCN}" in Chinese and "${word.ja}" in Japanese. This website contains English, Chinese, and Japanese translations for terms in Genshin Impact.`;
+    } else if (i18n.locale === "ja") {
+      title = `「${word.ja}」は英語で "${word.en}"`;
+      description = `「${word.ja}」の英語表記は "${word.en}"、中国語表記は「${word.zhCN}」 ― このサイトはゲーム「原神」の用語の、日本語・英語・中国語の対訳を掲載しています。`;
+    } else if (i18n.locale === "zh-CN") {
+      title = `"${word.zhCN}"的英语和日语翻译`;
+      description = `"${word.zhCN}"的英语是"${word.en}"，日语是"${word.ja}"。`; // TODO TranslationChanged
+    } else {
+      throw new Error(`Unexpected locale: ${i18n.locale}`);
+    }
 
     useMeta({
       title,
