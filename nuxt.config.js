@@ -115,9 +115,9 @@ export default async () => {
         messages: {
           en: {
             siteTitle: "Genshin Dictionary",
-            indexTitleDesc: "an online English-Chinese-Japanese dictionary for terms in Genshin Impact",
+            indexTitleDesc: "An online English-Chinese-Japanese dictionary of the terms in Genshin Impact",
             aboutTitle: "About this website",
-            aboutDescription: "About Genshin Dictionary. This website is an online English-Chinese-Japanese dictionary for the terms in Genshin Impact.",
+            aboutDescription: "About Genshin Dictionary. This website is an online English-Chinese-Japanese dictionary of the terms in Genshin Impact.",
             historyTitle: "Update History",
             opendataTitle: "Open Data / API (β)",
             langNameEn: "English",
