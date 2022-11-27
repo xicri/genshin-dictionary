@@ -51,7 +51,7 @@ export default defineComponent({
                   + (word.zhCN ? `、中国語表記は「${word.zhCN}」` : "")
                   + " ― このサイトはゲーム「原神」の用語の、日本語・英語・中国語の対訳を掲載しています。";
     } else if (i18n.locale === "zh-CN") {
-      title = `"${word.zhCN ?? word.en}"的英语和日语翻译`;
+      title = word.zhCN ? `"${word.zhCN}"的英语和日语翻译` : `"${word.en}"的日语翻译`;
       description = word.zhCN ?
         `"${word.zhCN}"的英语是"${word.en}"，日语是"${word.ja}"。` : // TODO TranslationChanged
         `"${word.en}"的日语是"${word.ja}"。`;
