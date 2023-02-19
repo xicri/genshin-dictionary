@@ -1,14 +1,12 @@
+"use strict";
+
 module.exports = {
   root: true,
-  extends: [
-    "xicri/nuxt+js",
-  ],
+  extends: "xicri/next",
 
-  rules: {
-    "vue/multi-word-component-names": "off",
-    "vue/no-v-html": "off",
+  parserOptions: {
+    project: "./tsconfig.json",
   },
-
   overrides: [
     {
       files: [ "**/*.test.js", "**/*.test.mjs" ],
