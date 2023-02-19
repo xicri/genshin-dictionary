@@ -18,6 +18,8 @@ FROM node:18-slim
 
 WORKDIR /app
 
+RUN apt-get update -qq && apt-get upgrade --yes
+
 COPY --from=builder /app .
 
 ENV HOST 0.0.0.0
