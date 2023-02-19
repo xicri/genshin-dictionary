@@ -61,8 +61,6 @@ export default async () => {
       };
     },
 
-    css: [ "~/assets/styles/global.scss" ],
-
     router: {
       trailingSlash: true,
       middleware: [

@@ -31,14 +31,12 @@ Thumbs.db
 .idea/
 .vscode/
 
-# Built files
-dist/
-
 # Temporary files
 tmp/
 
 # dotenv environment variables file
 .env
+.env*.local
 
 #
 # JavaScript
@@ -52,12 +50,19 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
 # Output of 'npm pack'
 *.tgz
 
-# Nuxt
-.nuxt
+# TypeScript
+*.tsbuildinfo
+
+# Next.js
+/.next/
+/build/
+/out/
+next-env.d.ts
 
 # npm is the package manager for this project.
 yarn.lock
