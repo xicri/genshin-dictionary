@@ -1,0 +1,48 @@
+{
+  "extends": [
+    "markuplint:recommended",
+    "markuplint:html-standard",
+    "markuplint:recommended-vue"
+  ],
+  "parser": {
+    ".jsx$": "@markuplint/jsx-parser",
+    ".vue$": "@markuplint/vue-parser"
+  },
+  "specs": {
+    ".jsx$": "@markuplint/react-spec",
+    ".vue$": "@markuplint/vue-spec"
+  },
+  "rules": {
+    "ineffective-attr": false,
+    "permitted-contents": true,
+    "label-has-control": false,
+    "no-default-value": false,
+    "require-accessible-name": true,
+    "required-h1": true,
+    "attr-duplication": true,
+    "doctype": "always",
+    "placeholder-label-option": true,
+    "use-list": false,
+    "no-empty-palpable-content": false,
+    "no-hard-code-id": false,
+    "case-sensitive-attr-name": false,
+    "required-element": true,
+    "case-sensitive-tag-name": false,
+    "id-duplication": true,
+    "end-tag": false,
+    "class-naming": false,
+    "deprecated-attr": true,
+    "attr-value-quotes": false,
+    "deprecated-element": true,
+    "required-attr": true,
+    "character-reference": true,
+    "landmark-roles": false,
+    "wai-aria": true,
+    "no-use-event-handler-attr": false,
+    "invalid-attr": true,
+    "no-boolean-attr-value": false,
+    "disallowed-element": true,
+    "require-datetime": true,
+    "no-refer-to-non-existent-id": true
+  }
+}
