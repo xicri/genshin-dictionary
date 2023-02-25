@@ -80,27 +80,7 @@ export default async () => {
     ],
 
     i18n: {
-      locales: [
-        {
-          code: "en",
-          iso: "en",
-          name: "English",
-        },
-        {
-          code: "ja",
-          iso: "ja-JP",
-          name: "日本語",
-        },
-        {
-          code: "zh-CN",
-          iso: "zh-CN",
-          name: "简体中文",
-        },
-      ],
       strategy: "prefix",
-      defaultLocale: "en",
-      baseUrl: "https://genshin-dictionary.com",
-      vueI18nLoader: true,
       detectBrowserLanguage: {
         useCookie: true,
         cookieSecure: true,
