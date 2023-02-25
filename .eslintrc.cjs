@@ -9,6 +9,12 @@ module.exports = {
   },
   overrides: [
     {
+      files: [ "**/*.js" ],
+      parserOptions: {
+        sourceType: "module",
+      },
+    },
+    {
       files: [ "**/*.test.js", "**/*.test.mjs" ],
       extends: "xicri/jest",
       rules: {

@@ -12,6 +12,7 @@
   },
   "homepage": "https://genshin-dictionary.com",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
