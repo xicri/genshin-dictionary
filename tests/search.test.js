@@ -20,8 +20,8 @@ test("search words including 'ヴァヴィヴヴェヴォ' by 'ばびぶべぼ'"
 
 const fixtures = [
   {
-    result: "Anemo Archon",
-    input: "Anemo God",
+    result: "Geo Archon",
+    input: "Geo God",
     lang: "en",
   },
   {
