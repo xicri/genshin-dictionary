@@ -44,6 +44,7 @@
     "@aws-sdk/client-s3": "^3.332.0",
     "@playwright/test": "^1.14.1",
     "@styled-jsx/plugin-sass": "^4.0.2",
+    "@types/luxon": "^3.2.0",
     "concurrently": "^8.0.1",
     "eslint": "latest",
     "eslint-config-xicri": "latest",

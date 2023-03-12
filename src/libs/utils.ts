@@ -1,14 +1,12 @@
 import { DateTime } from "luxon";
-
 import allWords from "../../public/dataset/words.json";
+import type { BuiltWord, History } from "@/types";
 
 class CandidateString {
-  constructor(candidate) {
-    this.candidate = candidate;
-  }
+  constructor(private candidate: string|undefined) {}
 
-  includes(searchElement) {
-    const normalize = (str) => str
+  includes(searchElement: string): boolean {
+    const normalize = (str: string): string => str
       // replace Katakana with Hiragana
       .replace(/[ァ-ヴ]/g, (str) => String.fromCharCode(str.charCodeAt(0) - 0x60))
       // ignore symbols
@@ -33,22 +31,22 @@ class CandidateString {
   }
 }
 
-export const candidate = (str) => new CandidateString(str);
+export const candidate = (str: string|undefined): CandidateString => new CandidateString(str);
 
-export const getHistory = () => {
-  function reverseSortObject(obj) {
-    const newObj = {};
+export const getHistory = (): History => {
+  function reverseSortObject<T extends { [key: string]: unknown }>(obj: T): T {
+    const newObj: { [key: string]: unknown } = {};
 
     for (const key of Object.keys(obj).sort().reverse()) {
       newObj[key] = obj[key];
     }
 
-    return newObj;
+    return <T>newObj;
   }
 
-  const history = {};
+  const history: History = {};
 
-  for (const word of allWords) {
+  for (const word of allWords as BuiltWord[]) {
     const createdAt = DateTime.fromISO(word.createdAt);
     const threeMonthsAgo = DateTime.now().minus({ months: 3 });
     const createdAtJa = createdAt.toFormat("yyyy/MM/dd");
@@ -75,13 +73,16 @@ export const getHistory = () => {
   return reverseSortObject(history);
 };
 
-export const sleep = async (ms) =>
+export const sleep = async (ms: number): Promise<void> =>
   new Promise(resolve =>
     setTimeout(() => resolve(), ms)
   );
 
-export const escapeHtmlString = (html) => {
-  const map = {
+export const escapeHtmlString = (html: string): string => {
+  type mapType = {
+    [key: string]: string,
+  };
+  const map: mapType = {
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
