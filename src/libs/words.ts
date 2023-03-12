@@ -4,12 +4,12 @@ import type { BuiltWord, SearchConditions } from "@/types";
 import _allWords from "../../public/dataset/words.json";
 const allWords = _allWords as BuiltWord[];
 
-export const getWords = ({ wordID = "", query = "", activeTags = [], maxWords = 100 }: SearchConditions): BuiltWord[] => {
+export const getWords = ({ wordID = "", query = "", activeTags = [], maxWords = 100, sortBy }: SearchConditions): BuiltWord[] => {
   if (wordID) {
     const word: BuiltWord | undefined = allWords.find(word => word.id === wordID);
     return word ? [ word ] : [];
   } else {
-    return allWords.filter(word => {
+    const words = allWords.filter(word => {
       // If no search query is specified, do not filter
       if (!query) {
         return true;
@@ -38,6 +38,12 @@ export const getWords = ({ wordID = "", query = "", activeTags = [], maxWords = 
 
       // true every search tag is included in the word tags
       return activeTags.every(searchTag => word.tags?.includes(searchTag));
-    }).slice(0, maxWords);
+    });
+
+    if (sortBy) {
+      words.sort((wordA, wordB) => wordB[sortBy] < wordA[sortBy] ? -1 : 1);
+    }
+
+    return words.slice(0, maxWords);
   }
 };

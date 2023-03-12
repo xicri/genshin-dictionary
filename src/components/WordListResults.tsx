@@ -1,3 +1,4 @@
+import { groupBy } from "lodash";
 import { useEffect, useMemo, useRef } from "react";
 import { setupI18n } from "@/libs/i18n";
 import { Word } from "@/components/Word";
@@ -7,11 +8,12 @@ import type { Locale, SearchConditions } from "@/types";
 
 type Props = {
   searchConditions: SearchConditions,
+  historyMode: boolean,
   locale: Locale,
   onLoadMoreWords: () => void,
 };
 
-export const WordListResults: FC<Props> = ({ searchConditions, locale, onLoadMoreWords: emitLoadMoreWords }: Props): JSX.Element => {
+export const WordListResults: FC<Props> = ({ searchConditions, historyMode, locale, onLoadMoreWords: emitLoadMoreWords }: Props): JSX.Element => {
   const wordList = useRef<HTMLDivElement>(null);
 
   //
@@ -19,12 +21,15 @@ export const WordListResults: FC<Props> = ({ searchConditions, locale, onLoadMor
   //
   const t = setupI18n(locale, {
     en: {
+      updatedOn: "Updated on {createdOn}",
       notFound: "Your search did not match any words in this dictionary.",
     },
     ja: {
+      updatedOn: "{createdOn} 更新",
       notFound: "該当する語彙が見つかりませんでした。",
     },
     "zh-CN": {
+      updatedOn: "更新于{createdOn}",
       notFound: "未找到匹配的词汇。",
     },
   });
@@ -58,6 +63,9 @@ export const WordListResults: FC<Props> = ({ searchConditions, locale, onLoadMor
 
   const words = useMemo(() => searchConditions ? getWords(searchConditions) : [], [ searchConditions ]);
 
+  const history = useMemo(() => historyMode ? groupBy(getWords({ sortBy: "createdAt" }), "createdAt") : {}, [ historyMode ]);
+  const createdDates = useMemo(() => Object.keys(history).filter(key => key !== "undefined").sort().reverse(), [ history ]);
+
   return (
     <>
       <style jsx>{`
@@ -70,11 +78,40 @@ export const WordListResults: FC<Props> = ({ searchConditions, locale, onLoadMor
             padding-left: vars.$side-margin;
             padding-right: vars.$side-margin;
           }
+
+          &__updated-at {
+            display: flex;
+            align-items: center;
+            margin-top: 2.5em;
+
+            &:after {
+              border-top: 1px solid vars.$color-dark;
+              content: "";
+              flex-grow: 1;
+              margin-left: 0.4em;
+              // By default, align-items: center does not center the line perfectly.
+              // By adding margin-top, I can center the line more accurately.
+              margin-top: 0.25em;
+            }
+          }
         }
       `}</style>
 
       <main className="results" ref={wordList}>
-        { words.map(word => <Word word={word} locale={locale} key={word.en} />)}
+        { historyMode ?
+          createdDates.map(createdDate => (
+            <div key={createdDate}>
+              <h3 className="results__updated-at">
+                { t("updatedOn", { createdOn: createdDate }) }
+              </h3>
+              {/* Required to be enclosed by <div> so that CSS' :last-child works */}
+              <div>
+                { history[createdDate].map(word => <Word word={word} locale={locale} key={word.id} />) }
+              </div>
+            </div>
+          )) :
+          words.map(word => <Word word={word} locale={locale} key={word.id} />)
+        }
 
         { words.length <= 0 ? (
           <p data-e2e="empty">

@@ -7,16 +7,18 @@ type Props = {
   locale: Locale,
   wordID?: string,
   tagID?: TagID,
+  historyMode?: boolean,
   onSearch?: () => void,
 };
 
-export function WordList({ locale, wordID: defaultWordID = "", tagID: defaultTagID, onSearch: emitSearch }: Props): JSX.Element {
+export function WordList({ locale, wordID: defaultWordID = "", tagID: defaultTagID, historyMode = false, onSearch: emitSearch }: Props): JSX.Element {
   const defaultActiveTags = useCallback(() => defaultTagID ? [ defaultTagID ] : [], [ defaultTagID ]);
 
   const [ wordID, setWordID ] = useState(defaultWordID);
   const [ query, setQuery ] = useState("");
   const [ activeTags, setActiveTags ] = useState<TagID[]>(defaultActiveTags);
   const [ maxWords, setMaxWords ] = useState(100);
+  const [ historyModeState, setHistoryMode ] = useState(historyMode);
 
   const reset = useCallback((): void => {
     setWordID(defaultWordID);
@@ -29,6 +31,8 @@ export function WordList({ locale, wordID: defaultWordID = "", tagID: defaultTag
   // Event handlers
   //
   const onSearch = ({ query: newQuery, newTag, removeTagIndex, maxWords: newMaxWords }: OnSearchProps): void => {
+    setHistoryMode(false);
+
     if (typeof newQuery === "string") {
       setMaxWords(100);
       setWordID("");
@@ -105,7 +109,7 @@ export function WordList({ locale, wordID: defaultWordID = "", tagID: defaultTag
       <div className="word-list">
         <div className="word-list__wrapper">
           <WordListSearch locale={locale} searchConditions={{ wordID, query, activeTags, maxWords }} onSearch={onSearch} />
-          <WordListResults searchConditions={{ wordID, query, activeTags, maxWords }} onLoadMoreWords={() => setMaxWords(maxWords + 100)} locale={locale} />
+          <WordListResults searchConditions={{ wordID, query, activeTags, maxWords }} historyMode={historyModeState} onLoadMoreWords={() => setMaxWords(maxWords + 100)} locale={locale} />
         </div>
       </div>
     </>

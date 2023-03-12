@@ -75,6 +75,7 @@ export type SearchConditions = {
   query?: string,
   activeTags?: TagID[],
   maxWords?: number,
+  sortBy?: "createdAt",
 };
 
 export type OnSearchProps = {
