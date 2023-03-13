@@ -108,14 +108,6 @@ export default defineComponent({
     const updateSearchQuery = debounce((evt) => {
       store.updateSearchQuery(evt.target.value);
       context.emit("search");
-
-      if (store.query && store.searchResults.length <= 0) {
-        $sentry.captureMessage(store.query, {
-          tags: {
-            analysis: "search",
-          },
-        });
-      }
     }, 500);
     const focusOnSearchBox = () => {
       const el = searchBox.value.$el;
