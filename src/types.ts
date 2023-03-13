@@ -1,3 +1,5 @@
+import type tags from "../public/dataset/tags.json";
+
 export type Locale = "en" | "ja" | "zh-CN";
 
 export type tFunction = (key: string, variables?: { [varName: string]: string|number }) => string;
@@ -51,6 +53,33 @@ export type BuiltWord = {
   };
 };
 
+export type Tags = {
+  [key: string]: {
+    en: string;
+    ja: string;
+    "zh-CN": string;
+    title: {
+      en: string;
+      ja: string;
+      "zh-CN": string;
+    };
+  };
+};
+
 export type History = {
   [key: string]: BuiltWord[];
+};
+
+export type SearchConditions = {
+  wordID?: string,
+  query?: string,
+  activeTags?: TagID[],
+  maxWords?: number,
+};
+
+export type OnSearchProps = {
+  query?: string,
+  newTag?: TagID,
+  removeTagIndex?: number,
+  maxWords?: number | "reset",
 };

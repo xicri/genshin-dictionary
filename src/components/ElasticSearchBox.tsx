@@ -1,84 +1,97 @@
-<template>
-  <input
-    ref="searchBox"
-    type="search"
-    class="elastic-searchbox"
-    :name="name"
-    :placeholder="placeholder"
-    :autocomplete="autocomplete"
-    @input="onInput"
-    @click="stopPropagation"
-  >
-</template>
+import { ChangeEvent, forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 
-<script>
-import { defineComponent, onMounted, ref } from "@nuxtjs/composition-api";
+type Props = {
+  name?: string,
+  placeholder?: string,
+  autoComplete?:string,
+  className?: string,
+  onInput?: (evt: ChangeEvent<HTMLInputElement>) => void,
+};
 
-export default defineComponent({
-  props: {
-    name: {
-      type: String,
-      default: "",
+type Methods = {
+  moveCursorToLast: () => void,
+  selectAll: () => void,
+};
+
+const ElasticSearchBox = forwardRef<Methods, Props>(({ name = "", placeholder = "", autoComplete = "", className, onInput: emitInput }, ref): JSX.Element => {
+  const searchBox = useRef<HTMLInputElement>(null);
+  const [ textLength, setTextLength ] = useState(0);
+
+  //
+  // methods
+  //
+  const updateSearchBoxWidth = useCallback(
+    (): void => setTextLength((searchBox.current && 0 < searchBox.current.value.length) ? searchBox.current.value.length : placeholder.length),
+    [ searchBox, placeholder ]
+  );
+
+  //
+  // Event handlers
+  //
+  const onInput = useCallback((evt: ChangeEvent<HTMLInputElement>): void => {
+    updateSearchBoxWidth();
+
+    if (emitInput) {
+      emitInput(evt);
+    }
+  }, [ updateSearchBoxWidth, emitInput ]);
+
+  //
+  // Component methods
+  //
+  useImperativeHandle(ref, () => ({
+    moveCursorToLast: (): void => {
+      if (searchBox.current) {
+        searchBox.current.setSelectionRange(searchBox.current.value.length, searchBox.current.value.length);
+        searchBox.current.focus();
+      }
     },
-    placeholder: {
-      type: String,
-      default: "",
+    selectAll: (): void => {
+      if (searchBox.current) {
+        searchBox.current.setSelectionRange(0, searchBox.current.value.length);
+        searchBox.current.focus();
+      }
     },
-    autocomplete: {
-      type: String,
-      default: "",
-    },
-  },
-  setup(props, context) {
-    //
-    // refs
-    //
-    const searchBox = ref(null);
+  }));
 
-    //
-    // methods
-    //
-    const updateSearchBoxWidth = () => {
-      const el = searchBox.value;
-      const textLength = (0 < el.value.length) ? el.value.length : props.placeholder.length;
-      el.style.width = `${textLength * 1.05}em`;
-    };
+  //
+  // Initialize
+  //
+  useEffect(() => updateSearchBoxWidth(), [ updateSearchBoxWidth ]);
 
-    //
-    // Lifecycle Hooks
-    //
-    onMounted(() => {
-      updateSearchBoxWidth();
-    });
+  return (
+    <>
+      <style jsx>{`
+        @use "_variables.scss" as vars;
 
-    return {
-      // refs
-      searchBox,
-      // event handlers
-      onInput(evt) {
-        updateSearchBoxWidth();
-        context.emit("input", evt);
-      },
-      stopPropagation(evt) {
-        evt.stopPropagation();
-      },
-    };
-  },
+        .elastic-searchbox {
+          border-width: 0;
+          border-style: none;
+          font-size: vars.$search-font-size;
+          background-color: transparent;
+
+          &:focus-visible {
+            outline-style: none;
+            outline-width: 0;
+          }
+        }
+      `}</style>
+
+      <input
+        ref={searchBox}
+        type="search"
+        style={{ width: `${textLength * 1.05}em` }}
+        className={`${className} elastic-searchbox`}
+        name={name}
+        placeholder={placeholder}
+        autoComplete={autoComplete}
+        onInput={onInput}
+        onClick={(evt) => evt.stopPropagation()}
+      />
+    </>
+  );
 });
-</script>
 
-<style lang="scss" scoped>
-@use "~/assets/styles/variables.scss" as vars;
+ElasticSearchBox.displayName = "ElasticSearchBox";
 
-.elastic-searchbox {
-  border-width: 0;
-  border-style: none;
-  font-size: vars.$search-font-size;
-  background-color: transparent;
-
-  &:focus-visible {
-    outline-style: none;
-    outline-width: 0;
-  }
-}
-</style>
+export { ElasticSearchBox };
