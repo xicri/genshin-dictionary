@@ -1,47 +1,37 @@
-<template>
-  <div class="tag">
-    <span>{{ TagName }}</span>
-  </div>
-</template>
+import allTags from "../../public/dataset/tags.json";
+import type { Locale, Tags } from "@/types";
 
-<script>
-import { computed, defineComponent, useContext } from "@nuxtjs/composition-api";
-import allTags from "~/static/dataset/tags.json";
+type Props = {
+  locale: Locale,
+  tagID: string,
+};
 
-export default defineComponent({
-  props: {
-    tagid: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
-    const { i18n } = useContext();
+export function Tag({ locale, tagID }: Props): JSX.Element {
+  return (
+    <>
+      <style jsx>{`
+        @use "_variables.scss" as vars;
 
-    return {
-      TagName: computed(() => allTags[props.tagid][i18n.locale]),
-    };
-  },
-});
-</script>
+        .tag {
+          border-width: 2px;
+          border-style: solid;
+          border-radius: 6px;
+          border-color: vars.$color-dark;
 
-<style lang="scss" scoped>
-@use "~/assets/styles/variables.scss" as vars;
+          padding-top: 2px;
+          padding-bottom: 2px;
+          padding-left: 4px;
+          padding-right: 4px;
 
-.tag {
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 6px;
-  border-color: vars.$color-dark;
+          margin-right: 6px;
 
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 4px;
-  padding-right: 4px;
-
-  margin-right: 6px;
-
-  color: vars.$color-dark;
-  background-color: vars.$color-lightest;
+          color: vars.$color-dark;
+          background-color: vars.$color-lightest;
+        }
+      `}</style>
+      <div className="tag">
+        <span>{(allTags as Tags)[tagID][locale]}</span>
+      </div>
+    </>
+  );
 }
-</style>
