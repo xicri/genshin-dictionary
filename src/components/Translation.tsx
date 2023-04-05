@@ -1,112 +1,111 @@
-<template>
-  <div class="results__translation">
-    <span class="results__langname results__translation-item">{{ langName }}: </span>
-    <div class="results__translation-item">
-      <div class="results__ja">
-        <span v-if="wordWithPinyin" lang="zh-CN" data-e2e="zh-CN" v-html="wordWithPinyin"></span>
-        <span v-else :lang="langCode" :data-e2e="langCode">{{ word }}</span>
-
-        <span v-if="kana" class="results__pronunciation-ja">({{ kana }})</span>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script>
-import { defineComponent, useContext } from "@nuxtjs/composition-api";
+import { setupI18n } from "@/libs/i18n";
 import { escapeHtmlString } from "@/libs/utils";
+import type { Locale } from "@/types";
 
-export default defineComponent({
-  props: {
-    lang: {
-      type: String,
-      required: true,
-      validator(val) {
-        return [ "en", "ja", "zh-CN" ].includes(val);
-      },
-    },
-    word: {
-      type: String,
-      required: true,
-    },
-    kana: {
-      type: String,
-      default: "",
-    },
-    pinyins: {
-      type: Array,
-      default: () => [],
-    },
-  },
-  setup(props) {
-    const { i18n } = useContext();
-    let langName;
-    let wordWithPinyin;
+type Props = {
+  locale: Locale,
+  lang: "en" | "ja" | "zh-CN",
+  word: string,
+  kana?: string,
+  pinyins?: { char: string, pron: string }[]
+};
 
-    if (props.lang === "en") {
-      langName = i18n.t("langNameEn");
-    } else if (props.lang === "ja") {
-      langName = i18n.t("langNameJa");
-    } else if (props.lang === "zh-CN") {
-      langName = i18n.t("langNameZhCN");
+export function Translation({ locale, lang, word, kana = "", pinyins = []}: Props): JSX.Element {
+  //
+  // i18n
+  //
+  const t = setupI18n(locale, {
+    en: {
+      langNameEn: "English",
+      langNameJa: "Japanese",
+      langNameZhCN: "Chinese",
+    },
+    ja: {
+      langNameEn: "英語",
+      langNameJa: "日本語",
+      langNameZhCN: "中国語",
+    },
+    "zh-CN": {
+      langNameEn: "英语",
+      langNameJa: "日语",
+      langNameZhCN: "简体中文",
+    },
+  });
+
+  let langName;
+
+  if (lang === "en") {
+    langName = t("langNameEn");
+  } else if (lang === "ja") {
+    langName = t("langNameJa");
+  } else if (lang === "zh-CN") {
+    langName = t("langNameZhCN");
+  }
+
+  let wordWithPinyin;
+
+  if (0 < pinyins.length) {
+    wordWithPinyin = escapeHtmlString(word);
+    for (const { char, pron } of pinyins) {
+      const escapedChar = escapeHtmlString(char);
+      const escapedPron = escapeHtmlString(pron);
+      wordWithPinyin = wordWithPinyin.replaceAll(escapedChar, `<ruby>${escapedChar}<rp>(</rp><rt class="results__pinyin">${escapedPron}</rt><rp>)</rp></ruby>`);
     }
-    if (0 < props.pinyins.length) {
-      wordWithPinyin = escapeHtmlString(props.word);
-      for (const { char, pron } of props.pinyins) {
-        const escapedChar = escapeHtmlString(char);
-        const escapedPron = escapeHtmlString(pron);
-
-        wordWithPinyin = wordWithPinyin.replaceAll(escapedChar, `<ruby>${escapedChar}<rp>(</rp><rt class="results__pinyin">${escapedPron}</rt><rp>)</rp></ruby>`);
-      }
-    }
-
-    return {
-      langCode: props.lang,
-      langName,
-      wordWithPinyin,
-    };
-  },
-});
-</script>
-
-<style lang="scss" scoped>
-@use "~/assets/styles/variables.scss" as vars;
-
-.results {
-  &__translation {
-    display: table-row;
   }
 
-  &__translation-item {
-    display: table-cell;
-  }
+  return (
+    <>
+      <style jsx>{`
+        @use "_variables.scss" as vars;
 
-  &__langname {
-    font-size: 0.7em;
-    width: 4.5em;
-  }
+        .results {
+          &__translation {
+            display: table-row;
+          }
+
+          &__translation-item {
+            display: table-cell;
+          }
+
+          &__langname {
+            font-size: 0.7em;
+            width: 4.5em;
+          }
 
 
-  &__ja {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    column-gap: 0.25em;
+          &__ja {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            column-gap: 0.25em;
 
-    width: 100%;
-    height: 100%;
-  }
+            width: 100%;
+            height: 100%;
+          }
 
-  &__pronunciation-ja {
-    font-size: 0.7em;
-  }
+          &__pronunciation-ja {
+            font-size: 0.7em;
+          }
+
+          &__pinyin {
+            font-weight: lighter;
+          }
+        }
+      `}</style>
+
+      <div className="results__translation">
+        <span className="results__langname results__translation-item">{ langName }: </span>
+        <div className="results__translation-item">
+          <div className="results__ja">
+            { wordWithPinyin ? (
+              <span lang="zh-CN" data-e2e="zh-CN" dangerouslySetInnerHTML={{ __html: wordWithPinyin }}></span>
+            ) : (
+              <span lang={lang} data-e2e={lang}>{ word }</span>
+            )}
+            { kana ? (<span className="results__pronunciation-ja">({ kana })</span>) : "" }
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
-</style>
-
-<style lang="scss">
-.results {
-  &__pinyin {
-    font-weight: lighter;
-  }
-}
-</style>
