@@ -1,5 +1,6 @@
 import App from "next/app";
 import Head from "next/head";
+import { Layout } from "@/components/Layout";
 import { setupI18n, validateLocale } from "@/libs/i18n";
 import "@/styles/globals.scss";
 import type { AppContext, AppInitialProps, AppProps } from "next/app";
@@ -39,7 +40,9 @@ const GenshinDictionary = ({ Component, pageProps, locale, canonical }: AppProps
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <Component {...pageProps} />
+      <Layout locale={validateLocale(pageProps.locale)}>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 };
