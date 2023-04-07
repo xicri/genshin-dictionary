@@ -1,9 +1,12 @@
-<template>
-  <span class="spacer"></span>
-</template>
+import type { FC } from "react";
 
-<style lang="scss" scoped>
-  .spacer {
-    flex-grow: 1;
-  }
-</style>
+export const Spacer: FC = (): JSX.Element => (
+  <>
+    <style jsx>{`
+      .spacer {
+        flex-grow: 1;
+      }
+    `}</style>
+    <span className="spacer"></span>
+  </>
+);
