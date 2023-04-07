@@ -35,3 +35,5 @@ export const validateLocale = (locale: string|undefined): Locale => {
     return "en";
   }
 };
+
+export const validateLocales = (locales: string[]|undefined): Locale[] => locales?.map(locale => validateLocale(locale)) ?? [];
