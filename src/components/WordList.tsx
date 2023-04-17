@@ -1,27 +1,29 @@
 import { useCallback, useEffect, useState } from "react";
 import { WordListSearch } from "@/components/WordListSearch";
 import { WordListResults } from "@/components/WordListResults";
-import type allTags from "../../public/dataset/tags.json";
 import type { Locale, OnSearchProps, TagID } from "@/types";
 
 type Props = {
   locale: Locale,
   wordID?: string,
+  tagID?: TagID,
   onSearch?: () => void,
 };
 
-export function WordList({ locale, wordID: defaultWordID = "", onSearch: emitSearch }: Props): JSX.Element {
+export function WordList({ locale, wordID: defaultWordID = "", tagID: defaultTagID, onSearch: emitSearch }: Props): JSX.Element {
+  const defaultActiveTags = useCallback(() => defaultTagID ? [ defaultTagID ] : [], [ defaultTagID ]);
+
   const [ wordID, setWordID ] = useState(defaultWordID);
   const [ query, setQuery ] = useState("");
-  const [ activeTags, setActiveTags ] = useState<TagID[]>([]);
+  const [ activeTags, setActiveTags ] = useState<TagID[]>(defaultActiveTags);
   const [ maxWords, setMaxWords ] = useState(100);
 
   const reset = useCallback((): void => {
     setWordID(defaultWordID);
     setQuery("");
-    setActiveTags([]);
+    setActiveTags(defaultActiveTags);
     setMaxWords(100);
-  }, [ defaultWordID ]);
+  }, [ defaultWordID, defaultActiveTags ]);
 
   //
   // Event handlers
