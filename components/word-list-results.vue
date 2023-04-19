@@ -4,16 +4,16 @@
       <h4 class="results__translations">
         <template v-if="$i18n.locale === 'en'">
           <translation lang="en" :word="word.en" />
-          <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" />
+          <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
           <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
         </template>
         <template v-if="$i18n.locale === 'ja'">
           <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
           <translation lang="en" :word="word.en" />
-          <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" />
+          <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
         </template>
         <template v-if="$i18n.locale === 'zh-CN'">
-          <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" />
+          <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
           <translation lang="en" :word="word.en" />
           <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
         </template>
