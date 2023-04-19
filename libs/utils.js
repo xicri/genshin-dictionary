@@ -79,3 +79,13 @@ export const sleep = async (ms) =>
   new Promise(resolve =>
     setTimeout(() => resolve(), ms)
   );
+
+export const escapeHtmlString = (html) => {
+  const map = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+  };
+
+  return html.replace(/[&<>]/g, (charToEscape) => map[charToEscape] ?? charToEscape);
+};
