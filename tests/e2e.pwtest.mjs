@@ -197,6 +197,27 @@ describe("The Genshin English Dictionary", () => {
       return;
     });
 
+    test(`if note is shown by the specified language (${lang})`, async ({ page }) => {
+      await page.goto(`http://localhost:3000/${ lang }/chihu-rock/`);
+
+      const words = await page.$$(".results__word");
+      const word = words[0];
+
+
+      if (lang === "ja") {
+        const notes = await word.$("div[data-e2e='notes']");
+        expect(await notes.innerText()).toBe("中国語の「螭虎岩」は古い時代の表記で、現在は簡略化されて「吃虎岩」と表記されるようになったという設定");
+        expect(await word.$("div[data-e2e='notesZh']")).toBeNull();
+      } else if (lang === "zh-CN") {
+        const notesZh = await word.$("div[data-e2e='notesZh']");
+        expect(await notesZh.innerText()).toBe("此地曾名为螭虎岩，但随着时间流逝百姓将此地简化为了吃虎岩。特此说明。");
+        expect(await word.$("div[data-e2e='notes']")).toBeNull();
+      } else { // if (lang === "en")
+        expect(await word.$("div[data-e2e='notes']")).toBeNull();
+        expect(await word.$("div[data-e2e='notesZh']")).toBeNull();
+      }
+    });
+
     test(`searching inexistent word (${lang})`, async ({ page }) => {
       await page.goto(rootURL);
       const searchBox = await page.$("input[name='searchbox']");
