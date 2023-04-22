@@ -51,12 +51,12 @@ export default defineComponent({
       langName = i18n.t("langNameZhCN");
     }
     if (0 < props.pinyins.length) {
+      wordWithPinyin = escapeHtmlString(props.word);
       for (const { char, pron } of props.pinyins) {
-        const escapedWord = escapeHtmlString(props.word);
         const escapedChar = escapeHtmlString(char);
         const escapedPron = escapeHtmlString(pron);
 
-        wordWithPinyin = escapedWord.replaceAll(escapedChar, `<ruby>${escapedChar}<rp>(</rp><rt class="results__pinyin">${escapedPron}</rt><rp>)</rp></ruby>`);
+        wordWithPinyin = wordWithPinyin.replaceAll(escapedChar, `<ruby>${escapedChar}<rp>(</rp><rt class="results__pinyin">${escapedPron}</rt><rp>)</rp></ruby>`);
       }
     }
 
