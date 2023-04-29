@@ -7,13 +7,6 @@ export default async () => {
     components: true,
     modern: "client",
 
-    router: {
-      trailingSlash: true,
-      middleware: [
-        "trailing-slash",
-      ],
-    },
-
     modules: [
       "@nuxtjs/robots",
       "@nuxtjs/sitemap",
