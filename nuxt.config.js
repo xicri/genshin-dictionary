@@ -16,7 +16,6 @@ export default async () => {
     },
 
     modules: [
-      "@nuxtjs/i18n",
       "@nuxtjs/robots",
       "@nuxtjs/sitemap",
     ],
@@ -29,22 +28,13 @@ export default async () => {
       vueI18n: {
         messages: {
           en: {
-            aboutTitle: "About this website",
-            aboutDescription: "About Genshin Dictionary. This website is an online English-Chinese-Japanese dictionary of the terms in Genshin Impact.",
             historyTitle: "Update History",
-            opendataTitle: "Open Data / API (β)",
           },
           ja: {
-            aboutTitle: "このサイトについて",
-            aboutDescription: "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
             historyTitle: "更新履歴",
-            opendataTitle: "オープンデータ・API (β)",
           },
           "zh-CN": {
-            aboutTitle: "关于本网站",
-            aboutDescription: "关于原神中英日辞典。本网站是一个在线的中英日三语原神游戏用语辞典。",
             historyTitle: "更新记录",
-            opendataTitle: "开放数据 · API (β)",
           },
         },
       },
