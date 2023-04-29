@@ -10,7 +10,6 @@ export default async () => {
     router: {
       trailingSlash: true,
       middleware: [
-        "headers",
         "trailing-slash",
       ],
     },
