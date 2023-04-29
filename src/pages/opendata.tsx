@@ -19,8 +19,10 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
       id: "zhongli",
       en: "Zhongli",
       ja: "鍾離",
+      zhCN: "钟离",
       pronunciationJa: "しょうり",
       notes: "読みは「ヂョンリー」",
+      notesZh: "锺离是中国古代早已有之的一个汉字复姓。…",
       variants: {
         ja: [ "鐘離" ],
       },
@@ -32,6 +34,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
       id: "inazuman",
       en: "Inazuman",
       ja: "稲妻人",
+      zhCN: "稻妻人 / 稻妻的",
       pronunciationJa: "いなずまじん",
       notes: "元々 Inazuman は非公式にプレイヤーの間で使われる言葉であったが…(以下略)",
       examples: [{
@@ -210,6 +213,12 @@ export default function AboutPage({ locale, wordDataExample }: InferGetStaticPro
                   <Sentence lang="zh-CN">日本語名</Sentence>
                 </li>
                 <li>
+                  <code>zhCN</code> (String) ―
+                  <Sentence lang="en">中国語名</Sentence>
+                  <Sentence lang="ja">中国語名</Sentence>
+                  <Sentence lang="zh-CN">中国語名</Sentence>
+                </li>
+                <li>
                   <code>pronunciationJa</code> (String) ―
                   <Sentence lang="en">
                     日本語の読み。ひらがな、カタカナ、記号が含まれます。
@@ -224,13 +233,25 @@ export default function AboutPage({ locale, wordDataExample }: InferGetStaticPro
                 <li>
                   <code>notes</code> (String) ―
                   <Sentence lang="en">
-                    備考。HTML が含まれる場合があります。
+                    備考 (日本語話者向け)。HTML が含まれる場合があります。
                   </Sentence>
                   <Sentence lang="ja">
-                    備考。HTML が含まれる場合があります。
+                    備考 (日本語話者向け)。HTML が含まれる場合があります。
                   </Sentence>
                   <Sentence lang="zh-CN">
-                    備考。HTML が含まれる場合があります。
+                    備考 (日本語話者向け)。HTML が含まれる場合があります。
+                  </Sentence>
+                </li>
+                <li>
+                  <code>notesZh</code> (String) ―
+                  <Sentence lang="en">
+                    備考 (中国語話者向け)。HTML が含まれる場合があります。
+                  </Sentence>
+                  <Sentence lang="ja">
+                    備考 (中国語話者向け)。HTML が含まれる場合があります。
+                  </Sentence>
+                  <Sentence lang="zh-CN">
+                    備考 (中国語話者向け)。HTML が含まれる場合があります。
                   </Sentence>
                 </li>
                 <li>
