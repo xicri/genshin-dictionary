@@ -28,6 +28,8 @@ export const validateLocale = (locale: string|undefined): Locale => {
     locale === "zh-CN"
   )) {
     return locale;
+  } else if (locale?.startsWith("zh-")) {
+    return "zh-CN";
   } else {
     // locale is not set or unexpected locale given. return "en" as the fallback locale.
     return "en";

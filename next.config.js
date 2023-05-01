@@ -3,9 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
 
   i18n: {
-    locales: [ "en", "ja", "zh-CN" ],
-    defaultLocale: "en",
-    localeDetection: true,
+    locales: [ "default", "en", "ja", "zh-CN" ],
+    defaultLocale: "default",
+    localeDetection: false, // middleware handles locale redirection on root
   },
 };
 

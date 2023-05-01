@@ -80,15 +80,7 @@ export default async () => {
     ],
 
     i18n: {
-      strategy: "prefix",
-      detectBrowserLanguage: {
-        useCookie: true,
-        cookieSecure: true,
-        fallbackLocale: "en",
-        redirectOn: "no prefix",
-      },
       vueI18n: {
-        fallbackLocale: "en",
         messages: {
           en: {
             siteTitle: "Genshin Dictionary",
