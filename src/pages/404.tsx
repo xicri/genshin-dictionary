@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { setupI18n, validateLocale } from "@/libs/i18n";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Locale } from "@/types";
@@ -58,7 +59,7 @@ export default function NotFound({ locale }: InferGetStaticPropsType<typeof getS
       <h1 className="error__title">
         { t("notFound") }
       </h1>
-      <h2><a href="/">{ t("returnToIndex") }</a></h2>
+      <h2><Link href="/">{ t("returnToIndex") }</Link></h2>
     </>
   );
 }
