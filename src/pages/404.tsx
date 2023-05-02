@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { setupI18n, validateLocale } from "@/libs/i18n";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Locale } from "@/types";
@@ -48,6 +49,11 @@ export default function NotFound({ locale }: InferGetStaticPropsType<typeof getS
           }
         }
       `}</style>
+
+      <Head>
+        <title>{ t("notFound") }</title>
+        <meta property="og:title" content={ t("notFound") } />
+      </Head>
 
       <h1 className="error__title">
         { t("notFound") }
