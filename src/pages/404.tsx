@@ -1,50 +1,58 @@
-<template>
-  <div>
-    <h1 class="error__title">
-      {{ $t("notfound") }}
-    </h1>
-    <h2><a href="/">{{ $t("returnToIndex") }}</a></h2>
-  </div>
-</template>
+import { setupI18n, validateLocale } from "@/libs/i18n";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { Locale } from "@/types";
 
-<i18n>
-{
-  "en": {
-    "notfound": "This page is not found",
-    "returnToIndex": "Return to index"
-  },
-  "ja": {
-    "notfound": "このページは存在しません",
-    "returnToIndex": "トップページへ戻る"
-  },
-  "zh-CN": {
-    "notfound": "页面不存在",
-    "returnToIndex": "返回到首页"
-  }
-}
-</i18n>
-
-<script>
-export default {
-  layout: "default",
+type Props = {
+  locale: Locale,
 };
-</script>
 
-<style lang="scss" scoped>
-@use "~/assets/styles/variables.scss" as vars;
+export const getStaticProps: GetStaticProps = async ({ locale }): Promise<{ props: Props }> => ({
+  props: {
+    locale: validateLocale(locale),
+  },
+});
 
-h1, h2 {
-  display: block;
-  font-weight: 300;
-  color: vars.$color-dark;
-  letter-spacing: 1px;
-  text-align: center;
+export default function NotFound({ locale }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
+  const t = setupI18n(locale, {
+    en: {
+      notFound: "This page is not found",
+      returnToIndex: "Return to index",
+    },
+    ja: {
+      notFound: "このページは存在しません",
+      returnToIndex: "トップページへ戻る",
+    },
+    "zh-CN": {
+      notFound: "页面不存在",
+      returnToIndex: "返回到首页",
+    },
+  });
+
+  return (
+    <>
+      <style jsx>{`
+        @use "_variables.scss" as vars;
+
+        h1, h2 {
+          display: block;
+          font-weight: 300;
+          color: vars.$color-dark;
+          letter-spacing: 1px;
+          text-align: center;
+        }
+
+        .error {
+          &__title {
+            font-size: 32px;
+            margin: 1vw;
+          }
+        }
+      `}</style>
+
+      <h1 className="error__title">
+        { t("notFound") }
+      </h1>
+      <h2><a href="/">{ t("returnToIndex") }</a></h2>
+    </>
+  );
 }
-
-.error {
-  &__title {
-    font-size: 32px;
-    margin: 1vw;
-  }
-}
-</style>
