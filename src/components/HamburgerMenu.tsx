@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { ClosingLayer } from "@/components/ClosingLayer";
-import { setupI18n, validateLocales } from "@/libs/i18n";
+import { setupI18n, validateLocale } from "@/libs/i18n";
 import type { ChangeEvent } from "react";
 import type { Locale } from "@/types";
 
@@ -177,17 +177,23 @@ export function HamburgerMenu({ locale }: Props): JSX.Element {
           <h2 className="menu__languages-title">
             Languages
           </h2>
-          <div className="menu__languages-list">{}
-            { (validateLocales(locales)).map(loc => (
-              <Link
-                href="#" // Check if there is a way to avoid appending #
-                key={loc}
-                className="menu__languages-item"
-                locale={loc}
-              >
-                { localeToLocaleName(loc) }
-              </Link>
-            ))}
+          <div className="menu__languages-list">
+            { locales?.filter(loc => loc !== "default")
+              .map(_loc => {
+                const loc = validateLocale(_loc);
+
+                return (
+                  <Link
+                    href="#" // Check if there is a way to avoid appending #
+                    key={loc}
+                    className="menu__languages-item"
+                    locale={loc}
+                  >
+                    { localeToLocaleName(loc) }
+                  </Link>
+                );
+              })
+            }
           </div>
 
           <div className="menu__bottomline">
