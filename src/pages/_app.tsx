@@ -1,7 +1,7 @@
 import App from "next/app";
 import Head from "next/head";
 import { Layout } from "@/components/Layout";
-import { setupI18n, validateLocale } from "@/libs/i18n";
+import { getAvailableLocales, setupI18n, validateLocale } from "@/libs/i18n";
 import "@/styles/globals.scss";
 import type { AppContext, AppInitialProps, AppProps } from "next/app";
 import type { Locale } from "@/types";
@@ -9,9 +9,13 @@ import type { Locale } from "@/types";
 type OwnProps = {
   locale: Locale,
   canonical: string,
+  alternates: {
+    hrefLang: Locale,
+    href: string,
+  }[],
 };
 
-const GenshinDictionary = ({ Component, pageProps, locale, canonical }: AppProps & OwnProps): JSX.Element => {
+const GenshinDictionary = ({ Component, pageProps, locale, canonical, alternates }: AppProps & OwnProps): JSX.Element => {
   const t = setupI18n(locale, {
     en: {
       defaultDescription: "An online English-Chinese-Japanese dictionary for terms in Genshin Impact",
@@ -35,6 +39,7 @@ const GenshinDictionary = ({ Component, pageProps, locale, canonical }: AppProps
         {/* ▲▲ Default values ― will be overwritten in each page components ▲▲ */}
         <link rel="canonical" href={canonical} />
         <meta property="og:url" content={canonical} />
+        { alternates.map(({ hrefLang, href }) => (<link rel="alternate" hrefLang={hrefLang} href={href} key={hrefLang} />))}
         <meta property="og:site_name" content={ t("siteTitle") } />
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -55,6 +60,10 @@ GenshinDictionary.getInitialProps = async (context: AppContext): Promise<OwnProp
     ...defaultInitialProps,
     locale,
     canonical: `https://genshin-dictionary.com/${locale}${context.ctx.asPath}`,
+    alternates: getAvailableLocales().map(loc => ({
+      hrefLang: loc,
+      href: `https://genshin-dictionary.com/${loc}${context.ctx.asPath}`,
+    })),
   };
 };
 

@@ -1,4 +1,5 @@
 import { translations as globalTranslations } from "@/libs/translations";
+import nextConfig from "../../next.config";
 import type { Locale, Translations, tFunction } from "@/types";
 
 export const setupI18n = (locale: Locale, translations: Translations): tFunction => {
@@ -37,3 +38,8 @@ export const validateLocale = (locale: string|undefined): Locale => {
 };
 
 export const validateLocales = (locales: string[]|undefined): Locale[] => locales?.map(locale => validateLocale(locale)) ?? [];
+
+export const getAvailableLocales = (): Locale[] => {
+  const availableLocales = nextConfig.i18n?.locales.filter(loc => loc !== "default");
+  return (availableLocales as Locale[]) ?? [];
+};
