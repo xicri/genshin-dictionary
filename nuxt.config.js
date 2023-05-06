@@ -1,6 +1,3 @@
-import words from "./static/dataset/words.json";
-import tags from "./static/dataset/tags.json";
-
 export default async () => {
   const config = {
     target: "server",
@@ -9,7 +6,6 @@ export default async () => {
 
     modules: [
       "@nuxtjs/robots",
-      "@nuxtjs/sitemap",
     ],
     buildModules: [
       "@nuxtjs/composition-api/module",
@@ -41,26 +37,6 @@ export default async () => {
         Disallow: "/",
       }),
     },
-
-    sitemap: async () => ({
-      hostname: "https://genshin-dictionary.com",
-      // disable automatic sitemap generation to exclude URLs without locale:
-      // e.g. https://genshin-dictionary.com/about/
-      exclude: [ "/**" ],
-      gzip: false,
-      i18n: true,
-      routes: [
-        ...([ "en", "ja" , "zh-CN" ].map(lang => ([
-          { url: `/${lang}/` },
-          { url: `/${lang}/history/` },
-          ...(words.map(word => ({ url: `/${lang}/${word.id}/`, lastmod: word.updatedAt }))),
-          ...(Object.keys(tags).map(tagID => ({ url: `/${lang}/tags/${tagID}/` }))),
-        ])).flat()),
-        // Pages not translated yet
-        { url: "/ja/about/" },
-        { url: "/ja/opendata/" },
-      ],
-    }),
   };
 
   return config;
