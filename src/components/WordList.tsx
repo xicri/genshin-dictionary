@@ -71,14 +71,6 @@ export function WordList({ locale, onSearch: emitSearch }: Props): JSX.Element {
             max-width: vars.$max-width;
             width: 100%;
           }
-
-          &__search {
-            padding-top: 1em;
-            padding-bottom: 1.2em;
-
-            // avoid overwrapping search bar by Google AdSense
-            z-index: 1;
-          }
         }
 
         @media (max-width: vars.$max-width) { // Mobile
@@ -89,30 +81,14 @@ export function WordList({ locale, onSearch: emitSearch }: Props): JSX.Element {
             &__wrapper {
               margin-bottom: 4em;
             }
-
-            // Show search component at the bottom of the page on mobile devices
-            &__search {
-              position: fixed;
-              bottom: 0;
-              width: 100%;
-              padding-left: vars.$side-margin;
-              padding-right: vars.$side-margin;
-              background-color: vars.$color-lightest;
-              box-shadow: 0 -0.2rem 5px #00000030;
-            }
-
-            &__results {
-              padding-left: vars.$side-margin;
-              padding-right: vars.$side-margin;
-            }
           }
         }
       `}</style>
 
       <div className="word-list">
         <div className="word-list__wrapper">
-          <WordListSearch className="word-list__search" locale={locale} searchConditions={{ wordID, query, activeTags, maxWords }} onSearch={onSearch} />
-          <WordListResults className="word-list__results" searchConditions={{ wordID, query, activeTags, maxWords }} onLoadMoreWords={() => setMaxWords(maxWords + 100)} locale={locale} />
+          <WordListSearch locale={locale} searchConditions={{ wordID, query, activeTags, maxWords }} onSearch={onSearch} />
+          <WordListResults searchConditions={{ wordID, query, activeTags, maxWords }} onLoadMoreWords={() => setMaxWords(maxWords + 100)} locale={locale} />
         </div>
       </div>
     </>

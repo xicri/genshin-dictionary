@@ -10,11 +10,10 @@ import type { Locale, SearchConditions } from "@/types";
 type Props = {
   searchConditions: SearchConditions,
   locale: Locale,
-  className?: string,
   onLoadMoreWords: () => void,
 };
 
-export const WordListResults: FC<Props> = ({ searchConditions, locale, className, onLoadMoreWords: emitLoadMoreWords }: Props): JSX.Element => {
+export const WordListResults: FC<Props> = ({ searchConditions, locale, onLoadMoreWords: emitLoadMoreWords }: Props): JSX.Element => {
   const wordList = useRef<HTMLDivElement>(null);
 
   //
@@ -117,6 +116,11 @@ export const WordListResults: FC<Props> = ({ searchConditions, locale, className
         .results {
           width: 100%;
 
+          @media (max-width: vars.$max-width) { // Mobile
+            padding-left: vars.$side-margin;
+            padding-right: vars.$side-margin;
+          }
+
           &__word {
             display: flex;
             flex-direction: column;
@@ -187,7 +191,7 @@ export const WordListResults: FC<Props> = ({ searchConditions, locale, className
         }
       `}</style>
 
-      <main className={`${className} results`} ref={wordList}>
+      <main className="results" ref={wordList}>
         { words.map(word => (
           <div key={word.en} className="results__word">
             <h4 className="results__translations">

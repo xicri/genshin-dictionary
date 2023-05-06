@@ -10,12 +10,11 @@ import type { Locale, OnSearchProps, SearchConditions, TagID, Tags } from "@/typ
 
 type Props = {
   locale: Locale,
-  className?: string,
   searchConditions: SearchConditions,
   onSearch: (props: OnSearchProps) => void,
 };
 
-export const WordListSearch: FC<Props> = ({ locale, className, searchConditions: { activeTags = []}, onSearch: emitSearch }: Props): JSX.Element => {
+export const WordListSearch: FC<Props> = ({ locale, searchConditions: { activeTags = []}, onSearch: emitSearch }: Props): JSX.Element => {
   const searchBox = useRef<ElementRef<typeof ElasticSearchBox>>(null);
   const [ displayTagListOnMobile, setDisplayTagListOnMobile ] = useState(false);
 
@@ -72,6 +71,12 @@ export const WordListSearch: FC<Props> = ({ locale, className, searchConditions:
 
         .search {
           width: 100%;
+
+          padding-top: 1em;
+          padding-bottom: 1.2em;
+
+          // avoid overwrapping search bar by Google AdSense
+          z-index: 1;
 
           & * {
             z-index: 11; // Higher than closing-layer (z-index: 10)
@@ -189,6 +194,15 @@ export const WordListSearch: FC<Props> = ({ locale, className, searchConditions:
           }
 
           @media (max-width: vars.$max-width) { // Mobile
+            // Show search component at the bottom of the page on mobile devices
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding-left: vars.$side-margin;
+            padding-right: vars.$side-margin;
+            background-color: vars.$color-lightest;
+            box-shadow: 0 -0.2rem 5px #00000030;
+
             &__taglist {
               display: none;
 
@@ -250,7 +264,7 @@ export const WordListSearch: FC<Props> = ({ locale, className, searchConditions:
           }
         }
       `}</style>
-      <div className={className ?? ""}>
+      <>
         <div className="search">
           <div className="search__box">
             {/* TODO React does not recognize double click properly. See: https://naughtldy.hatenablog.jp/entry/2018/02/27/160000 */}
@@ -299,7 +313,7 @@ export const WordListSearch: FC<Props> = ({ locale, className, searchConditions:
           </div>
         </div>
         <ClosingLayer enabled={displayTagListOnMobile} onClose={closeTagList} />
-      </div>
+      </>
     </>
   );
 };
