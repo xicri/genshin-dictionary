@@ -4,9 +4,6 @@ export default async () => {
     components: true,
     modern: "client",
 
-    modules: [
-      "@nuxtjs/robots",
-    ],
     buildModules: [
       "@nuxtjs/composition-api/module",
       "@pinia/nuxt",
@@ -26,16 +23,6 @@ export default async () => {
           },
         },
       },
-    },
-
-    robots: {
-      UserAgent: "*",
-      ...(process.env.SERVER_ENV === "production" ? {
-        Allow: "/",
-        Sitemap: "https://genshin-dictionary.com/sitemap.xml",
-      } : {
-        Disallow: "/",
-      }),
     },
   };
 
