@@ -57,13 +57,17 @@ export function Layout({ children, locale }: Props): JSX.Element {
             gap: 0.5rem;
           }
 
-          &__title {
+          &__title-wrapper {
             display: flex;
             flex-wrap: wrap;
+          }
+
+          &__title {
             font-weight: 300;
             font-size: 32px;
             color: vars.$color-dark;
             letter-spacing: 1px;
+            white-space: nowrap;
           }
         }
       `}</style>
@@ -71,8 +75,9 @@ export function Layout({ children, locale }: Props): JSX.Element {
       <div className="layout-default__nav-wrapper">
         <nav className="layout-default__nav">
           <h1>
-            <Link href="/" className="layout-default__title">
-              <span>{ t("siteTitleL1") }</span><span>{ t("siteTitleL2") }</span>
+            <Link href="/" className="layout-default__title-wrapper">
+              <span className="layout-default__title">{ t("siteTitleL1") }</span>
+              <span className="layout-default__title">{ t("siteTitleL2") }</span>
             </Link>
           </h1>
 
