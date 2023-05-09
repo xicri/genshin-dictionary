@@ -49,7 +49,7 @@ export function Translation({ locale, lang, word, kana = "", pinyins = []}: Prop
     for (const { char, pron } of pinyins) {
       const escapedChar = escapeHtmlString(char);
       const escapedPron = escapeHtmlString(pron);
-      wordWithPinyin = wordWithPinyin.replaceAll(escapedChar, `<ruby>${escapedChar}<rp>(</rp><rt class="results__pinyin">${escapedPron}</rt><rp>)</rp></ruby>`);
+      wordWithPinyin = wordWithPinyin.replaceAll(escapedChar, `<ruby>${escapedChar}<rp>(</rp><rt style="font-weight: lighter;">${escapedPron}</rt><rp>)</rp></ruby>`);
     }
   }
 
@@ -85,10 +85,6 @@ export function Translation({ locale, lang, word, kana = "", pinyins = []}: Prop
 
           &__pronunciation-ja {
             font-size: 0.7em;
-          }
-
-          &__pinyin {
-            font-weight: lighter;
           }
         }
       `}</style>
