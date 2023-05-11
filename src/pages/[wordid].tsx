@@ -24,7 +24,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ locale, pa
     };
   }
 
-  const word = getWords({ wordID })[0];
+  const { words } = getWords({ wordID });
+  const word = words[0];
 
   if (!word) {
     return {

@@ -15,6 +15,7 @@ type Props = {
 
 export const WordListResults: FC<Props> = ({ searchConditions, historyMode, locale, onLoadMoreWords: emitLoadMoreWords }: Props): JSX.Element => {
   const wordList = useRef<HTMLDivElement>(null);
+  const infiniteScrollTrigger = useRef<HTMLDivElement>(null);
 
   //
   // i18n
@@ -38,33 +39,45 @@ export const WordListResults: FC<Props> = ({ searchConditions, historyMode, loca
   // Lifecycle Hooks
   //
   useEffect(() => {
-    const observer = new IntersectionObserver((entries, observer) => {
+    const currentInfiniteScrollTrigger = infiniteScrollTrigger.current;
+    const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) {
           return;
         }
 
-        observer.unobserve(entry.target);
         emitLoadMoreWords();
       }
     });
 
-    const addIntersectionObserver = (): void => {
-      const wordCards = wordList.current?.getElementsByClassName("results__word");
-      const lastWordCard = wordCards?.[wordCards.length - 1];
+    if (currentInfiniteScrollTrigger) {
+      observer.observe(currentInfiniteScrollTrigger);
+    }
 
-      if (lastWordCard) {
-        observer.observe(lastWordCard); // add observer to the last word element
+    return () => {
+      if (currentInfiniteScrollTrigger) {
+        observer.unobserve(currentInfiniteScrollTrigger);
       }
     };
+  }, [ emitLoadMoreWords, infiniteScrollTrigger ]);
 
-    addIntersectionObserver();
-  }, [ emitLoadMoreWords ]);
+  const { words, history, fullLength } = useMemo(() => {
+    if (!historyMode) {
+      const { words, fullLength } = getWords(searchConditions);
 
-  const words = useMemo(() => searchConditions ? getWords(searchConditions) : [], [ searchConditions ]);
-
-  const history = useMemo(() => historyMode ? groupBy(getWords({ sortBy: "createdAt" }), "createdAt") : {}, [ historyMode ]);
-  const createdDates = useMemo(() => Object.keys(history).filter(key => key !== "undefined").sort().reverse(), [ history ]);
+      return {
+        words,
+        fullLength,
+      };
+    } else {
+      const { words, fullLength } = getWords({ ...searchConditions, sortBy: "createdAt" });
+      const history = groupBy(words, "createdAt");
+      return {
+        history,
+        fullLength,
+      };
+    }
+  }, [ historyMode, searchConditions ]);
 
   return (
     <>
@@ -94,30 +107,53 @@ export const WordListResults: FC<Props> = ({ searchConditions, historyMode, loca
               margin-top: 0.25em;
             }
           }
+
+          &__observer {
+            width: 1px;
+            height: 1px;
+            background-color: transparent;
+          }
         }
       `}</style>
 
       <main className="results" ref={wordList}>
-        { historyMode ?
-          createdDates.map(createdDate => (
-            <div key={createdDate}>
-              <h3 className="results__updated-at">
-                { t("updatedOn", { createdOn: createdDate }) }
-              </h3>
-              {/* Required to be enclosed by <div> so that CSS' :last-child works */}
-              <div>
-                { history[createdDate].map(word => <Word word={word} locale={locale} key={word.id} />) }
+        { words ? (
+          <div>
+            { words.map(word => <Word word={word} locale={locale} key={word.id} />) }
+          </div>
+        ) : history ?
+          Object.keys(history)
+            .filter(key => key !== "undefined")
+            .sort().reverse()
+            .map(createdDate => (
+              <div key={createdDate}>
+                <h3 className="results__updated-at">
+                  { t("updatedOn", { createdOn: createdDate }) }
+                </h3>
+                {/* Required to be enclosed by <div> so that CSS' :last-child works */}
+                <div>
+                  { history[createdDate].map(word => <Word word={word} locale={locale} key={word.id} />) }
+                </div>
               </div>
-            </div>
-          )) :
-          words.map(word => <Word word={word} locale={locale} key={word.id} />)
+            )) : ""
         }
 
-        { words.length <= 0 ? (
+        { words && words.length <= 0 ? (
           <p data-e2e="empty">
             { t("notFound") }
           </p>
         ) : ""}
+
+        {
+          (
+            (words && 0 < words.length && words.length < fullLength) ||
+            (history &&
+              Object.values(history)
+                .map(words => words.length)
+                .reduce((wordCountA, wordCountB) => wordCountA + wordCountB, 0) < fullLength
+            )
+          ) ? (<div ref={infiniteScrollTrigger} className="results__observer"></div>) : ""
+        }
       </main>
     </>
   );
