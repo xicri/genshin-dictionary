@@ -1,24 +1,18 @@
-import { setActivePinia, createPinia } from "pinia";
-import { useDictionaryStore } from "~/store/index.js";
+import { getWords } from "@/libs/words";
 
-function search(query) {
-  const store = useDictionaryStore();
-  store.updateSearchQuery(query);
-
-  return store.searchResults;
-}
-
-beforeEach(() => {
-  setActivePinia(createPinia());
-});
 
 test("search words including 'ヴァヴィヴヴェヴォ' by 'ばびぶべぼ'", () => {
-  const results = search("ベル・ゴレット");
-  expect(results).toHaveLength(1);
-  expect(results[0].ja).toBe("ヴェル・ゴレット");
+  const { words } = getWords({ query: "ベル・ゴレット" });
+  expect(words).toHaveLength(1);
+  expect(words[0].ja).toBe("ヴェル・ゴレット");
 });
 
-const fixtures = [
+type Fixture = {
+  result: string,
+  input: string,
+  lang: "en"|"ja"|"zhCN",
+};
+const fixtures: Fixture[] = [
   {
     result: "Geo Archon",
     input: "Geo God",
@@ -38,8 +32,8 @@ const fixtures = [
 
 for (const { result, input, lang } of fixtures) {
   test(`search by variants (${lang})`, () => {
-    const results = search(input);
-    expect(results).toHaveLength(1);
-    expect(results[0][lang]).toBe(result);
+    const { words } = getWords({ query: input });
+    expect(words).toHaveLength(1);
+    expect(words[0][lang]).toBe(result);
   });
 }
