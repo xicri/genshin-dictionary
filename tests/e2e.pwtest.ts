@@ -329,13 +329,13 @@ describe("redirection", () => {
 
   test("redirection from old word ID works properly", async () => {
     const srcURL = `${rootURL}/ja/barbara/`;
-    const destURL = `${rootURL}/ja/barbara-pegg/`;
+    const destPath = "/ja/barbara-pegg/";
 
     const res = await fetch(srcURL, {
       redirect: "manual",
     });
 
     expect(res.status).toBe(301);
-    expect(res.headers.get("Location")).toBe(destURL);
+    expect(res.headers.get("Location")).toBe(destPath);
   });
 });
