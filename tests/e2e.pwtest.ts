@@ -215,7 +215,7 @@ describe("The Genshin English Dictionary", () => {
     });
 
     test(`if note is shown by the specified language (${lang})`, async ({ page }) => {
-      await page.goto(`http://localhost:3000/${ lang }/chihu-rock/`);
+      await page.goto(`${ rootURL }chihu-rock/`);
 
       const words = await page.$$(".results__word");
       const word = words[0];
@@ -325,7 +325,7 @@ describe("redirection by language settings works properly", () => {
 });
 
 describe("redirection", () => {
-  const rootURL = `http://localhost:${port}`;
+  const rootURL = `http://${ ip }:${port}`;
 
   test("redirection from old word ID works properly", async () => {
     const srcURL = `${rootURL}/ja/barbara/`;
