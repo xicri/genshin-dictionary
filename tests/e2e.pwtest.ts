@@ -39,7 +39,7 @@ describe("The Genshin English Dictionary", () => {
     await page.waitForTimeout(1400); // Wait for the search results to be shown
 
     const words = await page.$$(".results__word");
-    await expect(words).toHaveLength(1);
+    expect(words).toHaveLength(1);
 
     const word = words[0];
     const ja = await word.$("span[data-e2e='ja']");
@@ -51,7 +51,7 @@ describe("The Genshin English Dictionary", () => {
     expect(await pronunciationJa?.innerText()).toBe("(むほうのけん)");
 
     const tags = await word.$$(".results__tags > a");
-    await expect(tags).toHaveLength(2);
+    expect(tags).toHaveLength(2);
 
     // error message is NOT shown
     expect(await page.$("p[data-e2e='empty']")).toBeNull();
@@ -72,7 +72,7 @@ describe("The Genshin English Dictionary", () => {
     await page.waitForTimeout(1400); // Wait for the search results to be shown
 
     const words = await page.$$(".results__word");
-    await expect(words).toHaveLength(1);
+    expect(words).toHaveLength(1);
 
     const word = words[0];
     const ja = await word.$("span[data-e2e='ja']");
@@ -86,7 +86,7 @@ describe("The Genshin English Dictionary", () => {
     expect(await pronunciationJa?.innerText()).toBe("(もえさかるほのおのまじょ)");
 
     const tags = await word.$$(".results__tags > a");
-    await expect(tags).toHaveLength(1);
+    expect(tags).toHaveLength(1);
 
     // error message is NOT shown
     expect(await page.$("p[data-e2e='empty']")).toBeNull();
@@ -122,10 +122,10 @@ describe("The Genshin English Dictionary", () => {
     await firstTag.click();
     await page.waitForTimeout(1400); // Wait for words loaded
 
-    const words = await page.locator(".results__word");
+    const words = page.locator(".results__word");
 
     for (let i = 0; i < await words.count(); i++) {
-      const tagEls = await (words.nth(i)).locator(".results__tags > a");
+      const tagEls = (words.nth(i)).locator(".results__tags > a");
       const resultTagNames = (await tagEls.allInnerTexts()).map(resultTagName => resultTagName.trim());
 
       expect(resultTagNames).toContain(selectedTagName);
@@ -174,7 +174,7 @@ describe("The Genshin English Dictionary", () => {
       await page.waitForTimeout(1400); // Wait for the search results to be shown
 
       const words = await page.$$(".results__word");
-      await expect(words).toHaveLength(1);
+      expect(words).toHaveLength(1);
 
       const word = words[0];
       const ja = await word.$("span[data-e2e='ja']");
@@ -193,7 +193,7 @@ describe("The Genshin English Dictionary", () => {
       }
 
       const tags = await word.$$(".results__tags > a");
-      await expect(tags).toHaveLength(1);
+      expect(tags).toHaveLength(1);
 
       const tag = tags[0];
       const tagName = await tag.$(".tag > span");
@@ -248,13 +248,13 @@ describe("The Genshin English Dictionary", () => {
       await page.waitForTimeout(1400); // Wait for the search results to be shown
 
       const words = await page.$$(".results__word");
-      await expect(words).toHaveLength(0);
+      expect(words).toHaveLength(0);
 
       // Check if searchbox is not disappeared
       const searchBox2 = await page.$("input[name='searchbox']");
-      await expect(searchBox2).not.toBeNull();
+      expect(searchBox2).not.toBeNull();
       // search text is not deleted
-      await expect(await searchBox2?.inputValue()).toBe("存在しない語彙");
+      expect(await searchBox2?.inputValue()).toBe("存在しない語彙");
 
       // error message is shown
       const notFoundMessage = (await page.textContent("p[data-e2e='empty']"))?.trim();
