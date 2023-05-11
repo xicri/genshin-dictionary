@@ -6,7 +6,7 @@ import type { Locale } from "@/types";
 const { describe } = test;
 
 const ip = "127.0.0.1";
-const port = 3000;
+const port = 5678;
 
 function getRandomLang(): Locale {
   const random = Math.floor(Math.random() * 3);
