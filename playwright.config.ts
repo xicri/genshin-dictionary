@@ -1,7 +1,7 @@
-const { devices } = require("@playwright/test");
+import { defineConfig, devices } from "@playwright/test";
 
-module.exports = {
-  testMatch: /.*(pwtest)\.(js|ts|mjs)/,
+const config = defineConfig({
+  testMatch: /.*(pwtest)\.ts/,
   workers: 1, // disable concurrent tests
 
   projects: [
@@ -44,4 +44,6 @@ module.exports = {
   use: {
     baseURL: "http://localhost:3000/ja/",
   },
-};
+});
+
+export default config;
