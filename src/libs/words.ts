@@ -9,6 +9,16 @@ type GetWordsReturn = {
   fullLength: number,
 };
 
+/**
+ * Search words by given conditions.
+ * @param {object} options - options
+ * @param {string} options.wordID - ID of the word. Useful when you want to show single word.
+ * @param {string} options.query - search query
+ * @param {string[]} options.activeTags - search tags
+ * @param {number} options.maxWords - max word number. Default is 100.
+ * @param {string} options.sortBy - If you specify "createdAt", it is reverse-sorted by the created date
+ * @returns {GetWordsReturn} words:  words as the search result, length: length of the search result when maxWords == ∞
+ */
 export const getWords = ({ wordID = "", query = "", activeTags = [], maxWords = 100, sortBy }: SearchConditions): GetWordsReturn => {
   if (wordID) {
     const word: BuiltWord | undefined = allWords.find(word => word.id === wordID);
