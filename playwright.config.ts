@@ -1,5 +1,12 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const debugOptions = {
+  // headless: false,
+  // launchOptions: {
+  //   slowMo: 50,
+  // },
+};
+
 const config = defineConfig({
   testMatch: /.*(pwtest)\.ts/,
   workers: 1, // disable concurrent tests
@@ -9,28 +16,29 @@ const config = defineConfig({
       name: "Chromium - Desktop",
       use: {
         ...devices["Desktop Chrome"],
-        // ▼▼ Debug Options ▼▼
-        // headless: false,
-        // launchOptions: {
-        //   slowMo: 50,
-        // },
+        ...debugOptions,
       },
     },
     {
       name: "Chrome - Mobile",
-      use: devices["Pixel 5"],
+      use: {
+        ...devices["Pixel 5"],
+        ...debugOptions,
+      },
     },
     {
       name: "Safari - Mobile",
       use: {
         ...devices["iPhone 12"],
         isMobile: false, // Workaround: without this, "search by tag" test fails
+        ...debugOptions,
       },
     },
     {
       name: "Firefox - Desktop",
       use: {
         ...devices["Desktop Firefox"],
+        ...debugOptions,
       },
     },
   ],
