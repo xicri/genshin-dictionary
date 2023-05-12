@@ -34,7 +34,7 @@ export const WordListSearch: FC<Props> = ({ locale, searchConditions: { activeTa
   const updateSearchQuery = debounce((evt: ChangeEvent<HTMLInputElement>) => emitSearch({ query: evt.target.value }), 500);
   const closeTagList = (): void => setDisplayTagListOnMobile(false);
   const toggleTagList = (): void => setDisplayTagListOnMobile(!displayTagListOnMobile);
-  const addTag = async (newTag: TagID): Promise<void> => {
+  const addTag = (newTag: TagID): void => {
     emitSearch({ newTag });
     closeTagList();
   };
