@@ -75,12 +75,7 @@ export const WordListSearch: FC<Props> = ({ locale, searchConditions: { activeTa
           padding-top: 1em;
           padding-bottom: 1.2em;
 
-          // avoid overwrapping search bar by Google AdSense
-          z-index: 1;
-
-          & * {
-            z-index: 11; // Higher than closing-layer (z-index: 10)
-          }
+          z-index: 11; // Higher than closing-layer (z-index: 10)
 
           &__box {
             display: grid;
