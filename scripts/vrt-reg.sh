@@ -9,9 +9,13 @@ git fetch origin
 
 export HASH_PROD="$(git rev-parse origin/main)"
 
-if [[ -z "${HASH_PR}" ]]; then
-  echo "[ERROR] An environment variable HASH_PR is not set."
-  exit 1
+if [[ -z "${HASH_PR:-}" ]]; then
+  if [[ -n "${CI:-}" ]]; then
+    echo "[ERROR] An environment variable HASH_PR is not set."
+    exit 1
+  else
+    export HASH_PR="$(git rev-parse HEAD)"
+  fi
 fi
 
 if [[ "${HASH_PROD}" == "${HASH_PR}" ]]; then
