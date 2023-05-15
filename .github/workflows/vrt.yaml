@@ -1,0 +1,41 @@
+name: "vrt"
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+
+jobs:
+  vrt:
+    timeout-minutes: 15
+    env:
+      SERVER_ENV: local
+      AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+      REG_SUIT_GITHUB_CLIENT_ID: ${{ secrets.REG_SUIT_GITHUB_CLIENT_ID }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+
+      - name: cache playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ hashFiles('**/package-lock.json') }}
+
+      - run: npm ci
+      - name: install system dependencies for Playwright
+        run: npx playwright install-deps chromium
+      - run: npm run build
+      - run: npm run vrt

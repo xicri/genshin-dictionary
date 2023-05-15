@@ -8,7 +8,7 @@ PROJECT_ROOT="${DIRNAME}/.."
 git fetch origin
 
 export HASH_PROD="$(git rev-parse origin/main)"
-export HASH_PR="$(git rev-parse HEAD)"
+export HASH_PR="${GITHUB_SHA:-$(git rev-parse HEAD)}"
 
 if [[ "${HASH_PROD}" == "${HASH_PR}" ]]; then
   echo "[ERROR] This PR has no change against main branch"
