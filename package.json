@@ -17,6 +17,9 @@
     "build": "nuxt build --fail-on-error",
     "start": "nuxt start",
     "test": "jest && playwright test",
+    "vrt": "concurrently --kill-others --success=first \"npm:start\" \"npm:vrt:screenshot\" && npm run vrt:reg",
+    "vrt:screenshot": "sleep 5 && node ./scripts/vrt-screenshot.mjs",
+    "vrt:reg": "./scripts/vrt-reg.sh",
     "lint": "eslint --ext .js,.mjs,.cjs,.ts,.vue --ignore-path .gitignore .",
     "purge-cache": "node ./scripts/purge-cache.mjs",
     "postinstall": "node ./scripts/postinstall.mjs && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
@@ -38,11 +41,18 @@
     "sass-loader": "^10.1.1"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.332.0",
     "@playwright/test": "^1.14.1",
     "babel-jest": "^29.0.1",
+    "concurrently": "^8.0.1",
     "eslint": "latest",
     "eslint-config-xicri": "latest",
-    "jest": "^29.0.1"
+    "jest": "^29.0.1",
+    "playwright": "^1.33.0",
+    "reg-notify-github-plugin": "^0.12.1",
+    "reg-publish-s3-plugin": "^0.12.1",
+    "reg-simple-keygen-plugin": "^0.12.1",
+    "reg-suit": "^0.12.1"
   },
   "engines": {
     "node": "18.x",
