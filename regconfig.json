@@ -1,0 +1,30 @@
+{
+  "core": {
+    "workingDir": "tmp/reg-suit/workspace",
+    "actualDir": "tmp/reg-suit/actual",
+    "thresholdRate": 0,
+    "addIgnore": true,
+    "enableAntialias": true,
+    "ximgdiff": {
+      "invocationType": "client"
+    }
+  },
+  "plugins": {
+    "reg-simple-keygen-plugin": {
+      "expectedKey": "${EXPECTED_KEY}",
+      "actualKey": "${ACTUAL_KEY}"
+    },
+    "reg-notify-github-plugin": {
+      "prComment": true,
+      "prCommentBehavior": "new",
+      "clientId": "${REG_SUIT_GITHUB_CLIENT_ID}"
+    },
+    "reg-publish-s3-plugin": {
+      "bucketName": "genshin-dictionary-reg-suit",
+      "customDomain": "vrt.genshin-dictionary.com",
+      "sdkOptions": {
+        "endpoint": "https://8306a13fafb28ed9cc9c2effe76f7830.r2.cloudflarestorage.com"
+      }
+    }
+  }
+}
