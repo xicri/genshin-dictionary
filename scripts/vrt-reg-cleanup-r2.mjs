@@ -15,12 +15,16 @@ const { Contents: files } = await s3.send(new ListObjectsCommand({
   Bucket: "genshin-dictionary-reg-suit",
 }));
 
-await s3.send(new DeleteObjectsCommand({
-  Bucket: "genshin-dictionary-reg-suit",
-  Delete: {
-    Objects: files
-      .map(file => ({ Key: file.Key }))
-      .filter(file => file.Key.startsWith(process.env.HASH_PROD) || file.Key.startsWith(process.env.HASH_PR)),
-    Quiet: false,
-  },
-}));
+const filesToDelete = files
+  .map(file => ({ Key: file.Key }))
+  .filter(file => file.Key.startsWith(process.env.HASH_PROD) || file.Key.startsWith(process.env.HASH_PR));
+
+if (0 < filesToDelete.length) {
+  await s3.send(new DeleteObjectsCommand({
+    Bucket: "genshin-dictionary-reg-suit",
+    Delete: {
+      Objects: filesToDelete,
+      Quiet: false,
+    },
+  }));
+}
