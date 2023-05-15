@@ -125,6 +125,10 @@ export function HamburgerMenu({ locale }: Props): JSX.Element {
             margin-bottom: 2em;
           }
 
+          &__extlink {
+            margin-left: 0.25em;
+          }
+
           &__languages-title {
             font-weight: bold;
             font-size: 1rem;
@@ -170,7 +174,7 @@ export function HamburgerMenu({ locale }: Props): JSX.Element {
             </li>
             <li className="menu__item">
               <a href="https://translate.genshin-dictionary.com" target="_blank" rel="noopener">{ t("translate") }</a>
-              <img src="/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14" />
+              <img src="/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14" className="menu__extlink" />
             </li>
           </ul>
 

@@ -139,10 +139,12 @@ export const Word: FC<Props> = ({ locale, word }: Props): JSX.Element => {
               width: 1em;
               height: 1em;
               cursor: pointer;
+              margin-left: 0.25em;
             }
             &--copied {
               width: 1em;
               height: 1em;
+              margin-left: 0.25em;
             }
           }
 

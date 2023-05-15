@@ -134,6 +134,7 @@ export const WordListSearch: FC<Props> = ({ locale, searchConditions: { activeTa
           &__remove-tag {
             font-weight: 1000;
             cursor: pointer;
+            margin-left: 0.25em;
           }
 
           &__input {
