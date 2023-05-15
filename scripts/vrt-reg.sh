@@ -8,7 +8,11 @@ PROJECT_ROOT="${DIRNAME}/.."
 git fetch origin
 
 export HASH_PROD="$(git rev-parse origin/main)"
-export HASH_PR="${GITHUB_SHA:-$(git rev-parse HEAD)}"
+
+if [[ -z "${HASH_PR}" ]]; then
+  echo "[ERROR] An environment variable HASH_PR is not set."
+  exit 1
+fi
 
 if [[ "${HASH_PROD}" == "${HASH_PR}" ]]; then
   echo "[ERROR] This PR has no change against main branch"
