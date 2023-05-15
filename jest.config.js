@@ -1,18 +1,17 @@
-module.exports = {
+/** @type {import('ts-jest').JestConfigWithTsJest} */
+const config = {
+  preset: "ts-jest",
+  testEnvironment: "node",
   moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/$1",
-    "^~/(.*)$": "<rootDir>/$1",
-    "^vue$": "vue/dist/vue.common.js",
+    "^@/(.*)$": "<rootDir>/src/$1",
   },
   moduleFileExtensions: [
+    "ts",
+    "tsx",
     "js",
-    "vue",
+    "jsx",
     "json",
   ],
-  transform: {
-    "^.+\\.js$": "babel-jest",
-    // TODO Temporarily disable vue-jest because it still uses deprecated `babel-core` package and it prevents running Jest properly.
-    // see: https://stackoverflow.com/questions/56289348/cannot-find-module-babel-core-but-babel-core-is-installed
-    // ".*\\.(vue)$": "vue-jest",
-  },
 };
+
+export default config;
