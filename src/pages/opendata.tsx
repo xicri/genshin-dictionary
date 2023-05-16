@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { setupI18n, validateLocale } from "@/libs/i18n";
-import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { BuiltWord, Locale } from "@/types";
 import { Sentence } from "@/components/Sentence";
 import { Article } from "@/components/Article";
@@ -13,7 +13,7 @@ type Props = {
   wordDataExample: string,
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ locale }) => {
+export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
   const wordDataExampleObject: BuiltWord[] = [
     {
       id: "zhongli",
@@ -58,7 +58,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ locale }) 
   };
 };
 
-export default function AboutPage({ locale, wordDataExample }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
+export default function AboutPage({ locale, wordDataExample }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   const t = setupI18n(locale, {
     en: {
       opendataTitle: "Open Data / API (β)",

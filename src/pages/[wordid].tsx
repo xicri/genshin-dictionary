@@ -1,9 +1,10 @@
 import Head from "next/head";
 import { WordList } from "@/components/WordList";
-import { setupI18n, validateLocale } from "@/libs/i18n";
+import { setupI18n, validateLocale, validateLocales } from "@/libs/i18n";
 import { getWordRedirectDestination } from "@/libs/redirect";
 import { getWords } from "@/libs/words";
-import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import allWords from "../../public/dataset/words.json";
+import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import type { BuiltWord, Locale } from "@/types";
 
 type Props = {
@@ -11,7 +12,24 @@ type Props = {
   word: BuiltWord,
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ locale, params }) => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  const paths = [];
+
+  for (const locale of validateLocales(locales)) {
+    for (const word of allWords) {
+      paths.push({
+        params: { wordid: word.id },
+        locale,
+      });
+    }
+  }
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps<Props> = async ({ locale, params }) => {
   const wordID: string = params?.wordid as string;
   const destWordID = getWordRedirectDestination(wordID);
 
@@ -41,7 +59,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ locale, pa
   };
 };
 
-export default function WordID({ locale, word }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
+export default function WordID({ locale, word }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   const t = setupI18n(locale, {
     en: {},
     ja: {},

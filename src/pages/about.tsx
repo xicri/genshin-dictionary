@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { setupI18n, validateLocale } from "@/libs/i18n";
-import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Locale } from "@/types";
 import { Sentence } from "@/components/Sentence";
 import { Article } from "@/components/Article";
@@ -11,13 +11,13 @@ type Props = {
   locale: Locale,
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ locale }) => ({
+export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => ({
   props: {
     locale: validateLocale(locale),
   },
 });
 
-export default function AboutPage({ locale }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
+export default function AboutPage({ locale }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   const t = setupI18n(locale, {
     en: {
       aboutTitle: "About this website",

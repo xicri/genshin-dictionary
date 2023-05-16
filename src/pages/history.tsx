@@ -1,20 +1,20 @@
 import Head from "next/head";
 import { WordList } from "@/components/WordList";
 import { setupI18n, validateLocale } from "@/libs/i18n";
-import type { GetServerSideProps, NextPage } from "next";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Locale } from "@/types";
 
 type Props = {
   locale: Locale,
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }): Promise<{ props: Props }> => ({
+export const getStaticProps: GetStaticProps<Props> = async ({ locale }): Promise<{ props: Props }> => ({
   props: {
     locale: validateLocale(locale),
   },
 });
 
-const HistoryPage: NextPage<Props> = ({ locale }: Props): JSX.Element => {
+export default function HistoryPage({ locale }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   const t = setupI18n(locale, {
     en: {
       title: "Update History",
@@ -75,6 +75,4 @@ const HistoryPage: NextPage<Props> = ({ locale }: Props): JSX.Element => {
       </div>
     </>
   );
-};
-
-export default HistoryPage;
+}
