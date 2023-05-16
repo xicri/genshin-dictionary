@@ -6,7 +6,6 @@ on:
       - main
     types:
       - opened
-      - edited
       - reopened
       - synchronize
   push:
