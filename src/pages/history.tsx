@@ -8,6 +8,12 @@ type Props = {
   locale: Locale,
 };
 
+export const getServerSideProps: GetServerSideProps = async ({ locale }): Promise<{ props: Props }> => ({
+  props: {
+    locale: validateLocale(locale),
+  },
+});
+
 const HistoryPage: NextPage<Props> = ({ locale }: Props): JSX.Element => {
   const t = setupI18n(locale, {
     en: {
@@ -70,11 +76,5 @@ const HistoryPage: NextPage<Props> = ({ locale }: Props): JSX.Element => {
     </>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = async ({ locale }): Promise<{ props: Props }> => ({
-  props: {
-    locale: validateLocale(locale),
-  },
-});
 
 export default HistoryPage;

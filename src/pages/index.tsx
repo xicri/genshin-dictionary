@@ -8,6 +8,12 @@ type Props = {
   locale: Locale,
 };
 
+export const getServerSideProps: GetServerSideProps = async ({ locale }): Promise<{ props: Props }> => ({
+  props: {
+    locale: validateLocale(locale),
+  },
+});
+
 export default function Index({ locale }: Props): JSX.Element {
   return (
     <>
@@ -24,9 +30,3 @@ export default function Index({ locale }: Props): JSX.Element {
     </>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async ({ locale }): Promise<{ props: Props }> => ({
-  props: {
-    locale: validateLocale(locale),
-  },
-});
