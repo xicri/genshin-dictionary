@@ -10,7 +10,7 @@ type Props = {
   locale: Locale,
 };
 
-export function Layout({ children, locale }: Props): JSX.Element {
+export default function Layout({ children, locale }: Props): JSX.Element {
   //
   // i18n
   //
