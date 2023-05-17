@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { WordList } from "@/components/WordList";
 import { setupI18n, validateLocale, validateLocales } from "@/libs/i18n";
-import { getWordRedirectDestination } from "@/libs/redirect";
 import { getWords } from "@/libs/words";
 import allWords from "../../public/dataset/words.json";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
@@ -31,16 +30,6 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 
 export const getStaticProps: GetStaticProps<Props> = async ({ locale, params }) => {
   const wordID: string = params?.wordid as string;
-  const destWordID = getWordRedirectDestination(wordID);
-
-  if (destWordID) {
-    return {
-      redirect: {
-        destination: `/${locale}/${destWordID}/`,
-        statusCode: 301,
-      },
-    };
-  }
 
   const { words } = getWords({ wordID });
   const word = words[0];

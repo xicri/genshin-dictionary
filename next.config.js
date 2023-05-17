@@ -1,3 +1,6 @@
+import wordRedirects from "./public/dataset/redirect/words.json" assert { type: "json" };
+import tagRedirects from "./public/dataset/redirect/tags.json" assert { type: "json" };
+
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -25,6 +28,28 @@ const nextConfig = {
         },
       ],
     }];
+  },
+
+  async redirects() {
+    const redirs = [];
+
+    for (const [ src, dest ] of Object.entries(wordRedirects)) {
+      redirs.push({
+        source: `/${src}/`,
+        destination: `/${dest}/`,
+        permanent: true,
+      });
+    }
+
+    for (const [ src, dest ] of Object.entries(tagRedirects)) {
+      redirs.push({
+        source: `/tags/${src}/`,
+        destination: `/tags/${dest}/`,
+        permanent: true,
+      });
+    }
+
+    return redirs;
   },
 
   i18n: {

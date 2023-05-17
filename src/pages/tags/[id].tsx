@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useState } from "react";
 import { WordList } from "@/components/WordList";
 import { setupI18n, validateLocale, validateLocales } from "@/libs/i18n";
-import { getTagRedirectDestination } from "@/libs/redirect";
 import { validateTag } from "@/libs/tags";
 import allTags from "../../../public/dataset/tags.json";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
@@ -33,16 +32,6 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 export const getStaticProps: GetStaticProps<Props> = async ({ locale, params }) => {
   try {
     const tagID: TagID = validateTag(params?.id as string);
-
-    const destTagID = getTagRedirectDestination(tagID);
-    if (destTagID) {
-      return {
-        redirect: {
-          destination: `/${locale}/tags/${destTagID}/`,
-          statusCode: 301,
-        },
-      };
-    }
 
     return {
       props: {
