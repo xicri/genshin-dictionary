@@ -1,23 +1,16 @@
-import type { GetServerSideProps } from "next";
+import { config } from "dotenv";
+import { writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  const robotsTxt = `UserAgent: *
+config(); // dotenv config
+
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+
+const robotsTxt = `UserAgent: *
 ${ process.env.SERVER_ENV === "production" ? `
 Allow: /
 Sitemap: https://genshin-dictionary.com/sitemap.xml
 ` : "Disallow: /" }`;
 
-  res.setHeader("Content-Type", "text/plain");
-  res.write(robotsTxt);
-  res.end();
-
-  return {
-    props: {},
-  };
-};
-
-const RobotsTxt = (): void => {
-  // Do nothing on frontend
-};
-
-export default RobotsTxt;
+await writeFile(join(__dirname, "../public/robots.txt"), robotsTxt);
