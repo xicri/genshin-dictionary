@@ -2,18 +2,45 @@ import Link from "next/link";
 import { HamburgerMenu } from "@/components/HamburgerMenu";
 import { Spacer } from "@/components/Spacer";
 import { I18n } from "@/libs/i18n";
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import type { Locale } from "@/types";
 
 type Props = {
   children: ReactNode,
-  locale: Locale,
+  params: { locale: Locale };
 };
 
-export default function Layout({ children, locale }: Props): JSX.Element {
+export async function generateMetaData({ params: { locale }}: Props): Promise<Metadata> {
   //
   // i18n
   //
+  const i18n = new I18n(locale);
+
+  return {
+    title: {
+      template: `%s | ${i18n.t("siteTitle")}`,
+      absolute: i18n.t("siteTitle"), // Fallback
+    },
+    openGraph: {
+      siteName: i18n.t("siteTitle"),
+      type: "website",
+    },
+    twitter: {
+      card: "summary",
+      site: "@xicri_gi",
+      creator: "@xicri_gi",
+    },
+    verification: {
+      google: "fPZCIib8QFE52LeBEGqBoapTwL6v9vqHl9lKqcreMDQ", // google-site-verification
+    },
+    icons: "/images/favicon.svg",
+    robots: process.env.SERVER_ENV === "production" ? { index: true, follow: true } : { index: false, follow: false },
+    formatDetection: { telephone: false },
+  };
+}
+
+export default function Layout({ children, params: { locale }}: Props): JSX.Element {
   const i18n = new I18n(locale, {
     en: {
       siteTitle: "Genshin Dictionary",
@@ -27,76 +54,89 @@ export default function Layout({ children, locale }: Props): JSX.Element {
   });
 
   return (
-    <div>
-      <style jsx>{`
-        @use "_variables.scss" as vars;
+    <html lang={locale}>
+      <head>
+        <style jsx>{`
+          @use "_variables.scss" as vars;
 
-        $hide-title-width: 336px;
+          $hide-title-width: 336px;
 
-        .layout-default {
-          &__nav-wrapper {
-            display: flex;
-            justify-content: center;
+          .layout-default {
+            &__nav-wrapper {
+              display: flex;
+              justify-content: center;
 
-            $margin: 12px;
-            margin-left: $margin;
-            margin-right: $margin;
-            width: calc(100% - #{ $margin * 2 });
-          }
-          &__nav {
-            max-width: vars.$max-width;
-            width: 100%;
-            margin-top: 24px;
-            margin-bottom: 36px;
+              $margin: 12px;
+              margin-left: $margin;
+              margin-right: $margin;
+              width: calc(100% - #{ $margin * 2 });
+            }
+            &__nav {
+              max-width: vars.$max-width;
+              width: 100%;
+              margin-top: 24px;
+              margin-bottom: 36px;
 
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            flex-wrap: nowrap;
-            gap: 0.5rem;
-          }
-
-          &__title {
-            font-weight: 300;
-            font-size: 32px;
-            color: vars.$color-dark;
-            letter-spacing: 1px;
-            white-space: nowrap;
-
-            @media (max-width: vars.$mobile-width) { // Mobile
-              font-size: 7vw;
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              flex-wrap: nowrap;
+              gap: 0.5rem;
             }
 
-            @media (max-width: $hide-title-width) { // Too small to display site title
+            &__title {
+              font-weight: 300;
+              font-size: 32px;
+              color: vars.$color-dark;
+              letter-spacing: 1px;
+              white-space: nowrap;
+
+              @media (max-width: vars.$mobile-width) { // Mobile
+                font-size: 7vw;
+              }
+
+              @media (max-width: $hide-title-width) { // Too small to display site title
+                display: none;
+              }
+            }
+
+            &__logo {
               display: none;
+
+              @media (max-width: $hide-title-width) { // Too small to display site title
+                display: inline;
+              }
             }
           }
+        `}</style>
+      </head>
+      <body>
+        <div>
+          <div className="layout-default__nav-wrapper">
+            <nav className="layout-default__nav">
+              <h1>
+                <Link href="/">
+                  <img src="/images/favicon.svg" alt={ i18n.t("siteTitle") } width="48" height="48" className="layout-default__logo" decoding="async" />
+                  <span className="layout-default__title">{ i18n.t("siteTitle") }</span>
+                </Link>
+              </h1>
 
-          &__logo {
-            display: none;
+              <Spacer />
+              <HamburgerMenu locale={locale} />
+            </nav>
+          </div>
 
-            @media (max-width: $hide-title-width) { // Too small to display site title
-              display: inline;
-            }
-          }
-        }
-      `}</style>
+          {children}
 
-      <div className="layout-default__nav-wrapper">
-        <nav className="layout-default__nav">
-          <h1>
-            <Link href="/">
-              <img src="/images/favicon.svg" alt={ i18n.t("siteTitle") } width="48" height="48" className="layout-default__logo" decoding="async" />
-              <span className="layout-default__title">{ i18n.t("siteTitle") }</span>
-            </Link>
-          </h1>
-
-          <Spacer />
-          <HamburgerMenu locale={locale} />
-        </nav>
-      </div>
-
-      {children}
-    </div>
+          { process.env.SERVER_ENV === "production" ? (
+            <script
+              src="https://static.cloudflareinsights.com/beacon.min.js"
+              data-cf-beacon='{"token": "1f401150384f4aaa9d14b208aac9fdba"}'
+              defer
+            ></script>
+          ) : "" }
+        </div>
+      </body>
+    </html>
   );
 }
