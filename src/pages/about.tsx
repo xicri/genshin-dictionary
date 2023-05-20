@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { setupI18n, validateLocale } from "@/libs/i18n";
+import { I18n, validateLocale } from "@/libs/i18n";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Locale } from "@/types";
 import { Sentence } from "@/components/Sentence";
@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => ({
 });
 
 export default function AboutPage({ locale }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
-  const t = setupI18n(locale, {
+  const i18n = new I18n(locale, {
     en: {
       aboutTitle: "About this website",
       aboutDescription: "About Genshin Dictionary. This website is an online English-Chinese-Japanese dictionary of the terms in Genshin Impact.",
@@ -33,8 +33,8 @@ export default function AboutPage({ locale }: InferGetStaticPropsType<typeof get
     },
   });
 
-  const title = `${t("aboutTitle")} | ${t("siteTitle")}`;
-  const description = t("aboutDescription");
+  const title = `${ i18n.t("aboutTitle") } | ${ i18n.t("siteTitle") }`;
+  const description = i18n.t("aboutDescription");
 
   const wordCount = allWords.length;
 
@@ -53,7 +53,7 @@ export default function AboutPage({ locale }: InferGetStaticPropsType<typeof get
       <div className="article__wrapper-outer">
         <div className="article__wrapper-inner">
           <Article locale={locale}>
-            <h2>{ t("aboutTitle") }</h2>
+            <h2>{ i18n.t("aboutTitle") }</h2>
 
             <main>
               { locale !== "ja" ? (

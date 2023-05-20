@@ -1,6 +1,6 @@
 import { groupBy } from "lodash";
 import { useEffect, useMemo, useRef } from "react";
-import { setupI18n } from "@/libs/i18n";
+import { I18n } from "@/libs/i18n";
 import { Word } from "@/components/Word";
 import { getWords } from "@/libs/words";
 import type { FC } from "react";
@@ -20,7 +20,7 @@ export const WordListResults: FC<Props> = ({ searchConditions, historyMode, loca
   //
   // i18n
   //
-  const t = setupI18n(locale, {
+  const i18n = new I18n(locale, {
     en: {
       updatedOn: "Updated on {createdOn}",
       notFound: "Your search did not match any words in this dictionary.",
@@ -128,7 +128,7 @@ export const WordListResults: FC<Props> = ({ searchConditions, historyMode, loca
             .map(createdDate => (
               <div key={createdDate}>
                 <h3 className="results__updated-at">
-                  { t("updatedOn", { createdOn: createdDate }) }
+                  { i18n.t("updatedOn", { createdOn: createdDate }) }
                 </h3>
                 {/* Required to be enclosed by <div> so that CSS' :last-child works */}
                 <div>
@@ -140,7 +140,7 @@ export const WordListResults: FC<Props> = ({ searchConditions, historyMode, loca
 
         { words && words.length <= 0 ? (
           <p data-e2e="empty">
-            { t("notFound") }
+            { i18n.t("notFound") }
           </p>
         ) : ""}
 

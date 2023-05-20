@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { ClosingLayer } from "@/components/ClosingLayer";
-import { setupI18n, validateLocale } from "@/libs/i18n";
+import { I18n, validateLocale } from "@/libs/i18n";
 import type { ChangeEvent } from "react";
 import type { Locale } from "@/types";
 
@@ -27,7 +27,7 @@ export function HamburgerMenu({ locale }: Props): JSX.Element {
   //
   // i18n
   //
-  const t = setupI18n(locale, {
+  const i18n = new I18n(locale, {
     en: {
       about: "About",
       opendata: "Opendata / API",
@@ -164,16 +164,16 @@ export function HamburgerMenu({ locale }: Props): JSX.Element {
         <div className="menu__nav-padding">
           <ul className="menu__items">
             <li className="menu__item">
-              <Link href="/about/">{ t("about") }</Link>
+              <Link href="/about/">{ i18n.t("about") }</Link>
             </li>
             <li className="menu__item">
-              <Link href="/opendata/">{ t("opendata") }</Link>
+              <Link href="/opendata/">{ i18n.t("opendata") }</Link>
             </li>
             <li className="menu__item">
-              <Link href="/history/">{ t("history") }</Link>
+              <Link href="/history/">{ i18n.t("history") }</Link>
             </li>
             <li className="menu__item">
-              <a href="https://translate.genshin-dictionary.com" target="_blank" rel="noopener">{ t("translate") }</a>
+              <a href="https://translate.genshin-dictionary.com" target="_blank" rel="noopener">{ i18n.t("translate") }</a>
               <img src="/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14" className="menu__extlink" />
             </li>
           </ul>

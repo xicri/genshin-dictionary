@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { setupI18n, validateLocale } from "@/libs/i18n";
+import { I18n, validateLocale } from "@/libs/i18n";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { BuiltWord, Locale } from "@/types";
 import { Sentence } from "@/components/Sentence";
@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
 };
 
 export default function AboutPage({ locale, wordDataExample }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
-  const t = setupI18n(locale, {
+  const i18n = new I18n(locale, {
     en: {
       opendataTitle: "Open Data / API (β)",
     },
@@ -71,7 +71,7 @@ export default function AboutPage({ locale, wordDataExample }: InferGetStaticPro
     },
   });
 
-  const title = `${t("opendataTitle")} | ${t("siteTitle")}`;
+  const title = `${ i18n.t("opendataTitle") } | ${ i18n.t("siteTitle") }`;
   // const description = t("opendataDescription"); // TODO
 
   return (
@@ -91,7 +91,7 @@ export default function AboutPage({ locale, wordDataExample }: InferGetStaticPro
       <div className="article__wrapper-outer">
         <div className="article__wrapper-inner">
           <Article locale={locale}>
-            <h2>{ t("opendataTitle") }</h2>
+            <h2>{ i18n.t("opendataTitle") }</h2>
 
             <main>
               { locale !== "ja" ? (

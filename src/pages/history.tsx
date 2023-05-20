@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { WordList } from "@/components/WordList";
-import { setupI18n, validateLocale } from "@/libs/i18n";
+import { I18n, validateLocale } from "@/libs/i18n";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Locale } from "@/types";
 
@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }): Promise
 });
 
 export default function HistoryPage({ locale }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
-  const t = setupI18n(locale, {
+  const i18n = new I18n(locale, {
     en: {
       title: "Update History",
       // description: "", // TODO
@@ -29,7 +29,7 @@ export default function HistoryPage({ locale }: InferGetStaticPropsType<typeof g
       // description: "", // TODO
     },
   });
-  const title = `${ t("title") } | ${ t("siteTitle") }`;
+  const title = `${ i18n.t("title") } | ${ i18n.t("siteTitle") }`;
 
   return (
     <>
@@ -69,7 +69,7 @@ export default function HistoryPage({ locale }: InferGetStaticPropsType<typeof g
       `}</style>
 
       <div className="history">
-        <h2>{ t("title") }</h2>
+        <h2>{ i18n.t("title") }</h2>
 
         <WordList locale={locale} historyMode={true} />
       </div>

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { setupI18n, validateLocale } from "@/libs/i18n";
+import { I18n, validateLocale } from "@/libs/i18n";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Locale } from "@/types";
 
@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }): Promise<{ prop
 });
 
 export default function NotFound({ locale }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
-  const t = setupI18n(locale, {
+  const i18n = new I18n(locale, {
     en: {
       internalServerError: "System Error",
       errorMsg: "This error is caused by the problem in this website. We are sorry for the inconvenience.<br />Try page reload and check if it addresses this error. If the error still persists, or this error frequently happens, <a href=\"https://twitter.com/xicri_gi\" target=\"_blank\" rel=\"noopener\">Let us know</a>.",
@@ -74,17 +74,17 @@ export default function NotFound({ locale }: InferGetStaticPropsType<typeof getS
       `}</style>
 
       <Head>
-        <title>{ t("internalServerError") }</title>
+        <title>{ i18n.t("internalServerError") }</title>
       </Head>
 
       <div className="error">
         <div className="error__wrapper">
           <h1 className="error__title">
-            { t("internalServerError") }
+            { i18n.t("internalServerError") }
           </h1>
-          <p className="error__message" dangerouslySetInnerHTML={{ __html: t("errorMsg") }}></p>
+          <p className="error__message" dangerouslySetInnerHTML={{ __html: i18n.t("errorMsg") }}></p>
 
-          <p className="error__return"><Link href="/">{ t("returnToIndex") }</Link></p>
+          <p className="error__return"><Link href="/">{ i18n.t("returnToIndex") }</Link></p>
         </div>
       </div>
     </>

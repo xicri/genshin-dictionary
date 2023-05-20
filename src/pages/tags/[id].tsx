@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import { WordList } from "@/components/WordList";
-import { setupI18n, validateLocale, validateLocales } from "@/libs/i18n";
+import { I18n, validateLocale, validateLocales } from "@/libs/i18n";
 import { validateTag } from "@/libs/tags";
 import allTags from "../../../public/dataset/tags.json";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
@@ -51,13 +51,13 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale, params }) 
 };
 
 export default function TagIDPage({ locale, tagID }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
-  const t = setupI18n(locale, {
+  const i18n = new I18n(locale, {
     en: {},
     ja: {},
     "zh-CN": {},
   });
 
-  const [ title, setTitle ] = useState(`${allTags[tagID].title[locale]} | ${t("siteTitle")}`);
+  const [ title, setTitle ] = useState(`${allTags[tagID].title[locale]} | ${i18n.t("siteTitle")}`);
 
   //
   // Event Handlers
@@ -67,7 +67,7 @@ export default function TagIDPage({ locale, tagID }: InferGetStaticPropsType<typ
 
     if (window.location.pathname !== root) {
       history.pushState({}, "", root);
-      setTitle(t("siteTitle"));
+      setTitle(i18n.t("siteTitle"));
     }
   };
 

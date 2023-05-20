@@ -1,7 +1,7 @@
 import App from "next/app";
 import Head from "next/head";
 import { Layout } from "@/components/Layout";
-import { getAvailableLocales, setupI18n, validateLocale } from "@/libs/i18n";
+import { I18n, getAvailableLocales, validateLocale } from "@/libs/i18n";
 import "@/styles/globals.scss";
 import type { AppContext, AppInitialProps, AppProps } from "next/app";
 import type { Locale } from "@/types";
@@ -16,7 +16,7 @@ type OwnProps = {
 };
 
 const GenshinDictionary = ({ Component, pageProps, locale, canonical, alternates }: AppProps & OwnProps): JSX.Element => {
-  const t = setupI18n(locale, {
+  const i18n = new I18n(locale, {
     en: {
       defaultDescription: "An online English-Chinese-Japanese dictionary for terms in Genshin Impact",
     },
@@ -32,15 +32,15 @@ const GenshinDictionary = ({ Component, pageProps, locale, canonical, alternates
     <>
       <Head>
         {/* ▼▼ Default values ― will be overwritten in each page components ▼▼ */}
-        <title>{`${ t("siteTitle") } ― ${ t("titleDesc") }`}</title>
-        <meta property="og:title" content={`${ t("siteTitle") } ― ${ t("titleDesc") }`} />
-        <meta name="description" content={ t("defaultDescription") } />
-        <meta property="og:description" content={ t("defaultDescription") } />
+        <title>{`${ i18n.t("siteTitle") } ― ${ i18n.t("titleDesc") }`}</title>
+        <meta property="og:title" content={`${ i18n.t("siteTitle") } ― ${ i18n.t("titleDesc") }`} />
+        <meta name="description" content={ i18n.t("defaultDescription") } />
+        <meta property="og:description" content={ i18n.t("defaultDescription") } />
         {/* ▲▲ Default values ― will be overwritten in each page components ▲▲ */}
         <link rel="canonical" href={canonical} />
         <meta property="og:url" content={canonical} />
         { alternates.map(({ hrefLang, href }) => (<link rel="alternate" hrefLang={hrefLang} href={href} key={hrefLang} />))}
-        <meta property="og:site_name" content={ t("siteTitle") } />
+        <meta property="og:site_name" content={ i18n.t("siteTitle") } />
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { setupI18n, validateLocale } from "@/libs/i18n";
+import { I18n, validateLocale } from "@/libs/i18n";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Locale } from "@/types";
 
@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }): Promise<{ prop
 });
 
 export default function NotFound({ locale }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
-  const t = setupI18n(locale, {
+  const i18n = new I18n(locale, {
     en: {
       notFound: "This page is not found",
       returnToIndex: "Return to index",
@@ -52,14 +52,14 @@ export default function NotFound({ locale }: InferGetStaticPropsType<typeof getS
       `}</style>
 
       <Head>
-        <title>{ t("notFound") }</title>
-        <meta property="og:title" content={ t("notFound") } />
+        <title>{ i18n.t("notFound") }</title>
+        <meta property="og:title" content={ i18n.t("notFound") } />
       </Head>
 
       <h1 className="error__title">
-        { t("notFound") }
+        { i18n.t("notFound") }
       </h1>
-      <h2><Link href="/">{ t("returnToIndex") }</Link></h2>
+      <h2><Link href="/">{ i18n.t("returnToIndex") }</Link></h2>
     </>
   );
 }
