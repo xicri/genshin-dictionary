@@ -1,10 +1,12 @@
 import { translations as globalTranslations } from "@/libs/translations";
 import nextConfig from "../../next.config";
-import type { Locale, Translations, tFunction } from "@/types";
+import type { Locale, Translations } from "@/types";
 
-export const setupI18n = (locale: Locale, translations: Translations): tFunction => {
-  const t: tFunction = (key: string, variables?: { [varName: string]: string|number }): string => {
-    let translation = translations[locale][key] ?? globalTranslations[locale][key];
+export class I18n {
+  constructor(private locale: Locale, private translations: Translations) {}
+
+  t(key: string, variables?: { [varName: string]: string|number }): string {
+    let translation = this.translations[this.locale][key] ?? globalTranslations[this.locale][key];
 
     if (!translation) {
       throw new Error(`There is no such key: "${key}".`);
@@ -17,10 +19,8 @@ export const setupI18n = (locale: Locale, translations: Translations): tFunction
     }
 
     return translation;
-  };
-
-  return t;
-};
+  }
+}
 
 export const validateLocale = (locale: string|undefined): Locale => {
   if (locale && (

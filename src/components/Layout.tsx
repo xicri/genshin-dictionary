@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { HamburgerMenu } from "@/components/HamburgerMenu";
 import { Spacer } from "@/components/Spacer";
-import { setupI18n } from "@/libs/i18n";
+import { I18n } from "@/libs/i18n";
 import type { ReactNode } from "react";
 import type { Locale } from "@/types";
 
@@ -14,7 +14,7 @@ export function Layout({ children, locale }: Props): JSX.Element {
   //
   // i18n
   //
-  const t = setupI18n(locale, {
+  const i18n = new I18n(locale, {
     en: {
       siteTitleL1: "Genshin",
       siteTitleL2: "Dictionary",
@@ -76,8 +76,8 @@ export function Layout({ children, locale }: Props): JSX.Element {
         <nav className="layout-default__nav">
           <h1>
             <Link href="/" className="layout-default__title-wrapper">
-              <span className="layout-default__title">{ t("siteTitleL1") }</span>
-              <span className="layout-default__title">{ t("siteTitleL2") }</span>
+              <span className="layout-default__title">{ i18n.t("siteTitleL1") }</span>
+              <span className="layout-default__title">{ i18n.t("siteTitleL2") }</span>
             </Link>
           </h1>
 

@@ -1,4 +1,4 @@
-import { setupI18n } from "@/libs/i18n";
+import { I18n } from "@/libs/i18n";
 import { Tag } from "@/components/Tag";
 import { Translation } from "@/components/Translation";
 import { sleep } from "@/libs/utils";
@@ -36,7 +36,7 @@ export const Word: FC<Props> = ({ locale, word }: Props): JSX.Element => {
   //
   // i18n
   //
-  const t = setupI18n(locale, {
+  const i18n = new I18n(locale, {
     en: {
       example: "Example",
       permalink: "Permalink",
@@ -194,7 +194,7 @@ export const Word: FC<Props> = ({ locale, word }: Props): JSX.Element => {
           { (word.examples && 0 < word.examples.length) ? (
             <div className="results__description-section">
               <h5 className="linebreak">
-                { t("example") }
+                { i18n.t("example") }
               </h5>
               { word.examples.map(example => (
                 <div key={example.en} className="results__description-section-level2">
@@ -225,16 +225,16 @@ export const Word: FC<Props> = ({ locale, word }: Props): JSX.Element => {
                 src="/vendor/octicons/link.svg"
                 width="12"
                 height="12"
-                alt={t("permalinkAlt", { word: word[locale.replace("zh-CN", "zhCN") as "en"|"ja"|"zhCN"] ?? word.en })}
+                alt={i18n.t("permalinkAlt", { word: word[locale.replace("zh-CN", "zhCN") as "en"|"ja"|"zhCN"] ?? word.en })}
                 decoding="async"
                 className="results__permalink--icon"
-              /> {t("permalink")}
+              /> {i18n.t("permalink")}
             </a>
             <img
               src="/vendor/octicons/copy.svg"
               width="12"
               height="12"
-              alt={t("copyLink", { word: word[locale.replace("zh-CN", "zhCN") as "en"|"ja"|"zhCN"] ?? word.en })}
+              alt={i18n.t("copyLink", { word: word[locale.replace("zh-CN", "zhCN") as "en"|"ja"|"zhCN"] ?? word.en })}
               decoding="async"
               className="results__permalink--copy"
               onClick={async (evt) => copyLink(word.id, evt)}
@@ -243,7 +243,7 @@ export const Word: FC<Props> = ({ locale, word }: Props): JSX.Element => {
               src="/vendor/octicons/check.svg"
               width="12"
               height="12"
-              alt={t("copyLinkDone", { word: word[locale.replace("zh-CN", "zhCN") as "en"|"ja"|"zhCN"] ?? word.en })}
+              alt={i18n.t("copyLinkDone", { word: word[locale.replace("zh-CN", "zhCN") as "en"|"ja"|"zhCN"] ?? word.en })}
               decoding="async"
               className="results__permalink--copied"
               style={{ display: "none" }}

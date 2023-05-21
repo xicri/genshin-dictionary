@@ -1,4 +1,4 @@
-import { setupI18n } from "@/libs/i18n";
+import { I18n } from "@/libs/i18n";
 import { escapeHtmlString } from "@/libs/utils";
 import type { Locale } from "@/types";
 
@@ -14,7 +14,7 @@ export function Translation({ locale, lang, word, kana = "", pinyins = []}: Prop
   //
   // i18n
   //
-  const t = setupI18n(locale, {
+  const i18n = new I18n(locale, {
     en: {
       langNameEn: "English",
       langNameJa: "Japanese",
@@ -35,11 +35,11 @@ export function Translation({ locale, lang, word, kana = "", pinyins = []}: Prop
   let langName;
 
   if (lang === "en") {
-    langName = t("langNameEn");
+    langName = i18n.t("langNameEn");
   } else if (lang === "ja") {
-    langName = t("langNameJa");
+    langName = i18n.t("langNameJa");
   } else if (lang === "zh-CN") {
-    langName = t("langNameZhCN");
+    langName = i18n.t("langNameZhCN");
   }
 
   let wordWithPinyin;

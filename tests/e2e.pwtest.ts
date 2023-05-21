@@ -335,7 +335,7 @@ describe("redirection", () => {
       redirect: "manual",
     });
 
-    expect(res.status).toBe(301);
+    expect(res.status).toBe(308);
     expect(res.headers.get("Location")).toBe(destPath);
   });
 });

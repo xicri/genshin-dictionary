@@ -1,9 +1,9 @@
 import Head from "next/head";
 import { WordList } from "@/components/WordList";
-import { setupI18n, validateLocale } from "@/libs/i18n";
-import { getWordRedirectDestination } from "@/libs/redirect";
+import { I18n, validateLocale, validateLocales } from "@/libs/i18n";
 import { getWords } from "@/libs/words";
-import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import allWords from "../../public/dataset/words.json";
+import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import type { BuiltWord, Locale } from "@/types";
 
 type Props = {
@@ -11,18 +11,25 @@ type Props = {
   word: BuiltWord,
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ locale, params }) => {
-  const wordID: string = params?.wordid as string;
-  const destWordID = getWordRedirectDestination(wordID);
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  const paths = [];
 
-  if (destWordID) {
-    return {
-      redirect: {
-        destination: `/${locale}/${destWordID}/`,
-        statusCode: 301,
-      },
-    };
+  for (const locale of validateLocales(locales)) {
+    for (const word of allWords) {
+      paths.push({
+        params: { wordid: word.id },
+        locale,
+      });
+    }
   }
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps<Props> = async ({ locale, params }) => {
+  const wordID: string = params?.wordid as string;
 
   const { words } = getWords({ wordID });
   const word = words[0];
@@ -41,8 +48,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ locale, pa
   };
 };
 
-export default function WordID({ locale, word }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
-  const t = setupI18n(locale, {
+export default function WordID({ locale, word }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
+  const i18n = new I18n(locale, {
     en: {},
     ja: {},
     "zh-CN": {},
@@ -55,17 +62,17 @@ export default function WordID({ locale, word }: InferGetServerSidePropsType<typ
   let description;
 
   if (locale === "en") {
-    title = `"${word.en}" is ` + (word.zhCN ? `"${word.zhCN}" in Chinese` : `${word.ja} in Japanese`) + ` | ${ t("siteTitle") }`;
+    title = `"${word.en}" is ` + (word.zhCN ? `"${word.zhCN}" in Chinese` : `${word.ja} in Japanese`) + ` | ${ i18n.t("siteTitle") }`;
     description = `"${word.en}" is `
                 + (word.zhCN ? `"${word.zhCN}" in Chinese and ` : "")
                 + `"${word.ja}" in Japanese. This website contains English, Chinese, and Japanese translations for terms in Genshin Impact.`;
   } else if (locale === "ja") {
-    title = `「${word.ja}」は英語で "${word.en}" | ${ t("siteTitle") }`;
+    title = `「${word.ja}」は英語で "${word.en}" | ${ i18n.t("siteTitle") }`;
     description = `「${word.ja}」の英語表記は "${word.en}"`
                 + (word.zhCN ? `、中国語表記は「${word.zhCN}」` : "")
                 + " ― このサイトはゲーム「原神」の用語の、日本語・英語・中国語の対訳を掲載しています。";
   } else if (locale === "zh-CN") {
-    title = (word.zhCN ? `"${word.zhCN}"的英语和日语翻译` : `"${word.en}"的日语翻译`) + ` | ${ t("siteTitle") }`;
+    title = (word.zhCN ? `"${word.zhCN}"的英语和日语翻译` : `"${word.en}"的日语翻译`) + ` | ${ i18n.t("siteTitle") }`;
     description = word.zhCN ?
       `"${word.zhCN}"的英语是"${word.en}"，日语是"${word.ja}"。` : // TODO TranslationChanged
       `"${word.en}"的日语是"${word.ja}"。`;
@@ -79,7 +86,7 @@ export default function WordID({ locale, word }: InferGetServerSidePropsType<typ
   const onSearch = (): void => {
     if (window.location.pathname !== `/${locale}/`) {
       history.pushState({}, "", `/${locale}/`);
-      document.title = t("siteTitle");
+      document.title = i18n.t("siteTitle");
     }
   };
 

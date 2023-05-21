@@ -1,11 +1,10 @@
 import Head from "next/head";
 import { useState } from "react";
 import { WordList } from "@/components/WordList";
-import { setupI18n, validateLocale } from "@/libs/i18n";
-import { getTagRedirectDestination } from "@/libs/redirect";
+import { I18n, validateLocale, validateLocales } from "@/libs/i18n";
 import { validateTag } from "@/libs/tags";
 import allTags from "../../../public/dataset/tags.json";
-import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Locale, TagID } from "@/types";
 
 type Props = {
@@ -13,19 +12,26 @@ type Props = {
   tagID: TagID,
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ locale, params }) => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  const paths = [];
+
+  for (const locale of validateLocales(locales)) {
+    for (const tagID of Object.keys(allTags)) {
+      paths.push({
+        params: { id: tagID },
+        locale,
+      });
+    }
+  }
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps<Props> = async ({ locale, params }) => {
   try {
     const tagID: TagID = validateTag(params?.id as string);
-
-    const destTagID = getTagRedirectDestination(tagID);
-    if (destTagID) {
-      return {
-        redirect: {
-          destination: `/${locale}/tags/${destTagID}/`,
-          statusCode: 301,
-        },
-      };
-    }
 
     return {
       props: {
@@ -44,14 +50,14 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ locale, pa
   }
 };
 
-export default function TagIDPage({ locale, tagID }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
-  const t = setupI18n(locale, {
+export default function TagIDPage({ locale, tagID }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
+  const i18n = new I18n(locale, {
     en: {},
     ja: {},
     "zh-CN": {},
   });
 
-  const [ title, setTitle ] = useState(`${allTags[tagID].title[locale]} | ${t("siteTitle")}`);
+  const [ title, setTitle ] = useState(`${allTags[tagID].title[locale]} | ${i18n.t("siteTitle")}`);
 
   //
   // Event Handlers
@@ -61,7 +67,7 @@ export default function TagIDPage({ locale, tagID }: InferGetServerSidePropsType
 
     if (window.location.pathname !== root) {
       history.pushState({}, "", root);
-      setTitle(t("siteTitle"));
+      setTitle(i18n.t("siteTitle"));
     }
   };
 

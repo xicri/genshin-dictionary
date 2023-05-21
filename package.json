@@ -15,7 +15,10 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run build:robots && npm run build:sitemap && npm run build:next",
+    "build:next": "next build",
+    "build:robots": "ts-node --esm ./scripts/build-robots.ts",
+    "build:sitemap": "ts-node --esm ./scripts/build-sitemap.ts",
     "start": "next start",
     "test": "jest && playwright test",
     "vrt": "concurrently --kill-others --success=first \"npm:start\" \"npm:vrt:screenshot\" && npm run vrt:reg",
@@ -57,6 +60,7 @@
     "reg-suit": "^0.12.1",
     "sass": "^1.61.0",
     "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },
   "engines": {

@@ -1,7 +1,7 @@
 import { klona } from "klona/json";
 import { useRef, useState } from "react";
 import { debounce } from "lodash";
-import { setupI18n } from "@/libs/i18n";
+import { I18n } from "@/libs/i18n";
 import { ClosingLayer } from "@/components/ClosingLayer";
 import { ElasticSearchBox } from "@/components/ElasticSearchBox";
 import allTags from "../../public/dataset/tags.json";
@@ -43,7 +43,7 @@ export const WordListSearch: FC<Props> = ({ locale, searchConditions: { activeTa
   //
   // i18n
   //
-  const t = setupI18n(locale, {
+  const i18n = new I18n(locale, {
     en: {
       enterSearchTerms: "Enter search terms...",
       tags: "Tags",
@@ -274,14 +274,14 @@ export const WordListSearch: FC<Props> = ({ locale, searchConditions: { activeTa
                 ))}
               </div>
 
-              <ElasticSearchBox ref={searchBox} className="search__input" name="searchbox" placeholder={t("enterSearchTerms")} autoComplete="off" onInput={updateSearchQuery} />
+              <ElasticSearchBox ref={searchBox} className="search__input" name="searchbox" placeholder={i18n.t("enterSearchTerms")} autoComplete="off" onInput={updateSearchQuery} />
             </div>
 
             <img
               src="/vendor/octicons/tag.svg"
               width="24"
               height="24"
-              alt={t("openListOfTags")}
+              alt={i18n.t("openListOfTags")}
               decoding="async"
               className="search__taglist-icon"
               onClick={toggleTagList}
@@ -289,7 +289,7 @@ export const WordListSearch: FC<Props> = ({ locale, searchConditions: { activeTa
           </div>
           <div className={ `search__taglist ${ displayTagListOnMobile ? "search__taglist-display-mobile" : "" }` }>
             <div className="search__taglist-inner">
-              <span className="search__taglist-title">{ t("tags") }:</span>
+              <span className="search__taglist-title">{ i18n.t("tags") }:</span>
               { getAvailableTagIDs().map((availableTagID) => (
                 <span className="search__tag" onClick={() => addTag(availableTagID)} key={availableTagID}>
                   { (allTags as Tags)[availableTagID][locale] } <span className="search__tag-add">+</span>
@@ -301,7 +301,7 @@ export const WordListSearch: FC<Props> = ({ locale, searchConditions: { activeTa
               src="/vendor/octicons/x.svg"
               width="24"
               height="24"
-              alt={t("closeListOfTags")}
+              alt={i18n.t("closeListOfTags")}
               decoding="async"
               className="search__taglist-close"
               onClick={closeTagList}
