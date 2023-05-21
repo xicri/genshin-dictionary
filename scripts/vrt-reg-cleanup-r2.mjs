@@ -16,10 +16,10 @@ const { Contents: files } = await s3.send(new ListObjectsCommand({
 }));
 
 const filesToDelete = files
-  .map(file => ({ Key: file.Key }))
+  ?.map(file => ({ Key: file.Key }))
   .filter(file => file.Key.startsWith(process.env.HASH_PROD) || file.Key.startsWith(process.env.HASH_PR));
 
-if (0 < filesToDelete.length) {
+if (filesToDelete && 0 < filesToDelete.length) {
   await s3.send(new DeleteObjectsCommand({
     Bucket: "genshin-dictionary-reg-suit",
     Delete: {
