@@ -5,6 +5,21 @@ set -eu
 DIRNAME="$(dirname -- "$0")"
 PROJECT_ROOT="${DIRNAME}/.."
 
+if [[ -f "${PROJECT_ROOT}/.env" ]]; then
+  eval "$(cat "${PROJECT_ROOT}/.env" <(echo) <(declare -x))"
+fi
+
+if [[ -z "${AWS_ACCESS_KEY_ID:-}" ]]; then
+  echo "AWS_ACCESS_KEY_ID is empty"
+  exit 1
+elif [[ -z "${AWS_SECRET_ACCESS_KEY:-}" ]]; then
+  echo "AWS_SECRET_ACCESS_KEY is empty"
+  exit 1
+elif [[ -z "${REG_SUIT_GITHUB_CLIENT_ID:-}" ]]; then
+  echo "REG_SUIT_GITHUB_CLIENT_ID is empty"
+  exit 1
+fi
+
 git fetch origin
 
 export HASH_PROD="$(git rev-parse origin/main)"
