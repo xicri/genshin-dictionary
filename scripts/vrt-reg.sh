@@ -38,7 +38,7 @@ if [[ "${HASH_PROD}" == "${HASH_PR}" ]]; then
   exit 1
 fi
 
-node "${PROJECT_ROOT}/scripts/vrt-reg-cleanup-r2.mjs"
+AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" node "${PROJECT_ROOT}/scripts/vrt-reg-cleanup-r2.mjs"
 
 #
 # upload current screenshots
