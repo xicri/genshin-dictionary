@@ -11,6 +11,10 @@ const nextConfig = {
       source: "/:all*",
       headers: [
         {
+          key: "Cache-Control",
+          value: "public, max-age=30, s-maxage=5184000", // 5184000s == 60 days
+        },
+        {
           key: "Content-Security-Policy",
           value: "frame-ancestors 'self' http://sunny2.starfree.jp;",
         },

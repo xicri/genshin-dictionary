@@ -19,7 +19,7 @@
     "build:next": "next build",
     "build:robots": "ts-node --esm ./scripts/build-robots.ts",
     "build:sitemap": "ts-node --esm ./scripts/build-sitemap.ts",
-    "start": "NODE_OPTIONS='--max-old-space-size=192' next start",
+    "start": "NODE_OPTIONS='--max-old-space-size=230' next start",
     "test": "jest && playwright test",
     "vrt": "concurrently --kill-others --success=first \"npm:start\" \"npm:vrt:screenshot\" && npm run vrt:reg",
     "vrt:screenshot": "sleep 5 && node ./scripts/vrt-screenshot.mjs",
