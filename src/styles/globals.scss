@@ -1,7 +1,7 @@
 @use "./variables.scss" as vars;
 
 html {
-  font-family: "Noto Sans CJK JP", "Meiryo", "Hiragino Sans", sans-serif;
+  font-family: var(--font-jp), var(--font-zh-cn), sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;

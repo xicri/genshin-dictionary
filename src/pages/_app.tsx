@@ -1,10 +1,22 @@
 import App from "next/app";
+import { Noto_Sans_SC, Noto_Sans_JP } from "next/font/google";
 import Head from "next/head";
 import { Layout } from "@/components/Layout";
 import { I18n, getAvailableLocales, validateLocale } from "@/libs/i18n";
 import "@/styles/globals.scss";
 import type { AppContext, AppInitialProps, AppProps } from "next/app";
 import type { Locale } from "@/types";
+
+
+Noto_Sans_JP({
+  display: "swap",
+  variable: "--font-jp",
+});
+Noto_Sans_SC({
+  weight: [ "400", "700" ],
+  display: "swap",
+  variable: "--font-zh-cn",
+});
 
 type OwnProps = {
   locale: Locale,
