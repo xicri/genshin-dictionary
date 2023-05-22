@@ -19,8 +19,10 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
       id: "zhongli",
       en: "Zhongli",
       ja: "鍾離",
+      zhCN: "钟离",
       pronunciationJa: "しょうり",
       notes: "読みは「ヂョンリー」",
+      notesZh: "锺离是中国古代早已有之的一个汉字复姓。…",
       variants: {
         ja: [ "鐘離" ],
       },
@@ -32,6 +34,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
       id: "inazuman",
       en: "Inazuman",
       ja: "稲妻人",
+      zhCN: "稻妻人 / 稻妻的",
       pronunciationJa: "いなずまじん",
       notes: "元々 Inazuman は非公式にプレイヤーの間で使われる言葉であったが…(以下略)",
       examples: [{
@@ -210,6 +213,12 @@ export default function AboutPage({ locale, wordDataExample }: InferGetStaticPro
                   <Sentence lang="zh-CN">日本語名</Sentence>
                 </li>
                 <li>
+                  <code>zhCN</code> (String) ―
+                  <Sentence lang="en">中国語名</Sentence>
+                  <Sentence lang="ja">中国語名</Sentence>
+                  <Sentence lang="zh-CN">中国語名</Sentence>
+                </li>
+                <li>
                   <code>pronunciationJa</code> (String) ―
                   <Sentence lang="en">
                     日本語の読み。ひらがな、カタカナ、記号が含まれます。
@@ -224,13 +233,25 @@ export default function AboutPage({ locale, wordDataExample }: InferGetStaticPro
                 <li>
                   <code>notes</code> (String) ―
                   <Sentence lang="en">
-                    備考。HTML が含まれる場合があります。
+                    備考 (日本語話者向け)。HTML が含まれる場合があります。
                   </Sentence>
                   <Sentence lang="ja">
-                    備考。HTML が含まれる場合があります。
+                    備考 (日本語話者向け)。HTML が含まれる場合があります。
                   </Sentence>
                   <Sentence lang="zh-CN">
-                    備考。HTML が含まれる場合があります。
+                    備考 (日本語話者向け)。HTML が含まれる場合があります。
+                  </Sentence>
+                </li>
+                <li>
+                  <code>notesZh</code> (String) ―
+                  <Sentence lang="en">
+                    備考 (中国語話者向け)。HTML が含まれる場合があります。
+                  </Sentence>
+                  <Sentence lang="ja">
+                    備考 (中国語話者向け)。HTML が含まれる場合があります。
+                  </Sentence>
+                  <Sentence lang="zh-CN">
+                    備考 (中国語話者向け)。HTML が含まれる場合があります。
                   </Sentence>
                 </li>
                 <li>
@@ -322,16 +343,13 @@ export default function AboutPage({ locale, wordDataExample }: InferGetStaticPro
               </h4>
               <p>
                 <Sentence lang="en">
-                  本データは現在β版です。予告なく破壊的変更が入る可能性もありますので、ご了承下さい。<br />
-                  可能であれば、アクセス毎に JSON を本サイトから取得することは避け、例えば Next.js や Nuxt.js などのプリレンダリングの仕組みを用いるなどして、ビルド時にデータを取得し HTML に予め埋め込む方式での実装を推奨します。
+                  本データは現在β版です。予告なく破壊的変更が入る可能性もありますので、ご了承下さい。
                 </Sentence>
                 <Sentence lang="ja">
-                  本データは現在β版です。予告なく破壊的変更が入る可能性もありますので、ご了承下さい。<br />
-                  可能であれば、アクセス毎に JSON を本サイトから取得することは避け、例えば Next.js や Nuxt.js などのプリレンダリングの仕組みを用いるなどして、ビルド時にデータを取得し HTML に予め埋め込む方式での実装を推奨します。
+                  本データは現在β版です。予告なく破壊的変更が入る可能性もありますので、ご了承下さい。
                 </Sentence>
                 <Sentence lang="zh-CN">
-                  本データは現在β版です。予告なく破壊的変更が入る可能性もありますので、ご了承下さい。<br />
-                  可能であれば、アクセス毎に JSON を本サイトから取得することは避け、例えば Next.js や Nuxt.js などのプリレンダリングの仕組みを用いるなどして、ビルド時にデータを取得し HTML に予め埋め込む方式での実装を推奨します。
+                  本データは現在β版です。予告なく破壊的変更が入る可能性もありますので、ご了承下さい。
                 </Sentence>
               </p>
 
