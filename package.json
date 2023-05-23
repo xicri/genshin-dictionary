@@ -25,7 +25,6 @@
     "vrt:screenshot": "sleep 5 && node ./scripts/vrt-screenshot.mjs",
     "vrt:reg": "./scripts/vrt-reg.sh",
     "lint": "tsc --noEmit && next lint",
-    "purge-cache": "node ./scripts/purge-cache.mjs",
     "postinstall": "node ./scripts/postinstall.mjs && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
