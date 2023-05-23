@@ -70,6 +70,7 @@ export function Translation({ locale, lang, word, kana = "", pinyins = []}: Prop
           &__langname {
             font-size: 0.7em;
             width: 4.5em;
+            white-space: nowrap;
           }
 
 
