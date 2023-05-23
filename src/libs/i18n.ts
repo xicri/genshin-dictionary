@@ -3,10 +3,10 @@ import nextConfig from "../../next.config";
 import type { Locale, Translations } from "@/types";
 
 export class I18n {
-  constructor(private locale: Locale, private translations: Translations) {}
+  constructor(private locale: Locale, private translations?: Translations) {}
 
   t(key: string, variables?: { [varName: string]: string|number }): string {
-    let translation = this.translations[this.locale][key] ?? globalTranslations[this.locale][key];
+    let translation = this.translations?.[this.locale][key] ?? globalTranslations[this.locale][key];
 
     if (!translation) {
       throw new Error(`There is no such key: "${key}".`);
