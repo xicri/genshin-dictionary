@@ -13,6 +13,12 @@ test("search words including 'ヴァヴィヴヴェヴォ' by 'ばびぶべぼ'"
   expect(words[0].ja).toBe("ヴェル・ゴレット");
 });
 
+test("search words including single quote", () => {
+  const { words } = getWords({ query: "Khaenriah" });
+
+  expect(words[0].en).toBe("Khaenri'ah");
+});
+
 type Fixture = {
   result: string,
   input: string,
