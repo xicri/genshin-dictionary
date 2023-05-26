@@ -63,7 +63,7 @@ export const WordListResults: FC<Props> = ({ searchConditions, historyMode, loca
 
   const { words, history, fullLength } = useMemo(() => {
     if (!historyMode) {
-      const { words, fullLength } = getWords(searchConditions);
+      const { words, fullLength } = getWords({ ...searchConditions, currentLocale: locale });
 
       return {
         words,
@@ -77,7 +77,7 @@ export const WordListResults: FC<Props> = ({ searchConditions, historyMode, loca
         fullLength,
       };
     }
-  }, [ historyMode, searchConditions ]);
+  }, [ historyMode, searchConditions, locale ]);
 
   return (
     <>

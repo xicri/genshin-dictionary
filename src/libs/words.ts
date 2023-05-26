@@ -1,5 +1,5 @@
 import { candidate } from "@/libs/utils";
-import type { BuiltWord, SearchConditions } from "@/types";
+import type { BuiltWord, Locale, SearchConditions } from "@/types";
 
 import _allWords from "../../public/dataset/words.json";
 const allWords = _allWords as BuiltWord[];
@@ -17,30 +17,95 @@ type GetWordsReturn = {
  * @param {string[]} options.activeTags - search tags
  * @param {number} options.maxWords - max word number. Default is 100.
  * @param {string} options.sortBy - If you specify "createdAt", it is reverse-sorted by the created date
+ * @param {string} options.currentLocale - Current locale
  * @returns {GetWordsReturn} words:  words as the search result, length: length of the search result when maxWords == ∞
  */
-export const getWords = ({ wordID = "", query = "", activeTags = [], maxWords = 100, sortBy }: SearchConditions): GetWordsReturn => {
+export const getWords = ({
+  wordID = "",
+  query = "",
+  activeTags = [],
+  maxWords = 100,
+  sortBy,
+  currentLocale,
+}: SearchConditions & { currentLocale?: Locale }): GetWordsReturn => {
   if (wordID) {
     const word: BuiltWord | undefined = allWords.find(word => word.id === wordID);
     return word ? { words: [ word ], fullLength: 1 } : { words: [], fullLength: 0 };
   } else {
-    let words = allWords.filter(word => {
-      // If no search query is specified, do not filter
-      if (!query) {
-        return true;
+    let words;
+
+    if (query) {
+      const wordsExactMatch = [];
+      const wordsExactMatchWithVariants = [];
+      const wordsPartialMatch = [];
+      const wordsPartialMatchWithVariants = [];
+      const wordsPartialMatchWithPronunciationJa = [];
+      const wordsMatchWithNotes = [];
+
+      for (const word of allWords) {
+        if ( // 1. exact match with en, ja, and zhCN, and pronunciationJa
+          candidate(word.ja).equals(query) ||
+          candidate(word.en).equals(query) ||
+          candidate(word.zhCN).equals(query) ||
+          candidate(word.pronunciationJa).equals(query)
+        ) {
+          wordsExactMatch.push(word);
+        } else if ( // 2. exact match with variants.en, variants.ja, and variants.zhCN
+          (word.variants?.ja?.some(variant => candidate(variant).equals(query)) ?? false) ||
+          (word.variants?.en?.some(variant => candidate(variant).equals(query)) ?? false) ||
+          (word.variants?.zhCN?.some(variant => candidate(variant).equals(query)) ?? false)
+        ) {
+          wordsExactMatchWithVariants.push(word);
+        } else if ( // 3. forward/backword/partial match with en, ja, and zhCN
+          candidate(word.ja).includes(query) ||
+          candidate(word.en).includes(query) ||
+          candidate(word.zhCN).includes(query)
+        ) {
+          wordsPartialMatch.push(word);
+        } else if ( // 4. forward/backword/partial match with variants.en, variants.ja, and variants.zhCN
+          (word.variants?.ja?.some(variant => candidate(variant).includes(query)) ?? false) ||
+          (word.variants?.en?.some(variant => candidate(variant).includes(query)) ?? false) ||
+          (word.variants?.zhCN?.some(variant => candidate(variant).includes(query)) ?? false)
+        ) {
+          wordsPartialMatchWithVariants.push(word);
+        } else if ( // 5. forward/backword/partial match with pronunciationJa
+          candidate(word.pronunciationJa).includes(query)
+        ) {
+          wordsPartialMatchWithPronunciationJa.push(word);
+        } else if ( // 6-1. exact/forward/backword/partial match with notes (on Japanese UI only)
+          currentLocale === "ja" &&
+          candidate(word.notes).includes(query)
+        ) {
+          wordsMatchWithNotes.push(word);
+        } else if ( // 6-2. exact/forward/backword/partial match with notesZh (on Chinese UI only)
+          currentLocale === "zh-CN" &&
+          candidate(word.notesZh).includes(query)
+        ) {
+          wordsMatchWithNotes.push(word);
+        } else if ( // 6-3. exact/forward/backword/partial match with ntoes and notesZh
+          !currentLocale &&
+          (
+            candidate(word.notes).includes(query) ||
+            candidate(word.notesZh).includes(query)
+          )
+        ) {
+          wordsMatchWithNotes.push(word);
+        }
       }
 
-      return (
-        candidate(word.ja).includes(query) ||
-        candidate(word.en).includes(query) ||
-        candidate(word.zhCN).includes(query) ||
-        candidate(word.pronunciationJa).includes(query) ||
-        candidate(word.notes).includes(query) ||
-        (word.variants?.ja?.some(variant => candidate(variant).includes(query)) ?? false) ||
-        (word.variants?.en?.some(variant => candidate(variant).includes(query)) ?? false) ||
-        (word.variants?.zhCN?.some(variant => candidate(variant).includes(query)) ?? false)
-      );
-    }).filter(word => {
+      words = [
+        ...wordsExactMatch,
+        ...wordsExactMatchWithVariants,
+        ...wordsPartialMatch,
+        ...wordsPartialMatchWithVariants,
+        ...wordsPartialMatchWithPronunciationJa,
+        ...wordsMatchWithNotes,
+      ];
+    } else {
+      words = allWords;
+    }
+
+    words = words.filter(word => {
       // If no search tag(s) are specified, do not filter
       if (activeTags.length <= 0) {
         return true;
