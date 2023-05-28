@@ -3,7 +3,7 @@ import type { BuiltWord, Locale, SearchConditions } from "@/types";
 import _allWords from "../../public/dataset/words.json";
 const allWords = _allWords as BuiltWord[];
 
-class CandidateString {
+class Candidate {
   constructor(private candidate: string|undefined) {}
 
   private normalize(str: string): string {
@@ -41,8 +41,6 @@ class CandidateString {
     return candidate.includes(_searchElement);
   }
 }
-
-const candidate = (str: string|undefined): CandidateString => new CandidateString(str);
 
 type GetWordsReturn = {
   words: BuiltWord[],
@@ -84,49 +82,49 @@ export const getWords = ({
 
       for (const word of allWords) {
         if ( // 1. exact match with en, ja, and zhCN, and pronunciationJa
-          candidate(word.ja).equals(query) ||
-          candidate(word.en).equals(query) ||
-          candidate(word.zhCN).equals(query) ||
-          candidate(word.pronunciationJa).equals(query)
+          new Candidate(word.ja).equals(query) ||
+          new Candidate(word.en).equals(query) ||
+          new Candidate(word.zhCN).equals(query) ||
+          new Candidate(word.pronunciationJa).equals(query)
         ) {
           wordsExactMatch.push(word);
         } else if ( // 2. exact match with variants.en, variants.ja, and variants.zhCN
-          (word.variants?.ja?.some(variant => candidate(variant).equals(query)) ?? false) ||
-          (word.variants?.en?.some(variant => candidate(variant).equals(query)) ?? false) ||
-          (word.variants?.zhCN?.some(variant => candidate(variant).equals(query)) ?? false)
+          (word.variants?.ja?.some(variant => new Candidate(variant).equals(query)) ?? false) ||
+          (word.variants?.en?.some(variant => new Candidate(variant).equals(query)) ?? false) ||
+          (word.variants?.zhCN?.some(variant => new Candidate(variant).equals(query)) ?? false)
         ) {
           wordsExactMatchWithVariants.push(word);
         } else if ( // 3. forward/backword/partial match with en, ja, and zhCN
-          candidate(word.ja).includes(query) ||
-          candidate(word.en).includes(query) ||
-          candidate(word.zhCN).includes(query)
+          new Candidate(word.ja).includes(query) ||
+          new Candidate(word.en).includes(query) ||
+          new Candidate(word.zhCN).includes(query)
         ) {
           wordsPartialMatch.push(word);
         } else if ( // 4. forward/backword/partial match with variants.en, variants.ja, and variants.zhCN
-          (word.variants?.ja?.some(variant => candidate(variant).includes(query)) ?? false) ||
-          (word.variants?.en?.some(variant => candidate(variant).includes(query)) ?? false) ||
-          (word.variants?.zhCN?.some(variant => candidate(variant).includes(query)) ?? false)
+          (word.variants?.ja?.some(variant => new Candidate(variant).includes(query)) ?? false) ||
+          (word.variants?.en?.some(variant => new Candidate(variant).includes(query)) ?? false) ||
+          (word.variants?.zhCN?.some(variant => new Candidate(variant).includes(query)) ?? false)
         ) {
           wordsPartialMatchWithVariants.push(word);
         } else if ( // 5. forward/backword/partial match with pronunciationJa
-          candidate(word.pronunciationJa).includes(query)
+          new Candidate(word.pronunciationJa).includes(query)
         ) {
           wordsPartialMatchWithPronunciationJa.push(word);
         } else if ( // 6-1. exact/forward/backword/partial match with notes (on Japanese UI only)
           currentLocale === "ja" &&
-          candidate(word.notes).includes(query)
+          new Candidate(word.notes).includes(query)
         ) {
           wordsMatchWithNotes.push(word);
         } else if ( // 6-2. exact/forward/backword/partial match with notesZh (on Chinese UI only)
           currentLocale === "zh-CN" &&
-          candidate(word.notesZh).includes(query)
+          new Candidate(word.notesZh).includes(query)
         ) {
           wordsMatchWithNotes.push(word);
         } else if ( // 6-3. exact/forward/backword/partial match with ntoes and notesZh
           !currentLocale &&
           (
-            candidate(word.notes).includes(query) ||
-            candidate(word.notesZh).includes(query)
+            new Candidate(word.notes).includes(query) ||
+            new Candidate(word.notesZh).includes(query)
           )
         ) {
           wordsMatchWithNotes.push(word);
