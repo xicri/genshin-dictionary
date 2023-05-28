@@ -9,7 +9,7 @@ class CandidateString {
       // e.g. search query: "勤労の導き" -> result: "「勤労」の導き"
       // e.g. search query: "氷元素" -> result: "氷 (元素)"
       // e.g. search query: "ジングンヒルド" -> result: "ジン・グンヒルド"
-      .replace(/[（）()「」・'" ]/g, "")
+      .replace(/[（）()「」『』<>＜＞《》'"、。,.，．・!?！？ 　]/g, "")
       .replace(/ゔぁ/g, "ば")
       .replace(/ゔぃ/g, "び")
       .replace(/ゔぇ/g, "べ")
