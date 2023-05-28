@@ -16,16 +16,13 @@ export function Layout({ children, locale }: Props): JSX.Element {
   //
   const i18n = new I18n(locale, {
     en: {
-      siteTitleL1: "Genshin",
-      siteTitleL2: "Dictionary",
+      siteTitle: "Genshin Dictionary",
     },
     ja: {
-      siteTitleL1: "原神 英語・",
-      siteTitleL2: "中国語辞典",
+      siteTitle: "原神 英語・中国語辞典",
     },
     "zh-CN": {
-      siteTitleL1: "原神",
-      siteTitleL2: "中英日辞典",
+      siteTitle: "原神中英日辞典",
     },
   });
 
@@ -33,6 +30,8 @@ export function Layout({ children, locale }: Props): JSX.Element {
     <div>
       <style jsx>{`
         @use "_variables.scss" as vars;
+
+        $hide-title-width: 336px;
 
         .layout-default {
           &__nav-wrapper {
@@ -57,17 +56,28 @@ export function Layout({ children, locale }: Props): JSX.Element {
             gap: 0.5rem;
           }
 
-          &__title-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-          }
-
           &__title {
             font-weight: 300;
             font-size: 32px;
             color: vars.$color-dark;
             letter-spacing: 1px;
             white-space: nowrap;
+
+            @media (max-width: vars.$mobile-width) { // Mobile
+              font-size: 7vw;
+            }
+
+            @media (max-width: $hide-title-width) { // Too small to display site title
+              display: none;
+            }
+          }
+
+          &__logo {
+            display: none;
+
+            @media (max-width: $hide-title-width) { // Too small to display site title
+              display: inline;
+            }
           }
         }
       `}</style>
@@ -75,9 +85,9 @@ export function Layout({ children, locale }: Props): JSX.Element {
       <div className="layout-default__nav-wrapper">
         <nav className="layout-default__nav">
           <h1>
-            <Link href="/" className="layout-default__title-wrapper">
-              <span className="layout-default__title">{ i18n.t("siteTitleL1") }</span>
-              <span className="layout-default__title">{ i18n.t("siteTitleL2") }</span>
+            <Link href="/">
+              <img src="/images/favicon.svg" alt={ i18n.t("siteTitle") } width="48" height="48" className="layout-default__logo" decoding="async" />
+              <span className="layout-default__title">{ i18n.t("siteTitle") }</span>
             </Link>
           </h1>
 
