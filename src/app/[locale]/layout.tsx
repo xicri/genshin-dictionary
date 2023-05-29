@@ -2,6 +2,7 @@ import Link from "next/link";
 import { HamburgerMenu } from "@/components/HamburgerMenu";
 import { Spacer } from "@/components/Spacer";
 import { I18n } from "@/libs/i18n";
+import { locales } from "@/config";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import type { Locale } from "@/types";
@@ -38,6 +39,10 @@ export async function generateMetaData({ params: { locale }}: Props): Promise<Me
     robots: process.env.SERVER_ENV === "production" ? { index: true, follow: true } : { index: false, follow: false },
     formatDetection: { telephone: false },
   };
+}
+
+export async function generateStaticParams(): Promise<{ locale: Locale; }[]> {
+  return locales.map(locale => ({ locale }));
 }
 
 export default function Layout({ children, params: { locale }}: Props): JSX.Element {
