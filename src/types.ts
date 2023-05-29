@@ -1,3 +1,4 @@
+import type { Metadata as OriginalMetadata } from "next";
 import type tags from "../public/dataset/tags.json";
 
 export type Locale = "en" | "ja" | "zh-CN";
@@ -81,4 +82,14 @@ export type OnSearchProps = {
   newTag?: TagID,
   removeTagIndex?: number,
   maxWords?: number | "reset",
+};
+
+/** Make specified properties required */
+type Require<Super, Keys extends keyof Exclude<Super, null|undefined>> = Super & {
+  [Property in Keys]-?: Exclude<Super, null|undefined>[Property];
+};
+
+export type Metadata = Require<OriginalMetadata, "title"|"description"> & {
+  alternates: Require<OriginalMetadata["alternates"], "canonical"|"languages">;
+  openGraph: Require<OriginalMetadata["openGraph"], "title"|"description"|"url">;
 };
