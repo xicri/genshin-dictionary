@@ -16,12 +16,15 @@ type Props = {
 const translations = {
   en: {
     opendataTitle: "Open Data / API (β)",
+    description: "Genshin Dictionary's dataset is available as an API / Opendata. This page is a reference for the data format.",
   },
   ja: {
     opendataTitle: "オープンデータ・API (β)",
+    description: "原神 英語・中国語辞典のデータを API / オープンデータとして利用することができます。このページではデータフォーマットについての詳細を説明しています。",
   },
   "zh-CN": {
     opendataTitle: "开放数据 · API (β)",
+    description: "Genshin Dictionary's dataset is available as an API / Opendata. This page is a reference for the data format.", // TODO
   },
 };
 
@@ -29,17 +32,20 @@ export async function generateMetaData({ params: { locale }}: Props): Promise<Me
   const i18n = new I18n(locale, translations);
 
   const title = i18n.t("opendataTitle");
+  const description = i18n.t("description");
 
   const { canonical, languages } = generateAlternates("/opendata/", locale);
 
   return {
     title,
+    description,
     alternates: {
       canonical,
       languages,
     },
     openGraph: {
       title,
+      description,
       url: canonical,
     },
     robots: {
