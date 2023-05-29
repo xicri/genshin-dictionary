@@ -1,19 +1,56 @@
-import Head from "next/head";
-import { I18n, validateLocale } from "@/libs/i18n";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import type { BuiltWord, Locale } from "@/types";
+import { I18n } from "@/libs/i18n";
+import { generateAlternates } from "@/libs/meta";
 import { Sentence } from "@/components/Sentence";
 import { Article } from "@/components/Article";
-import allTags from "../../public/dataset/tags.json";
-
 import { styles } from "@/styles/article";
+import allTags from "../../../../public/dataset/tags.json";
+import type { BuiltWord, Locale, Metadata } from "@/types";
 
 type Props = {
-  locale: Locale,
-  wordDataExample: string,
+  params: {
+    locale: Locale,
+    wordDataExample: string,
+  };
 };
 
-export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
+const translations = {
+  en: {
+    opendataTitle: "Open Data / API (β)",
+  },
+  ja: {
+    opendataTitle: "オープンデータ・API (β)",
+  },
+  "zh-CN": {
+    opendataTitle: "开放数据 · API (β)",
+  },
+};
+
+export async function generateMetaData({ params: { locale }}: Props): Promise<Metadata> {
+  const i18n = new I18n(locale, translations);
+
+  const title = i18n.t("opendataTitle");
+
+  const { canonical, languages } = generateAlternates("/opendata/", locale);
+
+  return {
+    title,
+    alternates: {
+      canonical,
+      languages,
+    },
+    openGraph: {
+      title,
+      url: canonical,
+    },
+    robots: {
+      index: locale === "ja", // TODO this forbids to index all locale pages
+    },
+  };
+}
+
+export default function OpendataPage({ params: { locale }}: Props): JSX.Element {
+  const i18n = new I18n(locale, translations);
+
   const wordDataExampleObject: BuiltWord[] = [
     {
       id: "zhongli",
@@ -48,48 +85,15 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
       tags: [ "inazuma" ],
     },
   ];
-
-  return {
-    props: {
-      locale: validateLocale(locale),
-      wordDataExample: JSON.stringify(wordDataExampleObject, null, 2)
-        .replace(/\]$/, `
-  // ...
+  const wordDataExample = JSON.stringify(wordDataExampleObject, null, 2)
+    .replace(/\]$/, `
+// ...
 ]
-`),
-    },
-  };
-};
-
-export default function AboutPage({ locale, wordDataExample }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
-  const i18n = new I18n(locale, {
-    en: {
-      opendataTitle: "Open Data / API (β)",
-    },
-    ja: {
-      opendataTitle: "オープンデータ・API (β)",
-    },
-    "zh-CN": {
-      opendataTitle: "开放数据 · API (β)",
-    },
-  });
-
-  const title = `${ i18n.t("opendataTitle") } | ${ i18n.t("siteTitle") }`;
-  // const description = t("opendataDescription"); // TODO
+`);
 
   return (
     <>
       <style jsx>{ styles }</style>
-
-      <Head>
-        <title>{ title }</title>
-        <meta property="og:title" content={ title } />
-        {/* TODO
-        <meta name="description" content={ description } />
-        <meta property="og:description" content={ description } />
-        */}
-        { locale !== "ja" ? (<meta name="robots" content="noindex" />) : "" }
-      </Head>
 
       <div className="article__wrapper-outer">
         <div className="article__wrapper-inner">

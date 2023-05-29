@@ -1,54 +1,68 @@
-import Head from "next/head";
-import { I18n, validateLocale } from "@/libs/i18n";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import type { Locale } from "@/types";
+import { I18n } from "@/libs/i18n";
+import { generateAlternates } from "@/libs/meta";
 import { Sentence } from "@/components/Sentence";
 import { Article } from "@/components/Article";
-import allWords from "../../public/dataset/words.json";
 import { styles } from "@/styles/article";
+import { locales } from "@/config";
+import allWords from "../../../../public/dataset/words.json";
+import type { Locale, Metadata } from "@/types";
 
 type Props = {
-  locale: Locale,
+  params: { locale: Locale };
 };
 
-export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => ({
-  props: {
-    locale: validateLocale(locale),
+const translations = {
+  en: {
+    aboutTitle: "About this website",
+    aboutDescription: "About Genshin Dictionary. This website is an online English-Chinese-Japanese dictionary of the terms in Genshin Impact.",
   },
-});
+  ja: {
+    aboutTitle: "このサイトについて",
+    aboutDescription: "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
+  },
+  "zh-CN": {
+    aboutTitle: "关于本网站",
+    aboutDescription: "关于原神中英日辞典。本网站是一个在线的中英日三语原神游戏用语辞典。",
+  },
+};
 
-export default function AboutPage({ locale }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
-  const i18n = new I18n(locale, {
-    en: {
-      aboutTitle: "About this website",
-      aboutDescription: "About Genshin Dictionary. This website is an online English-Chinese-Japanese dictionary of the terms in Genshin Impact.",
-    },
-    ja: {
-      aboutTitle: "このサイトについて",
-      aboutDescription: "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
-    },
-    "zh-CN": {
-      aboutTitle: "关于本网站",
-      aboutDescription: "关于原神中英日辞典。本网站是一个在线的中英日三语原神游戏用语辞典。",
-    },
-  });
+export async function generateMetaData({ params: { locale }}: Props): Promise<Metadata> {
+  const i18n = new I18n(locale, translations);
 
-  const title = `${ i18n.t("aboutTitle") } | ${ i18n.t("siteTitle") }`;
+  const title = i18n.t("aboutTitle");
   const description = i18n.t("aboutDescription");
 
+  const { canonical, languages } = generateAlternates("/about/", locale);
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+      languages,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+    },
+    robots: {
+      index: locale === "ja", // TODO this forbids to index all locale pages
+    },
+  };
+}
+
+export async function generateStaticParams(): Promise<{ locale: Locale; }[]> {
+  return locales.map(locale => ({ locale }));
+}
+
+export default function AboutPage({ params: { locale }}: Props): JSX.Element {
+  const i18n = new I18n(locale, translations);
   const wordCount = allWords.length;
 
   return (
     <>
       <style jsx>{ styles }</style>
-
-      <Head>
-        <title>{ title }</title>
-        <meta property="og:title" content={ title } />
-        <meta name="description" content={ description } />
-        <meta property="og:description" content={ description } />
-        { locale !== "ja" ? (<meta name="robots" content="noindex" />) : "" }
-      </Head>
 
       <div className="article__wrapper-outer">
         <div className="article__wrapper-inner">
