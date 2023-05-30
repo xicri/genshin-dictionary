@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "npm run build:robots && npm run build:sitemap && npm run build:next",
-    "build:next": "next build",
+    "build:next": "next build && next export",
     "build:robots": "ts-node --esm ./scripts/build-robots.ts",
     "build:sitemap": "ts-node --esm ./scripts/build-sitemap.ts",
     "start": "next start",
