@@ -1,3 +1,4 @@
+// TODO
 import Head from "next/head";
 import { WordList } from "@/components/WordList";
 import { I18n, validateLocale } from "@/libs/i18n";
