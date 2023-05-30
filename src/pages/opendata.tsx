@@ -8,6 +8,10 @@ import allTags from "../../public/dataset/tags.json";
 
 import { styles } from "@/styles/article";
 
+export const config = {
+  runtime: "edge",
+};
+
 type Props = {
   locale: Locale,
   wordDataExample: string,

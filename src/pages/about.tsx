@@ -7,6 +7,10 @@ import { Article } from "@/components/Article";
 import allWords from "../../public/dataset/words.json";
 import { styles } from "@/styles/article";
 
+export const config = {
+  runtime: "edge",
+};
+
 type Props = {
   locale: Locale,
 };

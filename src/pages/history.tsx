@@ -4,6 +4,10 @@ import { I18n, validateLocale } from "@/libs/i18n";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import type { Locale } from "@/types";
 
+export const config = {
+  runtime: "edge",
+};
+
 type Props = {
   locale: Locale,
 };

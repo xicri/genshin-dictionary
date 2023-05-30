@@ -7,6 +7,10 @@ import allTags from "../../../public/dataset/tags.json";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import type { Locale, TagID } from "@/types";
 
+export const config = {
+  runtime: "edge",
+};
+
 type Props = {
   locale: Locale,
   tagID: TagID,

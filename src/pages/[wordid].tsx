@@ -5,6 +5,10 @@ import { getWords } from "@/libs/words";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import type { BuiltWord, Locale } from "@/types";
 
+export const config = {
+  runtime: "edge",
+};
+
 type Props = {
   locale: Locale,
   word: BuiltWord,
