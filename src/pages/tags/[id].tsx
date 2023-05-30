@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { useState } from "react";
 import { WordList } from "@/components/WordList";
-import { I18n, validateLocale, validateLocales } from "@/libs/i18n";
+import { I18n, validateLocale } from "@/libs/i18n";
 import { validateTag } from "@/libs/tags";
 import allTags from "../../../public/dataset/tags.json";
-import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import type { Locale, TagID } from "@/types";
 
 type Props = {
@@ -12,24 +12,7 @@ type Props = {
   tagID: TagID,
 };
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const paths = [];
-
-  for (const locale of validateLocales(locales)) {
-    for (const tagID of Object.keys(allTags)) {
-      paths.push({
-        params: { id: tagID },
-        locale,
-      });
-    }
-  }
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps<Props> = async ({ locale, params }) => {
+export const getServerSideProps: GetServerSideProps<Props> = async ({ locale, params }) => {
   try {
     const tagID: TagID = validateTag(params?.id as string);
 
@@ -50,7 +33,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale, params }) 
   }
 };
 
-export default function TagIDPage({ locale, tagID }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
+export default function TagIDPage({ locale, tagID }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
   const i18n = new I18n(locale, {
     en: {},
     ja: {},

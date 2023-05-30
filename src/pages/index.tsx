@@ -1,20 +1,20 @@
 import Head from "next/head";
 import { WordList } from "@/components/WordList";
 import { validateLocale } from "@/libs/i18n";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import type { Locale } from "@/types";
 
 type Props = {
   locale: Locale,
 };
 
-export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => ({
+export const getServerSideProps: GetServerSideProps = async ({ locale }): Promise<{ props: Props }> => ({
   props: {
     locale: validateLocale(locale),
   },
 });
 
-export default function Index({ locale }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
+export default function Index({ locale }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
   return (
     <>
       <Head>
