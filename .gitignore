@@ -72,3 +72,6 @@ yarn.lock
 # Misc
 .node_repl_history
 .eslintcache
+
+# Vercel
+/.vercel/

@@ -15,8 +15,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "npm run build:robots && npm run build:sitemap && npm run build:next",
-    "build:next": "next build",
+    "prebuild": "npm run build:robots && npm run build:sitemap",
     "build:robots": "ts-node --esm ./scripts/build-robots.ts",
     "build:sitemap": "ts-node --esm ./scripts/build-sitemap.ts",
     "start": "next start",
@@ -40,6 +39,7 @@
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.332.0",
+    "@cloudflare/next-on-pages": "^1.0.1",
     "@playwright/test": "^1.14.1",
     "@styled-jsx/plugin-sass": "^4.0.2",
     "@types/jest": "^29.5.1",
