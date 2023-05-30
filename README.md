@@ -9,12 +9,12 @@ If you want to contribute this project by adding new words or fixing wrong trans
 
 ## Development
 
-Genshin Dictionary is a website based on Next.js.
+Genshin Dictionary is a static website based on Nuxt 2.
 You may need experience in (or need to learn) following technology stack to contribute this project:
 
-- TypeScript
-- Next.js
-- React
+- JavaScript (ES2015+)
+- Nuxt 2
+- Vue 2 (Composition API)
 - Scss (Understanding for BEM is required)
 
 ### Requirements

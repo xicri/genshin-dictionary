@@ -12,6 +12,9 @@ on:
   push:
     branches:
       - main
+  repository_dispatch:
+    types:
+      - langdata-update
 
 jobs:
   test:
@@ -24,7 +27,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 16
           cache: npm
 
       - name: cache playwright browsers
@@ -39,3 +42,42 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: npm run lint
+
+  staging:
+    if: ${{ github.ref != 'refs/heads/main' && github.repository_owner == 'xicri' }}
+    timeout-minutes: 10
+    env:
+      SERVER_ENV: staging
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: generate Dockerfile_staging
+        run: |
+          cp Dockerfile Dockerfile_staging
+          sed -i -e 's/production/staging/g' Dockerfile_staging
+      - run: flyctl deploy --remote-only --app=genshin-dictionary-staging --dockerfile=Dockerfile_staging
+
+  production:
+    if: ${{ github.ref == 'refs/heads/main' && github.repository_owner == 'xicri' }}
+    needs: test
+    timeout-minutes: 10
+    env:
+      SERVER_ENV: production
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+
+      - name: Purge Cloudflare cache
+        run: |
+          npm install node-fetch
+          npm run purge-cache

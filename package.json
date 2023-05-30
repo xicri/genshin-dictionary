@@ -12,42 +12,38 @@
   },
   "homepage": "https://genshin-dictionary.com",
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "npm run build:robots && npm run build:sitemap && npm run build:next",
-    "build:next": "next build",
-    "build:robots": "ts-node --esm ./scripts/build-robots.ts",
-    "build:sitemap": "ts-node --esm ./scripts/build-sitemap.ts",
-    "start": "next start",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider nuxt",
+    "build": "nuxt build --fail-on-error",
+    "start": "nuxt start",
     "test": "jest && playwright test",
     "vrt": "concurrently --kill-others --success=first \"npm:start\" \"npm:vrt:screenshot\" && npm run vrt:reg",
     "vrt:screenshot": "sleep 5 && node ./scripts/vrt-screenshot.mjs",
     "vrt:reg": "./scripts/vrt-reg.sh",
-    "lint": "tsc --noEmit && next lint",
+    "lint": "eslint --ext .js,.mjs,.cjs,.ts,.vue --ignore-path .gitignore .",
+    "purge-cache": "node ./scripts/purge-cache.mjs",
     "postinstall": "node ./scripts/postinstall.mjs && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
-    "@escapace/accept-language-parser": "^1.6.3",
+    "@nuxtjs/composition-api": "^0.33.0",
+    "@nuxtjs/i18n": "^7.2.0",
+    "@nuxtjs/robots": "^2.5.0",
+    "@nuxtjs/sentry": "^6.0.0",
+    "@nuxtjs/sitemap": "^2.4.0",
+    "@pinia/nuxt": "^0.2.1",
     "dotenv": "^16.0.1",
     "klona": "^2.0.4",
     "lodash": "^4.17.21",
     "luxon": "^3.2.1",
-    "next": "^13.1.6",
-    "node-fetch": "^3.3.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "nuxt": "^2.16.0",
+    "pinia": "^2.0.13",
+    "sass": "^1.32.10",
+    "sass-loader": "^10.1.1"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.332.0",
     "@playwright/test": "^1.14.1",
-    "@styled-jsx/plugin-sass": "^4.0.2",
-    "@types/jest": "^29.5.1",
-    "@types/lodash": "^4.14.192",
-    "@types/luxon": "^3.2.0",
-    "@types/node": "^18.14.0",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
+    "babel-jest": "^29.0.1",
     "concurrently": "^8.0.1",
     "eslint": "latest",
     "eslint-config-xicri": "latest",
@@ -56,14 +52,10 @@
     "reg-notify-github-plugin": "^0.12.1",
     "reg-publish-s3-plugin": "^0.12.1",
     "reg-simple-keygen-plugin": "^0.12.1",
-    "reg-suit": "^0.12.1",
-    "sass": "^1.61.0",
-    "ts-jest": "^29.1.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "reg-suit": "^0.12.1"
   },
   "engines": {
     "node": "18.x",
-    "npm": ">=9.x"
+    "npm": ">=8.x"
   }
 }
