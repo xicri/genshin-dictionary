@@ -32,7 +32,7 @@
 </i18n>
 
 <script setup>
-import { isEmpty } from "lodash";
+import { isEmpty } from "lodash-es";
 import { getHistory } from "~/libs/utils";
 
 const { t } = useI18n();
