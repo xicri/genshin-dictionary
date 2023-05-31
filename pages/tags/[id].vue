@@ -38,7 +38,7 @@ onMounted(() => {
 });
 
 const onSearch = () => {
-  const root = `/${locale.value}/`;
+  const root = `/${locale.value}`;
 
   if (window.location.pathname !== root) {
     history.pushState({}, "", root);

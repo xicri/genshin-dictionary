@@ -13,7 +13,7 @@ const store = useDictionaryStore($pinia);
 
 const onSearch = () => {
   if (window.location.pathname !== "/") {
-    history.pushState({}, "", `/${locale.value}/`);
+    history.pushState({}, "", `/${locale.value}`);
     document.title = t("siteTitle");
   }
 };

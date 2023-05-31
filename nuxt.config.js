@@ -73,14 +73,14 @@ export default defineNuxtConfig({
     // i18n: true, // TODO temporarily disable i18n option until nuxt/sitemap supports nuxt/i18n on Nuxt 3
     routes: [
       ...([ "en", "ja" , "zh-CN" ].map(lang => ([
-        { url: `/${lang}/` },
-        { url: `/${lang}/history/` },
-        ...(words.map(word => ({ url: `/${lang}/${word.id}/`, lastmod: word.updatedAt }))),
-        ...(Object.keys(tags).map(tagID => ({ url: `/${lang}/tags/${tagID}/` }))),
+        { url: `/${lang}` },
+        { url: `/${lang}/history` },
+        ...(words.map(word => ({ url: `/${lang}/${word.id}`, lastmod: word.updatedAt }))),
+        ...(Object.keys(tags).map(tagID => ({ url: `/${lang}/tags/${tagID}` }))),
       ])).flat()),
       // Pages not translated yet
-      { url: "/ja/about/" },
-      { url: "/ja/opendata/" },
+      { url: "/ja/about" },
+      { url: "/ja/opendata" },
     ],
   }),
 });
