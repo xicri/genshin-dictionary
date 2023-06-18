@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { candidate } from "../libs/utils.js";
-import words from "~/dataset/words.json";
+import allWords from "~/dataset/words.json";
 
 export const useDictionaryStore = defineStore("dictionary", {
   state: () => ({
@@ -13,10 +13,10 @@ export const useDictionaryStore = defineStore("dictionary", {
   getters: {
     searchResults: (state) => {
       if (state.wordID) {
-        const word = words.find(word => word.id === state.wordID);
+        const word = allWords.find(word => word.id === state.wordID);
         return word ? [ word ] : [];
       } else {
-        const results = words.filter(word => {
+        const results = allWords.filter(word => {
           if (state.query) {
             return (
               candidate(word.ja).includes(state.query) ||
