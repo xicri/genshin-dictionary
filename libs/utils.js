@@ -7,8 +7,8 @@ class CandidateString {
     this.candidate = candidate;
   }
 
-  includes(searchElement) {
-    const normalize = (str) => str
+  #normalize(str) {
+    return str
       // replace Katakana with Hiragana
       .replace(/[ァ-ヴ]/g, (str) => String.fromCharCode(str.charCodeAt(0) - 0x60))
       // ignore symbols
@@ -22,13 +22,23 @@ class CandidateString {
       .replace(/ゔぉ/g, "ぼ")
       .replace(/ゔ/g, "ぶ") // You need to replace after ゔぇ & ゔぉ, or ゔぇ & ゔぉ would be converted to ぶぇ & ぶぉ.
       .toLowerCase();
+  }
 
+  equals(searchElement) {
     if (!this.candidate) {
       return false;
     }
 
-    const candidate = normalize(this.candidate);
-    const _searchElement = normalize(searchElement);
+    return this.#normalize(this.candidate) === this.#normalize(searchElement);
+  }
+
+  includes(searchElement) {
+    if (!this.candidate) {
+      return false;
+    }
+
+    const candidate = this.#normalize(this.candidate);
+    const _searchElement = this.#normalize(searchElement);
     return candidate.includes(_searchElement);
   }
 }
