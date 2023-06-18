@@ -32,10 +32,11 @@ import { useDictionaryStore } from "~/store/index.js";
 defineEmits([ "search" ]);
 
 const { $pinia } = useNuxtApp();
-const { t } = useI18n({
+const { t, locale } = useI18n({
   useScope: "local",
 });
 const store = useDictionaryStore($pinia);
+store.setLocale(locale);
 const { searchResults } = storeToRefs(store);
 </script>
 
