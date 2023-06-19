@@ -1,6 +1,6 @@
-const { devices } = require("@playwright/test");
+import { devices } from "@playwright/test";
 
-module.exports = {
+export default {
   testMatch: /.*(pwtest)\.(js|ts|mjs)/,
   workers: 1, // disable concurrent tests
 
