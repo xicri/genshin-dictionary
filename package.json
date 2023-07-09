@@ -49,7 +49,7 @@
     "eslint-config-xicri": "latest",
     "jest": "^29.0.1",
     "playwright": "^1.33.0",
-    "reg-notify-github-plugin": "^0.12.1",
+    "reg-notify-github-plugin": "^0.12.2",
     "reg-publish-s3-plugin": "^0.12.1",
     "reg-simple-keygen-plugin": "^0.12.1",
     "reg-suit": "^0.12.1"
