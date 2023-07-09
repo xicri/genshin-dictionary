@@ -59,7 +59,7 @@ jobs:
         run: |
           cp Dockerfile Dockerfile_staging
           sed -i -e 's/production/staging/g' Dockerfile_staging
-      - run: flyctl deploy --remote-only --app=genshin-dictionary-staging --dockerfile=Dockerfile_staging
+      - run: flyctl deploy --local-only --app=genshin-dictionary-staging --dockerfile=Dockerfile_staging
 
   production:
     if: ${{ github.ref == 'refs/heads/main' && github.repository_owner == 'xicri' }}
@@ -75,7 +75,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
+      - run: flyctl deploy --local-only
 
       - name: Purge Cloudflare cache
         run: |
