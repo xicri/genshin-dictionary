@@ -266,14 +266,15 @@ describe("The Genshin English Dictionary", () => {
 
 describe("redirection by language settings works properly", () => {
   const rootURL = `http://${ip}:${port}`;
+  // TODO Some languages are temporarily disabled due to nuxt/i18n bug.
   const langs = [
-    { code: "ja", url: `${rootURL}/ja` },
-    { code: "ja-JP", url: `${rootURL}/ja` },
+    // { code: "ja", url: `${rootURL}/ja` },
+    // { code: "ja-JP", url: `${rootURL}/ja` },
     { code: "en", url: `${rootURL}/en` },
     { code: "en-US", url: `${rootURL}/en` },
     { code: "en-GB", url: `${rootURL}/en` },
-    { code: "zh", url: `${rootURL}/zh-CN` },
-    { code: "zh-CN", url: `${rootURL}/zh-CN` },
+    // { code: "zh", url: `${rootURL}/zh-CN` },
+    // { code: "zh-CN", url: `${rootURL}/zh-CN` },
     { code: "fr", url: `${rootURL}/en` }, // fallback to English
   ];
 
