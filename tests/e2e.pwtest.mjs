@@ -20,7 +20,7 @@ function getRandomLang() {
 
 describe("The Genshin English Dictionary", () => {
   const lang = getRandomLang();
-  const rootURL = `http://${ip}:${port}/${lang}/`;
+  const rootURL = `http://${ip}:${port}/${lang}`;
 
   console.log(`Testing in ${lang} locale.`);
 
@@ -138,7 +138,7 @@ describe("The Genshin English Dictionary", () => {
   });
 
   test("pinyin is properly displayed on Chinese", async ({ page }) => {
-    await page.goto(`http://${ip}:${port}/zh-CN/pearl-galley/`);
+    await page.goto(`http://${ip}:${port}/zh-CN/pearl-galley`);
 
     const chinese = await page.$("[data-e2e='zh-CN']");
     expect(await chinese.innerHTML()).toBe("珠<ruby>钿<rp>(</rp><rt class=\"results__pinyin\">diàn</rt><rp>)</rp></ruby><ruby>舫<rp>(</rp><rt class=\"results__pinyin\">fǎng</rt><rp>)</rp></ruby>");
@@ -147,7 +147,7 @@ describe("The Genshin English Dictionary", () => {
   });
 
   for (const lang of [ "en", "ja", "zh-CN" ]) {
-    const rootURL = `http://${ip}:${port}/${lang}/`;
+    const rootURL = `http://${ip}:${port}/${lang}`;
 
     test(`search by Japanese (${lang})`, async ({ page }) => {
       await page.goto(rootURL);
@@ -168,7 +168,7 @@ describe("The Genshin English Dictionary", () => {
       expect(await ja.innerText()).toBe("狂戦士の仮面");
       expect(await en.innerText()).toBe("Berserker's Battle Mask");
       expect(await pronunciationJa.innerText()).toBe("(きょうせんしのかめん)");
-      expect(await permalink.getAttribute("href")).toBe(`/${lang}/berserkers-battle-mask/`);
+      expect(await permalink.getAttribute("href")).toBe(`/${lang}/berserkers-battle-mask`);
 
       if (lang === "ja") {
         const notes = await word.$("div[data-e2e='notes']");
@@ -189,7 +189,7 @@ describe("The Genshin English Dictionary", () => {
         expect(await tagName.innerText()).toBe("圣遗物（单件名）");
       }
 
-      expect(await tag.getAttribute("href")).toBe(`/${lang}/tags/artifact-piece/`);
+      expect(await tag.getAttribute("href")).toBe(`/${lang}/tags/artifact-piece`);
 
       // error message is NOT shown
       expect(await page.$("p[data-e2e='empty']")).toBeNull();
@@ -198,7 +198,7 @@ describe("The Genshin English Dictionary", () => {
     });
 
     test(`if note is shown by the specified language (${lang})`, async ({ page }) => {
-      await page.goto(`http://localhost:3000/${ lang }/chihu-rock/`);
+      await page.goto(`http://localhost:3000/${ lang }/chihu-rock`);
 
       const words = await page.$$(".results__word");
       const word = words[0];
@@ -249,7 +249,7 @@ describe("The Genshin English Dictionary", () => {
     });
 
     test(`title (${lang})`, async ({ page }) => {
-      await page.goto(`${rootURL}lumine/`);
+      await page.goto(`${rootURL}/lumine`);
 
       if (lang === "en") {
         await expect(page.title()).resolves.toBe("\"Lumine\" is \"荧\" in Chinese | Genshin Dictionary");
@@ -267,14 +267,14 @@ describe("The Genshin English Dictionary", () => {
 describe("redirection by language settings works properly", () => {
   const rootURL = `http://${ip}:${port}`;
   const langs = [
-    { code: "ja", url: `${rootURL}/ja/` },
-    { code: "ja-JP", url: `${rootURL}/ja/` },
-    { code: "en", url: `${rootURL}/en/` },
-    { code: "en-US", url: `${rootURL}/en/` },
-    { code: "en-GB", url: `${rootURL}/en/` },
-    { code: "zh", url: `${rootURL}/zh-CN/` },
-    { code: "zh-CN", url: `${rootURL}/zh-CN/` },
-    { code: "fr", url: `${rootURL}/en/` }, // fallback to English
+    { code: "ja", url: `${rootURL}/ja` },
+    { code: "ja-JP", url: `${rootURL}/ja` },
+    { code: "en", url: `${rootURL}/en` },
+    { code: "en-US", url: `${rootURL}/en` },
+    { code: "en-GB", url: `${rootURL}/en` },
+    { code: "zh", url: `${rootURL}/zh-CN` },
+    { code: "zh-CN", url: `${rootURL}/zh-CN` },
+    { code: "fr", url: `${rootURL}/en` }, // fallback to English
   ];
 
   for (const { code, url } of langs) {
@@ -290,14 +290,14 @@ describe("redirection by language settings works properly", () => {
     });
 
     test(`/[wordid] (${code})`, async () => {
-      const res = await fetch(`${rootURL}/artifact/`, {
+      const res = await fetch(`${rootURL}/artifact`, {
         headers: {
           "Accept-Language": code,
         },
       });
 
       expect(res.redirected).toBe(true);
-      expect(res.url).toBe(`${url}artifact/`);
+      expect(res.url).toBe(`${url}/artifact`);
     });
   }
 });
@@ -306,8 +306,8 @@ describe("redirection", () => {
   const rootURL = `http://localhost:${port}`;
 
   test("redirection from old word ID works properly", async () => {
-    const srcURL = `${rootURL}/ja/barbara/`;
-    const destURL = `${rootURL}/ja/barbara-pegg/`;
+    const srcURL = `${rootURL}/ja/barbara`;
+    const destURL = `${rootURL}/ja/barbara-pegg`;
 
     const res = await fetch(srcURL, {
       redirect: "manual",
