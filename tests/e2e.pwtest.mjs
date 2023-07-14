@@ -317,4 +317,16 @@ describe("redirection", () => {
     expect(res.status).toBe(301);
     expect(res.headers.get("Location")).toBe(destURL);
   });
+
+  test("redirection to strip slash", async () => {
+    const srcURL = `${rootURL}/ja/barbara-pegg/`;
+    const destURL = "/ja/barbara-pegg";
+
+    const res = await fetch(srcURL, {
+      redirect: "manual",
+    });
+
+    expect(res.status).toBe(301);
+    expect(res.headers.get("Location")).toBe(destURL);
+  });
 });
