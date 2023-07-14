@@ -308,7 +308,7 @@ describe("redirection", () => {
 
   test("redirection from old word ID works properly", async () => {
     const srcURL = `${rootURL}/ja/barbara`;
-    const destURL = `${rootURL}/ja/barbara-pegg`;
+    const destURL = "/ja/barbara-pegg";
 
     const res = await fetch(srcURL, {
       redirect: "manual",
