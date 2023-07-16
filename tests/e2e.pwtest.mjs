@@ -262,7 +262,7 @@ describe("The Genshin English Dictionary", () => {
       return;
     });
 
-    test(`title (${lang})`, async ({ page }) => {
+    test(`title for words page (${lang})`, async ({ page }) => {
       await page.goto(`${rootURL}/lumine`);
 
       if (lang === "en") {
@@ -271,6 +271,20 @@ describe("The Genshin English Dictionary", () => {
         await expect(page.title()).resolves.toBe("「蛍」は英語で \"Lumine\" | 原神 英語・中国語辞典");
       } else { // if (lang === "zh-CN")
         await expect(page.title()).resolves.toBe("\"荧\"的英语和日语翻译 | 原神中英日辞典");
+      }
+
+      return;
+    });
+
+    test(`title for tag page (${lang})`, async ({ page }) => {
+      await page.goto(`${rootURL}/tags/liyue`);
+
+      if (lang === "en") {
+        expect(await page.title()).toBe("Chinese & Japanese translations for words related to Liyue | Genshin Dictionary");
+      } else if (lang === "ja") {
+        expect(await page.title()).toBe("璃月に関する言葉の英語・中国語表記一覧 | 原神 英語・中国語辞典");
+      } else { // if (lang === "zh-CN")
+        expect(await page.title()).toBe("关于璃月的词语的英语和日语翻译 | 原神中英日辞典");
       }
 
       return;
