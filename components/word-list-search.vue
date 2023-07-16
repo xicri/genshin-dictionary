@@ -191,7 +191,10 @@ const removeTag = async (tagIndex) => {
     flex-wrap: wrap;
   }
   &__active-tag {
+    display: flex;
     flex-shrink: 0;
+    align-items: center;
+    gap: 0.34em;
 
     border-width: 2px;
     border-style: solid;
