@@ -98,7 +98,7 @@ describe("The Genshin English Dictionary", () => {
     await page.waitForTimeout(1400); // Wait for additional words loaded
 
     const words = await page.$$(".results__word");
-    expect(words.length).toBeGreaterThan(101);
+    expect(words.length).toBe(200);
 
     return;
   });
