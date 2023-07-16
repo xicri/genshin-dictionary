@@ -58,7 +58,8 @@
               :alt="t('permalinkAlt', { word: word[locale] })"
               decoding="async"
               class="results__permalink--icon"
-            /> {{ t("permalink") }}
+            />
+            <span class="results__permalink--text">{{ t("permalink") }}</span>
           </a>
           <img
             src="~/assets/vendor/octicons/copy.svg"
@@ -256,6 +257,10 @@ h5.linebreak {
     &--icon {
       width: 1em;
       height: 1em;
+    }
+    &--text {
+      margin-left: 0.34em;
+      margin-right: 0.34em;
     }
     &--copy {
       width: 1em;
