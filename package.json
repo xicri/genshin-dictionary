@@ -21,7 +21,7 @@
     "vrt": "concurrently --kill-others --success=first \"npm:start\" \"npm:vrt:screenshot\" && npm run vrt:reg",
     "vrt:screenshot": "sleep 5 && node ./scripts/vrt-screenshot.mjs",
     "vrt:reg": "./scripts/vrt-reg.sh",
-    "lint": "eslint --ext .js,.mjs,.cjs,.ts,.vue --ignore-path .gitignore .",
+    "lint": "nuxt typecheck && eslint --ext .js,.mjs,.cjs,.ts,.vue --ignore-path .gitignore .",
     "purge-cache": "node ./scripts/purge-cache.mjs",
     "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
@@ -29,6 +29,7 @@
     "@nuxt/devtools": "^0.8.2",
     "@nuxtjs/i18n": "8.0.0-rc.4",
     "@pinia/nuxt": "^0.4.1",
+    "@types/node": "^18.16.20",
     "dotenv": "^16.0.1",
     "klona": "^2.0.4",
     "lodash-es": "^4.17.21",
@@ -50,7 +51,8 @@
     "reg-notify-github-plugin": "^0.12.1",
     "reg-publish-s3-plugin": "^0.12.1",
     "reg-simple-keygen-plugin": "^0.12.1",
-    "reg-suit": "^0.12.1"
+    "reg-suit": "^0.12.1",
+    "vue-tsc": "^1.8.8"
   },
   "engines": {
     "node": "18.x",

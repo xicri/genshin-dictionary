@@ -8,6 +8,9 @@ export default defineNuxtConfig({
   nitro: {
     preset: "node-server",
   },
+  typescript: {
+    strict: true,
+  },
 
   css: [ "~/assets/styles/global.scss" ],
 
