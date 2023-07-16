@@ -253,6 +253,10 @@ h5.linebreak {
     text-align: right;
     margin-top: 8px;
 
+    &--icon {
+      width: 1em;
+      height: 1em;
+    }
     &--copy {
       width: 1em;
       height: 1em;
@@ -262,11 +266,6 @@ h5.linebreak {
       width: 1em;
       height: 1em;
     }
-  }
-
-  &__permalink--icon {
-    width: 1em;
-    height: 1em;
   }
 }
 
