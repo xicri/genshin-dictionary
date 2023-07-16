@@ -1,9 +1,9 @@
 <template>
   <div>
     <h1 class="error__title">
-      {{ $t("notfound") }}
+      {{ t("notfound") }}
     </h1>
-    <h2><a href="/">{{ $t("returnToIndex") }}</a></h2>
+    <h2><a href="/">{{ t("returnToIndex") }}</a></h2>
   </div>
 </template>
 
@@ -24,10 +24,17 @@
 }
 </i18n>
 
-<script>
-export default {
-  layout: "default",
-};
+<script setup>
+const props = defineProps({
+  error: {
+    type: Object,
+    required: true,
+  },
+});
+
+const { t } = useI18n({
+  useScope: "local",
+});
 </script>
 
 <style lang="scss" scoped>

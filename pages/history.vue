@@ -1,15 +1,15 @@
 <template>
   <div class="history">
-    <h2>{{ $t("historyTitle") }}</h2>
+    <h2>{{ t("historyTitle") }}</h2>
     <div v-for="(words, createdAt) in history" :key="createdAt" class="history__wrapper">
       <h3 class="history__updated-at">
-        {{ $t("updatedOn", { createdAt: createdAt }) }}
+        {{ t("updatedOn", { createdAt: createdAt }) }}
       </h3>
       <word-list-results :words="words" />
     </div>
 
     <p v-if="empty" class="history__empty">
-      {{ $t("noRecentUpdates") }}
+      {{ t("noRecentUpdates") }}
     </p>
   </div>
 </template>
@@ -31,33 +31,22 @@
 }
 </i18n>
 
-<script>
-import { defineComponent, useAsync, useContext, useMeta } from "@nuxtjs/composition-api";
-import { isEmpty } from "lodash";
+<script setup>
+import { isEmpty } from "lodash-es";
 import { getHistory } from "~/libs/utils";
 
-export default defineComponent({
-  setup() {
-    const { i18n } = useContext();
-    const title = `${i18n.t("historyTitle")} | ${i18n.t("siteTitle")}`;
+const { t } = useI18n();
+const title = `${t("historyTitle")} | ${t("siteTitle")}`;
 
-    useMeta({
-      title,
-      meta: [
-        { hid: "og:title", property: "og:title", content: title },
-      ],
-    });
-
-    const history = useAsync(() => getHistory());
-    const empty = useAsync(() => isEmpty(getHistory()));
-
-    return {
-      history,
-      empty,
-    };
-  },
-  head: {}, // empty head required
+useHead({
+  title,
+  meta: [
+    { hid: "og:title", property: "og:title", content: title },
+  ],
 });
+
+const { data: history } = useLazyAsyncData("history", () => getHistory());
+const { data: empty } = useLazyAsyncData("empty", () => isEmpty(getHistory()));
 </script>
 
 <style lang="scss" scoped>

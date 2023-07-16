@@ -25,8 +25,8 @@
           オープンデータ・API (β)
         </h3>
         <p>
-          本サイトの対訳表データは CSV 形式 (一般向け) 及び JSON 形式 (技術者向け) で配布しています。<br>
-          詳細は<a href="/opendata/">オープンデータ・API についてのページ</a>をご確認下さい。
+          本サイトの対訳表データは CSV 形式 (一般向け) 及び JSON 形式 (技術者向け) で配布しています。<br />
+          詳細は<a href="/opendata">オープンデータ・API についてのページ</a>をご確認下さい。
         </p>
 
         <h3>運営者・貢献者</h3>
@@ -36,8 +36,8 @@
         </ul>
 
         <p>
-          お問い合わせなどの際は <a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">Twitter</a> からご連絡下さい。(DM 可)<br>
-          バグ報告やオープンデータ・API 関連、その他技術的なお問い合わせについては、GitHub の <a href="https://github.com/xicri/genshin-dictionary/issues" target="_blank" rel="noopener">Issues</a> や <a href="https://github.com/xicri/genshin-dictionary/discussions" target="_blank" rel="noopener">Discussions</a> からお問い合わせ頂いても構いません。<br>
+          お問い合わせなどの際は <a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">Twitter</a> からご連絡下さい。(DM 可)<br />
+          バグ報告やオープンデータ・API 関連、その他技術的なお問い合わせについては、GitHub の <a href="https://github.com/xicri/genshin-dictionary/issues" target="_blank" rel="noopener">Issues</a> や <a href="https://github.com/xicri/genshin-dictionary/discussions" target="_blank" rel="noopener">Discussions</a> からお問い合わせ頂いても構いません。<br />
           お問い合わせの際は、できるだけ日本語又は英語でお願いします。
         </p>
 
@@ -61,40 +61,30 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, useAsync, useContext, useMeta } from "@nuxtjs/composition-api";
-import words from "~/static/dataset/words.json";
+<script setup>
+import words from "~/dataset/words.json";
 
-export default defineComponent({
-  setup() {
-    const { i18n } = useContext();
-    const title = `${i18n.t("aboutTitle")} | ${i18n.t("siteTitle")}`;
-    const description = i18n.t("aboutDescription");
+const { locale, t } = useI18n();
+const title = `${t("aboutTitle")} | ${t("siteTitle")}`;
+const description = t("aboutDescription");
 
-    useMeta({
-      title,
-      meta: [
-        { hid: "og:title", property: "og:title", content: title },
-        { hid: "description", name: "description", content: description },
-        { hid: "og:description", property: "og:description", content: description },
+useHead({
+  title,
+  meta: [
+    { hid: "og:title", property: "og:title", content: title },
+    { hid: "description", name: "description", content: description },
+    { hid: "og:description", property: "og:description", content: description },
 
-        // noindex untranslated pages
-        ...(i18n.locale !== "ja" ? [{
-          hid: "noindex",
-          name: "robots",
-          content: "noindex",
-        }] : []),
-      ],
-    });
-
-    const wordCount = useAsync(() => words.length);
-
-    return {
-      wordCount,
-    };
-  },
-  head: {},
+    // noindex untranslated pages
+    ...(locale !== "ja" ? [{
+      hid: "noindex",
+      name: "robots",
+      content: "noindex",
+    }] : []),
+  ],
 });
+
+const { data: wordCount } = useLazyAsyncData("wordCount", () => words.length);
 </script>
 
 <style lang="scss" src="~/assets/styles/articles.scss" scoped></style>

@@ -10,22 +10,22 @@
             </div>
           </div>
 
-          <elastic-searchbox ref="searchBox" class="search__input" name="searchbox" :placeholder="$t('enterSearchTerms')" autocomplete="off" @input="updateSearchQuery" />
+          <elastic-searchbox ref="searchBox" class="search__input" name="searchbox" :placeholder="t('enterSearchTerms')" autocomplete="off" @input="updateSearchQuery" />
         </div>
 
         <img
           src="~/assets/vendor/octicons/tag.svg"
           width="24"
           height="24"
-          :alt="$t('openListOfTags')"
+          :alt="t('openListOfTags')"
           decoding="async"
           class="search__taglist-icon"
           @click="toggleTagList"
-        >
+        />
       </div>
       <div ref="taglist" :class="{ search__taglist: true, 'search__taglist-display-mobile': displayTagListOnMobile }">
         <div class="search__taglist-inner">
-          <span class="search__taglist-title">{{ $t("tags") }}:</span>
+          <span class="search__taglist-title">{{ t("tags") }}:</span>
           <span v-for="(availableTag, id) in AvailableTags" :key="id" class="search__tag" @click="addTag(id)">
             {{ availableTag[$i18n.locale] }} <span class="search__tag-add">+</span>
           </span>
@@ -35,11 +35,11 @@
           src="~/assets/vendor/octicons/x.svg"
           width="24"
           height="24"
-          :alt="$t('closeListOfTags')"
+          :alt="t('closeListOfTags')"
           decoding="async"
           class="search__taglist-close"
           @click="closeTagList"
-        >
+        />
       </div>
     </div>
     <closing-layer :enabled="displayTagListOnMobile" @close="closeTagList" />
@@ -69,100 +69,81 @@
 }
 </i18n>
 
-<script>
-import { computed, defineComponent, ref, useContext } from "@nuxtjs/composition-api";
-import allTags from "~/static/dataset/tags.json";
+<script setup>
+import allTags from "~/dataset/tags.json";
 import { klona } from "klona/json";
-import { debounce } from "lodash";
+import { debounce } from "lodash-es";
 import { storeToRefs } from "pinia";
 import { useDictionaryStore } from "~/store/index.js";
 
-export default defineComponent({
-  setup(_, context) {
-    const { $pinia, $sentry } = useContext();
-    const store = useDictionaryStore($pinia);
+const emit = defineEmits([ "search" ]);
+const { $pinia, $sentry } = useNuxtApp();
+const store = useDictionaryStore($pinia);
 
-    //
-    // Refs
-    //
-    const searchBox = ref(null);
-    const { tags } = storeToRefs(store);
-    const displayTagListOnMobile = ref(false);
-
-    //
-    // Computed
-    //
-    const AvailableTags = computed(() => {
-      const availableTags = klona(allTags);
-
-      for (const searchTag of tags.value) {
-        delete availableTags[searchTag];
-      }
-
-      return availableTags;
-    });
-
-    //
-    // Event handlers
-    //
-    const updateSearchQuery = debounce((evt) => {
-      store.updateSearchQuery(evt.target.value);
-      context.emit("search");
-
-      if (store.query && store.searchResults.length <= 0) {
-        $sentry.captureMessage(store.query, {
-          tags: {
-            analysis: "search",
-          },
-        });
-      }
-    }, 500);
-    const focusOnSearchBox = () => {
-      const el = searchBox.value.$el;
-      el.setSelectionRange(el.value.length, el.value.length);
-      el.focus();
-    };
-    const selectAll = () => {
-      const el = searchBox.value.$el;
-      el.setSelectionRange(0, el.value.length);
-      el.focus();
-    };
-    const closeTagList = () => {
-      displayTagListOnMobile.value = false;
-    };
-    const toggleTagList = () => {
-      displayTagListOnMobile.value = !displayTagListOnMobile.value;
-    };
-    const addTag = async (tagID) => {
-      store.addTags(tagID);
-      context.emit("search");
-      closeTagList();
-    };
-    const removeTag = async (tagIndex) => {
-      store.removeTag(tagIndex);
-      context.emit("search");
-    };
-
-    return {
-      // refs
-      searchBox,
-      displayTagListOnMobile,
-      // computed
-      AvailableTags,
-      tags,
-      // event handlers
-      updateSearchQuery,
-      focusOnSearchBox,
-      selectAll,
-      closeTagList,
-      toggleTagList,
-      addTag,
-      removeTag,
-      // constant
-      allTags,
-    };
-  },
+const { t } = useI18n({
+  useScope: "local",
 });
+
+//
+// Refs
+//
+const searchBox = ref(null);
+const { tags } = storeToRefs(store);
+const displayTagListOnMobile = ref(false);
+
+//
+// Computed
+//
+const AvailableTags = computed(() => {
+  const availableTags = klona(allTags);
+
+  for (const searchTag of tags.value) {
+    delete availableTags[searchTag];
+  }
+
+  return availableTags;
+});
+
+//
+// Event handlers
+//
+const updateSearchQuery = debounce((evt) => {
+  store.updateSearchQuery(evt.target.value);
+  emit("search");
+
+  if (store.query && store.searchResults.length <= 0) {
+    $sentry.captureMessage(store.query, {
+      tags: {
+        analysis: "search",
+      },
+    });
+  }
+}, 500);
+const focusOnSearchBox = () => {
+  const el = searchBox.value.$el;
+  el.setSelectionRange(el.value.length, el.value.length);
+  el.focus();
+};
+const selectAll = () => {
+  const el = searchBox.value.$el;
+  el.setSelectionRange(0, el.value.length);
+  el.focus();
+};
+const closeTagList = () => {
+  displayTagListOnMobile.value = false;
+};
+const toggleTagList = () => {
+  displayTagListOnMobile.value = !displayTagListOnMobile.value;
+};
+const addTag = async (tagID) => {
+  store.addTags(tagID);
+  emit("search");
+  closeTagList();
+};
+const removeTag = async (tagIndex) => {
+  store.removeTag(tagIndex);
+  emit("search");
+};
 </script>
 
 <style lang="scss" scoped>
@@ -210,7 +191,10 @@ export default defineComponent({
     flex-wrap: wrap;
   }
   &__active-tag {
+    display: flex;
     flex-shrink: 0;
+    align-items: center;
+    gap: 0.34em;
 
     border-width: 2px;
     border-style: solid;

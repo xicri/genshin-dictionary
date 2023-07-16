@@ -1,26 +1,27 @@
 <template>
   <div>
-    <input id="menu-switch" type="checkbox" :checked="open" style="display: none;" @click="toggleMenu">
+    <input id="menu-switch" type="checkbox" :checked="open" style="display: none;" @click="toggleMenu" />
     <label class="menu__icon" for="menu-switch">
-      <div class="menu__icon-line"></div>
-      <div class="menu__icon-line"></div>
-      <div class="menu__icon-line"></div>
+      <div class="menu__icon-line" />
+      <div class="menu__icon-line" />
+      <div class="menu__icon-line" />
     </label>
     <nav class="menu__nav">
       <div class="menu__nav-padding">
         <ul class="menu__items">
+          <!-- localePath() generates path without trailing slash, so append manually -->
           <li class="menu__item">
-            <a :href="localePath('/about/')">{{ $t("about") }}</a>
+            <a :href="localePath('/about')">{{ t("about") }}</a>
           </li>
           <li class="menu__item">
-            <a :href="localePath('/opendata/')">{{ $t("opendata") }}</a>
+            <a :href="localePath('/opendata')">{{ t("opendata") }}</a>
           </li>
           <li class="menu__item">
-            <a :href="localePath('/history/')">{{ $t("history") }}</a>
+            <a :href="localePath('/history')">{{ t("history") }}</a>
           </li>
           <li class="menu__item">
-            <a href="https://translate.genshin-dictionary.com/" target="_blank" rel="noopener">{{ $t("translate") }}</a>
-            <img src="~/assets/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14">
+            <a href="https://translate.genshin-dictionary.com/" target="_blank" rel="noopener">{{ t("translate") }}</a>
+            <img src="~/assets/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14" />
           </li>
         </ul>
 
@@ -28,14 +29,14 @@
           Languages
         </h2>
         <div class="menu__languages-list">
-          <span
-            v-for="locale in $i18n.locales"
+          <NuxtLink
+            v-for="locale in locales"
             :key="locale.code"
             class="menu__languages-item"
-            @click.prevent.stop="$i18n.setLocale(locale.code)"
+            :to="switchLocalePath(locale.code)"
           >
             {{ locale.name }}
-          </span>
+          </NuxtLink>
         </div>
 
         <div class="menu__bottomline">
@@ -71,26 +72,26 @@
 }
 </i18n>
 
-<script>
-import { defineComponent, ref } from "@nuxtjs/composition-api";
-
-export default defineComponent({
-  setup() {
-    const open = ref(false);
-
-    return {
-      // refs
-      open,
-      // event handlers
-      toggleMenu(evt) {
-        open.value = evt.target.checked;
-      },
-      closeMenu() {
-        open.value = false;
-      },
-    };
-  },
+<script setup>
+//
+// refs
+//
+const { locales, t } = useI18n({
+  useScope: "local",
 });
+const open = ref(false);
+
+//
+// event handlers
+//
+const localePath = useLocalePath();
+const switchLocalePath = useSwitchLocalePath();
+const toggleMenu = (evt) => {
+  open.value = evt.target.checked;
+};
+const closeMenu = () => {
+  open.value = false;
+};
 </script>
 
 <style lang="scss" scoped>

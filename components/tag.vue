@@ -4,25 +4,19 @@
   </div>
 </template>
 
-<script>
-import { computed, defineComponent, useContext } from "@nuxtjs/composition-api";
-import allTags from "~/static/dataset/tags.json";
+<script setup>
+import allTags from "~/dataset/tags.json";
 
-export default defineComponent({
-  props: {
-    tagid: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
-    const { i18n } = useContext();
+const { locale } = useI18n();
 
-    return {
-      TagName: computed(() => allTags[props.tagid][i18n.locale]),
-    };
+const props = defineProps({
+  tagid: {
+    type: String,
+    required: true,
   },
 });
+
+const TagName = computed(() => allTags[props.tagid][locale.value]);
 </script>
 
 <style lang="scss" scoped>

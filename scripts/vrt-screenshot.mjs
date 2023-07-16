@@ -17,11 +17,11 @@ const envs = [
 ];
 const targets = [
   { path: "/", fullPage: false },
-  { path: "/lumine/", fullPage: true },
-  { path: "/tags/mondstadt/", fullPage: false },
-  { path: "/history/", fullPage: false },
-  { path: "/about/", fullPage: true },
-  { path: "/opendata/", fullPage: true },
+  { path: "/lumine", fullPage: true },
+  { path: "/tags/mondstadt", fullPage: false },
+  { path: "/history", fullPage: false },
+  { path: "/about", fullPage: true },
+  { path: "/opendata", fullPage: true },
 ];
 
 console.info("Generating screenshots for visual regression tests...");
@@ -47,7 +47,7 @@ for (const env of envs) {
     }
 
     // Hamburger Menu
-    await page.goto(`${env.baseURL}/${locale}/`, { waitUntil: "networkidle" });
+    await page.goto(`${env.baseURL}/${locale}`, { waitUntil: "networkidle" });
     await page.locator(".menu__icon").click();
     await sleep(1500); // Wait for the menu to be 100% opened
     await page.screenshot({ path: join(__dirname, `../tmp/reg-suit/${env.id}/${locale}_hamburger-menu.png`) });

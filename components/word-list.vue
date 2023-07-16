@@ -6,7 +6,7 @@
     </div>
 
     <p v-if="searchResults.length <= 0" data-e2e="empty">
-      {{ $t("notFound") }}
+      {{ t("notFound") }}
     </p>
   </div>
 </template>
@@ -25,22 +25,18 @@
 }
 </i18n>
 
-<script>
-import { defineComponent, useContext } from "@nuxtjs/composition-api";
+<script setup>
 import { storeToRefs } from "pinia";
 import { useDictionaryStore } from "~/store/index.js";
 
-export default defineComponent({
-  setup() {
-    const { $pinia } = useContext();
-    const store = useDictionaryStore($pinia);
-    const { searchResults } = storeToRefs(store);
+defineEmits([ "search" ]);
 
-    return {
-      searchResults,
-    };
-  },
+const { $pinia } = useNuxtApp();
+const { t } = useI18n({
+  useScope: "local",
 });
+const store = useDictionaryStore($pinia);
+const { searchResults } = storeToRefs(store);
 </script>
 
 <style lang="scss" scoped>
