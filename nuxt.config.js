@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     "@nuxtjs/robots",
     "@funken-studio/sitemap-nuxt-3",
     "@pinia/nuxt",
+    "@nuxt/devtools",
   ],
 
   i18n: {
@@ -83,4 +84,8 @@ export default defineNuxtConfig({
       { url: "/ja/opendata" },
     ],
   }),
+
+  devtools: {
+    enabled: true,
+  },
 });
