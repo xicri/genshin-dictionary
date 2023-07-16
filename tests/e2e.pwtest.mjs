@@ -26,6 +26,8 @@ describe("The Genshin English Dictionary", () => {
 
   test("search by English", async ({ page }) => {
     await page.goto(rootURL);
+    await page.waitForTimeout(1400); // Wait for page initialization process
+
     const searchBox = await page.$("input[name='searchbox']");
     await searchBox.fill("Dull Blade");
 
@@ -54,6 +56,8 @@ describe("The Genshin English Dictionary", () => {
 
   test("search by Chinese", async ({ page }) => {
     await page.goto(rootURL);
+    await page.waitForTimeout(1400); // Wait for page initialization process
+
     const searchBox = await page.$("input[name='searchbox']");
     await searchBox.fill("炽烈的炎之魔女");
 
@@ -85,6 +89,10 @@ describe("The Genshin English Dictionary", () => {
   test("infinite load", async ({ page }) => {
     await page.goto(rootURL);
 
+    // Without this, window.scrollTo() runs before Nuxt finishes all the page load process.
+    // When Nuxt finishes the page load process, Nuxt seems to reset scroll position to the top.
+    await page.waitForTimeout(1400);
+
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
 
     await page.waitForTimeout(1400); // Wait for additional words loaded
@@ -97,6 +105,7 @@ describe("The Genshin English Dictionary", () => {
 
   test("search by tag", async ({ page }) => {
     await page.goto(rootURL);
+    await page.waitForTimeout(1400); // Wait for page initialization process
 
     const mobileTagBoxToggle = page.locator(".search__taglist-icon");
 
@@ -124,6 +133,7 @@ describe("The Genshin English Dictionary", () => {
 
   test("open tag list", async ({ page }) => {
     await page.goto(rootURL);
+    await page.waitForTimeout(1400); // Wait for page initialization process
 
     // Do not run test on Desktop
     if (840 < await page.evaluate(() => window.innerWidth)) {
@@ -151,6 +161,8 @@ describe("The Genshin English Dictionary", () => {
 
     test(`search by Japanese (${lang})`, async ({ page }) => {
       await page.goto(rootURL);
+      await page.waitForTimeout(1400); // Wait for page initialization process
+
       const searchBox = await page.$("input[name='searchbox']");
       await searchBox.fill("狂戦士の仮面");
 
@@ -220,6 +232,8 @@ describe("The Genshin English Dictionary", () => {
 
     test(`searching inexistent word (${lang})`, async ({ page }) => {
       await page.goto(rootURL);
+      await page.waitForTimeout(1400); // Wait for page initialization process
+
       const searchBox = await page.$("input[name='searchbox']");
       await searchBox.fill("存在しない語彙");
 
