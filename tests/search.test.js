@@ -12,6 +12,12 @@ beforeEach(() => {
   setActivePinia(createPinia());
 });
 
+test("search by pronunciationJa", () => {
+  const words = search("いなずま");
+
+  expect(words[0].ja).toBe("稲妻");
+});
+
 test("search words including 'ヴァヴィヴヴェヴォ' by 'ばびぶべぼ'", () => {
   const results = search("ベル・ゴレット");
   expect(results).toHaveLength(1);
@@ -43,3 +49,14 @@ for (const { result, input, lang } of fixtures) {
     expect(results[0][lang]).toBe(result);
   });
 }
+
+test("search order", () => {
+  const words = search("稲妻");
+
+  expect(words[0].ja).toBe("稲妻");
+
+  const partialMatchIndex = words.findIndex(word => word.ja?.includes("稲妻"));
+  const partialMatchNotesIndex = words.findIndex(word => word.notes?.includes("稲妻"));
+
+  expect(partialMatchIndex).toBeLessThan(partialMatchNotesIndex);
+});

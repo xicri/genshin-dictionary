@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { candidate } from "../libs/utils.js";
-import words from "~/dataset/words.json";
+import allWords from "~/dataset/words.json";
 
 export const useDictionaryStore = defineStore("dictionary", {
   state: () => ({
@@ -8,30 +8,89 @@ export const useDictionaryStore = defineStore("dictionary", {
     query: "",
     tags: [],
     maxWords: 100,
+    currentLocale: undefined,
   }),
 
   getters: {
     searchResults: (state) => {
       if (state.wordID) {
-        const word = words.find(word => word.id === state.wordID);
+        const word = allWords.find(word => word.id === state.wordID);
         return word ? [ word ] : [];
       } else {
-        const results = words.filter(word => {
-          if (state.query) {
-            return (
+        let words;
+
+        if (state.query) {
+          const wordsExactMatch = [];
+          const wordsExactMatchWithVariants = [];
+          const wordsPartialMatch = [];
+          const wordsPartialMatchWithVariants = [];
+          const wordsPartialMatchWithPronunciationJa = [];
+          const wordsMatchWithNotes = [];
+
+          for (const word of allWords) {
+            if ( // 1. exact match with en, ja, and zhCN, and pronunciationJa
+              candidate(word.ja).equals(state.query) ||
+              candidate(word.en).equals(state.query) ||
+              candidate(word.zhCN).equals(state.query) ||
+              candidate(word.pronunciationJa).equals(state.query)
+            ) {
+              wordsExactMatch.push(word);
+            } else if ( // 2. exact match with variants.en, variants.ja, and variants.zhCN
+              (word.variants?.ja?.some(variant => candidate(variant).equals(state.query)) ?? false) ||
+              (word.variants?.en?.some(variant => candidate(variant).equals(state.query)) ?? false) ||
+              (word.variants?.zhCN?.some(variant => candidate(variant).equals(state.query)) ?? false)
+            ) {
+              wordsExactMatchWithVariants.push(word);
+            } else if ( // 3. forward/backword/partial match with en, ja, and zhCN
               candidate(word.ja).includes(state.query) ||
               candidate(word.en).includes(state.query) ||
-              candidate(word.zhCN).includes(state.query) ||
-              candidate(word.pronunciationJa).includes(state.query) ||
-              candidate(word.notes).includes(state.query) ||
-              word.variants?.ja?.some(variant => candidate(variant).includes(state.query)) ||
-              word.variants?.en?.some(variant => candidate(variant).includes(state.query)) ||
-              word.variants?.zhCN?.some(variant => candidate(variant).includes(state.query))
-            );
-          } else { // If no search terms are specified, do not filter.
-            return true;
+              candidate(word.zhCN).includes(state.query)
+            ) {
+              wordsPartialMatch.push(word);
+            } else if ( // 4. forward/backword/partial match with variants.en, variants.ja, and variants.zhCN
+              (word.variants?.ja?.some(variant => candidate(variant).includes(state.query)) ?? false) ||
+              (word.variants?.en?.some(variant => candidate(variant).includes(state.query)) ?? false) ||
+              (word.variants?.zhCN?.some(variant => candidate(variant).includes(state.query)) ?? false)
+            ) {
+              wordsPartialMatchWithVariants.push(word);
+            } else if ( // 5. forward/backword/partial match with pronunciationJa
+              candidate(word.pronunciationJa).includes(state.query)
+            ) {
+              wordsPartialMatchWithPronunciationJa.push(word);
+            } else if ( // 6-1. exact/forward/backword/partial match with notes (on Japanese UI only)
+              state.currentLocale === "ja" &&
+              candidate(word.notes).includes(state.query)
+            ) {
+              wordsMatchWithNotes.push(word);
+            } else if ( // 6-2. exact/forward/backword/partial match with notesZh (on Chinese UI only)
+              state.currentLocale === "zh-CN" &&
+              candidate(word.notesZh).includes(state.query)
+            ) {
+              wordsMatchWithNotes.push(word);
+            } else if ( // 6-3. exact/forward/backword/partial match with ntoes and notesZh
+              !state.currentLocale &&
+              (
+                candidate(word.notes).includes(state.query) ||
+                candidate(word.notesZh).includes(state.query)
+              )
+            ) {
+              wordsMatchWithNotes.push(word);
+            }
           }
-        }).filter(word => {
+
+          words = [
+            ...wordsExactMatch,
+            ...wordsExactMatchWithVariants,
+            ...wordsPartialMatch,
+            ...wordsPartialMatchWithVariants,
+            ...wordsPartialMatchWithPronunciationJa,
+            ...wordsMatchWithNotes,
+          ];
+        } else {
+          words = allWords;
+        }
+
+        return words.filter(word => {
           // If no search tag(s) are specified, do not filter
           if (state.tags.length <= 0) {
             return true;
@@ -44,14 +103,15 @@ export const useDictionaryStore = defineStore("dictionary", {
 
           // true every search tag is included in the word tags
           return state.tags.every(searchTag => word.tags.includes(searchTag));
-        });
-
-        return results.slice(0, state.maxWords);
+        }).slice(0, state.maxWords);
       }
     },
   },
 
   actions: {
+    setLocale(locale) {
+      this.currentLocale = locale;
+    },
     queryByID(id) {
       this.wordID = id;
 
