@@ -171,7 +171,7 @@ onUpdated(async () => {
 //
 const localePath = useLocalePath();
 const copyLink = async (wordId, $event) => {
-  navigator.clipboard.writeText(`https://genshin-dictionary.com/${locale}/${wordId}`);
+  navigator.clipboard.writeText(`https://genshin-dictionary.com/${locale.value}/${wordId}`);
 
   const copyImg = $event.target;
   const copiedImg = copyImg.parentElement.getElementsByClassName("results__permalink--copied")[0];
