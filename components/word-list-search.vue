@@ -74,7 +74,7 @@ import allTags from "~/dataset/tags.json";
 import { klona } from "klona/json";
 import { debounce } from "lodash-es";
 import { storeToRefs } from "pinia";
-import { useDictionaryStore } from "~/store/index.js";
+import { useDictionaryStore } from "~/store/index";
 
 const emit = defineEmits([ "search" ]);
 const { $pinia } = useNuxtApp();

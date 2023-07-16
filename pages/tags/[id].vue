@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { useDictionaryStore } from "~/store/index.js";
+import { useDictionaryStore } from "~/store/index";
 import tags from "~/dataset/tags.json";
 
 const { $pinia } = useNuxtApp();

@@ -112,8 +112,8 @@
 </i18n>
 
 <script setup>
-import { useDictionaryStore } from "~/store/index.js";
-import { sleep } from "~/libs/utils.js";
+import { useDictionaryStore } from "~/store/index";
+import { sleep } from "~/libs/utils";
 
 const props = defineProps({
   words: {

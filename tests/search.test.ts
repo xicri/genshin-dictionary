@@ -1,5 +1,5 @@
 import { setActivePinia, createPinia } from "pinia";
-import { useDictionaryStore } from "~/store/index.js";
+import { useDictionaryStore } from "~/store/index";
 
 function search(query) {
   const store = useDictionaryStore();

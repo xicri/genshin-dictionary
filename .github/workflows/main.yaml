@@ -79,5 +79,5 @@ jobs:
 
       - name: Purge Cloudflare cache
         run: |
-          npm install node-fetch
+          npm install node-fetch ts-node
           npm run purge-cache

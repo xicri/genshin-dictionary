@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { useDictionaryStore } from "~/store/index.js";
+import { useDictionaryStore } from "~/store/index";
 
 const { $pinia } = useNuxtApp();
 const { locale, t } = useI18n();

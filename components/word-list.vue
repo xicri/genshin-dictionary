@@ -27,7 +27,7 @@
 
 <script setup>
 import { storeToRefs } from "pinia";
-import { useDictionaryStore } from "~/store/index.js";
+import { useDictionaryStore } from "~/store/index";
 
 defineEmits([ "search" ]);
 
