@@ -17,10 +17,10 @@ export default defineNuxtConfig({
 
   modules: [
     "@nuxtjs/i18n",
-    "@nuxtjs/robots",
-    "@funken-studio/sitemap-nuxt-3",
     "@pinia/nuxt",
     "@nuxt/devtools",
+    "nuxt-simple-robots",
+    "nuxt-simple-sitemap",
   ],
 
   i18n: {
@@ -52,40 +52,35 @@ export default defineNuxtConfig({
     },
   },
 
-  robots: {
-    rules: {
-      UserAgent: "*",
-      ...(process.env.SERVER_ENV === "production" ? {
-        Allow: "/",
-        Sitemap: "https://genshin-dictionary.com/sitemap.xml",
-      } : {
-        Disallow: "/",
-      }),
-    },
-  },
-
-  sitemap: async () => ({
-    generateOnBuild: true,
-    hostname: "https://genshin-dictionary.com",
-    // disable automatic sitemap generation to exclude URLs without locale:
-    // e.g. https://genshin-dictionary.com/about/
-    exclude: [ "/**" ],
-    gzip: false,
-    // i18n: true, // TODO temporarily disable i18n option until nuxt/sitemap supports nuxt/i18n on Nuxt 3
-    routes: [
-      ...([ "en", "ja" , "zh-CN" ].map(lang => ([
-        { url: `/${lang}` },
-        { url: `/${lang}/history` },
-        ...(words.map(word => ({ url: `/${lang}/${word.id}`, lastmod: word.updatedAt }))),
-        ...(Object.keys(tags).map(tagID => ({ url: `/${lang}/tags/${tagID}` }))),
-      ])).flat()),
+  sitemap: {
+    autoLastmod: false,
+    cacheTtl: 0, // disable cache
+    urls: [
+      ...([ "en", "ja" , "zh-CN" ].map(lang => [
+        { loc: `/${lang}` },
+        { loc: `/${lang}/history` },
+        ...(words.map(word => ({ loc: `/${lang}/${word.id}`, lastmod: word.updatedAt }))),
+        ...(Object.keys(tags).map(tagID => ({ loc: `/${lang}/tags/${tagID}` }))),
+      ]).flat()),
       // Pages not translated yet
-      { url: "/ja/about" },
-      { url: "/ja/opendata" },
+      { loc: "/ja/about" },
+      { loc: "/ja/opendata" },
     ],
-  }),
+    exclude: [
+      "/en/about",
+      "/en/opendata",
+      "/zh-CN/about",
+      "/zh-CN/opendata",
+    ],
+  },
 
   devtools: {
     enabled: true,
+  },
+
+  // For nuxt-simple-robots and nuxt-simple-sitemap
+  site: {
+    url: "https://genshin-dictionary.com",
+    indexable: process.env.SERVER_ENV === "production",
   },
 });
