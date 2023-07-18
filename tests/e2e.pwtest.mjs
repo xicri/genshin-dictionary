@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 const { describe } = test;
 
 const ip = "127.0.0.1";
-const port = 3000;
+const port = 5678;
 
 function getRandomLang() {
   const random = Math.floor(Math.random() * 3);
@@ -210,7 +210,7 @@ describe("The Genshin English Dictionary", () => {
     });
 
     test(`if note is shown by the specified language (${lang})`, async ({ page }) => {
-      await page.goto(`http://localhost:3000/${ lang }/chihu-rock`);
+      await page.goto(`${ rootURL }/chihu-rock`);
 
       const words = await page.$$(".results__word");
       const word = words[0];
