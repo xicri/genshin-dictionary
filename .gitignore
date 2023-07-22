@@ -61,6 +61,10 @@ yarn-error.log*
 # npm is the package manager for this project.
 yarn.lock
 
+# nuxt-simple-[robots|sitemap]
+/public/robots.txt
+/public/sitemap.xml
+
 # Misc
 .node_repl_history
 .eslintcache
