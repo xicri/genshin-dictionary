@@ -43,8 +43,10 @@
     "id": "zhongli",
     "en": "Zhongli",
     "ja": "鍾離",
+    "zhCN": "钟离",
     "pronunciationJa": "しょうり",
     "notes": "読みは「ヂョンリー」",
+    "notesZh": "锺离是中国古代早已有之的一个汉字复姓。…",
     "variants": {
       ja: [ "鐘離" ],
     },
@@ -55,7 +57,8 @@
   {
     "id": "inazuman",
     "en": "Inazuman",
-    "ja": "稲妻人",
+    "ja": "稲妻人 / 稲妻の",
+    "zhCN": "稻妻人 / 稻妻的",
     "pronunciationJa": "いなずまじん",
     "notes": "元々 Inazuman は非公式にプレイヤーの間で使われる言葉であったが…(以下略)",
     "examples": [{
@@ -76,8 +79,10 @@
           <li><code>id</code> (String) ― 各単語を一意に示す ID。https://genshin-dictionary.com/{ ID }/ にアクセスすると、本サイトの当該単語のページを表示できます。時折予告なく変更される場合があるため、注意して下さい。</li>
           <li><code>en</code> (String) ― 英語名</li>
           <li><code>ja</code> (String) ― 日本語名</li>
+          <li><code>zhCN</code> (String) ― 中国語名</li>
           <li><code>pronunciationJa</code> (String) ― 日本語の読み。ひらがな、カタカナ、記号が含まれます。</li>
-          <li><code>notes</code> (String)― 備考。HTML が含まれる場合があります。</li>
+          <li><code>notes</code> (String)― 備考 (日本語話者向け)。HTML が含まれる場合があります。</li>
+          <li><code>notesZh</code> (String)― 備考 (中国語話者向け)。HTML が含まれる場合があります。</li>
           <li><code>variants</code> (Object)― よくある誤記や通称等。例えば鍾離の誤記「鐘離」や、聖遺物「血染めの騎士道」の略称「血染め」などが含まれます。</li>
           <li><code>variants.en</code> (string[])― 英語の誤記や通称等</li>
           <li><code>variants.ja</code> (string[])― 日本語の誤記や通称等</li>
