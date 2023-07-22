@@ -4,14 +4,15 @@
 
 <script lang="ts" setup>
 import { useDictionaryStore } from "~/store/index";
+import type { Locale } from "~/types";
 
 const { $pinia } = useNuxtApp();
-const { locale, t } = useI18n();
+const { locale, t } = useI18n<[], Locale>();
 
 const route = useRoute();
 const store = useDictionaryStore($pinia);
 
-const onSearch = () => {
+const onSearch = (): void => {
   if (window.location.pathname !== "/") {
     history.pushState({}, "", `/${locale.value}`);
     document.title = t("siteTitle");

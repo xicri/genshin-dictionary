@@ -6,7 +6,7 @@ import "dotenv/config";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-async function copyFromURL(src, dest) {
+async function copyFromURL(src: string, dest: string): Promise<void> {
   const res = await fetch(src);
 
   if (400 <= res.status) {

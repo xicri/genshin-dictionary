@@ -136,8 +136,9 @@
 
 <script lang="ts" setup>
 import tags from "~/dataset/tags.json";
+import type { Locale } from "~/types";
 
-const { locale, t } = useI18n();
+const { locale, t } = useI18n<[], Locale>();
 const title = `${ t("opendataTitle") } | ${ t("siteTitle") }`;
 
 useHead({

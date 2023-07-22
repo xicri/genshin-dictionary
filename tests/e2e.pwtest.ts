@@ -1,12 +1,13 @@
 import { test, expect } from "@playwright/test";
 import fetch from "node-fetch";
+import type { Locale } from "../types";
 
 const { describe } = test;
 
 const ip = "127.0.0.1";
 const port = 5678;
 
-function getRandomLang() {
+function getRandomLang(): Locale {
   const random = Math.floor(Math.random() * 3);
 
   if (random === 0) {
@@ -29,7 +30,7 @@ describe("The Genshin English Dictionary", () => {
     await page.waitForTimeout(1400); // Wait for page initialization process
 
     const searchBox = await page.$("input[name='searchbox']");
-    await searchBox.fill("Dull Blade");
+    await searchBox!.fill("Dull Blade");
 
     await page.waitForTimeout(1400); // Wait for the search results to be shown
 
@@ -41,9 +42,9 @@ describe("The Genshin English Dictionary", () => {
     const en = await word.$("*[data-e2e='en']");
     const pronunciationJa = await word.$(".results__pronunciation-ja");
 
-    expect(await ja.innerText()).toBe("無鋒の剣");
-    expect(await en.innerText()).toBe("Dull Blade");
-    expect(await pronunciationJa.innerText()).toBe("(むほうのけん)");
+    expect(await ja!.innerText()).toBe("無鋒の剣");
+    expect(await en!.innerText()).toBe("Dull Blade");
+    expect(await pronunciationJa!.innerText()).toBe("(むほうのけん)");
 
     const tags = await word.$$(".results__tags > a");
     expect(tags).toHaveLength(2);
@@ -59,7 +60,7 @@ describe("The Genshin English Dictionary", () => {
     await page.waitForTimeout(1400); // Wait for page initialization process
 
     const searchBox = await page.$("input[name='searchbox']");
-    await searchBox.fill("炽烈的炎之魔女");
+    await searchBox!.fill("炽烈的炎之魔女");
 
     await page.waitForTimeout(1400); // Wait for the search results to be shown
 
@@ -72,10 +73,10 @@ describe("The Genshin English Dictionary", () => {
     const zhCN = await word.$("*[data-e2e='zh-CN']");
     const pronunciationJa = await word.$(".results__pronunciation-ja");
 
-    expect(await ja.innerText()).toBe("燃え盛る炎の魔女");
-    expect(await en.innerText()).toBe("Crimson Witch of Flames");
-    expect(await zhCN.innerText()).toBe("炽烈的炎之魔女");
-    expect(await pronunciationJa.innerText()).toBe("(もえさかるほのおのまじょ)");
+    expect(await ja!.innerText()).toBe("燃え盛る炎の魔女");
+    expect(await en!.innerText()).toBe("Crimson Witch of Flames");
+    expect(await zhCN!.innerText()).toBe("炽烈的炎之魔女");
+    expect(await pronunciationJa!.innerText()).toBe("(もえさかるほのおのまじょ)");
 
     const tags = await word.$$(".results__tags > a");
     expect(tags).toHaveLength(1);
@@ -151,7 +152,7 @@ describe("The Genshin English Dictionary", () => {
     await page.goto(`http://${ip}:${port}/zh-CN/pearl-galley`);
 
     const chinese = await page.$("[data-e2e='zh-CN']");
-    expect(await chinese.innerHTML()).toBe("珠<ruby>钿<rp>(</rp><rt class=\"results__pinyin\">diàn</rt><rp>)</rp></ruby><ruby>舫<rp>(</rp><rt class=\"results__pinyin\">fǎng</rt><rp>)</rp></ruby>");
+    expect(await chinese!.innerHTML()).toBe("珠<ruby>钿<rp>(</rp><rt class=\"results__pinyin\">diàn</rt><rp>)</rp></ruby><ruby>舫<rp>(</rp><rt class=\"results__pinyin\">fǎng</rt><rp>)</rp></ruby>");
 
     return;
   });
@@ -164,7 +165,7 @@ describe("The Genshin English Dictionary", () => {
       await page.waitForTimeout(1400); // Wait for page initialization process
 
       const searchBox = await page.$("input[name='searchbox']");
-      await searchBox.fill("狂戦士の仮面");
+      await searchBox!.fill("狂戦士の仮面");
 
       await page.waitForTimeout(1400); // Wait for the search results to be shown
 
@@ -177,14 +178,14 @@ describe("The Genshin English Dictionary", () => {
       const pronunciationJa = await word.$(".results__pronunciation-ja");
       const permalink = await word.$(".results__permalink > a");
 
-      expect(await ja.innerText()).toBe("狂戦士の仮面");
-      expect(await en.innerText()).toBe("Berserker's Battle Mask");
-      expect(await pronunciationJa.innerText()).toBe("(きょうせんしのかめん)");
-      expect(await permalink.getAttribute("href")).toBe(`/${lang}/berserkers-battle-mask`);
+      expect(await ja!.innerText()).toBe("狂戦士の仮面");
+      expect(await en!.innerText()).toBe("Berserker's Battle Mask");
+      expect(await pronunciationJa!.innerText()).toBe("(きょうせんしのかめん)");
+      expect(await permalink!.getAttribute("href")).toBe(`/${lang}/berserkers-battle-mask`);
 
       if (lang === "ja") {
         const notes = await word.$("div[data-e2e='notes']");
-        expect(await notes.innerText()).toBe("聖遺物セット「狂戦士」(Berserker) の1つ");
+        expect(await notes!.innerText()).toBe("聖遺物セット「狂戦士」(Berserker) の1つ");
       }
 
       const tags = await word.$$(".results__tags > a");
@@ -194,11 +195,11 @@ describe("The Genshin English Dictionary", () => {
       const tagName = await tag.$(".tag > span");
 
       if (lang === "en") {
-        expect(await tagName.innerText()).toBe("A Piece of Artifacts");
+        expect(await tagName!.innerText()).toBe("A Piece of Artifacts");
       } else if (lang === "ja") {
-        expect(await tagName.innerText()).toBe("聖遺物（個別名）");
+        expect(await tagName!.innerText()).toBe("聖遺物（個別名）");
       } else { // if (lang === "zh-CN")
-        expect(await tagName.innerText()).toBe("圣遗物（单件名）");
+        expect(await tagName!.innerText()).toBe("圣遗物（单件名）");
       }
 
       expect(await tag.getAttribute("href")).toBe(`/${lang}/tags/artifact-piece`);
@@ -218,11 +219,11 @@ describe("The Genshin English Dictionary", () => {
 
       if (lang === "ja") {
         const notes = await word.$("div[data-e2e='notes']");
-        expect(await notes.innerText()).toBe("中国語の「螭虎岩」は古い時代の表記で、現在は簡略化されて「吃虎岩」と表記されるようになったという設定");
+        expect(await notes!.innerText()).toBe("中国語の「螭虎岩」は古い時代の表記で、現在は簡略化されて「吃虎岩」と表記されるようになったという設定");
         expect(await word.$("div[data-e2e='notesZh']")).toBeNull();
       } else if (lang === "zh-CN") {
         const notesZh = await word.$("div[data-e2e='notesZh']");
-        expect(await notesZh.innerText()).toBe("此地曾名为螭虎岩，但随着时间流逝百姓将此地简化为了吃虎岩。特此说明。");
+        expect(await notesZh!.innerText()).toBe("此地曾名为螭虎岩，但随着时间流逝百姓将此地简化为了吃虎岩。特此说明。");
         expect(await word.$("div[data-e2e='notes']")).toBeNull();
       } else { // if (lang === "en")
         expect(await word.$("div[data-e2e='notes']")).toBeNull();
@@ -235,7 +236,7 @@ describe("The Genshin English Dictionary", () => {
       await page.waitForTimeout(1400); // Wait for page initialization process
 
       const searchBox = await page.$("input[name='searchbox']");
-      await searchBox.fill("存在しない語彙");
+      await searchBox!.fill("存在しない語彙");
 
       await page.waitForTimeout(1400); // Wait for the search results to be shown
 
@@ -246,10 +247,10 @@ describe("The Genshin English Dictionary", () => {
       const searchBox2 = await page.$("input[name='searchbox']");
       expect(searchBox2).not.toBeNull();
       // search text is not deleted
-      expect(await searchBox2.inputValue()).toBe("存在しない語彙");
+      expect(await searchBox2!.inputValue()).toBe("存在しない語彙");
 
       // error message is shown
-      const notFoundMessage = (await page.textContent("p[data-e2e='empty']")).trim();
+      const notFoundMessage = (await page.textContent("p[data-e2e='empty']"))!.trim();
 
       if (lang === "en") {
         expect(notFoundMessage).toBe("Your search did not match any words in this dictionary.");

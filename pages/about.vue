@@ -63,8 +63,9 @@
 
 <script lang="ts" setup>
 import words from "~/dataset/words.json";
+import type { Locale } from "~/types";
 
-const { locale, t } = useI18n();
+const { locale, t } = useI18n<[], Locale>();
 const title = `${t("aboutTitle")} | ${t("siteTitle")}`;
 const description = t("aboutDescription");
 

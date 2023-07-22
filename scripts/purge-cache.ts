@@ -15,7 +15,7 @@ try {
     }),
   });
 
-  const json = await res.json();
+  const json = await res.json() as { success?: true };
 
   if (json.success === true) {
     console.info("Cache successfully purged!");

@@ -29,6 +29,8 @@
     "@nuxt/devtools": "^0.8.2",
     "@nuxtjs/i18n": "8.0.0-rc.4",
     "@pinia/nuxt": "^0.4.1",
+    "@types/lodash-es": "^4.17.9",
+    "@types/luxon": "^3.3.1",
     "@types/node": "^18.16.20",
     "dotenv": "^16.0.1",
     "klona": "^2.0.4",
@@ -42,6 +44,7 @@
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.332.0",
+    "@jest/globals": "^29.6.1",
     "@playwright/test": "^1.14.1",
     "concurrently": "^8.0.1",
     "eslint": "latest",

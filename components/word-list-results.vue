@@ -114,23 +114,24 @@
 <script lang="ts" setup>
 import { useDictionaryStore } from "~/store/index";
 import { sleep } from "~/libs/utils";
+import type { Locale, Word } from "~/types";
 
 const props = defineProps({
   words: {
-    type: Array,
+    type: Array as PropType<Word[]>,
     required: true,
   },
 });
 
 const { $pinia } = useNuxtApp();
-const { locale, t } = useI18n();
+const { locale, t } = useI18n<[], Locale>();
 
 const store = useDictionaryStore($pinia);
 
 //
 // refs
 //
-const wordList = ref(null);
+const wordList = ref<HTMLElement[] | null>(null);
 
 //
 // methods
@@ -146,11 +147,11 @@ const observer = process.client ? new IntersectionObserver((entries, observer) =
   }
 }) : null;
 
-const addIntersectionObserver = () => {
+const addIntersectionObserver = (): void => {
   const wordEls = wordList.value;
 
   if (0 < wordEls.length) {
-    observer.observe(wordEls[wordEls.length - 1]); // add observer to the last word element
+    observer?.observe(wordEls[wordEls.length - 1]); // add observer to the last word element
   }
 };
 
@@ -170,11 +171,11 @@ onUpdated(async () => {
 // event handlers
 //
 const localePath = useLocalePath();
-const copyLink = async (wordId, $event) => {
+const copyLink = async (wordId: string, $event: MouseEvent): Promise<void> => {
   navigator.clipboard.writeText(`https://genshin-dictionary.com/${locale.value}/${wordId}`);
 
-  const copyImg = $event.target;
-  const copiedImg = copyImg.parentElement.getElementsByClassName("results__permalink--copied")[0];
+  const copyImg = $event.target as HTMLElement;
+  const copiedImg = copyImg?.parentElement?.getElementsByClassName("results__permalink--copied")[0] as HTMLElement;
   copyImg.style.display = "none";
   copiedImg.style.display = "inline";
 

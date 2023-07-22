@@ -3,7 +3,9 @@
 </template>
 
 <script lang="ts" setup>
-const { t } = useI18n();
+import type { Locale } from "~/types";
+
+const { t } = useI18n<[], Locale>();
 const title = `${ t("siteTitle") } ― ${ t("indexTitleDesc") }`;
 
 useHead({

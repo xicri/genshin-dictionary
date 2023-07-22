@@ -5,9 +5,10 @@
 <script lang="ts" setup>
 import { useDictionaryStore } from "~/store/index";
 import tags from "~/dataset/tags.json";
+import type { Locale } from "~/types";
 
 const { $pinia } = useNuxtApp();
-const { locale, t } = useI18n({
+const { locale, t } = useI18n<[], Locale>({
   useScope: "local",
 });
 const route = useRoute();
@@ -24,7 +25,7 @@ useHead({
   ],
 });
 
-useLazyAsyncData("initTag", () => {
+useLazyAsyncData("initTag", async () => {
   store.$reset();
   store.addTags(tagID);
 });
@@ -37,7 +38,7 @@ onMounted(() => {
   };
 });
 
-const onSearch = () => {
+const onSearch = (): void => {
   const root = `/${locale.value}`;
 
   if (window.location.pathname !== root) {

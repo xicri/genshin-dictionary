@@ -28,11 +28,12 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
 import { useDictionaryStore } from "~/store/index";
+import type { Locale } from "~/types";
 
 defineEmits([ "search" ]);
 
 const { $pinia } = useNuxtApp();
-const { t, locale } = useI18n({
+const { t, locale } = useI18n<[], Locale>({
   useScope: "local",
 });
 const store = useDictionaryStore($pinia);

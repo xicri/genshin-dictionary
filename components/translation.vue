@@ -14,13 +14,14 @@
 
 <script lang="ts" setup>
 import { escapeHtmlString } from "~/libs/utils";
+import type { Locale } from "~/types";
 
 const props = defineProps({
   lang: {
     type: String,
     required: true,
     validator(val) {
-      return [ "en", "ja", "zh-CN" ].includes(val);
+      return (typeof val === "string" && [ "en", "ja", "zh-CN" ].includes(val));
     },
   },
   word: {
@@ -32,15 +33,15 @@ const props = defineProps({
     default: "",
   },
   pinyins: {
-    type: Array,
+    type: Array as PropType<{ char: string, pron: string }[]>,
     default: () => [],
   },
 });
 
-const { t } = useI18n();
+const { t } = useI18n<[], Locale>();
 
-let langName;
-let wordWithPinyin;
+let langName: string;
+let wordWithPinyin: string;
 
 if (props.lang === "en") {
   langName = t("langNameEn");
