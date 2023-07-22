@@ -1,4 +1,8 @@
-import { getTagRedirectDestination, getWordRedirectDestination } from "~/libs/redirect";
+import wordRedirects from "../dataset/redirect/words.json";
+import tagRedirects from "../dataset/redirect/tags.json";
+
+const getWordRedirectDestination = (srcWordID) => wordRedirects[srcWordID];
+const getTagRedirectDestination = (srcWordID) => tagRedirects[srcWordID];
 
 export default defineNuxtRouteMiddleware((to) => {
   const [ locale, ...rest ] = to.path.split("/").filter(component => !!component);
