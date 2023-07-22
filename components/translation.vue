@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { escapeHtmlString } from "@/libs/utils";
+import { escapeHtmlString } from "~/libs/utils";
 
 const props = defineProps({
   lang: {
