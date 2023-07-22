@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 
-import allWords from "~/dataset/words.json";
+import allWords from "../dataset/words.json";
 import type { Word } from "../types";
 
 class CandidateString {
