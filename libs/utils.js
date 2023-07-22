@@ -4,7 +4,7 @@ import allWords from "~/dataset/words.json";
 
 class CandidateString {
   constructor(candidate) {
-    this.candidate = candidate;
+    this.#candidate = candidate;
   }
 
   #normalize(str) {
@@ -25,19 +25,19 @@ class CandidateString {
   }
 
   equals(searchElement) {
-    if (!this.candidate) {
+    if (!this.#candidate) {
       return false;
     }
 
-    return this.#normalize(this.candidate) === this.#normalize(searchElement);
+    return this.#normalize(this.#candidate) === this.#normalize(searchElement);
   }
 
   includes(searchElement) {
-    if (!this.candidate) {
+    if (!this.#candidate) {
       return false;
     }
 
-    const candidate = this.#normalize(this.candidate);
+    const candidate = this.#normalize(this.#candidate);
     const _searchElement = this.#normalize(searchElement);
     return candidate.includes(_searchElement);
   }
