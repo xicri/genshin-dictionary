@@ -102,5 +102,15 @@ export const escapeHtmlString = (html: string): string => {
     ">": "&gt;",
   };
 
-  return html.replace(/[&<>]/g, (charToEscape) => map[charToEscape] ?? charToEscape);
+  return html.replace(/[&<>]/g, (charToEscape) => {
+    if (
+      charToEscape === "&" ||
+      charToEscape === "<" ||
+      charToEscape === ">"
+    ) {
+      return map[charToEscape];
+    } else {
+      return charToEscape;
+    }
+  });
 };
