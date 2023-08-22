@@ -59,6 +59,9 @@
     "ts-node": "^10.9.1",
     "vue-tsc": "^1.8.8"
   },
+  "overrides": {
+    "@typescript-eslint/eslint-plugin": "latest"
+  },
   "engines": {
     "node": "18.x",
     "npm": ">=8.x"
