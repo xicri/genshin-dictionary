@@ -27,7 +27,6 @@ if (lang === "zh-CN") {
   description = "An online English-Chinese-Japanese dictionary for terms in Genshin Impact";
 }
 
-const route = useRoute();
 const runtimeConfig = useRuntimeConfig();
 
 useHead({

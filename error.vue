@@ -25,7 +25,7 @@
 </i18n>
 
 <script setup>
-const props = defineProps({
+defineProps({
   error: {
     type: Object,
     required: true,

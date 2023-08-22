@@ -24,8 +24,8 @@
             <tag :tagid="tag" />
           </a>
         </div>
-        <div v-if="word.notes && locale === 'ja'" class="results__description-section" data-e2e="notes" v-html="word.notes" />
-        <div v-if="word.notesZh && locale === 'zh-CN'" class="results__description-section" data-e2e="notesZh" v-html="word.notesZh" />
+        <div v-if="word.notes && locale === 'ja'" class="results__description-section" data-e2e="notes" v-html="word.notes"></div>
+        <div v-if="word.notesZh && locale === 'zh-CN'" class="results__description-section" data-e2e="notesZh" v-html="word.notesZh"></div>
         <div v-if="word.examples && 0 < word.examples.length" class="results__description-section">
           <h5 class="linebreak">
             {{ t("example") }}
@@ -116,7 +116,7 @@ import { useDictionaryStore } from "~/store/index";
 import { sleep } from "~/libs/utils";
 import type { Locale, Word } from "~/types";
 
-const props = defineProps({
+defineProps({
   words: {
     type: Array as PropType<Word[]>,
     required: true,

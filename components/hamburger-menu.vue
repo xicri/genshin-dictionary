@@ -2,9 +2,9 @@
   <div>
     <input id="menu-switch" type="checkbox" :checked="open" style="display: none;" @click="toggleMenu" />
     <label class="menu__icon" for="menu-switch">
-      <div class="menu__icon-line" />
-      <div class="menu__icon-line" />
-      <div class="menu__icon-line" />
+      <div class="menu__icon-line"></div>
+      <div class="menu__icon-line"></div>
+      <div class="menu__icon-line"></div>
     </label>
     <nav class="menu__nav">
       <div class="menu__nav-padding">
