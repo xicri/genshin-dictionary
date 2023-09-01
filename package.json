@@ -26,8 +26,8 @@
     "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
-    "@nuxt/devtools": "^0.6.7",
-    "@nuxtjs/i18n": "8.0.0-beta.13",
+    "@nuxt/devtools": "^0.8.2",
+    "@nuxtjs/i18n": "8.0.0-rc.4",
     "@pinia/nuxt": "^0.4.1",
     "dotenv": "^16.0.1",
     "klona": "^2.0.4",
