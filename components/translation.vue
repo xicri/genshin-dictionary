@@ -75,6 +75,7 @@ if (0 < props.pinyins.length) {
   &__langname {
     font-size: 0.7em;
     width: 4.5em;
+    white-space: nowrap;
   }
 
 
