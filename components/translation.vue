@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { escapeHtmlString } from "~/libs/utils";
 
 const props = defineProps({

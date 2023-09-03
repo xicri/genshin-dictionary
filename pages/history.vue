@@ -31,7 +31,7 @@
 }
 </i18n>
 
-<script setup>
+<script lang="ts" setup>
 import { isEmpty } from "lodash-es";
 import { getHistory } from "~/libs/utils";
 

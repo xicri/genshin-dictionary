@@ -111,7 +111,7 @@
 }
 </i18n>
 
-<script setup>
+<script lang="ts" setup>
 import { useDictionaryStore } from "~/store/index";
 import { sleep } from "~/libs/utils";
 

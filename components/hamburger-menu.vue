@@ -72,7 +72,7 @@
 }
 </i18n>
 
-<script setup>
+<script lang="ts" setup>
 //
 // refs
 //

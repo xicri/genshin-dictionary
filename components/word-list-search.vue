@@ -69,7 +69,7 @@
 }
 </i18n>
 
-<script setup>
+<script lang="ts" setup>
 import allTags from "~/dataset/tags.json";
 import { klona } from "klona/json";
 import { debounce } from "lodash-es";

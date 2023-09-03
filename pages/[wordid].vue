@@ -2,7 +2,7 @@
   <word-list @search="onSearch" />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useDictionaryStore } from "~/store/index";
 
 const { $pinia } = useNuxtApp();

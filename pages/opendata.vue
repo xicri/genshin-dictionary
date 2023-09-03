@@ -134,7 +134,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import tags from "~/dataset/tags.json";
 
 const { locale, t } = useI18n();

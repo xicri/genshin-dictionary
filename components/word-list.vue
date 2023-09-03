@@ -25,7 +25,7 @@
 }
 </i18n>
 
-<script setup>
+<script lang="ts" setup>
 import { storeToRefs } from "pinia";
 import { useDictionaryStore } from "~/store/index";
 

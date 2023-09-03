@@ -11,7 +11,7 @@
   />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 const emit = defineEmits([ "input" ]);
 
 const props = defineProps({

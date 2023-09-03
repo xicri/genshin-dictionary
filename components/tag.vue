@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import allTags from "~/dataset/tags.json";
 
 const { locale } = useI18n();

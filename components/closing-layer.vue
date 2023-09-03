@@ -2,7 +2,7 @@
   <div :style="{ display: enabled ? 'block' : 'none' }" class="closer" @click="$emit('close')" />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 defineEmits([ "close" ]);
 
 defineProps({

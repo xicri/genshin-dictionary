@@ -2,7 +2,7 @@
   <word-list />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 const { t } = useI18n();
 const title = `${ t("siteTitle") } ― ${ t("indexTitleDesc") }`;
 

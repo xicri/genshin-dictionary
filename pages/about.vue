@@ -61,7 +61,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import words from "~/dataset/words.json";
 
 const { locale, t } = useI18n();
