@@ -1,23 +1,24 @@
 import { defineStore } from "pinia";
-import { candidate } from "../libs/utils.js";
+import { candidate } from "../libs/utils";
 import allWords from "~/dataset/words.json";
+import type { Locale, TagID, Word } from "../types";
 
 export const useDictionaryStore = defineStore("dictionary", {
   state: () => ({
-    wordID: "",
-    query: "",
-    tags: [],
-    maxWords: 100,
-    currentLocale: undefined,
+    wordID: "" as string,
+    query: "" as string,
+    tags: [] as TagID[],
+    maxWords: 100 as number,
+    currentLocale: undefined as Locale | undefined,
   }),
 
   getters: {
-    searchResults: (state) => {
+    searchResults: (state): Word[] => {
       if (state.wordID) {
-        const word = allWords.find(word => word.id === state.wordID);
+        const word = (allWords as Word[]).find(word => word.id === state.wordID);
         return word ? [ word ] : [];
       } else {
-        let words;
+        let words: Word[];
 
         if (state.query) {
           const wordsExactMatch = [];
@@ -27,7 +28,7 @@ export const useDictionaryStore = defineStore("dictionary", {
           const wordsPartialMatchWithPronunciationJa = [];
           const wordsMatchWithNotes = [];
 
-          for (const word of allWords) {
+          for (const word of allWords as Word[]) {
             if ( // 1. exact match with en, ja, and zhCN, and pronunciationJa
               candidate(word.ja).equals(state.query) ||
               candidate(word.en).equals(state.query) ||
@@ -87,7 +88,7 @@ export const useDictionaryStore = defineStore("dictionary", {
             ...wordsMatchWithNotes,
           ];
         } else {
-          words = allWords;
+          words = allWords as Word[];
         }
 
         return words.filter(word => {
@@ -102,28 +103,28 @@ export const useDictionaryStore = defineStore("dictionary", {
           }
 
           // true every search tag is included in the word tags
-          return state.tags.every(searchTag => word.tags.includes(searchTag));
+          return state.tags.every(searchTag => word.tags?.includes(searchTag));
         }).slice(0, state.maxWords);
       }
     },
   },
 
   actions: {
-    setLocale(locale) {
+    setLocale(locale: Locale) {
       this.currentLocale = locale;
     },
-    queryByID(id) {
+    queryByID(id: string) {
       this.wordID = id;
 
       this.maxWords = 100;
     },
-    updateSearchQuery(query) {
+    updateSearchQuery(query: string) {
       this.wordID = "";
       this.query = query;
 
       this.maxWords = 100;
     },
-    addTags(tags) {
+    addTags(tags: TagID|TagID[]) {
       this.wordID = "";
 
       if (Array.isArray(tags)) {
@@ -134,7 +135,7 @@ export const useDictionaryStore = defineStore("dictionary", {
 
       this.maxWords = 100;
     },
-    removeTag(tagIndex) {
+    removeTag(tagIndex: number) {
       this.wordID = "";
       this.tags.splice(tagIndex, 1);
 

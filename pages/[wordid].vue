@@ -2,16 +2,17 @@
   <word-list @search="onSearch" />
 </template>
 
-<script setup>
-import { useDictionaryStore } from "~/store/index.js";
+<script lang="ts" setup>
+import { useDictionaryStore } from "~/store/index";
+import type { Locale } from "~/types";
 
 const { $pinia } = useNuxtApp();
-const { locale, t } = useI18n();
+const { locale, t } = useI18n<[], Locale>();
 
 const route = useRoute();
 const store = useDictionaryStore($pinia);
 
-const onSearch = () => {
+const onSearch = (): void => {
   if (window.location.pathname !== "/") {
     history.pushState({}, "", `/${locale.value}`);
     document.title = t("siteTitle");
@@ -19,7 +20,7 @@ const onSearch = () => {
 };
 
 store.$reset();
-store.queryByID(route.params.wordid);
+store.queryByID(Array.isArray(route.params.wordid) ? route.params.wordid[0] : route.params.wordid);
 const word = store.searchResults[0];
 
 if (!word) {

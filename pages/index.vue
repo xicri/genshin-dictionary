@@ -2,8 +2,10 @@
   <word-list />
 </template>
 
-<script setup>
-const { t } = useI18n();
+<script lang="ts" setup>
+import type { Locale } from "~/types";
+
+const { t } = useI18n<[], Locale>();
 const title = `${ t("siteTitle") } ― ${ t("indexTitleDesc") }`;
 
 useHead({

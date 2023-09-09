@@ -61,10 +61,11 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import words from "~/dataset/words.json";
+import type { Locale } from "~/types";
 
-const { locale, t } = useI18n();
+const { locale, t } = useI18n<[], Locale>();
 const title = `${t("aboutTitle")} | ${t("siteTitle")}`;
 const description = t("aboutDescription");
 
@@ -76,7 +77,7 @@ useHead({
     { hid: "og:description", property: "og:description", content: description },
 
     // noindex untranslated pages
-    ...(locale !== "ja" ? [{
+    ...(locale.value !== "ja" ? [{
       hid: "noindex",
       name: "robots",
       content: "noindex",
@@ -84,7 +85,7 @@ useHead({
   ],
 });
 
-const { data: wordCount } = useLazyAsyncData("wordCount", () => words.length);
+const wordCount = words.length;
 </script>
 
 <style lang="scss" src="~/assets/styles/articles.scss" scoped></style>

@@ -5,7 +5,11 @@ export default {
   },
   moduleFileExtensions: [
     "js",
+    "ts",
     "vue",
     "json",
   ],
+  transform: {
+    "^.+\\.(ts|tsx)$": "ts-jest",
+  },
 };

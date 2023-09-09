@@ -25,18 +25,19 @@
 }
 </i18n>
 
-<script setup>
+<script lang="ts" setup>
 import { storeToRefs } from "pinia";
-import { useDictionaryStore } from "~/store/index.js";
+import { useDictionaryStore } from "~/store/index";
+import type { Locale } from "~/types";
 
 defineEmits([ "search" ]);
 
 const { $pinia } = useNuxtApp();
-const { t, locale } = useI18n({
+const { t, locale } = useI18n<[], Locale>({
   useScope: "local",
 });
 const store = useDictionaryStore($pinia);
-store.setLocale(locale);
+store.setLocale(locale.value);
 const { searchResults } = storeToRefs(store);
 </script>
 

@@ -3,7 +3,7 @@
     <span class="results__langname results__translation-item">{{ langName }}: </span>
     <div class="results__translation-item">
       <div class="results__ja">
-        <span v-if="wordWithPinyin" lang="zh-CN" data-e2e="zh-CN" v-html="wordWithPinyin" />
+        <span v-if="wordWithPinyin" lang="zh-CN" data-e2e="zh-CN" v-html="wordWithPinyin"></span>
         <span v-else :lang="lang" :data-e2e="lang">{{ word }}</span>
 
         <span v-if="kana" class="results__pronunciation-ja">({{ kana }})</span>
@@ -12,15 +12,16 @@
   </div>
 </template>
 
-<script setup>
-import { escapeHtmlString } from "@/libs/utils";
+<script lang="ts" setup>
+import { escapeHtmlString } from "~/libs/utils";
+import type { Locale } from "~/types";
 
 const props = defineProps({
   lang: {
     type: String,
     required: true,
     validator(val) {
-      return [ "en", "ja", "zh-CN" ].includes(val);
+      return (typeof val === "string" && [ "en", "ja", "zh-CN" ].includes(val));
     },
   },
   word: {
@@ -32,15 +33,15 @@ const props = defineProps({
     default: "",
   },
   pinyins: {
-    type: Array,
+    type: Array as PropType<{ char: string, pron: string }[]>,
     default: () => [],
   },
 });
 
-const { t } = useI18n();
+const { t } = useI18n<[], Locale>();
 
-let langName;
-let wordWithPinyin;
+let langName: string;
+let wordWithPinyin: string;
 
 if (props.lang === "en") {
   langName = t("langNameEn");

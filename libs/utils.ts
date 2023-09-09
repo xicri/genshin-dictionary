@@ -1,13 +1,16 @@
 import { DateTime } from "luxon";
 
-import allWords from "~/dataset/words.json";
+import allWords from "../dataset/words.json";
+import type { Word } from "../types";
 
 class CandidateString {
-  constructor(candidate) {
-    this.candidate = candidate;
+  #candidate: string | undefined;
+
+  constructor(candidate: string | undefined) {
+    this.#candidate = candidate;
   }
 
-  #normalize(str) {
+  #normalize(str: string): string {
     return str
       // replace Katakana with Hiragana
       .replace(/[ァ-ヴ]/g, (str) => String.fromCharCode(str.charCodeAt(0) - 0x60))
@@ -24,39 +27,41 @@ class CandidateString {
       .toLowerCase();
   }
 
-  equals(searchElement) {
-    if (!this.candidate) {
+  equals(searchElement: string): boolean {
+    if (!this.#candidate) {
       return false;
     }
 
-    return this.#normalize(this.candidate) === this.#normalize(searchElement);
+    return this.#normalize(this.#candidate) === this.#normalize(searchElement);
   }
 
-  includes(searchElement) {
-    if (!this.candidate) {
+  includes(searchElement: string): boolean {
+    if (!this.#candidate) {
       return false;
     }
 
-    const candidate = this.#normalize(this.candidate);
+    const candidate = this.#normalize(this.#candidate);
     const _searchElement = this.#normalize(searchElement);
     return candidate.includes(_searchElement);
   }
 }
 
-export const candidate = (str) => new CandidateString(str);
+export const candidate = (str: string | undefined): CandidateString => new CandidateString(str);
 
-export const getHistory = () => {
-  function reverseSortObject(obj) {
-    const newObj = {};
+type History = { [key:string]: Word[]};
+
+export const getHistory = (): History => {
+  function reverseSortObject<T extends { [key: string]: unknown }>(obj: T): T {
+    const newObj: { [key:string]: unknown } = {};
 
     for (const key of Object.keys(obj).sort().reverse()) {
       newObj[key] = obj[key];
     }
 
-    return newObj;
+    return newObj as T;
   }
 
-  const history = {};
+  const history: History = {};
 
   for (const word of allWords) {
     const createdAt = DateTime.fromISO(word.createdAt);
@@ -71,7 +76,7 @@ export const getHistory = () => {
     if (!Array.isArray(history[createdAtJa])) {
       history[createdAtJa] = [];
     }
-    history[createdAtJa].push(word);
+    history[createdAtJa].push(word as Word);
   }
 
   // If 300+ words are updated at once, that would be considered resetting createdAt
@@ -85,17 +90,27 @@ export const getHistory = () => {
   return reverseSortObject(history);
 };
 
-export const sleep = async (ms) =>
+export const sleep = async (ms: number): Promise<void> =>
   new Promise(resolve =>
-    setTimeout(() => resolve(), ms)
+    setTimeout(() => resolve(undefined), ms)
   );
 
-export const escapeHtmlString = (html) => {
+export const escapeHtmlString = (html: string): string => {
   const map = {
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
   };
 
-  return html.replace(/[&<>]/g, (charToEscape) => map[charToEscape] ?? charToEscape);
+  return html.replace(/[&<>]/g, (charToEscape) => {
+    if (
+      charToEscape === "&" ||
+      charToEscape === "<" ||
+      charToEscape === ">"
+    ) {
+      return map[charToEscape];
+    } else {
+      return charToEscape;
+    }
+  });
 };

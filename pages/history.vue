@@ -31,11 +31,12 @@
 }
 </i18n>
 
-<script setup>
+<script lang="ts" setup>
 import { isEmpty } from "lodash-es";
 import { getHistory } from "~/libs/utils";
+import type { Locale } from "~/types";
 
-const { t } = useI18n();
+const { t } = useI18n<[], Locale>();
 const title = `${t("historyTitle")} | ${t("siteTitle")}`;
 
 useHead({
@@ -45,8 +46,8 @@ useHead({
   ],
 });
 
-const { data: history } = useLazyAsyncData("history", () => getHistory());
-const { data: empty } = useLazyAsyncData("empty", () => isEmpty(getHistory()));
+const { data: history } = useLazyAsyncData("history", async () => getHistory());
+const { data: empty } = useLazyAsyncData("empty", async () => isEmpty(getHistory()));
 </script>
 
 <style lang="scss" scoped>

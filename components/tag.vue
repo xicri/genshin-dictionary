@@ -4,14 +4,15 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import allTags from "~/dataset/tags.json";
+import type { Locale, TagID } from "~/types";
 
-const { locale } = useI18n();
+const { locale } = useI18n<[], Locale>();
 
 const props = defineProps({
   tagid: {
-    type: String,
+    type: String as PropType<TagID>,
     required: true,
   },
 });

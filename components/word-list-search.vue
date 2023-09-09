@@ -5,7 +5,7 @@
         <div class="search__scrollable" @click="focusOnSearchBox" @dblclick="selectAll">
           <div class="search__active-tags">
             <div v-for="(tag, i) in tags" :key="tag" class="search__active-tag">
-              <span>{{ allTags[tag][$i18n.locale] }}</span>
+              <span>{{ allTags[tag][locale] }}</span>
               <span class="search__remove-tag" @click="removeTag(i)">☓</span>
             </div>
           </div>
@@ -27,7 +27,7 @@
         <div class="search__taglist-inner">
           <span class="search__taglist-title">{{ t("tags") }}:</span>
           <span v-for="(availableTag, id) in AvailableTags" :key="id" class="search__tag" @click="addTag(id)">
-            {{ availableTag[$i18n.locale] }} <span class="search__tag-add">+</span>
+            {{ availableTag[locale] }} <span class="search__tag-add">+</span>
           </span>
         </div>
 
@@ -69,25 +69,27 @@
 }
 </i18n>
 
-<script setup>
+<script lang="ts" setup>
 import allTags from "~/dataset/tags.json";
 import { klona } from "klona/json";
 import { debounce } from "lodash-es";
 import { storeToRefs } from "pinia";
-import { useDictionaryStore } from "~/store/index.js";
+import { useDictionaryStore } from "~/store/index";
+import type ElasticSearchbox from "~/components/elastic-searchbox.vue";
+import type { Locale, TagID } from "~/types";
 
 const emit = defineEmits([ "search" ]);
-const { $pinia, $sentry } = useNuxtApp();
+const { $pinia } = useNuxtApp();
 const store = useDictionaryStore($pinia);
 
-const { t } = useI18n({
+const { locale, t } = useI18n<[], Locale>({
   useScope: "local",
 });
 
 //
 // Refs
 //
-const searchBox = ref(null);
+const searchBox = ref<InstanceType<typeof ElasticSearchbox>|null>(null);
 const { tags } = storeToRefs(store);
 const displayTagListOnMobile = ref(false);
 
@@ -110,37 +112,33 @@ const AvailableTags = computed(() => {
 const updateSearchQuery = debounce((evt) => {
   store.updateSearchQuery(evt.target.value);
   emit("search");
-
-  if (store.query && store.searchResults.length <= 0) {
-    $sentry.captureMessage(store.query, {
-      tags: {
-        analysis: "search",
-      },
-    });
-  }
 }, 500);
-const focusOnSearchBox = () => {
-  const el = searchBox.value.$el;
-  el.setSelectionRange(el.value.length, el.value.length);
-  el.focus();
+const focusOnSearchBox = (): void => {
+  const el = searchBox.value?.$el;
+  if (el) {
+    el.setSelectionRange(el.value.length, el.value.length);
+    el.focus();
+  }
 };
-const selectAll = () => {
-  const el = searchBox.value.$el;
-  el.setSelectionRange(0, el.value.length);
-  el.focus();
+const selectAll = (): void => {
+  const el = searchBox.value?.$el;
+  if (el) {
+    el.setSelectionRange(0, el.value.length);
+    el.focus();
+  }
 };
-const closeTagList = () => {
+const closeTagList = (): void => {
   displayTagListOnMobile.value = false;
 };
-const toggleTagList = () => {
+const toggleTagList = (): void => {
   displayTagListOnMobile.value = !displayTagListOnMobile.value;
 };
-const addTag = async (tagID) => {
+const addTag = (tagID: TagID): void => {
   store.addTags(tagID);
   emit("search");
   closeTagList();
 };
-const removeTag = async (tagIndex) => {
+const removeTag = (tagIndex: number): void => {
   store.removeTag(tagIndex);
   emit("search");
 };

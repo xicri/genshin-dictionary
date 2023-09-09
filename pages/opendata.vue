@@ -134,10 +134,11 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import tags from "~/dataset/tags.json";
+import type { Locale } from "~/types";
 
-const { locale, t } = useI18n();
+const { locale, t } = useI18n<[], Locale>();
 const title = `${ t("opendataTitle") } | ${ t("siteTitle") }`;
 
 useHead({
@@ -146,7 +147,7 @@ useHead({
     { hid: "og:title", property: "og:title", content: title },
 
     // noindex untranslated pages
-    ...(locale !== "ja" ? [{
+    ...(locale.value !== "ja" ? [{
       hid: "noindex",
       name: "robots",
       content: "noindex",

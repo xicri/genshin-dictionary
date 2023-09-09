@@ -24,8 +24,8 @@
             <tag :tagid="tag" />
           </a>
         </div>
-        <div v-if="word.notes && locale === 'ja'" class="results__description-section" data-e2e="notes" v-html="word.notes" />
-        <div v-if="word.notesZh && locale === 'zh-CN'" class="results__description-section" data-e2e="notesZh" v-html="word.notesZh" />
+        <div v-if="word.notes && locale === 'ja'" class="results__description-section" data-e2e="notes" v-html="word.notes"></div>
+        <div v-if="word.notesZh && locale === 'zh-CN'" class="results__description-section" data-e2e="notesZh" v-html="word.notesZh"></div>
         <div v-if="word.examples && 0 < word.examples.length" class="results__description-section">
           <h5 class="linebreak">
             {{ t("example") }}
@@ -55,7 +55,7 @@
               src="~/assets/vendor/octicons/link.svg"
               width="12"
               height="12"
-              :alt="t('permalinkAlt', { word: word[locale] })"
+              :alt="t('permalinkAlt', { word: word[locale === 'zh-CN' ? 'zhCN' : locale] })"
               decoding="async"
               class="results__permalink--icon"
             />
@@ -65,7 +65,7 @@
             src="~/assets/vendor/octicons/copy.svg"
             width="12"
             height="12"
-            :alt="t('copyLink', { word: word[locale] })"
+            :alt="t('copyLink', { word: word[locale === 'zh-CN' ? 'zhCN' : locale] })"
             decoding="async"
             class="results__permalink--copy"
             @click="copyLink(word.id, $event)"
@@ -74,7 +74,7 @@
             src="~/assets/vendor/octicons/check.svg"
             width="12"
             height="12"
-            :alt="t('copyLinkDone', { word: word[locale] })"
+            :alt="t('copyLinkDone', { word: word[locale === 'zh-CN' ? 'zhCN' : locale] })"
             decoding="async"
             class="results__permalink--copied"
             style="display: none;"
@@ -111,26 +111,27 @@
 }
 </i18n>
 
-<script setup>
-import { useDictionaryStore } from "~/store/index.js";
-import { sleep } from "~/libs/utils.js";
+<script lang="ts" setup>
+import { useDictionaryStore } from "~/store/index";
+import { sleep } from "~/libs/utils";
+import type { Locale, Word } from "~/types";
 
-const props = defineProps({
+defineProps({
   words: {
-    type: Array,
+    type: Array as PropType<Word[]>,
     required: true,
   },
 });
 
 const { $pinia } = useNuxtApp();
-const { locale, t } = useI18n();
+const { locale, t } = useI18n<[], Locale>();
 
 const store = useDictionaryStore($pinia);
 
 //
 // refs
 //
-const wordList = ref(null);
+const wordList = ref<HTMLElement[] | null>(null);
 
 //
 // methods
@@ -146,11 +147,11 @@ const observer = process.client ? new IntersectionObserver((entries, observer) =
   }
 }) : null;
 
-const addIntersectionObserver = () => {
+const addIntersectionObserver = (): void => {
   const wordEls = wordList.value;
 
-  if (0 < wordEls.length) {
-    observer.observe(wordEls[wordEls.length - 1]); // add observer to the last word element
+  if (wordEls && 0 < wordEls.length) {
+    observer?.observe(wordEls[wordEls.length - 1]); // add observer to the last word element
   }
 };
 
@@ -170,13 +171,16 @@ onUpdated(async () => {
 // event handlers
 //
 const localePath = useLocalePath();
-const copyLink = async (wordId, $event) => {
+const copyLink = async (wordId: string, $event: MouseEvent): Promise<void> => {
   navigator.clipboard.writeText(`https://genshin-dictionary.com/${locale.value}/${wordId}`);
 
-  const copyImg = $event.target;
-  const copiedImg = copyImg.parentElement.getElementsByClassName("results__permalink--copied")[0];
-  copyImg.style.display = "none";
-  copiedImg.style.display = "inline";
+  const copyImg = $event.target as HTMLElement;
+  const copiedImg = copyImg?.parentElement?.getElementsByClassName("results__permalink--copied")[0] as HTMLElement;
+
+  if (copiedImg) {
+    copyImg.style.display = "none";
+    copiedImg.style.display = "inline";
+  }
 
   await sleep(1000);
 

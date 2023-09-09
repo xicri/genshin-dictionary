@@ -13,7 +13,7 @@
       </nav>
     </div>
 
-    <slot />
+    <slot></slot>
   </div>
 </template>
 
@@ -34,8 +34,10 @@
 }
 </i18n>
 
-<script setup>
-const { t } = useI18n({
+<script lang="ts" setup>
+import type { Locale } from "~/types";
+
+const { t } = useI18n<[], Locale>({
   useScope: "local",
 });
 const localePath = useLocalePath();

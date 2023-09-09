@@ -1,7 +1,9 @@
+import { beforeEach, expect, test } from "@jest/globals";
 import { setActivePinia, createPinia } from "pinia";
-import { useDictionaryStore } from "~/store/index.js";
+import { useDictionaryStore } from "~/store/index";
+import type { Word } from "../types";
 
-function search(query) {
+function search(query: string): Word[] {
   const store = useDictionaryStore();
   store.updateSearchQuery(query);
 
@@ -24,7 +26,13 @@ test("search words including 'ヴァヴィヴヴェヴォ' by 'ばびぶべぼ'"
   expect(results[0].ja).toBe("ヴェル・ゴレット");
 });
 
-const fixtures = [
+type Fixture = {
+  result: string;
+  input: string;
+  lang: "en" | "ja" | "zhCN";
+};
+
+const fixtures: Fixture[] = [
   {
     result: "Geo Archon",
     input: "Geo God",
