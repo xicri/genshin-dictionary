@@ -20,7 +20,7 @@ const onSearch = (): void => {
 };
 
 store.$reset();
-store.queryByID(route.params.wordid);
+store.queryByID(Array.isArray(route.params.wordid) ? route.params.wordid[0] : route.params.wordid);
 const word = store.searchResults[0];
 
 if (!word) {
