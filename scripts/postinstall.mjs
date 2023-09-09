@@ -1,3 +1,10 @@
+/*
+ * DO NOT CONVERT THIS FILE TO TYPESCRIPT!
+ * This script has to run before `nuxt prepare` command because nuxt.config.ts requires dataset json files which are installed by this script.
+ * However, tsconfig.json of this repository depends on .nuxt/tsconfig.json which is installed by `nuxt prepare` command,
+ * so this script has to run after `nuxt prepare` if this script was TypeScript.
+ * Therefore, you cannot convert this JavaScript file to TypeScript.
+ */
 import { copyFile, mkdir, writeFile } from "fs/promises";
 import fetch from "node-fetch";
 import { resolve } from "path";
