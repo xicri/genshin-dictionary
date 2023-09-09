@@ -39,8 +39,10 @@ const searchBox = ref<HTMLInputElement | null>(null);
 //
 const updateSearchBoxWidth = (): void => {
   const el = searchBox.value;
-  const textLength = (0 < el.value.length) ? el.value.length : props.placeholder.length;
-  el.style.width = `${textLength * 1.05}em`;
+  if (el) {
+    const textLength = (0 < el.value.length) ? el.value.length : props.placeholder.length;
+    el.style.width = `${textLength * 1.05}em`;
+  }
 };
 
 //

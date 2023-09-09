@@ -150,7 +150,7 @@ const observer = process.client ? new IntersectionObserver((entries, observer) =
 const addIntersectionObserver = (): void => {
   const wordEls = wordList.value;
 
-  if (0 < wordEls.length) {
+  if (wordEls && 0 < wordEls.length) {
     observer?.observe(wordEls[wordEls.length - 1]); // add observer to the last word element
   }
 };
@@ -176,8 +176,11 @@ const copyLink = async (wordId: string, $event: MouseEvent): Promise<void> => {
 
   const copyImg = $event.target as HTMLElement;
   const copiedImg = copyImg?.parentElement?.getElementsByClassName("results__permalink--copied")[0] as HTMLElement;
-  copyImg.style.display = "none";
-  copiedImg.style.display = "inline";
+
+  if (copiedImg) {
+    copyImg.style.display = "none";
+    copiedImg.style.display = "inline";
+  }
 
   await sleep(1000);
 

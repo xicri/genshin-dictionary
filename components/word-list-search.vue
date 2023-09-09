@@ -115,13 +115,17 @@ const updateSearchQuery = debounce((evt) => {
 }, 500);
 const focusOnSearchBox = (): void => {
   const el = searchBox.value?.$el;
-  el.setSelectionRange(el.value.length, el.value.length);
-  el.focus();
+  if (el) {
+    el.setSelectionRange(el.value.length, el.value.length);
+    el.focus();
+  }
 };
 const selectAll = (): void => {
   const el = searchBox.value?.$el;
-  el.setSelectionRange(0, el.value.length);
-  el.focus();
+  if (el) {
+    el.setSelectionRange(0, el.value.length);
+    el.focus();
+  }
 };
 const closeTagList = (): void => {
   displayTagListOnMobile.value = false;
