@@ -77,7 +77,7 @@ import { storeToRefs } from "pinia";
 import { useDictionaryStore } from "~/store/index.js";
 
 const emit = defineEmits([ "search" ]);
-const { $pinia, $sentry } = useNuxtApp();
+const { $pinia } = useNuxtApp();
 const store = useDictionaryStore($pinia);
 
 const { t } = useI18n({
@@ -110,14 +110,6 @@ const AvailableTags = computed(() => {
 const updateSearchQuery = debounce((evt) => {
   store.updateSearchQuery(evt.target.value);
   emit("search");
-
-  if (store.query && store.searchResults.length <= 0) {
-    $sentry.captureMessage(store.query, {
-      tags: {
-        analysis: "search",
-      },
-    });
-  }
 }, 500);
 const focusOnSearchBox = () => {
   const el = searchBox.value.$el;
