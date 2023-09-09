@@ -2,7 +2,12 @@ import { chromium } from "playwright";
 import { mkdir, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { sleep } from "../libs/utils";
+
+// TODO replace with `import { sleep } from "../libs/utils.js";`
+const sleep = async (ms) =>
+  new Promise(resolve =>
+    setTimeout(() => resolve(), ms)
+  );
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
