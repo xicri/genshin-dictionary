@@ -85,7 +85,7 @@ useHead({
   ],
 });
 
-const { data: wordCount } = useLazyAsyncData("wordCount", () => words.length);
+const wordCount = words.length;
 </script>
 
 <style lang="scss" src="~/assets/styles/articles.scss" scoped></style>
