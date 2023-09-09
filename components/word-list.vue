@@ -37,7 +37,7 @@ const { t, locale } = useI18n<[], Locale>({
   useScope: "local",
 });
 const store = useDictionaryStore($pinia);
-store.setLocale(locale);
+store.setLocale(locale.value);
 const { searchResults } = storeToRefs(store);
 </script>
 

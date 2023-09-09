@@ -77,7 +77,7 @@ useHead({
     { hid: "og:description", property: "og:description", content: description },
 
     // noindex untranslated pages
-    ...(locale !== "ja" ? [{
+    ...(locale.value !== "ja" ? [{
       hid: "noindex",
       name: "robots",
       content: "noindex",
