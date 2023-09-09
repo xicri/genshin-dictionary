@@ -135,12 +135,12 @@ const closeTagList = () => {
 const toggleTagList = () => {
   displayTagListOnMobile.value = !displayTagListOnMobile.value;
 };
-const addTag = async (tagID) => {
+const addTag = (tagID) => {
   store.addTags(tagID);
   emit("search");
   closeTagList();
 };
-const removeTag = async (tagIndex) => {
+const removeTag = (tagIndex) => {
   store.removeTag(tagIndex);
   emit("search");
 };
