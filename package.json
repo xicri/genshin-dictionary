@@ -19,11 +19,11 @@
     "start": "node .output/server/index.mjs",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest && playwright test",
     "vrt": "concurrently --kill-others --success=first \"npm:start\" \"npm:vrt:screenshot\" && npm run vrt:reg",
-    "vrt:screenshot": "sleep 5 && ts-node --esm ./scripts/vrt-screenshot.ts",
+    "vrt:screenshot": "sleep 5 && node ./scripts/vrt-screenshot.mjs",
     "vrt:reg": "./scripts/vrt-reg.sh",
     "lint": "nuxt typecheck && eslint --ext .js,.mjs,.cjs,.ts,.vue --ignore-path .gitignore .",
-    "purge-cache": "ts-node --esm ./scripts/purge-cache.ts",
-    "postinstall": "ts-node --esm ./scripts/postinstall.ts && nuxt prepare && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
+    "purge-cache": "node ./scripts/purge-cache.mjs",
+    "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
     "@nuxt/devtools": "^0.8.2",
