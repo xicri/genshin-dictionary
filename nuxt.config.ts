@@ -5,7 +5,12 @@ const isLocal = !process.env.SERVER_ENV || process.env.SERVER_ENV === "local";
 
 export default defineNuxtConfig({
   ssr: true,
-  components: true,
+  components: [
+    {
+      path: "~/components",
+      pathPrefix: false,
+    },
+  ],
 
   nitro: {
     preset: "node-server",
