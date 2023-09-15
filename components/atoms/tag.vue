@@ -1,6 +1,6 @@
 <template>
   <div class="tag">
-    <span>{{ TagName }}</span>
+    <span>{{ tagName }}</span>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ const props = defineProps({
   },
 });
 
-const TagName = computed(() => allTags[props.tagid][locale.value]);
+const tagName = allTags[props.tagid][locale.value];
 </script>
 
 <style lang="scss" scoped>
