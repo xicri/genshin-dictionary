@@ -2,7 +2,7 @@ import { chromium } from "playwright";
 import { mkdir, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { sleep } from "../libs/utils";
+import { sleep } from "../utils/utils";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

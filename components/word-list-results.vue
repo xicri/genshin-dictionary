@@ -113,7 +113,6 @@
 
 <script lang="ts" setup>
 import { useDictionaryStore } from "~/store/index";
-import { sleep } from "~/libs/utils";
 import type { Locale, Word } from "~/types";
 
 defineProps({

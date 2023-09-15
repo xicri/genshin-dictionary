@@ -13,7 +13,6 @@
 </template>
 
 <script lang="ts" setup>
-import { escapeHtmlString } from "~/libs/utils";
 import type { Locale } from "~/types";
 
 const props = defineProps({

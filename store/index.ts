@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { candidate } from "../libs/utils";
 import allWords from "~/dataset/words.json";
 import type { Locale, TagID, Word } from "../types";
 
