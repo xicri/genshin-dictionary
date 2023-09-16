@@ -23,9 +23,13 @@
       <div ref="taglist" :class="{ search__taglist: true, 'search__taglist-display-mobile': displayTagListOnMobile }">
         <div class="search__taglist-inner">
           <span class="search__taglist-title">{{ t("tags") }}:</span>
-          <span v-for="(availableTag, id) in AvailableTags" :key="id" class="search__tag" @click="addTag(id)">
-            {{ availableTag[locale] }} <span class="search__tag-add">+</span>
-          </span>
+          <tag
+            v-for="(availableTagID) in AvailableTagIDs"
+            :key="availableTagID"
+            :tagid="availableTagID"
+            button="+"
+            @click="addTag(availableTagID)"
+          />
         </div>
 
         <img
@@ -79,7 +83,7 @@ const emit = defineEmits([ "search" ]);
 const { $pinia } = useNuxtApp();
 const store = useDictionaryStore($pinia);
 
-const { locale, t } = useI18n<[], Locale>({
+const { t } = useI18n<[], Locale>({
   useScope: "local",
 });
 
@@ -93,14 +97,14 @@ const displayTagListOnMobile = ref(false);
 //
 // Computed
 //
-const AvailableTags = computed(() => {
+const AvailableTagIDs = computed(() => {
   const availableTags = klona(allTags);
 
   for (const searchTag of tags.value) {
     delete availableTags[searchTag];
   }
 
-  return availableTags;
+  return Object.keys(availableTags) as TagID[];
 });
 
 //
@@ -197,6 +201,7 @@ const removeTag = (tagIndex: number): void => {
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: baseline;
+    gap: 10px;
   }
   &__tag {
     display: block;
