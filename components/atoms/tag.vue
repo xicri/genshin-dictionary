@@ -34,8 +34,6 @@ const tagName = allTags[props.tagid][locale.value];
   padding-left: 4px;
   padding-right: 4px;
 
-  margin-right: 6px;
-
   color: vars.$color-dark;
   background-color: vars.$color-lightest;
 }
