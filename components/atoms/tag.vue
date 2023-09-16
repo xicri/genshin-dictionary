@@ -23,6 +23,11 @@ const props = defineProps({
     required: false,
     default: undefined,
   },
+  size: {
+    type: String as PropType<"medium" | "small">,
+    required: false,
+    default: "medium",
+  },
   // required to be defined here to check if these events are listened by parent components
   onClick: {
     type: Function,
@@ -42,6 +47,7 @@ const emit = defineEmits([
 ]);
 
 const tagName = allTags[props.tagid][locale.value];
+const fontSize = props.size === "medium" ? "15px" : "12px";
 
 let entirePointer: "default" | "pointer";
 let buttonPointer: "default" | "pointer";
@@ -82,6 +88,7 @@ if (props.onClick && props.onButtonClick) {
   color: vars.$color-dark;
   background-color: vars.$color-lightest;
 
+  font-size: v-bind("fontSize");
   cursor: v-bind("entirePointer");
 
   &__button {
