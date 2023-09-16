@@ -21,7 +21,7 @@
       <div class="results__description">
         <div class="results__tags results__description-section">
           <a v-for="tag in word.tags" :key="tag" :href="localePath(`/tags/${tag}`)">
-            <tag :tagid="tag" />
+            <tag :tagid="tag" size="small" />
           </a>
         </div>
         <div v-if="word.notes && locale === 'ja'" class="results__description-section" data-e2e="notes" v-html="word.notes"></div>
