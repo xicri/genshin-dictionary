@@ -29,10 +29,10 @@ const tagName = allTags[props.tagid][locale.value];
   border-radius: 6px;
   border-color: vars.$color-dark;
 
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
 
   color: vars.$color-dark;
   background-color: vars.$color-lightest;
