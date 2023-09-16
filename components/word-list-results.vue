@@ -249,6 +249,7 @@ h5.linebreak {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    gap: 6px;
 
     font-size: 12px;
   }
