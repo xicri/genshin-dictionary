@@ -1,22 +1,28 @@
 <template>
-  <div class="tag" @click="emit('click')">
+  <component :is="link ? 'a' : 'div'" :href="href" class="tag" @click="emit('click')">
     <span>{{ tagName }}</span>
     <span v-if="button" class="tag__button" @click="emit('buttonClick')">
       {{ button }}
     </span>
-  </div>
+  </component>
 </template>
 
 <script lang="ts" setup>
 import allTags from "~/dataset/tags.json";
 import type { Locale, TagID } from "~/types";
 
+const localePath = useLocalePath();
 const { locale } = useI18n<[], Locale>();
 
 const props = defineProps({
   tagid: {
     type: String as PropType<TagID>,
     required: true,
+  },
+  link: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
   button: {
     type: String,
@@ -47,6 +53,7 @@ const emit = defineEmits([
 ]);
 
 const tagName = allTags[props.tagid][locale.value];
+const href = props.link ? localePath(`/tags/${props.tagid}`) : undefined;
 const fontSize = props.size === "medium" ? "15px" : "12px";
 
 let entirePointer: "default" | "pointer";
@@ -54,7 +61,7 @@ let buttonPointer: "default" | "pointer";
 
 if (props.onClick && props.onButtonClick) {
   throw new Error("You can set @click or @buttonClick, not both at the same time.");
-} else if (props.onClick) {
+} else if (props.link || props.onClick) {
   entirePointer = "pointer";
   buttonPointer = "pointer";
 } else if (props.onButtonClick) {
@@ -63,6 +70,10 @@ if (props.onClick && props.onButtonClick) {
 } else { // None of @click and @buttonClick are defined
   entirePointer = "default";
   buttonPointer = "default";
+}
+
+if ((props.link && !!props.onClick) || (props.link && !!props.onButtonClick)) {
+  throw new Error("link and onClick/onButtonClick cannot be set at the same time.");
 }
 </script>
 
