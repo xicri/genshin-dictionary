@@ -4,10 +4,7 @@
       <div class="search__box">
         <div class="search__scrollable" @click="focusOnSearchBox" @dblclick="selectAll">
           <div class="search__active-tags">
-            <div v-for="(tag, i) in tags" :key="tag" class="search__active-tag">
-              <span>{{ allTags[tag][locale] }}</span>
-              <span class="search__remove-tag" @click="removeTag(i)">☓</span>
-            </div>
+            <tag v-for="(tag, i) in tags" :key="tag" :tagid="tag" button="☓" pointable="buttonOnly" @button-click="removeTag(i)" />
           </div>
 
           <elastic-searchbox ref="searchBox" class="search__input" name="searchbox" :placeholder="t('enterSearchTerms')" autocomplete="off" @input="updateSearchQuery" />
@@ -180,40 +177,13 @@ const removeTag = (tagIndex: number): void => {
     width: calc(100% - 0.4em);
 
     display: flex;
+    gap: 6px;
 
     cursor: text;
   }
 
   &__active-tags {
     display: contents;
-    flex-wrap: wrap;
-  }
-  &__active-tag {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    gap: 0.34em;
-
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 6px;
-    border-color: vars.$color-dark;
-
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 4px;
-    padding-right: 4px;
-
-    margin-right: 6px;
-
-    color: vars.$color-dark;
-    background-color: vars.$color-lightest;
-
-    font-size: vars.$search-font-size;
-  }
-  &__remove-tag {
-    font-weight: 1000;
-    cursor: pointer;
   }
 
   &__input {
