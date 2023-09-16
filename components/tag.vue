@@ -1,5 +1,5 @@
 <template>
-  <div class="tag">
+  <div class="tag" @click="emit('click')">
     <span>{{ tagName }}</span>
     <span v-if="button" class="tag__button" @click="emit('buttonClick')">
       {{ button }}
@@ -24,6 +24,11 @@ const props = defineProps({
     default: undefined,
   },
   // required to be defined here to check if these events are listened by parent components
+  onClick: {
+    type: Function,
+    required: false,
+    default: undefined,
+  },
   onButtonClick: {
     type: Function,
     required: false,
@@ -31,15 +36,26 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([ "buttonClick" ]);
+const emit = defineEmits([
+  "click",
+  "buttonClick",
+]);
 
 const tagName = allTags[props.tagid][locale.value];
 
+let entirePointer: "default" | "pointer";
 let buttonPointer: "default" | "pointer";
 
-if (props.onButtonClick) {
+if (props.onClick && props.onButtonClick) {
+  throw new Error("You can set @click or @buttonClick, not both at the same time.");
+} else if (props.onClick) {
+  entirePointer = "pointer";
   buttonPointer = "pointer";
-} else { // @buttonClick is not defined
+} else if (props.onButtonClick) {
+  entirePointer = "default";
+  buttonPointer = "pointer";
+} else { // None of @click and @buttonClick are defined
+  entirePointer = "default";
   buttonPointer = "default";
 }
 </script>
@@ -65,6 +81,8 @@ if (props.onButtonClick) {
 
   color: vars.$color-dark;
   background-color: vars.$color-lightest;
+
+  cursor: v-bind("entirePointer");
 
   &__button {
     font-weight: 1000;
