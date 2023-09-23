@@ -2,7 +2,10 @@
 
 module.exports = {
   root: true,
-  extends: "xicri/nuxt+ts",
+  extends: [
+    "xicri/nuxt+ts",
+    "plugin:storybook/recommended",
+  ],
 
   parserOptions: {
     project: "./tsconfig.json",

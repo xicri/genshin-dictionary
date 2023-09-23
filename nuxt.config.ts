@@ -22,6 +22,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@pinia/nuxt",
     "@nuxt/devtools",
+    "@nuxtjs/storybook",
     "nuxt-simple-robots",
     "nuxt-simple-sitemap",
   ],
@@ -79,6 +80,13 @@ export default defineNuxtConfig({
 
   devtools: {
     enabled: true,
+  },
+
+  storybook: {
+    url: "http://localhost:6006",
+    storybookRoute: "/__storybook__",
+    port: 6006,
+    devtools: true,
   },
 
   // For nuxt-simple-robots and nuxt-simple-sitemap
