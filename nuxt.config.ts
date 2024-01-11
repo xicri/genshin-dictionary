@@ -1,6 +1,8 @@
 import words from "./dataset/words.json";
 import tags from "./dataset/tags.json";
 
+const isLocal = !process.env.SERVER_ENV || process.env.SERVER_ENV === "local";
+
 export default defineNuxtConfig({
   ssr: true,
   components: true,
@@ -78,7 +80,7 @@ export default defineNuxtConfig({
   },
 
   devtools: {
-    enabled: true,
+    enabled: isLocal,
   },
 
   // For nuxt-simple-robots and nuxt-simple-sitemap
