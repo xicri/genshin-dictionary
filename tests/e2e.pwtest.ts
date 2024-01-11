@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import fetch from "node-fetch";
+import { fetch } from "undici";
 import type { Locale } from "../types";
 
 const { describe } = test;

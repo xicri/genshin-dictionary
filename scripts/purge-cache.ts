@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import { fetch } from "undici";
 
 const zone = process.env.CLOUDFLARE_ZONE;
 const apiToken = process.env.CLOUDFLARE_API_TOKEN;

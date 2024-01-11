@@ -6,7 +6,7 @@
  * Therefore, you cannot convert this JavaScript file to TypeScript.
  */
 import { copyFile, mkdir, writeFile } from "fs/promises";
-import fetch from "node-fetch";
+import { fetch } from "undici";
 import { resolve } from "path";
 import { fileURLToPath } from "url";
 import "dotenv/config";
