@@ -82,7 +82,8 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
 
-      - name: Purge Cloudflare cache
+      - name: Purge Cloudflare edge cache
         run: |
-          npm install node-fetch esno
+          npm ci --omit=dev
+          npm install esno
           npm run purge-cache
