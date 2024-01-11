@@ -55,11 +55,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
-      - name: generate Dockerfile_staging
-        run: |
-          cp Dockerfile Dockerfile_staging
-          sed -i -e 's/production/staging/g' Dockerfile_staging
-      - run: flyctl deploy --remote-only --app=genshin-dictionary-staging --dockerfile=Dockerfile_staging
+      - run: npm run stage
 
   production:
     if: ${{ github.ref == 'refs/heads/main' && github.repository_owner == 'xicri' }}
