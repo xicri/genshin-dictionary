@@ -84,5 +84,5 @@ jobs:
 
       - name: Purge Cloudflare cache
         run: |
-          npm install node-fetch
+          npm install node-fetch esno
           npm run purge-cache
