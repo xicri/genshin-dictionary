@@ -14,16 +14,6 @@ module.exports = {
 
   overrides: [
     {
-      files: [ "*.test.ts" ],
-      extends: "xicri/jest",
-      rules: {
-        "jest/expect-expect": [ "error", {
-          assertFunctionNames: [ "expect", "ok" ],
-        }],
-        "jest/no-conditional-expect": "off",
-      },
-    },
-    {
       files: [ "*.test.ts", "*.pwtest.ts" ],
       rules: {
         // non-null assertions (`var!.prop`) is required in test to raise error when the var is null or undefined.
