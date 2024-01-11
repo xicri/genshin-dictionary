@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@nuxtjs/sitemap",
     "@pinia/nuxt",
-    "@nuxt/devtools",
+    ...(isLocal ? [ "@nuxt/devtools" ] : []),
     "nuxt-simple-robots",
   ],
 
