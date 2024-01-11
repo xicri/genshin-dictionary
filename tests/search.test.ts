@@ -1,4 +1,4 @@
-import { beforeEach, expect, test } from "@jest/globals";
+import { beforeEach, expect, test } from "vitest";
 import { setActivePinia, createPinia } from "pinia";
 import { useDictionaryStore } from "~/store/index";
 import type { Word } from "../types";
