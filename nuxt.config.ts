@@ -20,10 +20,10 @@ export default defineNuxtConfig({
 
   modules: [
     "@nuxtjs/i18n",
+    "@nuxtjs/sitemap",
     "@pinia/nuxt",
     "@nuxt/devtools",
     "nuxt-simple-robots",
-    "nuxt-simple-sitemap",
   ],
 
   i18n: {

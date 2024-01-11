@@ -29,6 +29,7 @@
     "@nuxt/devtools": "^0.8.2",
     "@nuxtjs/i18n": "8.0.0-rc.4",
     "@pinia/nuxt": "^0.4.1",
+    "@nuxtjs/sitemap": "^5.0.1",
     "@types/lodash-es": "^4.17.9",
     "@types/luxon": "^3.3.1",
     "@types/node": "^18.16.20",
@@ -39,7 +40,6 @@
     "node-fetch": "^3.3.2",
     "nuxt": "^3.0.0",
     "nuxt-simple-robots": "^3.0.2",
-    "nuxt-simple-sitemap": "^3.0.11",
     "pinia": "^2.0.13",
     "sass": "^1.32.10"
   },
