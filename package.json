@@ -36,6 +36,7 @@
     "klona": "^2.0.4",
     "lodash-es": "^4.17.21",
     "luxon": "^3.2.1",
+    "node-fetch": "^3.3.2",
     "nuxt": "^3.0.0",
     "nuxt-simple-robots": "^3.0.2",
     "nuxt-simple-sitemap": "^3.0.11",
