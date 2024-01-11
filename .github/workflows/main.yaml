@@ -74,12 +74,6 @@ jobs:
         with:
           node-version: 20
           cache: npm
-
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
 
-      - name: Purge Cloudflare edge cache
-        run: |
-          npm ci --omit=dev
-          npm install esno
-          npm run purge-cache
+      - run: npm run release
