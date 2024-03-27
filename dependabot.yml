@@ -11,10 +11,9 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     assignees:
       - "xicri"
-    open-pull-requests-limit: 0 # only receive security updates
 
   - package-ecosystem: "docker"
     directory: "/"
@@ -22,4 +21,3 @@ updates:
       interval: "daily"
     assignees:
       - "xicri"
-    open-pull-requests-limit: 0 # only receive security updates
