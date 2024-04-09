@@ -73,17 +73,14 @@
 </i18n>
 
 <script lang="ts" setup>
-import type { LocaleObject } from "@nuxtjs/i18n/dist/runtime/composables";
 import type { Locale } from "~/types";
 
 //
 // refs
 //
-const i18n = useI18n<[], Locale>({
+const { locales, t } = useI18n<[], Locale>({
   useScope: "local",
 });
-const locales = <LocaleObject[]>i18n.locales.value;
-const t = i18n.t;
 const open = ref(false);
 
 //
