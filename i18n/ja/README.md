@@ -4,25 +4,25 @@
 
 ## 登録単語を追加・編集したい場合
 
-This repository only contains the Web UI for Genshin Dictionary and the translation dataset is in [genshin-langdata](https://github.com/xicri/genshin-langdata) repository. If you want to contribute this project by adding new words or fixing wrong translations, this repository is not the one you are looking for.
+このリポジトリには、Genshin Dictionary の Web UI のみが含まれており、翻訳データセットは[genshin-langdata](https://github.com/xicri/genshin-langdata)リポジトリにあります。新しい単語を追加したり、誤った翻訳を修正したりしてこのプロジェクトに貢献したい場合は、このリポジトリは適していません。
 
 ## 開発
 
-Genshin Dictionary is a website based on Nuxt 3. You may need experience in (or need to learn) following technology stack to contribute this project:
+Genshin Dictionary は Nuxt 3 をベースにしたウェブサイトです。このプロジェクトに貢献するには、次のテクノロジー スタックの経験 (または学習) が必要になる場合があります。
 
 - JavaScript (ES2015+)
 - Nuxt 3
-- Vue 3 (Composition API)
-- Scss (Understanding for BEM is required)
+- Vue 3 (コンポジション API)
+- Scss（BEMの理解が必要）
 
-### Requirements
+### 要件
 
-- Node.js: The latest LTS version recommended
-- npm: The latest version recommended
-- (Windows only) PowerShell 7+
-    - Some npm scripts needs `&&` support
+- Node.js: 最新のLTSバージョンを推奨
+- npm: 最新バージョンを推奨
+- (Windows のみ) PowerShell 7+
+    - 一部のnpmスクリプトには`&&`サポートが必要です
 
-### Setup
+### 設定
 
 ```shell
 $ cd /path/to/genshin-dictionary
@@ -30,21 +30,21 @@ $ npm ci
 $ npm run dev
 ```
 
-Then open http://localhost:3000/ to view your local Genshin Dictionary.
+次に、http://localhost:3000/ を開いて、ローカルの Genshin Dictionary を表示します。
 
-### Test &amp; Lint
+### テストとリント
 
 ```shell
 $ npm test
 $ npm run lint
 ```
 
-`npm test` runs E2E tests by Playwright. If you use Linux, you need to install system dependencies. On Ubuntu and Ubuntu-based distributions, you can install dependencies automatically with following command:
+`npm test` Playwright による E2E テストを実行します。Linux を使用する場合は、システムの依存関係をインストールする必要があります。Ubuntu および Ubuntu ベースのディストリビューションでは、次のコマンドで依存関係を自動的にインストールできます。
 
 ```shell
 $ sudo npx playwright install-deps
 ```
 
-### Update translation dataset
+### 翻訳データセットを更新する
 
-Translation dataset is fetched after `npm install` or `npm ci`. To update it, run `npm ci` again.
+翻訳データセットは`npm install`または`npm ci`の後に取得されます。更新するには、 `npm ci`を再度実行します。
