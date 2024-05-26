@@ -19,10 +19,6 @@
           <li class="menu__item">
             <a :href="localePath('/history')">{{ t("history") }}</a>
           </li>
-          <li class="menu__item">
-            <a href="https://translate.genshin-dictionary.com/" target="_blank" rel="noopener">{{ t("translate") }}</a>
-            <img src="~/assets/vendor/octicons/link-external.svg" alt="" decoding="async" width="14" height="14" />
-          </li>
         </ul>
 
         <h2 class="menu__languages-title">
@@ -41,7 +37,7 @@
 
         <div class="menu__bottomline">
           <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">Twitter</a>
+          <a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">X (Twitter)</a>
         </div>
       </div>
     </nav>
@@ -54,20 +50,17 @@
   "en": {
     "about": "About",
     "opendata": "Opendata / API",
-    "history": "History",
-    "translate": "Genshin Machine Translate (Japanese)"
+    "history": "History"
   },
   "ja": {
     "about": "このサイトについて",
     "opendata": "オープンデータ・API",
-    "history": "更新履歴",
-    "translate": "原神 自動翻訳"
+    "history": "更新履歴"
   },
   "zh-CN": {
     "about": "关于",
     "opendata": "开放数据 · API",
-    "history": "更新记录",
-    "translate": "原神机器翻译（日语）"
+    "history": "更新记录"
   }
 }
 </i18n>
