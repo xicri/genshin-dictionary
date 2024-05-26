@@ -37,7 +37,7 @@
 
         <div class="menu__bottomline">
           <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">Twitter</a>
+          <a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">X (Twitter)</a>
         </div>
       </div>
     </nav>
