@@ -57,6 +57,9 @@ yarn-error.log*
 # Nuxt
 .nuxt
 /.output/
+# When nitro.preset: "cloudflare-pages" is set in nuxt.config.ts,
+# build output is placed in dist/
+/dist/
 
 # npm is the package manager for this project.
 yarn.lock
@@ -64,6 +67,11 @@ yarn.lock
 # nuxt-simple-[robots|sitemap]
 /public/robots.txt
 /public/sitemap.xml
+
+# Cloudflare / Wrangler
+.wrangler
+.dev.vars
+worker-configuration.d.ts
 
 # Misc
 .node_repl_history

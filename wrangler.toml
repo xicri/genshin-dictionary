@@ -1,0 +1,9 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "genshin-dictionary"
+compatibility_date = "2024-07-31"
+pages_build_output_dir = "./dist"
+
+# Smart Placement
+# https://developers.cloudflare.com/pages/functions/smart-placement/#smart-placement
+[placement]
+mode = "smart"
