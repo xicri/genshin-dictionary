@@ -32,7 +32,7 @@
     "@pinia/nuxt": "^0.5.1",
     "@types/lodash-es": "^4.17.9",
     "@types/luxon": "^3.3.1",
-    "@types/node": "^20.10.8",
+    "@types/node": "^22.0.2",
     "dotenv": "^16.0.1",
     "klona": "^2.0.4",
     "lodash-es": "^4.17.21",
@@ -63,7 +63,7 @@
     "xml2js": "^0.6.2"
   },
   "engines": {
-    "node": "20.x",
+    "node": "22.x",
     "npm": ">=10"
   }
 }
