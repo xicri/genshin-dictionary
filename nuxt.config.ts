@@ -24,10 +24,10 @@ export default defineNuxtConfig({
   modules: [
     "nitro-cloudflare-dev",
     "@nuxtjs/i18n",
+    "@nuxtjs/robots",
     "@nuxtjs/sitemap",
     "@pinia/nuxt",
     ...(isLocal ? [ "@nuxt/devtools" ] : []),
-    "nuxt-simple-robots",
   ],
 
   i18n: {
