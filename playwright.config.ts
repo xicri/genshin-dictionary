@@ -45,7 +45,7 @@ export default {
   ],
 
   webServer: {
-    command: "PORT=5678 npm start",
+    command: "npm run test:server",
     url: "http://localhost:5678/ja",
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,

@@ -16,9 +16,9 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "wrangler types && nuxt build",
-    "start": "node .output/server/index.mjs",
     "test": "vitest run && playwright test",
-    "vrt": "concurrently --kill-others --success=first \"npm:start\" \"npm:vrt:screenshot\" && npm run vrt:reg",
+    "test:server": "wrangler pages dev --local --port=5678",
+    "vrt": "concurrently --kill-others --success=first \"npm:test:server\" \"npm:vrt:screenshot\" && npm run vrt:reg",
     "vrt:screenshot": "sleep 5 && esno ./scripts/vrt-screenshot.ts",
     "vrt:reg": "./scripts/vrt-reg.sh",
     "lint": "nuxt typecheck && eslint --ext .js,.mjs,.cjs,.ts,.vue --ignore-path .gitignore .",

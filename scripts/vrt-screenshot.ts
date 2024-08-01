@@ -8,7 +8,7 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 const envs = [
   { id: "current", baseURL: "https://genshin-dictionary.com" },
-  { id: "new", baseURL: "http://localhost:3000" },
+  { id: "new", baseURL: "http://localhost:5678" },
 ];
 const targets = [
   { path: "/", fullPage: false },
