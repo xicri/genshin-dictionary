@@ -27,8 +27,8 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
-import { useDictionaryStore } from "~/store/index";
-import type { Locale } from "~/types";
+import { useDictionaryStore } from "~/store/index.ts";
+import type { Locale } from "~/types.ts";
 
 defineEmits([ "search" ]);
 

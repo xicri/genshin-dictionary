@@ -5,11 +5,11 @@
  * so this script has to run after `nuxt prepare` if this script was TypeScript.
  * Therefore, you cannot convert this JavaScript file to TypeScript.
  */
-import { copyFile, mkdir, writeFile } from "fs/promises";
-import { fetch } from "undici";
-import { resolve } from "path";
-import { fileURLToPath } from "url";
+import { copyFile, mkdir, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import "dotenv/config";
+import { fetch } from "undici";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

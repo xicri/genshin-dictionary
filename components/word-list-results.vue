@@ -112,9 +112,9 @@
 </i18n>
 
 <script lang="ts" setup>
-import { useDictionaryStore } from "~/store/index";
-import { sleep } from "~/libs/utils";
-import type { Locale, Word } from "~/types";
+import { sleep } from "~/libs/utils.ts";
+import { useDictionaryStore } from "~/store/index.ts";
+import type { Locale, Word } from "~/types.ts";
 
 defineProps({
   words: {

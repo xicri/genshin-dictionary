@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useDictionaryStore } from "~/store/index";
 import tags from "~/dataset/tags.json";
+import { useDictionaryStore } from "~/store/index.ts";
 import type { RouteLocationNormalizedLoaded } from "#vue-router";
 import type { Locale, TagID } from "~/types";
 

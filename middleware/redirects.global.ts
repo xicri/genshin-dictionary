@@ -1,5 +1,5 @@
-import wordRedirects from "../dataset/redirect/words.json";
 import tagRedirects from "../dataset/redirect/tags.json";
+import wordRedirects from "../dataset/redirect/words.json";
 import type { TagID } from "../types";
 
 type ObsoleteWordID = keyof typeof wordRedirects;

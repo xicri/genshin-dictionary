@@ -33,8 +33,8 @@
 
 <script lang="ts" setup>
 import { isEmpty } from "lodash-es";
-import { getHistory } from "~/libs/utils";
-import type { Locale } from "~/types";
+import { getHistory } from "~/libs/utils.ts";
+import type { Locale } from "~/types.ts";
 
 const { t } = useI18n<[], Locale>();
 const title = `${t("historyTitle")} | ${t("siteTitle")}`;
