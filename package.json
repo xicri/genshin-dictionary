@@ -61,9 +61,6 @@
     "vue-tsc": "^1.8.8",
     "xml2js": "^0.6.2"
   },
-  "overrides": {
-    "@typescript-eslint/eslint-plugin": "latest"
-  },
   "engines": {
     "node": "20.x",
     "npm": ">=10"
