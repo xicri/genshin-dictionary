@@ -22,6 +22,7 @@
     "vrt:screenshot": "sleep 5 && esno ./scripts/vrt-screenshot.ts",
     "vrt:reg": "./scripts/vrt-reg.sh",
     "lint": "nuxt typecheck && eslint --ext .js,.mjs,.cjs,.ts,.vue --ignore-path .gitignore .",
+    "purge-cache": "esno ./scripts/purge-cache.ts",
     "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
