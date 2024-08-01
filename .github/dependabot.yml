@@ -35,10 +35,3 @@ updates:
       interval: "weekly"
     assignees:
       - "xicri"
-
-  - package-ecosystem: "docker"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    assignees:
-      - "xicri"
