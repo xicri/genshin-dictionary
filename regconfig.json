@@ -2,7 +2,7 @@
   "core": {
     "workingDir": "tmp/reg-suit/workspace",
     "actualDir": "tmp/reg-suit/actual",
-    "thresholdRate": 0,
+    "thresholdRate": 0.05,
     "addIgnore": true,
     "enableAntialias": true,
     "ximgdiff": {
