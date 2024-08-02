@@ -168,7 +168,10 @@ const removeTag = (tagIndex: number): void => {
   }
 
   &__scrollable {
+    display: flex;
     overflow-x: scroll;
+    width: calc(100% - 0.4em);
+    cursor: text;
 
     // hide scroll bar
     -ms-overflow-style: none;
@@ -176,12 +179,6 @@ const removeTag = (tagIndex: number): void => {
     &::-webkit-scrollbar {
       display: none;
     }
-
-    width: calc(100% - 0.4em);
-
-    display: flex;
-
-    cursor: text;
   }
 
   &__active-tags {
