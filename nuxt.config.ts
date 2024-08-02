@@ -4,11 +4,12 @@ import words from "./dataset/words.json";
 const isLocal = !process.env.SERVER_ENV || process.env.SERVER_ENV === "local";
 
 export default defineNuxtConfig({
+  compatibilityDate: "2024-07-31",
   ssr: true,
   components: true,
 
   nitro: {
-    preset: "node-server",
+    preset: "cloudflare-pages",
   },
   typescript: {
     strict: true,
@@ -21,6 +22,7 @@ export default defineNuxtConfig({
   },
 
   modules: [
+    "nitro-cloudflare-dev",
     "@nuxtjs/i18n",
     "@nuxtjs/sitemap",
     "@pinia/nuxt",
