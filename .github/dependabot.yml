@@ -1,0 +1,37 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    assignees:
+      - "xicri"
+    groups:
+      security:
+        applies-to: "security-updates"
+        update-types:
+          - "minor"
+          - "patch"
+      security-breaking:
+        applies-to: "security-updates"
+        update-types:
+          - "major"
+      compatible:
+        applies-to: "version-updates"
+        update-types:
+          - "minor"
+          - "patch"
+      not-urgent:
+        applies-to: "version-updates"
+        patterns:
+          - "eslint"
+          - "eslint-plugin-*"
+          - "eslint-config-*"
+          - "typescript-eslint"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    assignees:
+      - "xicri"
