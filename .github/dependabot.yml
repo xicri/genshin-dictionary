@@ -35,3 +35,16 @@ updates:
       interval: "weekly"
     assignees:
       - "xicri"
+    groups:
+      security:
+        applies-to: "security-updates"
+        update-types:
+          - "major"
+          - "minor"
+          - "patch"
+      normal:
+        applies-to: "version-updates"
+        update-types:
+          - "major"
+          - "minor"
+          - "patch"
