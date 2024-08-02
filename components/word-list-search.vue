@@ -70,11 +70,11 @@
 </i18n>
 
 <script lang="ts" setup>
-import allTags from "~/dataset/tags.json";
 import { klona } from "klona/json";
 import { debounce } from "lodash-es";
 import { storeToRefs } from "pinia";
-import { useDictionaryStore } from "~/store/index";
+import allTags from "~/dataset/tags.json";
+import { useDictionaryStore } from "~/store/index.ts";
 import type ElasticSearchbox from "~/components/elastic-searchbox.vue";
 import type { Locale, TagID } from "~/types";
 

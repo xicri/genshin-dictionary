@@ -1,8 +1,8 @@
-import { chromium } from "playwright";
 import { mkdir, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { sleep } from "../libs/utils";
+import { chromium } from "playwright";
+import { sleep } from "../libs/utils.ts";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

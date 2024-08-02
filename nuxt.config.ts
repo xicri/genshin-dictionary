@@ -1,5 +1,5 @@
-import words from "./dataset/words.json";
 import tags from "./dataset/tags.json";
+import words from "./dataset/words.json";
 
 const isLocal = !process.env.SERVER_ENV || process.env.SERVER_ENV === "local";
 
