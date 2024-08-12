@@ -32,7 +32,7 @@
     "@pinia/nuxt": "^0.5.3",
     "@types/lodash-es": "^4.17.9",
     "@types/luxon": "^3.3.1",
-    "@types/node": "^22.1.0",
+    "@types/node": "^22.2.0",
     "dotenv": "^16.0.1",
     "klona": "^2.0.4",
     "lodash-es": "^4.17.21",
@@ -40,7 +40,7 @@
     "nuxt": "^3.0.0",
     "pinia": "^2.2.1",
     "sass": "^1.32.10",
-    "undici": "^6.19.6"
+    "undici": "^6.19.7"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.627.0",
