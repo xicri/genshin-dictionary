@@ -59,7 +59,7 @@
     "reg-suit": "^0.14.3",
     "vitest": "^2.0.2",
     "vue-tsc": "^2.1.2",
-    "wrangler": "^3.72.3",
+    "wrangler": "^3.73.0",
     "xml2js": "^0.6.2"
   },
   "engines": {
