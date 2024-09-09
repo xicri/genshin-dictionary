@@ -47,7 +47,7 @@
     "@cloudflare/workers-types": "^4.20240903.0",
     "@nuxt/devtools": "^1.4.1",
     "@playwright/test": "^1.47.0",
-    "concurrently": "^8.0.1",
+    "concurrently": "^9.0.0",
     "eslint": "^8",
     "eslint-config-xicri": "latest",
     "esno": "^4.0.0",
