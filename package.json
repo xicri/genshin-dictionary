@@ -43,11 +43,11 @@
     "undici": "^6.19.8"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.649.0",
+    "@aws-sdk/client-s3": "^3.650.0",
     "@cloudflare/workers-types": "^4.20240909.0",
     "@nuxt/devtools": "^1.4.2",
     "@playwright/test": "^1.47.0",
-    "concurrently": "^9.0.0",
+    "concurrently": "^9.0.1",
     "eslint": "^8",
     "eslint-config-xicri": "latest",
     "esno": "^4.0.0",
