@@ -48,7 +48,7 @@
     "@nuxt/devtools": "^1.4.2",
     "@playwright/test": "^1.47.0",
     "concurrently": "^9.0.1",
-    "eslint": "^8",
+    "eslint": "^9",
     "eslint-config-xicri": "latest",
     "esno": "^4.0.0",
     "nitro-cloudflare-dev": "^0.1.5",
