@@ -7,3 +7,11 @@ pages_build_output_dir = "./dist"
 # https://developers.cloudflare.com/pages/functions/smart-placement/#smart-placement
 [placement]
 mode = "smart"
+
+[env.production.vars]
+NODE_ENV = "production"
+SERVER_ENV = "production"
+
+[env.preview.vars]
+NODE_ENV = "preview"
+SERVER_ENV = "preview"
