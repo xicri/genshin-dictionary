@@ -42,6 +42,11 @@ useHead({
     { hid: "twitter:card", property: "twitter:card", content: "summary" },
     { hid: "twitter:site", property: "twitter:site", content: "@xicri_gi" },
     { hid: "twitter:creator", property: "twitter:creator", content: "@xicri_gi" },
+    {
+      hid: "google-site-verification",
+      name: "google-site-verification",
+      content: "siYv7dgV8-NP15jdAUtGC0L52osNwLDBt7HFe2LH-3s",
+    },
     ...meta,
   ],
   link: [
