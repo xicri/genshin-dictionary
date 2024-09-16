@@ -33,7 +33,7 @@
 
 <script lang="ts" setup>
 import { isEmpty } from "lodash-es";
-import { getHistory } from "~/libs/utils.ts";
+import { getHistory } from "~/utils/utils.ts";
 import type { Locale } from "~/types.ts";
 
 const { t } = useI18n<[], Locale>();

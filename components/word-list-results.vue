@@ -112,7 +112,7 @@
 </i18n>
 
 <script lang="ts" setup>
-import { sleep } from "~/libs/utils.ts";
+import { sleep } from "~/utils/utils.ts";
 import { useDictionaryStore } from "~/store/index.ts";
 import type { Locale, Word } from "~/types.ts";
 
