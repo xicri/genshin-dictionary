@@ -26,6 +26,8 @@
     "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
+    "@cloudflare/workers-types": "^4.20240909.0",
+    "@nuxt/devtools": "^1.4.2",
     "@nuxtjs/i18n": "^8.5.3",
     "@nuxtjs/robots": "^4.1.7",
     "@nuxtjs/sitemap": "^6.0.1",
@@ -37,21 +39,20 @@
     "klona": "^2.0.4",
     "lodash-es": "^4.17.21",
     "luxon": "^3.5.0",
+    "nitro-cloudflare-dev": "^0.1.5",
     "nuxt": "^3.13.2",
     "pinia": "^2.2.2",
     "sass": "^1.78.0",
-    "undici": "^6.19.8"
+    "undici": "^6.19.8",
+    "wrangler": "^3.78.2"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.651.1",
-    "@cloudflare/workers-types": "^4.20240909.0",
-    "@nuxt/devtools": "^1.4.2",
     "@playwright/test": "^1.47.1",
     "concurrently": "^9.0.1",
     "eslint": "^8",
     "eslint-config-xicri": "latest",
     "esno": "^4.0.0",
-    "nitro-cloudflare-dev": "^0.1.5",
     "playwright": "^1.33.0",
     "reg-notify-github-plugin": "^0.14.4",
     "reg-publish-s3-plugin": "^0.14.4",
@@ -59,7 +60,6 @@
     "reg-suit": "^0.14.3",
     "vitest": "^2.1.1",
     "vue-tsc": "^2.1.6",
-    "wrangler": "^3.78.2",
     "xml2js": "^0.6.2"
   },
   "engines": {
