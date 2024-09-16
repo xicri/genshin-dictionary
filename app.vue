@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { htmlAttrs, meta, link } = useLocaleHead({
   addDirAttribute: true,
   identifierAttribute: "id",
