@@ -33,7 +33,15 @@ for (const env of envs) {
     for (const target of targets) {
       await page.goto(`${env.baseURL}/${locale}${target.path}`, { waitUntil: "networkidle" });
       await page.screenshot({
-        path: join(import.meta.dirname, `../tmp/reg-suit/${env.id}/${locale}_${target.path.split("/").filter(str => !!str).join("_")}.png`),
+        path: join(
+          import.meta.dirname,
+          `../tmp/reg-suit/${env.id}/${locale}_${
+            target.path
+              .split("/")
+              .filter(str => !!str)
+              .join("_")
+          }.png`
+        ),
         fullPage: target.fullPage,
       });
     }
@@ -42,7 +50,12 @@ for (const env of envs) {
     await page.goto(`${env.baseURL}/${locale}`, { waitUntil: "networkidle" });
     await page.locator(".menu__icon").click();
     await sleep(1500); // Wait for the menu to be 100% opened
-    await page.screenshot({ path: join(import.meta.dirname, `../tmp/reg-suit/${env.id}/${locale}_hamburger-menu.png`) });
+    await page.screenshot({
+      path: join(
+        import.meta.dirname,
+        `../tmp/reg-suit/${env.id}/${locale}_hamburger-menu.png`,
+      ),
+    });
   }
 }
 
