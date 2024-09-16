@@ -8,6 +8,9 @@ pages_build_output_dir = "./dist"
 [placement]
 mode = "smart"
 
+[vars]
+NODE_VERSION = "22"
+
 [env.production.vars]
 NODE_ENV = "production"
 SERVER_ENV = "production"
