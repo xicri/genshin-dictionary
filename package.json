@@ -28,7 +28,7 @@
   "dependencies": {
     "@nuxtjs/i18n": "^8.5.3",
     "@nuxtjs/robots": "^4.1.7",
-    "@nuxtjs/sitemap": "^5.0.1",
+    "@nuxtjs/sitemap": "^6.0.1",
     "@pinia/nuxt": "^0.5.4",
     "@types/lodash-es": "^4.17.9",
     "@types/luxon": "^3.3.1",
