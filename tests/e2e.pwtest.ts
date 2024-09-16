@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { fetch } from "undici";
-import type { Locale } from "../types";
 import { ok } from "assert";
+import type { Locale } from "../src/types.ts";
 
 const { describe } = test;
 

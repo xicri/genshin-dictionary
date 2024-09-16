@@ -3,8 +3,8 @@
 #
 /dataset/
 /functions/
-/public/dataset/
-/public/_redirects
+/src/public/dataset/
+/src/public/_redirects
 
 #
 # System
@@ -67,9 +67,9 @@ yarn-error.log*
 # npm is the package manager for this project.
 yarn.lock
 
-# nuxt-simple-[robots|sitemap]
-/public/robots.txt
-/public/sitemap.xml
+# @nuxtjs/robots & @nuxtjs/sitemap
+/src/public/robots.txt
+/src/public/sitemap.xml
 
 # Playwright
 .last-run.json

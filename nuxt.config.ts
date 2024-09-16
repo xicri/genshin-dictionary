@@ -4,6 +4,7 @@ import words from "./dataset/words.json";
 const isLocal = !process.env.SERVER_ENV || process.env.SERVER_ENV === "local";
 
 export default defineNuxtConfig({
+  srcDir: "src/",
   compatibilityDate: "2024-07-31",
   ssr: true, // Enable prerender
   components: true,
