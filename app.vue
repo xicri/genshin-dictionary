@@ -42,7 +42,6 @@ useHead({
     { hid: "twitter:card", property: "twitter:card", content: "summary" },
     { hid: "twitter:site", property: "twitter:site", content: "@xicri_gi" },
     { hid: "twitter:creator", property: "twitter:creator", content: "@xicri_gi" },
-    { hid: "google-site-verification", name: "google-site-verification", content: "fPZCIib8QFE52LeBEGqBoapTwL6v9vqHl9lKqcreMDQ" },
     ...meta,
   ],
   link: [
