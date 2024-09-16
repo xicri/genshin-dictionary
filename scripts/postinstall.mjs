@@ -13,6 +13,11 @@ import { fetch } from "undici";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
+/**
+ * Copy file from URL and save it on local disk.
+ * @param {string} src - URL of the source file
+ * @param {string} dest - path to save the downloaded file
+ */
 async function copyFromURL(src, dest) {
   const res = await fetch(src);
 
