@@ -1,4 +1,5 @@
 /*
+  Content-Security-Policy: script-src static.cloudflareinsights.com; connect-src cloudflareinsights.com;
   Cross-Origin-Resource-Policy: same-site
   Cross-Origin-Opener-Policy: same-origin
   X-Content-Type-Options: nosniff
