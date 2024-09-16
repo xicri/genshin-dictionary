@@ -10,6 +10,9 @@ import { resolve } from "node:path";
 import "dotenv/config";
 import { fetch } from "undici";
 
+const datasetDir = resolve(import.meta.dirname, "../src/dataset");
+const publicDatasetDir = resolve(import.meta.dirname, "../src/public/dataset");
+
 /**
  * Copy file from URL and save it on local disk.
  * @param {string} src - URL of the source file
@@ -27,7 +30,7 @@ Status code: ${res.status}`);
   await writeFile(dest, str);
 }
 
-await mkdir(resolve(import.meta.dirname, "../dataset/redirect/"), { recursive: true });
+await mkdir(resolve(datasetDir, "redirect/"), { recursive: true });
 
 if (process.env.LANGDATA_PATH) {
   console.info(`Copying dataset from ${process.env.LANGDATA_PATH}`);
@@ -35,27 +38,27 @@ if (process.env.LANGDATA_PATH) {
   await Promise.all([
     copyFile(
       resolve(process.env.LANGDATA_PATH, "dist/words.json"),
-      resolve(import.meta.dirname, "../dataset/words.json"),
+      resolve(datasetDir, "words.json"),
     ),
     copyFile(
       resolve(process.env.LANGDATA_PATH, "dist/words.csv"),
-      resolve(import.meta.dirname, "../dataset/words.csv"),
+      resolve(datasetDir, "words.csv"),
     ),
     copyFile(
       resolve(process.env.LANGDATA_PATH, "dist/words-sjis.csv"),
-      resolve(import.meta.dirname, "../dataset/words-sjis.csv"),
+      resolve(datasetDir, "words-sjis.csv"),
     ),
     copyFile(
       resolve(process.env.LANGDATA_PATH, "dist/tags.json"),
-      resolve(import.meta.dirname, "../dataset/tags.json"),
+      resolve(datasetDir, "tags.json"),
     ),
     copyFile(
       resolve(process.env.LANGDATA_PATH, "dist/redirect/words.json"),
-      resolve(import.meta.dirname, "../dataset/redirect/words.json"),
+      resolve(datasetDir, "redirect/words.json"),
     ),
     copyFile(
       resolve(process.env.LANGDATA_PATH, "dist/redirect/tags.json"),
-      resolve(import.meta.dirname, "../dataset/redirect/tags.json"),
+      resolve(datasetDir, "redirect/tags.json"),
     ),
   ]);
 
@@ -66,27 +69,27 @@ if (process.env.LANGDATA_PATH) {
   await Promise.all([
     copyFromURL(
       "https://dataset.genshin-dictionary.com/words.json",
-      resolve(import.meta.dirname, "../dataset/words.json"),
+      resolve(datasetDir, "words.json"),
     ),
     copyFromURL(
       "https://dataset.genshin-dictionary.com/words.csv",
-      resolve(import.meta.dirname, "../dataset/words.csv"),
+      resolve(datasetDir, "words.csv"),
     ),
     copyFromURL(
       "https://dataset.genshin-dictionary.com/words-sjis.csv",
-      resolve(import.meta.dirname, "../dataset/words-sjis.csv"),
+      resolve(datasetDir, "words-sjis.csv"),
     ),
     copyFromURL(
       "https://dataset.genshin-dictionary.com/tags.json",
-      resolve(import.meta.dirname, "../dataset/tags.json"),
+      resolve(datasetDir, "tags.json"),
     ),
     copyFromURL(
       "https://dataset.genshin-dictionary.com/redirect/words.json",
-      resolve(import.meta.dirname, "../dataset/redirect/words.json"),
+      resolve(datasetDir, "redirect/words.json"),
     ),
     copyFromURL(
       "https://dataset.genshin-dictionary.com/redirect/tags.json",
-      resolve(import.meta.dirname, "../dataset/redirect/tags.json"),
+      resolve(datasetDir, "redirect/tags.json"),
     ),
   ]);
 
@@ -95,24 +98,24 @@ if (process.env.LANGDATA_PATH) {
 
 console.info("Copying dataset into the public directory for Web API compatibility...");
 
-await mkdir(resolve(import.meta.dirname, "../public/dataset/"), { recursive: true });
+await mkdir(publicDatasetDir, { recursive: true });
 
 await Promise.all([
   copyFile(
-    resolve(import.meta.dirname, "../dataset/words.json"),
-    resolve(import.meta.dirname, "../public/dataset/words.json"),
+    resolve(datasetDir, "words.json"),
+    resolve(publicDatasetDir, "words.json"),
   ),
   copyFile(
-    resolve(import.meta.dirname, "../dataset/words.csv"),
-    resolve(import.meta.dirname, "../public/dataset/words.csv"),
+    resolve(datasetDir, "words.csv"),
+    resolve(publicDatasetDir, "words.csv"),
   ),
   copyFile(
-    resolve(import.meta.dirname, "../dataset/words-sjis.csv"),
-    resolve(import.meta.dirname, "../public/dataset/words-sjis.csv"),
+    resolve(datasetDir, "words-sjis.csv"),
+    resolve(publicDatasetDir, "words-sjis.csv"),
   ),
   copyFile(
-    resolve(import.meta.dirname, "../dataset/tags.json"),
-    resolve(import.meta.dirname, "../public/dataset/tags.json"),
+    resolve(datasetDir, "tags.json"),
+    resolve(publicDatasetDir, "tags.json"),
   ),
 ]);
 

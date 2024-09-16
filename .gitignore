@@ -2,7 +2,7 @@
 # Project-specific
 #
 /dataset/
-/public/dataset/
+/src/public/dataset/
 
 #
 # System
@@ -63,9 +63,9 @@ yarn-error.log*
 # npm is the package manager for this project.
 yarn.lock
 
-# nuxt-simple-[robots|sitemap]
-/public/robots.txt
-/public/sitemap.xml
+# @nuxtjs/robots & @nuxtjs/sitemap
+/src/public/robots.txt
+/src/public/sitemap.xml
 
 # Cloudflare / Wrangler
 .wrangler
