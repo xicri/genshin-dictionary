@@ -16,5 +16,4 @@ NODE_ENV = "production"
 SERVER_ENV = "production"
 
 [env.preview.vars]
-NODE_ENV = "preview"
 SERVER_ENV = "preview"
