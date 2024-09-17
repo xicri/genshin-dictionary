@@ -24,8 +24,19 @@
             <tag :tagid="tag" />
           </a>
         </div>
-        <div v-if="word.notes && locale === 'ja'" class="results__description-section" data-e2e="notes" v-html="word.notes"></div>
-        <div v-if="word.notesZh && locale === 'zh-CN'" class="results__description-section" data-e2e="notesZh" v-html="word.notesZh"></div>
+
+        <div
+          v-if="word.notes && locale === 'ja'"
+          class="results__description-section"
+          data-e2e="notes"
+          v-html="word.notes"
+        ></div>
+        <div
+          v-if="word.notesZh && locale === 'zh-CN'"
+          class="results__description-section"
+          data-e2e="notesZh"
+          v-html="word.notesZh"
+        ></div>
         <div v-if="word.examples && 0 < word.examples.length" class="results__description-section">
           <h5 class="linebreak">
             {{ t("example") }}
