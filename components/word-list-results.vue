@@ -32,6 +32,12 @@
           v-html="word.notes"
         ></div>
         <div
+          v-if="word.notesEn && locale === 'en'"
+          class="results__description-section"
+          data-e2e="notesEn"
+          v-html="word.notesEn"
+        ></div>
+        <div
           v-if="word.notesZh && locale === 'zh-CN'"
           class="results__description-section"
           data-e2e="notesZh"
