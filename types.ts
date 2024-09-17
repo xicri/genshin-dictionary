@@ -14,7 +14,7 @@ export type Word = {
     char: string;
     pron: string;
   }[];
-  notes: string;
+  notes?: string;
   notesZh?: string;
   tags?: TagID[];
   examples?: {
