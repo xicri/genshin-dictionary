@@ -21,7 +21,7 @@
     "vrt": "concurrently --kill-others --success=first \"npm:test:server\" \"npm:vrt:screenshot\" && npm run vrt:reg",
     "vrt:screenshot": "sleep 5 && esno ./scripts/vrt-screenshot.ts",
     "vrt:reg": "./scripts/vrt-reg.sh",
-    "lint": "nuxt typecheck && eslint --ext .js,.mjs,.cjs,.ts,.vue --ignore-path .gitignore .",
+    "lint": "nuxt typecheck",
     "purge-cache": "esno ./scripts/purge-cache.ts",
     "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
@@ -50,8 +50,6 @@
     "@aws-sdk/client-s3": "^3.651.1",
     "@playwright/test": "^1.47.1",
     "concurrently": "^9.0.1",
-    "eslint": "^8",
-    "eslint-config-xicri": "latest",
     "esno": "^4.0.0",
     "playwright": "^1.33.0",
     "reg-notify-github-plugin": "^0.14.4",
