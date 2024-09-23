@@ -26,11 +26,11 @@
     "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
-    "@cloudflare/workers-types": "^4.20240909.0",
-    "@nuxt/devtools": "^1.4.2",
-    "@nuxtjs/i18n": "^8.5.3",
+    "@cloudflare/workers-types": "^4.20240919.0",
+    "@nuxt/devtools": "^1.5.0",
+    "@nuxtjs/i18n": "^8.5.5",
     "@nuxtjs/robots": "^4.1.7",
-    "@nuxtjs/sitemap": "^6.0.1",
+    "@nuxtjs/sitemap": "^6.1.0",
     "@pinia/nuxt": "^0.5.4",
     "@types/lodash-es": "^4.17.9",
     "@types/luxon": "^3.3.1",
@@ -42,13 +42,13 @@
     "nitro-cloudflare-dev": "^0.1.5",
     "nuxt": "^3.13.2",
     "pinia": "^2.2.2",
-    "sass": "^1.78.0",
+    "sass": "^1.79.3",
     "undici": "^6.19.8",
-    "wrangler": "^3.78.2"
+    "wrangler": "^3.78.7"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.651.1",
-    "@playwright/test": "^1.47.1",
+    "@aws-sdk/client-s3": "^3.654.0",
+    "@playwright/test": "^1.47.2",
     "concurrently": "^9.0.1",
     "esno": "^4.0.0",
     "playwright": "^1.33.0",
