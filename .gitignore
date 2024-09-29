@@ -59,6 +59,8 @@ yarn-error.log*
 # When nitro.preset: "cloudflare-pages" is set in nuxt.config.ts,
 # build output is placed in dist/
 /dist/
+# dist/ directory is generated as a symlink when you run `nuxt generate`
+/dist
 
 # npm is the package manager for this project.
 yarn.lock

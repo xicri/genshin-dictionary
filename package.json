@@ -15,7 +15,7 @@
   "type": "module",
   "scripts": {
     "dev": "nuxt dev",
-    "build": "wrangler types && nuxt build",
+    "build": "nuxt generate",
     "preview": "wrangler pages dev --local",
     "test": "vitest run && playwright test",
     "test:server": "wrangler pages dev --local --show-interactive-dev-session=false --port=5678",
@@ -41,7 +41,6 @@
     "klona": "^2.0.4",
     "lodash-es": "^4.17.21",
     "luxon": "^3.5.0",
-    "nitro-cloudflare-dev": "^0.1.5",
     "nuxt": "^3.13.2",
     "pinia": "^2.2.3",
     "sass": "^1.79.4",

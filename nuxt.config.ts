@@ -5,12 +5,15 @@ const isLocal = !process.env.SERVER_ENV || process.env.SERVER_ENV === "local";
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-07-31",
-  ssr: true,
+  ssr: true, // Enable prerender
   components: true,
 
   nitro: {
-    preset: "cloudflare-pages",
+    prerender: {
+      autoSubfolderIndex: false,
+    },
   },
+
   typescript: {
     strict: true,
     tsConfig: {
@@ -45,7 +48,6 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    "nitro-cloudflare-dev",
     "@nuxtjs/i18n",
     "@nuxtjs/robots",
     "@nuxtjs/sitemap",
