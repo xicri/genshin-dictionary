@@ -23,6 +23,7 @@
     "vrt:reg": "./scripts/vrt-reg.sh",
     "lint": "nuxt typecheck",
     "purge-cache": "esno ./scripts/purge-cache.ts",
+    "update-nuxt": "nuxi upgrade --force",
     "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
