@@ -17,3 +17,6 @@ NODE_VERSION = "22"
 NODE_ENV = "production" # To omit devDependencies
 SERVER_ENV = "preview"
 NODE_VERSION = "22"
+
+[dev]
+port = 3000
