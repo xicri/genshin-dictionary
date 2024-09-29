@@ -295,39 +295,38 @@ describe("The Genshin English Dictionary", () => {
 
 describe("redirection by language settings works properly", () => {
   const rootURL = `http://${ip}:${port}`;
-  // TODO Some languages are temporarily disabled due to nuxt/i18n bug.
   const langs = [
-    // { code: "ja", url: `${rootURL}/ja` },
-    // { code: "ja-JP", url: `${rootURL}/ja` },
-    { code: "en", url: `${rootURL}/en` },
-    { code: "en-US", url: `${rootURL}/en` },
-    { code: "en-GB", url: `${rootURL}/en` },
-    // { code: "zh", url: `${rootURL}/zh-CN` },
-    // { code: "zh-CN", url: `${rootURL}/zh-CN` },
-    { code: "fr", url: `${rootURL}/en` }, // fallback to English
+    { code: "ja", localeDir: "ja" },
+    { code: "ja-JP", localeDir: "ja" },
+    { code: "en", localeDir: "en" },
+    { code: "en-US", localeDir: "en" },
+    { code: "en-GB", localeDir: "en" },
+    { code: "zh", localeDir: "zh-CN" },
+    { code: "zh-CN", localeDir: "zh-CN" },
+    { code: "fr", localeDir: "en" }, // fallback to English
   ];
 
-  for (const { code, url } of langs) {
+  for (const { code, localeDir } of langs) {
     test(`/ (${code})`, async () => {
-      const res = await fetch(rootURL, {
+      const res = await fetch(`${ rootURL }/locale-redirect?path=%2F`, { // `%2F` === `/`
         headers: {
           "Accept-Language": code,
         },
       });
 
       expect(res.redirected).toBe(true);
-      expect(res.url).toBe(url);
+      expect(res.url).toBe(`${ rootURL }/${ localeDir }`);
     });
 
     test(`/[wordid] (${code})`, async () => {
-      const res = await fetch(`${rootURL}/artifact`, {
+      const res = await fetch(`${ rootURL }/locale-redirect?path=%2Flumine`, { // `%2F` === `/`
         headers: {
           "Accept-Language": code,
         },
       });
 
       expect(res.redirected).toBe(true);
-      expect(res.url).toBe(`${url}/artifact`);
+      expect(res.url).toBe(`${ rootURL }/${ localeDir }/lumine`);
     });
   }
 });
