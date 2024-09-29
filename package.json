@@ -2,7 +2,7 @@
   "name": "genshin-dictionary",
   "description": "An online Japanese-English dictionary for terms in Genshin Impact",
   "license": "Apache-2.0",
-  "author": "Xicri <xicri@proton.me> (https://genshin-dictionary.com/)",
+  "author": "Xicri (https://genshin-dictionary.com/)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xicri/genshin-dictionary.git"
