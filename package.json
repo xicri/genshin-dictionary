@@ -18,7 +18,7 @@
     "build": "wrangler types && nuxt build",
     "preview": "wrangler pages dev --local",
     "test": "vitest run && playwright test",
-    "test:server": "wrangler pages dev --local --port=5678",
+    "test:server": "wrangler pages dev --local --show-interactive-dev-session=false --port=5678",
     "vrt": "concurrently --kill-others --success=first \"npm:test:server\" \"npm:vrt:screenshot\" && npm run vrt:reg",
     "vrt:screenshot": "sleep 5 && esno ./scripts/vrt-screenshot.ts",
     "vrt:reg": "./scripts/vrt-reg.sh",
