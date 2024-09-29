@@ -1,8 +1,10 @@
+@use "sass:color";
+
 $color-dark: #013770;
-$color-darkest: darken($color-dark, 10%);
-$color-light: lighten($color-dark, 60%);
-$color-lighter: lighten($color-dark, 67%);
-$color-lightest: lighten($color-dark, 75%);
+$color-darkest: color.adjust($color-dark, $lightness: -10%);
+$color-light: color.adjust($color-dark, $lightness: 60%);
+$color-lighter: color.adjust($color-dark, $lightness: 67%);
+$color-lightest: color.adjust($color-dark, $lightness: 75%);
 
 $max-width: 840px;
 $side-margin: 12px;
