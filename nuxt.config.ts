@@ -37,6 +37,7 @@ export default defineNuxtConfig({
         "../public/dataset/**",
         // Cloudflare
         "../.wrangler/**",
+        "../functions/**",
       ],
     },
   },
@@ -74,14 +75,8 @@ export default defineNuxtConfig({
       },
     ],
     strategy: "prefix",
-    defaultLocale: "en",
     baseUrl: "https://genshin-dictionary.com",
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieSecure: true,
-      fallbackLocale: "en",
-      redirectOn: "no prefix",
-    },
+    detectBrowserLanguage: false,
   },
 
   sitemap: {

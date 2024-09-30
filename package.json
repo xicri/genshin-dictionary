@@ -15,7 +15,7 @@
   "type": "module",
   "scripts": {
     "dev": "nuxt dev",
-    "build": "nuxt generate",
+    "build": "tsup && nuxt generate",
     "preview": "wrangler pages dev --local",
     "test": "vitest run && playwright test",
     "test:server": "wrangler pages dev --local --show-interactive-dev-session=false --port=5678",
@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20240925.0",
+    "@escapace/accept-language-parser": "^1.6.6",
     "@nuxt/devtools": "^1.5.1",
     "@nuxtjs/i18n": "^8.5.5",
     "@nuxtjs/robots": "^4.1.7",
@@ -44,6 +45,7 @@
     "nuxt": "^3.13.2",
     "pinia": "^2.2.3",
     "sass": "^1.79.4",
+    "tsup": "^8.3.0",
     "undici": "^6.19.8",
     "wrangler": "^3.78.12"
   },
