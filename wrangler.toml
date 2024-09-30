@@ -14,5 +14,6 @@ SERVER_ENV = "production"
 NODE_VERSION = "22"
 
 [env.preview.vars]
+NODE_ENV = "production" # To omit devDependencies
 SERVER_ENV = "preview"
 NODE_VERSION = "22"
