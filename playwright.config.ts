@@ -1,4 +1,4 @@
-import { devices } from "@playwright/test";
+import { defineConfig, devices } from "@playwright/test";
 
 const debugOptions = {
   // headless: false,
@@ -7,7 +7,7 @@ const debugOptions = {
   // },
 };
 
-export default {
+export default defineConfig({
   testMatch: /.*(pwtest)\.(js|ts|mjs)/,
   workers: 1, // disable concurrent tests
 
@@ -53,4 +53,4 @@ export default {
   use: {
     baseURL: "http://localhost:5678/ja",
   },
-};
+});
