@@ -67,6 +67,9 @@ yarn.lock
 /public/robots.txt
 /public/sitemap.xml
 
+# Playwright
+.last-run.json
+
 # Cloudflare / Wrangler
 .wrangler
 .dev.vars
