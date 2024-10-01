@@ -21,7 +21,7 @@ const redirectByLanguage: PagesFunction = async ({ request }) => {
   };
 
   const reqURL = new URL(request.url);
-  const baseURL = `https://${ reqURL.host }`;
+  const baseURL = `${ reqURL.protocol }//${ reqURL.host }`;
   const rawPath = reqURL.searchParams.get("path");
   const path = rawPath ? decodeURIComponent(rawPath) : undefined;
 
