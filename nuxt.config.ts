@@ -35,6 +35,15 @@ export default defineNuxtConfig({
           "@cloudflare/workers-types/2023-07-01",
         ],
       },
+      // Relative paths are based on .nuxt/tsconfig.json.
+      // ../ means project root.
+      exclude: [
+        // Dataset from genshin-langdata
+        "../dataset/**",
+        "../public/dataset/**",
+        // Cloudflare
+        "../.wrangler/**",
+      ],
     },
   },
 
