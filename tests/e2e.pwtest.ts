@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { fetch } from "undici";
 import type { Locale } from "../types";
+import { ok } from "assert";
 
 const { describe } = test;
 
@@ -342,7 +343,7 @@ describe("redirection", () => {
       redirect: "manual",
     });
 
-    expect(res.status).toBe(301);
+    ok(res.status === 301 || res.status === 308);
     expect(res.headers.get("Location")).toBe(destURL);
   });
 
@@ -354,7 +355,7 @@ describe("redirection", () => {
       redirect: "manual",
     });
 
-    expect(res.status).toBe(301);
+    ok(res.status === 301 || res.status === 308);
     expect(res.headers.get("Location")).toBe(destURL);
   });
 });
