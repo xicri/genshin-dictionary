@@ -2,9 +2,9 @@ import { defineConfig, devices } from "@playwright/test";
 
 const debugOptions = {
   // headless: false,
-  // launchOptions: {
-  //   slowMo: 50,
-  // },
+  launchOptions: {
+    slowMo: 1000,
+  },
 };
 
 export default defineConfig({
