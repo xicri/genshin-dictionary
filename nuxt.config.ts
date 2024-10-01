@@ -13,6 +13,29 @@ export default defineNuxtConfig({
   },
   typescript: {
     strict: true,
+    tsConfig: {
+      compilerOptions: {
+        strict: true,
+        skipLibCheck: true,
+        moduleResolution: "bundler",
+        esModuleInterop: true,
+        resolveJsonModule: true,
+        allowImportingTsExtensions: true,
+        allowJs: true,
+        checkJs: true,
+
+        module: "esnext",
+        target: "esnext",
+        newLine: "lf",
+        removeComments: true,
+        declaration: false,
+
+        lib: [ "esnext", "dom" ],
+        types: [
+          "@cloudflare/workers-types/2023-07-01",
+        ],
+      },
+    },
   },
 
   css: [ "~/assets/styles/global.scss" ],
