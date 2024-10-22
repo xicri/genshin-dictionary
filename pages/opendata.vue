@@ -97,11 +97,6 @@ useHead({
   title,
   meta: [
     { hid: "og:title", property: "og:title", content: title },
-    ...(locale.value !== "ja" ? [{
-      hid: "noindex",
-      name: "robots",
-      content: "noindex",
-    }] : []),
   ],
 });
 
