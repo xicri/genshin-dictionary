@@ -59,17 +59,17 @@ export default defineNuxtConfig({
   i18n: {
     locales: [
       {
-        code: "en",
+        code: 'en',
         iso: "en",
         name: "English",
       },
       {
-        code: "ja",
+        code: 'ja',
         iso: "ja-JP",
         name: "日本語",
       },
       {
-        code: "zh-CN",
+        code: 'zh-CN',
         iso: "zh-CN",
         name: "简体中文",
       },
@@ -77,6 +77,7 @@ export default defineNuxtConfig({
     strategy: "prefix",
     baseUrl: "https://genshin-dictionary.com",
     detectBrowserLanguage: false,
+    vueI18n: "i18n.config.ts"
   },
 
   sitemap: {

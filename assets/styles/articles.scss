@@ -28,7 +28,7 @@ h4 {
   margin-bottom: 0.4em;
 }
 
-a {
+:deep(a) {
   text-decoration: underline;
 }
 
