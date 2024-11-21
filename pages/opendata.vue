@@ -1,21 +1,21 @@
 <template>
   <div class="article__wrapper-outer">
     <div class="article__wrapper-inner">
-      <h2>{{ $t("opendataTitle") }}</h2>
+      <h2>{{ t("opendataTitle") }}</h2>
 
       <main>
-        <p>{{ $t("introText") }}</p>
+        <p>{{ t("introText") }}</p>
 
-        <h3>{{ $t("csvTitle") }}</h3>
+        <h3>{{ t("csvTitle") }}</h3>
         <ul>
           <li>
             <a href="https://dataset.genshin-dictionary.com/words.csv" target="_blank">
-              {{ $t("csvDownloadUtf8") }}
+              {{ t("csvDownloadUtf8") }}
             </a>
           </li>
           <li>
             <a href="https://dataset.genshin-dictionary.com/words-sjis.csv" target="_blank">
-              {{ $t("csvDownloadShiftJis") }}
+              {{ t("csvDownloadShiftJis") }}
             </a>
           </li>
         </ul>
@@ -24,38 +24,38 @@
           その他のソフトウェアを用いる場合についても、文字化けが発生する場合は UTF-8 版と Shift_JIS 版の両方を試してみて下さい。
         </p>
 
-        <h3>{{ $t("jsonTitle") }}</h3>
+        <h3>{{ t("jsonTitle") }}</h3>
 
-        <h4>{{ $t("jsonUrlTitle") }}</h4>
+        <h4>{{ t("jsonUrlTitle") }}</h4>
         <p v-html="downloadLink"></p>
 
-        <h4>{{ $t("jsonFormatTitle") }}</h4>
-        <p>{{ $t("jsonFormatText") }}</p>
+        <h4>{{ t("jsonFormatTitle") }}</h4>
+        <p>{{ t("jsonFormatText") }}</p>
         <code>
           <pre>{{ jsonExample }}</pre>
         </code>
 
-        <p>{{ $t("propertyTitle") }}</p>
+        <p>{{ t("propertyTitle") }}</p>
         <ul>
-          <li><code>id</code> ― {{ $t("propertyId") }}</li>
-          <li><code>en</code> ― {{ $t("propertyEn") }}</li>
-          <li><code>ja</code> ― {{ $t("propertyJa") }}</li>
-          <li><code>zhCN</code> ― {{ $t("propertyZhCN") }}</li>
-          <li><code>pronunciationJa</code> ― {{ $t("propertyPronunciationJa") }}</li>
-          <li><code>notes</code> ― {{ $t("propertyNotes") }}</li>
-          <li><code>notesZh</code> ― {{ $t("propertyNotesZh") }}</li>
-          <li><code>variants</code> ― {{ $t("propertyVariants") }}</li>
-          <li><code>variants.en</code> ― {{ $t("propertyVariantsEn") }}</li>
-          <li><code>variants.ja</code> ― {{ $t("propertyVariantsJa") }}</li>
-          <li><code>examples</code> ― {{ $t("propertyExamples") }}</li>
-          <li><code>examples[].en</code> ― {{ $t("propertyExamplesEn") }}</li>
-          <li><code>examples[].ja</code> ― {{ $t("propertyExamplesJa") }}</li>
-          <li><code>examples[].ref</code> ― {{ $t("propertyExamplesRef") }}</li>
-          <li><code>examples[].refURL</code> ― {{ $t("propertyExamplesRefURL") }}</li>
-          <li><code>createdAt</code> ― {{ $t("propertyCreatedAt") }}</li>
-          <li><code>updatedAt</code> ― {{ $t("propertyUpdatedAt") }}</li>
+          <li><code>id</code> ― {{ t("propertyId") }}</li>
+          <li><code>en</code> ― {{ t("propertyEn") }}</li>
+          <li><code>ja</code> ― {{ t("propertyJa") }}</li>
+          <li><code>zhCN</code> ― {{ t("propertyZhCN") }}</li>
+          <li><code>pronunciationJa</code> ― {{ t("propertyPronunciationJa") }}</li>
+          <li><code>notes</code> ― {{ t("propertyNotes") }}</li>
+          <li><code>notesZh</code> ― {{ t("propertyNotesZh") }}</li>
+          <li><code>variants</code> ― {{ t("propertyVariants") }}</li>
+          <li><code>variants.en</code> ― {{ t("propertyVariantsEn") }}</li>
+          <li><code>variants.ja</code> ― {{ t("propertyVariantsJa") }}</li>
+          <li><code>examples</code> ― {{ t("propertyExamples") }}</li>
+          <li><code>examples[].en</code> ― {{ t("propertyExamplesEn") }}</li>
+          <li><code>examples[].ja</code> ― {{ t("propertyExamplesJa") }}</li>
+          <li><code>examples[].ref</code> ― {{ t("propertyExamplesRef") }}</li>
+          <li><code>examples[].refURL</code> ― {{ t("propertyExamplesRefURL") }}</li>
+          <li><code>createdAt</code> ― {{ t("propertyCreatedAt") }}</li>
+          <li><code>updatedAt</code> ― {{ t("propertyUpdatedAt") }}</li>
           <li>
-            <code>tags</code> ― {{ $t("propertyTags") }}
+            <code>tags</code> ― {{ t("propertyTags") }}
             <ul>
               <li v-for="[ tagID, tag ] in Object.entries(tags)" :key="tagID">
                 <code>{{ tagID }}</code> ― {{ tag[locale as Locale] }}
@@ -64,24 +64,24 @@
           </li>
         </ul>
 
-        <h4>{{ $t("compatibilityTitle") }}</h4>
-        <p>{{ $t("compatibilityText") }}</p>
+        <h4>{{ t("compatibilityTitle") }}</h4>
+        <p>{{ t("compatibilityText") }}</p>
 
-        <h3>{{ $t("usageNotesTitle") }}</h3>
-        <p>{{ $t("lastUpdated") }}</p>
+        <h3>{{ t("usageNotesTitle") }}</h3>
+        <p>{{ t("lastUpdated") }}</p>
         <ul class="usage-notes">
-          <li>{{ $t("usageNotes.basic") }}</li>
-          <li>{{ $t("usageNotes.citation") }}</li>
+          <li>{{ t("usageNotes.basic") }}</li>
+          <li>{{ t("usageNotes.citation") }}</li>
           <li>
-            {{ $t("usageNotes.revocation.intro") }}
+            {{ t("usageNotes.revocation.intro") }}
             <ul>
-              <li>{{ $t("usageNotes.revocation.rights") }}</li>
-              <li>{{ $t("usageNotes.revocation.terms") }}</li>
-              <li>{{ $t("usageNotes.revocation.laws") }}</li>
-              <li>{{ $t("usageNotes.revocation.request") }}</li>
+              <li>{{ t("usageNotes.revocation.rights") }}</li>
+              <li>{{ t("usageNotes.revocation.terms") }}</li>
+              <li>{{ t("usageNotes.revocation.laws") }}</li>
+              <li>{{ t("usageNotes.revocation.request") }}</li>
             </ul>
           </li>
-          <li>{{ $t("usageNotes.disclaimer") }}</li>
+          <li>{{ t("usageNotes.disclaimer") }}</li>
         </ul>
         <p v-html="contactText"></p>
       </main>

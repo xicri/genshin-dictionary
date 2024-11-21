@@ -1,39 +1,39 @@
 <template>
   <div class="article__wrapper-outer">
     <div class="article__wrapper-inner">
-      <h2>{{ $t("aboutTitle") }}</h2>
+      <h2>{{ t("aboutTitle") }}</h2>
 
       <main>
         <p v-html="aboutIntroText"></p>
-        <p>{{ $t("wordCount", { count: wordCount }) }}</p>
+        <p>{{ t("wordCount", { count: wordCount }) }}</p>
 
-        <h3>{{ $t("precautionsTitle") }}</h3>
-        <p>{{ $t("precautions1") }}</p>
+        <h3>{{ t("precautionsTitle") }}</h3>
+        <p>{{ t("precautions1") }}</p>
         <p v-if="locale === 'ja'">
           読み仮名は検索精度の向上を目的として付けており、その正確性について十分な調査をしておりません。間違いが多く含まれる可能性があることをご了承下さい。
         </p>
-        <p>{{ $t("precautions2") }}</p>
+        <p>{{ t("precautions2") }}</p>
 
-        <h3>{{ $t("operatorTitle") }}</h3>
+        <h3>{{ t("operatorTitle") }}</h3>
         <ul>
           <li v-html="operatorText"></li>
           <li v-html="contributorText"></li>
         </ul>
 
         <p>
-          {{ $t("contact1", {
+          {{ t("contact1", {
             twitterLink: createLink("https://twitter.com/xicri_gi", "Twitter"),
           }) }}
           <br />
-          {{ $t("contact2", {
+          {{ t("contact2", {
             issuesLink: createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues"),
             discussionsLink: createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions"),
           }) }}
           <br />
-          {{ $t("contact3") }}
+          {{ t("contact3") }}
         </p>
 
-        <h3>{{ $t("creditsTitle") }}</h3>
+        <h3>{{ t("creditsTitle") }}</h3>
         <p v-html="credits1Text"></p>
         <p v-html="credits2Text"></p>
         <p v-html="credits3Text"></p>
