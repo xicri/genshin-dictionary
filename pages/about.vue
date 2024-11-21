@@ -20,7 +20,18 @@
           <li v-html="contributorText"></li>
         </ul>
 
-        <p v-html="contactText"></p>
+        <p>
+          {{ $t("contact1", {
+            twitterLink: createLink("https://twitter.com/xicri_gi", "Twitter"),
+          }) }}
+          <br />
+          {{ $t("contact2", {
+            issuesLink: createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues"),
+            discussionsLink: createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions"),
+          }) }}
+          <br />
+          {{ $t("contact3") }}
+        </p>
 
         <h3>{{ $t("creditsTitle") }}</h3>
         <p v-html="credits1Text"></p>
@@ -50,7 +61,9 @@
     operatorTitle: "運営者・貢献者",
     operator: "運営者: シクリ ({twitterLink} / {githubLink})",
     contributor: "中国語翻訳データ作成: Bill Haku ({bilibiliLink} / {twitterLink} / {githubLink})",
-    contact: "お問い合わせなどの際は {twitterLink} からご連絡下さい。(DM 可)<br>バグ報告やオープンデータ・API 関連、その他技術的なお問い合わせについては、GitHub の {issuesLink} や {discussionsLink} からお問い合わせ頂いても構いません。<br>お問い合わせの際は、できるだけ日本語又は英語でお願いします。",
+    contact1: "お問い合わせなどの際は {twitterLink} からご連絡下さい。(DM 可)",
+    contact2: "バグ報告やオープンデータ・API 関連、その他技術的なお問い合わせについては、GitHub の {issuesLink} や {discussionsLink} からお問い合わせ頂いても構いません。",
+    contact3: "お問い合わせの際は、できるだけ日本語又は英語でお願いします。",
     creditsTitle: "クレジット",
     credits1: "本サイトの読み仮名データの一部は、{genshinDictionaryLink}及び{genshinKanjiLabLink}を参照しています。",
     credits2: "本サイト運営初期に追加された聖遺物など一部の単語については {genshinWikiLink} を参照しています。",
@@ -107,13 +120,6 @@ const contributorText = computed(() => {
   const twitterLink = createLink("https://twitter.com/Haku_Bill", "Twitter");
   const githubLink = createLink("https://github.com/Bill-Haku", "GitHub");
   return t("contributor", { bilibiliLink, twitterLink, githubLink });
-});
-
-const contactText = computed(() => {
-  const twitterLink = createLink("https://twitter.com/xicri_gi", "Twitter");
-  const issuesLink = createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues");
-  const discussionsLink = createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions");
-  return t("contact", { twitterLink, issuesLink, discussionsLink });
 });
 
 const credits1Text = computed(() => {
