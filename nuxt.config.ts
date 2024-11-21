@@ -61,17 +61,17 @@ export default defineNuxtConfig({
   i18n: {
     locales: [
       {
-        code: 'en',
+        code: "en",
         iso: "en",
         name: "English",
       },
       {
-        code: 'ja',
+        code: "ja",
         iso: "ja-JP",
         name: "日本語",
       },
       {
-        code: 'zh-CN',
+        code: "zh-CN",
         iso: "zh-CN",
         name: "简体中文",
       },
