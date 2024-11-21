@@ -14,9 +14,6 @@
         </p>
         <p>{{ $t("precautions2") }}</p>
 
-        <h3>{{ $t("openDataTitle") }}</h3>
-        <p v-html="openDataContentText"></p>
-
         <h3>{{ $t("operatorTitle") }}</h3>
         <ul>
           <li v-html="operatorText"></li>
@@ -50,9 +47,6 @@
     precautionsTitle: "ご利用にあたっての注意・免責事項",
     precautions1: "本サイトはゲームの固有名詞等の対訳を掲載している都合上、意訳が多く、一般的な意味とは訳が異なる場合がありますので、ご注意下さい。",
     precautions2: "このサイトは一プレイヤーが運営しているファンサイトであり、開発元である HoYoverse (Cognosphere 社) 及び miHoYo 社とは関係ありません。",
-    openDataTitle: "オープンデータ・API (β)",
-    openDataContent: "本サイトの対訳表データは CSV 形式 (一般向け) 及び JSON 形式 (技術者向け) で配布しています。<br>詳細は{openDataLink}をご確認下さい。",
-    openDataPageLink: "オープンデータ・APIについてのページ",
     operatorTitle: "運営者・貢献者",
     operator: "運営者: シクリ ({twitterLink} / {githubLink})",
     contributor: "中国語翻訳データ作成: Bill Haku ({bilibiliLink} / {twitterLink} / {githubLink})",
@@ -100,11 +94,6 @@ const createLink = (url: string, text: string) => `<a href="${url}" target="_bla
 const aboutIntroText = computed(() => {
   const genshinLink = createLink("https://genshin.hoyoverse.com", t("genshinImpact"));
   return t("aboutIntro", { genshinLink });
-});
-
-const openDataContentText = computed(() => {
-  const openDataLink = createLink("./opendata", t("openDataPageLink"));
-  return t("openDataContent", { openDataLink });
 });
 
 const operatorText = computed(() => {
