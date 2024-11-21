@@ -9,8 +9,10 @@
 
         <h3>{{ $t("precautionsTitle") }}</h3>
         <p>{{ $t("precautions1") }}</p>
-        <p v-html="precautions2Text"></p>
-        <p>{{ $t("precautions3") }}</p>
+        <p v-if="locale === 'ja'">
+          読み仮名は検索精度の向上を目的として付けており、その正確性について十分な調査をしておりません。間違いが多く含まれる可能性があることをご了承下さい。読み仮名について、より正確な情報を収集されたい場合、<a href="http://anemoarchon.s205.xrea.com/#/gdic">原神用語辞書</a>を参照されることをおすすめします。
+        </p>
+        <p>{{ $t("precautions2") }}</p>
 
         <h3>{{ $t("openDataTitle") }}</h3>
         <p v-html="openDataContentText"></p>
@@ -47,8 +49,7 @@
     wordCount: "現在の収録単語数は{count}語です。",
     precautionsTitle: "ご利用にあたっての注意・免責事項",
     precautions1: "本サイトはゲームの固有名詞等の対訳を掲載している都合上、意訳が多く、一般的な意味とは訳が異なる場合がありますので、ご注意下さい。",
-    precautions2: "読み仮名は検索精度の向上を目的として付けており、その正確性について十分な調査をしておりません。間違いが多く含まれる可能性があることをご了承下さい。読み仮名について、より正確な情報を収集されたい場合、{genshinDictionaryLink}を参照されることをおすすめします。",
-    precautions3: "このサイトは一プレイヤーが運営しているファンサイトであり、開発元である HoYoverse (COGNOSPHERE 社・miHoYo 社)とは関係ありません。",
+    precautions2: "このサイトは一プレイヤーが運営しているファンサイトであり、開発元である HoYoverse (COGNOSPHERE 社・miHoYo 社)とは関係ありません。",
     openDataTitle: "オープンデータ・API (β)",
     openDataContent: "本サイトの対訳表データは CSV 形式 (一般向け) 及び JSON 形式 (技術者向け) で配布しています。<br>詳細は{openDataLink}をご確認下さい。",
     openDataPageLink: "オープンデータ・APIについてのページ",
@@ -101,10 +102,6 @@ const aboutIntroText = computed(() => {
   return t("aboutIntro", { genshinLink });
 });
 
-const precautions2Text = computed(() => {
-  const genshinDictionaryLink = createLink("http://anemoarchon.s205.xrea.com/#/gdic", t("genshinDictionary"));
-  return t("precautions2", { genshinDictionaryLink });
-});
 
 const openDataContentText = computed(() => {
   const openDataLink = createLink("./opendata", t("openDataPageLink"));
