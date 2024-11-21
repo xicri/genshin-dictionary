@@ -1,13 +1,39 @@
-import en from './lang/en'
-import ja from './lang/ja'
-import zhCN from './lang/zh-CN'
-
 export default defineI18nConfig(() => ({
     legacy: false,
     fallbackLocale: 'en',
     messages: {
-        en,
-        ja,
-        'zh-CN': zhCN
-    }
-}))
+      en: {
+        siteTitle: "Genshin Dictionary",
+        indexTitleDesc: "An online English-Chinese-Japanese dictionary of the terms in Genshin Impact",
+        aboutTitle: "About this website",
+        aboutDescription: "About Genshin Dictionary. This website is an online English-Chinese-Japanese dictionary of the terms in Genshin Impact.",
+        historyTitle: "Update History",
+        opendataTitle: "Open Data / API (β)",
+        langNameEn: "English",
+        langNameJa: "Japanese",
+        langNameZhCN: "Chinese",
+      },
+      ja: {
+        siteTitle: "原神 英語・中国語辞典",
+        indexTitleDesc: "原神の固有名詞等の英語表記、及び中国語表記の一覧を掲載しています。",
+        aboutTitle: "このサイトについて",
+        aboutDescription: "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
+        historyTitle: "更新履歴",
+        opendataTitle: "オープンデータ・API (β)",
+        langNameEn: "英語",
+        langNameJa: "日本語",
+        langNameZhCN: "中国語",
+      },
+      "zh-CN": {
+        siteTitle: "原神中英日辞典",
+        indexTitleDesc: "一个在线的中英日三语原神游戏用语辞典",
+        aboutTitle: "关于本网站",
+        aboutDescription: "关于原神中英日辞典。本网站是一个在线的中英日三语原神游戏用语辞典。",
+        historyTitle: "更新记录",
+        opendataTitle: "开放数据 · API (β)",
+        langNameEn: "英语",
+        langNameJa: "日语",
+        langNameZhCN: "简体中文",
+      },
+    },
+}));
