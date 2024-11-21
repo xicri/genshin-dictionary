@@ -19,7 +19,10 @@
             </a>
           </li>
         </ul>
-        <p>{{ $t("csvNote") }}</p>
+        <p v-if="locale === 'ja'">
+          Excel を用いて CSV を開く場合は、Shift_JIS 版の利用を推奨します。UTF-8 版を用いると文字化けする可能性があります。<br />
+          その他のソフトウェアを用いる場合についても、文字化けが発生する場合は UTF-8 版と Shift_JIS 版の両方を試してみて下さい。
+        </p>
 
         <h3>{{ $t("jsonTitle") }}</h3>
 
@@ -94,7 +97,6 @@
       csvTitle: "CSV (一般向け)",
       csvDownloadUtf8: "CSV (UTF-8 版) をダウンロード",
       csvDownloadShiftJis: "CSV (Shift_JIS 版) をダウンロード",
-      csvNote: "Excel を用いて CSV を開く場合は、Shift_JIS 版の利用を推奨します。UTF-8 版を用いると文字化けする可能性があります。\nその他のソフトウェアを用いる場合についても、文字化けが発生する場合は UTF-8 版と Shift_JIS 版の両方を試してみて下さい。",
 
       jsonTitle: "JSON (技術者向け)",
       jsonUrlTitle: "データ URL",
