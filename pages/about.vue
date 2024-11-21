@@ -10,7 +10,7 @@
         <h3>{{ $t("precautionsTitle") }}</h3>
         <p>{{ $t("precautions1") }}</p>
         <p v-if="locale === 'ja'">
-          読み仮名は検索精度の向上を目的として付けており、その正確性について十分な調査をしておりません。間違いが多く含まれる可能性があることをご了承下さい。読み仮名について、より正確な情報を収集されたい場合、<a href="http://anemoarchon.s205.xrea.com/#/gdic">原神用語辞書</a>を参照されることをおすすめします。
+          読み仮名は検索精度の向上を目的として付けており、その正確性について十分な調査をしておりません。間違いが多く含まれる可能性があることをご了承下さい。
         </p>
         <p>{{ $t("precautions2") }}</p>
 
@@ -44,12 +44,12 @@
   },
   "ja": {
     aboutTitle: "このサイトについて",
-    aboutDescription: "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
-    aboutIntro: "このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「{genshinLink}」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
+    aboutDescription: "原神 英語・中国語辞典についての説明です。このサイトはゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
+    aboutIntro: "このサイトはゲーム「{genshinLink}」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
     wordCount: "現在の収録単語数は{count}語です。",
     precautionsTitle: "ご利用にあたっての注意・免責事項",
     precautions1: "本サイトはゲームの固有名詞等の対訳を掲載している都合上、意訳が多く、一般的な意味とは訳が異なる場合がありますので、ご注意下さい。",
-    precautions2: "このサイトは一プレイヤーが運営しているファンサイトであり、開発元である HoYoverse (COGNOSPHERE 社・miHoYo 社)とは関係ありません。",
+    precautions2: "このサイトは一プレイヤーが運営しているファンサイトであり、開発元である HoYoverse (Cognosphere 社) 及び miHoYo 社とは関係ありません。",
     openDataTitle: "オープンデータ・API (β)",
     openDataContent: "本サイトの対訳表データは CSV 形式 (一般向け) 及び JSON 形式 (技術者向け) で配布しています。<br>詳細は{openDataLink}をご確認下さい。",
     openDataPageLink: "オープンデータ・APIについてのページ",
@@ -59,7 +59,7 @@
     contact: "お問い合わせなどの際は {twitterLink} からご連絡下さい。(DM 可)<br>バグ報告やオープンデータ・API 関連、その他技術的なお問い合わせについては、GitHub の {issuesLink} や {discussionsLink} からお問い合わせ頂いても構いません。<br>お問い合わせの際は、できるだけ日本語又は英語でお願いします。",
     creditsTitle: "クレジット",
     credits1: "本サイトの読み仮名データの一部は、{genshinDictionaryLink}及び{genshinKanjiLabLink}を参照しています。",
-    credits2: "本サイトの単語は、原則としてゲームや公式から配信される YouTube 動画、ツイート等を参照していますが、聖遺物など一部の単語については {genshinWikiLink} を参照しています。",
+    credits2: "本サイト運営初期に追加された聖遺物など一部の単語については {genshinWikiLink} を参照しています。",
     credits3: "本サイトは GitHub 社により {licenseLink}にて提供されている {octiconsLink} を利用しています。",
     credits4: "本サイトの favicon の一部には{logoTypeGothicLink}を利用しています。",
     genshinDictionary: "原神用語辞書",
@@ -101,7 +101,6 @@ const aboutIntroText = computed(() => {
   const genshinLink = createLink("https://genshin.hoyoverse.com", t("genshinImpact"));
   return t("aboutIntro", { genshinLink });
 });
-
 
 const openDataContentText = computed(() => {
   const openDataLink = createLink("./opendata", t("openDataPageLink"));
