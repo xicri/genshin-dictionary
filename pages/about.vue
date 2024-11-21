@@ -46,39 +46,39 @@
 <i18n lang="json">
 {
   "en": {
-    genshinImpact: "Genshin Impact",
-    license: "license",
-    logoTypeGothic: "Logo Type Gothic"
+    "genshinImpact": "Genshin Impact",
+    "license": "license",
+    "logoTypeGothic": "Logo Type Gothic"
   },
   "ja": {
-    aboutTitle: "このサイトについて",
-    aboutDescription: "原神 英語・中国語辞典についての説明です。このサイトはゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
-    aboutIntro: "このサイトはゲーム「{genshinLink}」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
-    wordCount: "現在の収録単語数は{count}語です。",
-    precautionsTitle: "ご利用にあたっての注意・免責事項",
-    precautions1: "本サイトはゲームの固有名詞等の対訳を掲載している都合上、意訳が多く、一般的な意味とは訳が異なる場合がありますので、ご注意下さい。",
-    precautions2: "このサイトは一プレイヤーが運営しているファンサイトであり、開発元である HoYoverse (Cognosphere 社) 及び miHoYo 社とは関係ありません。",
-    operatorTitle: "運営者・貢献者",
-    operator: "運営者: シクリ ({twitterLink} / {githubLink})",
-    contributor: "中国語翻訳データ作成: Bill Haku ({bilibiliLink} / {twitterLink} / {githubLink})",
-    contact1: "お問い合わせなどの際は {twitterLink} からご連絡下さい。(DM 可)",
-    contact2: "バグ報告やオープンデータ・API 関連、その他技術的なお問い合わせについては、GitHub の {issuesLink} や {discussionsLink} からお問い合わせ頂いても構いません。",
-    contact3: "お問い合わせの際は、できるだけ日本語又は英語でお願いします。",
-    creditsTitle: "クレジット",
-    credits1: "本サイトの読み仮名データの一部は、{genshinDictionaryLink}及び{genshinKanjiLabLink}を参照しています。",
-    credits2: "本サイト運営初期に追加された聖遺物など一部の単語については {genshinWikiLink} を参照しています。",
-    credits3: "本サイトは GitHub 社により {licenseLink}にて提供されている {octiconsLink} を利用しています。",
-    credits4: "本サイトの favicon の一部には{logoTypeGothicLink}を利用しています。",
-    genshinDictionary: "原神用語辞書",
-    genshinKanjiLab: "原神漢字研究所",
-    genshinImpact: "原神",
-    license: "ライセンス",
-    logoTypeGothic: "ロゴたいぷゴシック"
+    "aboutTitle": "このサイトについて",
+    "aboutDescription": "原神 英語・中国語辞典についての説明です。このサイトはゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
+    "aboutIntro": "このサイトはゲーム「{genshinLink}」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
+    "wordCount": "現在の収録単語数は{count}語です。",
+    "precautionsTitle": "ご利用にあたっての注意・免責事項",
+    "precautions1": "本サイトはゲームの固有名詞等の対訳を掲載している都合上、意訳が多く、一般的な意味とは訳が異なる場合がありますので、ご注意下さい。",
+    "precautions2": "このサイトは一プレイヤーが運営しているファンサイトであり、開発元である HoYoverse (Cognosphere 社) 及び miHoYo 社とは関係ありません。",
+    "operatorTitle": "運営者・貢献者",
+    "operator": "運営者: シクリ ({twitterLink} / {githubLink})",
+    "contributor": "中国語翻訳データ作成: Bill Haku ({bilibiliLink} / {twitterLink} / {githubLink})",
+    "contact1": "お問い合わせなどの際は {twitterLink} からご連絡下さい。(DM 可)",
+    "contact2": "バグ報告やオープンデータ・API 関連、その他技術的なお問い合わせについては、GitHub の {issuesLink} や {discussionsLink} からお問い合わせ頂いても構いません。",
+    "contact3": "お問い合わせの際は、できるだけ日本語又は英語でお願いします。",
+    "creditsTitle": "クレジット",
+    "credits1": "本サイトの読み仮名データの一部は、{genshinDictionaryLink}及び{genshinKanjiLabLink}を参照しています。",
+    "credits2": "本サイト運営初期に追加された聖遺物など一部の単語については {genshinWikiLink} を参照しています。",
+    "credits3": "本サイトは GitHub 社により {licenseLink}にて提供されている {octiconsLink} を利用しています。",
+    "credits4": "本サイトの favicon の一部には{logoTypeGothicLink}を利用しています。",
+    "genshinDictionary": "原神用語辞書",
+    "genshinKanjiLab": "原神漢字研究所",
+    "genshinImpact": "原神",
+    "license": "ライセンス",
+    "logoTypeGothic": "ロゴたいぷゴシック"
   },
   "zh-CN": {
-    genshinImpact: "原神",
-    license: "许可证",
-    logoTypeGothic: "Logo Type Gothic字体"
+    "genshinImpact": "原神",
+    "license": "许可证",
+    "logoTypeGothic": "Logo Type Gothic字体"
   }
 }
 </i18n>
