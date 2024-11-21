@@ -30,7 +30,7 @@ export default defineI18nConfig(() => ({
         aboutTitle: "关于本网站",
         aboutDescription: "关于原神中英日辞典。本网站是一个在线的中英日三语原神游戏用语辞典。",
         historyTitle: "更新记录",
-        opendataTitle: "开放数据 · API (β)",
+        opendataTitle: "开放数据与API (β)",
         langNameEn: "英语",
         langNameJa: "日语",
         langNameZhCN: "简体中文",
