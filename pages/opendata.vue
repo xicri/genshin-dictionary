@@ -91,6 +91,58 @@
 
 <i18n lang="json">
   {
+    "en": {
+      "introText": "The translation data on this website is distributed as CSV (for general public) and JSON (for software engineers) formats. You can modify and re-distribute the data. (See the Terms of Use section)",
+      "csvTitle": "CSV (for general public)",
+      "csvDownloadUtf8": "Download CSV (UTF-8; recommended for most of non-Japanese speakers)",
+      "csvDownloadShiftJis": "Download CSV (Shift_JIS; recommended only for Japanese version of Microsoft Excel)",
+
+      "jsonTitle": "JSON (for software engineers)",
+      "jsonUrlTitle": "URL of the Data",
+      "jsonUrlText": "You can fetch JSON data from: {url}",
+      "jsonFormatTitle": "JSON data format",
+      "jsonFormatText": "The JSON data is given as an array of the objects as the following example.",
+      "propertyTitle": "Here's the referrence document of the each properties:",
+      "propertyId": "A unique slug for the each words. https://genshin-dictionary.com/[ ID ]/ is the URL for the page of the word. This slug can be changed without announcement.",
+      "propertyEn": "The English translation",
+      "propertyJa": "The Japanese translation",
+      "propertyZhCN": "Simplified Chinese translation",
+      "propertyPronunciationJa": "Japanese pronunciation in Kana. It can include Hiragana, Katakana, and symbols.",
+      "propertyNotes": "Note for Japanese speakers. It can include HTML tags.",
+      "propertyNotesZh": "Note for (Simplified) Chinese speakers. It can include HTML tags.",
+      "propertyVariants": "Variants such as commonly known typo and unofficial nicknames. For example, \"凌华\", the Chinese mistype of Ayaka (绫华) and \"CW\", a short name of an Artifact \"Crimson Witch of Flames\".",
+      "propertyVariantsEn": "English variants",
+      "propertyVariantsJa": "Japanese variants",
+      "propertyExamples": "Example sentences",
+      "propertyExamplesEn": "English example sentences",
+      "propertyExamplesJa": "Japanese example sentences",
+      "propertyExamplesRef": "The source of the example sentence",
+      "propertyExamplesRefURL": "The URL to the source of the example sentence",
+      "propertyCreatedAt": "The date we added the word (yyyy-mm-dd format)",
+      "propertyUpdatedAt": "The data we updated the word (yyyy-mm-dd format)",
+      "propertyTags": "Tags. Here's the list of the tags:",
+
+      "compatibilityTitle": "Compatibility",
+      "compatibilityText": "This data is currently β. We might apply breaking changes at anytime without announcement.",
+
+      "usageNotesTitle": "Terms of use",
+      "lastUpdated": "Last updated at: 2024/11/21",
+
+      "usageNotes": {
+        "basic": "You can modify and re-distribute CSVs and JSON data of the English-Chinese-Japanese translations (\"The Data\")",
+        "citation": "You don't have to give the credit to this website and provide link to its URL. (However, we welcome if you give the credit)",
+        "revocation": {
+          "intro": "We cancel the permission to redistribute The Data if:",
+          "rights": "you have violate the rights of the HoYoverse companies (i.e. miHoYo, Cognosphere, and their local branches and subsidiaries) and any thirdparties.",
+          "terms": "you violate agreements of the Genshin Impact game and its related services such as HoYoLab.",
+          "laws": "you violate Japanese law or the law of the country you live.",
+          "request": "the owner of this website request to stop redistribution."
+        },
+        "disclaimer": "The owner of this website and the contributors of The Data assumes no responsibility for any damages while you use, modify, publish, or redistribute The Data."
+      },
+
+      "contactText": "If you have any questions, contact via {twitterLink}. (You don't have to follow me to send me the DMs.)"
+    },
     "ja": {
       "introText": "本サイトの対訳表データは CSV 形式 (一般向け) 及び JSON 形式 (技術者向け) で配布しています。データは、基本的に自由に加工し掲載・再配布して頂いて構いません。(詳細は利用条件の項をお読み下さい)",
 
