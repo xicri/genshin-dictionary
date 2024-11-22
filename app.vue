@@ -8,9 +8,9 @@
 
 <script setup lang="ts">
 const { htmlAttrs, meta, link } = useLocaleHead({
-  addDirAttribute: true,
-  identifierAttribute: "id",
-  addSeoAttributes: true,
+  dir: true,
+  key: "id",
+  seo: true,
 }).value;
 const { lang } = htmlAttrs;
 let siteName;
