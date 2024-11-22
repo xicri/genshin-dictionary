@@ -134,7 +134,10 @@ const wordCount = words.length;
 const createLink = (url: string, text: string) => `<a href="${url}" target="_blank" rel="noopener">${text}</a>`;
 
 const aboutIntroText = computed(() => {
-  const genshinLink = createLink("https://genshin.hoyoverse.com", t("genshinImpact"));
+  const genshinLink = createLink(
+    locale.value === "zh-CN" ? "https://ys.mihoyo.com" : "https://genshin.hoyoverse.com",
+    t("genshinImpact")
+  );
   return t("aboutIntro", { genshinLink });
 });
 
