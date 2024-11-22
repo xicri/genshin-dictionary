@@ -306,7 +306,7 @@ const downloadLink = computed(() => {
 });
 
 const contactText = computed(() => {
-  const twitterLink = '<a href="https://twitter.com/xicri_gi" target="_blank" rel="noopener">Twitter</a>';
+  const twitterLink = '<a href="https://x.com/xicri_gi" target="_blank" rel="noopener">X (Twitter)</a>';
   return t("contactText", { twitterLink });
 });
 </script>
