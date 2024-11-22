@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<i18n>
+<i18n lang="json">
 {
   "en": {
     "notFound": "Your search did not match any words in this dictionary."
