@@ -102,7 +102,7 @@
   </main>
 </template>
 
-<i18n>
+<i18n lang="json">
 {
   "en": {
     "example": "Example",
