@@ -20,18 +20,7 @@
           <li v-html="contributorText"></li>
         </ul>
 
-        <p>
-          {{ t("contact1", {
-            twitterLink: createLink("https://twitter.com/xicri_gi", "Twitter"),
-          }) }}
-          <br />
-          {{ t("contact2", {
-            issuesLink: createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues"),
-            discussionsLink: createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions"),
-          }) }}
-          <br />
-          {{ t("contact3") }}
-        </p>
+        <p v-html="contactText"></p>
 
         <h3>{{ t("creditsTitle") }}</h3>
         <p v-html="credits1Text"></p>
@@ -160,6 +149,16 @@ const contributorText = computed(() => {
   const twitterLink = createLink("https://twitter.com/Haku_Bill", "Twitter");
   const githubLink = createLink("https://github.com/Bill-Haku", "GitHub");
   return t("contributor", { bilibiliLink, twitterLink, githubLink });
+});
+
+const contactText = computed(() => {
+  const twitterLink = createLink("https://twitter.com/xicri_gi", "Twitter");
+  const issuesLink = createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues");
+  const discussionsLink = createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions");
+
+  return t("contact1", { twitterLink }) + "<br />"
+    + t("contact2", { issuesLink, discussionsLink }) + "<br />"
+    + t("contact3");
 });
 
 const credits1Text = computed(() => {
