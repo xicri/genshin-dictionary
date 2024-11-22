@@ -12,7 +12,7 @@ const { htmlAttrs, meta, link } = useLocaleHead({
   key: "id",
   seo: true,
 }).value;
-const { lang } = htmlAttrs;
+const lang: "en-US" | "ja-JP" | "zh-CN" = htmlAttrs?.lang ?? "en-US";
 let siteName;
 let description;
 
@@ -47,11 +47,11 @@ useHead({
       name: "google-site-verification",
       content: "siYv7dgV8-NP15jdAUtGC0L52osNwLDBt7HFe2LH-3s",
     },
-    ...meta,
+    ...(meta ?? []),
   ],
   link: [
     { rel: "icon", href: "/images/favicon.svg", type: "image/svg+xml" },
-    ...link,
+    ...(link ?? []),
   ],
   script: [
     ...(runtimeConfig.serverEnv === "production" ? [{
