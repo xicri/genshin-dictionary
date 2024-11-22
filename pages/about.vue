@@ -142,20 +142,20 @@ const aboutIntroText = computed(() => {
 });
 
 const operatorText = computed(() => {
-  const twitterLink = createLink("https://twitter.com/xicri_gi", "Twitter");
+  const twitterLink = createLink("https://x.com/xicri_gi", "X (Twitter)");
   const githubLink = createLink("https://github.com/xicri", "GitHub");
   return t("operator", { twitterLink, githubLink });
 });
 
 const contributorText = computed(() => {
   const bilibiliLink = createLink("https://space.bilibili.com/158463764", "BiliBili");
-  const twitterLink = createLink("https://twitter.com/Haku_Bill", "Twitter");
+  const twitterLink = createLink("https://x.com/Haku_Bill", "X (Twitter)");
   const githubLink = createLink("https://github.com/Bill-Haku", "GitHub");
   return t("contributor", { bilibiliLink, twitterLink, githubLink });
 });
 
 const contactText = computed(() => {
-  const twitterLink = createLink("https://twitter.com/xicri_gi", "Twitter");
+  const twitterLink = createLink("https://x.com/xicri_gi", "X (Twitter)");
   const issuesLink = createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues");
   const discussionsLink = createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions");
 
@@ -166,7 +166,7 @@ const contactText = computed(() => {
 
 const credits1Text = computed(() => {
   const genshinDictionaryLink = createLink("http://anemoarchon.s205.xrea.com/#/gdic", t("genshinDictionary"));
-  const genshinKanjiLabLink = createLink("https://twitter.com/genshin_kanji", t("genshinKanjiLab"));
+  const genshinKanjiLabLink = createLink("https://x.com/genshin_kanji", t("genshinKanjiLab"));
   return t("credits1", { genshinDictionaryLink, genshinKanjiLabLink });
 });
 
