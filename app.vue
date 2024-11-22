@@ -10,6 +10,7 @@
 const { htmlAttrs, meta, link } = useLocaleHead({
   dir: true,
   key: "id",
+  lang: true,
   seo: true,
 }).value;
 const lang: "en-US" | "ja-JP" | "zh-CN" = htmlAttrs?.lang ?? "en-US";
