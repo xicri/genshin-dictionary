@@ -197,56 +197,56 @@
       "contactText": "ご不明点があれば、{twitterLink} にてお問い合わせ下さい。(フォロー外から DM をお送り頂くことも可能です。)"
     },
     "zh-CN": {
-      "introText": "The translation data on this website is distributed as CSV (for general public) and JSON (for software engineers) formats. You can modify and re-distribute the data. (See the Terms of Use section)",
-      "csvTitle": "CSV (for general public)",
-      "csvDownloadUtf8": "Download CSV (UTF-8; recommended for most of non-Japanese speakers)",
-      "csvDownloadShiftJis": "Download CSV (Shift_JIS; recommended only for Japanese version of Microsoft Excel)",
+      "introText": "本站的翻译数据以 CSV（适合普通用户）和 JSON（适合开发者）格式提供。您可以自由修改和再分发这些数据。（详细信息请参阅“使用条款”部分）",
 
-      "jsonTitle": "JSON (for software engineers)",
-      "jsonUrlTitle": "URL of the Data",
-      "jsonUrlText": "You can fetch JSON data from: {url}",
-      "jsonFormatTitle": "JSON data format",
-      "jsonFormatText": "The JSON data is given as an array of the objects as the following example.",
-      "propertyTitle": "Here's the referrence document of the each properties:",
-      "propertyId": "A unique slug for the each words. https://genshin-dictionary.com/[ ID ]/ is the URL for the page of the word. This slug can be changed without announcement.",
-      "propertyEn": "The English translation",
-      "propertyJa": "The Japanese translation",
-      "propertyZhCN": "Simplified Chinese translation",
-      "propertyPronunciationJa": "Japanese pronunciation in Kana. It can include Hiragana, Katakana, and symbols.",
-      "propertyNotes": "Note for Japanese speakers. It can include HTML tags.",
-      "propertyNotesZh": "Note for (Simplified) Chinese speakers. It can include HTML tags.",
-      "propertyVariants": "Variants such as commonly known typo and unofficial nicknames. For example, \"凌华\", the Chinese mistype of Ayaka (绫华) and \"CW\", a short name of an Artifact \"Crimson Witch of Flames\".",
-      "propertyVariantsEn": "English variants",
-      "propertyVariantsJa": "Japanese variants",
-      "propertyExamples": "Example sentences",
-      "propertyExamplesEn": "English example sentences",
-      "propertyExamplesJa": "Japanese example sentences",
-      "propertyExamplesRef": "The source of the example sentence",
-      "propertyExamplesRefURL": "The URL to the source of the example sentence",
-      "propertyCreatedAt": "The date we added the word (yyyy-mm-dd format)",
-      "propertyUpdatedAt": "The data we updated the word (yyyy-mm-dd format)",
-      "propertyTags": "Tags. Here's the list of the tags:",
+      "csvTitle": "CSV（适合普通用户）",
+      "csvDownloadUtf8": "下载 CSV（UTF-8；建议大多数非日语用户使用）",
+      "csvDownloadShiftJis": "下载 CSV（Shift_JIS；仅推荐使用日语版 Microsoft Excel 的用户使用）",
 
-      "compatibilityTitle": "Compatibility",
-      "compatibilityText": "This data is currently β. We might apply breaking changes at anytime without announcement.",
+      "jsonTitle": "JSON（适合开发者）",
+      "jsonUrlTitle": "数据 URL",
+      "jsonUrlText": "您可以通过以下链接获取 JSON 数据：{url}",
+      "jsonFormatTitle": "JSON 数据格式",
+      "jsonFormatText": "JSON 数据是一个对象数组，格式如下所示：",
+      "propertyTitle": "以下是各属性的说明：",
+      "propertyId": "每个词条的唯一标识。访问 https://genshin-dictionary.com/[ID]/ 可以查看词条的页面。此标识可能会不定期更改。",
+      "propertyEn": "词条的英文翻译",
+      "propertyJa": "词条的日文翻译",
+      "propertyZhCN": "词条的简体中文翻译",
+      "propertyPronunciationJa": "词条的日语发音，可能包含平假名、片假名及符号。",
+      "propertyNotes": "面向日语用户的备注，可包含 HTML 标签。",
+      "propertyNotesZh": "面向中文用户的备注，可包含 HTML 标签。",
+      "propertyVariants": "常见错别字或非官方昵称，例如“凌华”是绫华的中文错别字，“CW”是圣遗物“炽烈的炎之魔女”的简称。",
+      "propertyVariantsEn": "词条的英文变体",
+      "propertyVariantsJa": "词条的日文变体",
+      "propertyExamples": "例句",
+      "propertyExamplesEn": "英文例句",
+      "propertyExamplesJa": "日文例句",
+      "propertyExamplesRef": "例句的来源",
+      "propertyExamplesRefURL": "例句来源的链接",
+      "propertyCreatedAt": "词条添加日期（yyyy-mm-dd 格式）",
+      "propertyUpdatedAt": "词条更新日期（yyyy-mm-dd 格式）",
+      "propertyTags": "标签，以下是可用标签的列表：",
 
-      "usageNotesTitle": "Terms of use",
-      "lastUpdated": "Last updated at: 2024/11/21",
+      "compatibilityTitle": "兼容性",
+      "compatibilityText": "目前数据处于 β 版本，可能会随时进行重大更改，恕不另行通知。",
+
+      "usageNotesTitle": "使用条款",
+      "lastUpdated": "最后更新：2024/11/21",
 
       "usageNotes": {
-        "basic": "You can modify and re-distribute CSVs and JSON data of the English-Chinese-Japanese translations (\"The Data\")",
-        "citation": "You don't have to give the credit to this website and provide link to its URL. (However, we welcome if you give the credit)",
+        "basic": "您可以自由修改和再分发本站提供的中日英翻译数据（以下简称“数据”）。",
+        "citation": "无需注明本站为数据的来源或提供链接。（当然，如果您愿意标明，我们将非常感谢。）",
         "revocation": {
-          "intro": "We cancel the permission to redistribute The Data if:",
-          "rights": "you have violate the rights of the HoYoverse companies (i.e. miHoYo, Cognosphere, and their local branches and subsidiaries) and any thirdparties.",
-          "terms": "you violate agreements of the Genshin Impact game and its related services such as HoYoLab.",
-          "laws": "you violate Japanese law or the law of the country you live.",
-          "request": "the owner of this website request to stop redistribution."
+          "intro": "在以下情况下，我们将取消您再分发数据的许可：",
+          "rights": "您侵犯了米哈游（如上海米哈游网络科技股份有限公司、株式会社miHoYo、Cognosphere Pte., Ltd. (HoYoVerse) 及其分支机构或子公司）或第三方的权益。",
+          "terms": "您违反了《原神》游戏及其相关服务（如米游社、HoYoLab）的用户协议。",
+          "laws": "您违反了日本法律或您所在国家/地区的法律。",
+          "request": "本站运营者要求您停止再分发数据。"
         },
-        "disclaimer": "The owner of this website and the contributors of The Data assumes no responsibility for any damages while you use, modify, publish, or redistribute The Data."
+        "disclaimer": "本站运营者及数据贡献者对您在使用、修改、发布或再分发数据过程中造成的任何损失概不负责。"
       },
-
-      "contactText": "If you have any questions, contact via {twitterLink}. (You don't have to follow me to send me the DMs.)"
+      "contactText": "如有任何问题，请通过 {twitterLink} 联系运营者。（无需关注即可发送私信）"
     }
   }
 </i18n>
