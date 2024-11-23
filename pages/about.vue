@@ -91,7 +91,7 @@
     "wordCount": "截至目前，本站已收集了 {count} 个专有词汇。",
     "precautionsTitle": "使用注意事项及免责声明",
     "precautions1": "由于本站收录的是《原神》中的专有词汇，因此大多数单词并非直译。",
-    "precautions2": "本站是一个由《原神》玩家制作并运营的网站，与开发商上海米哈游网络科技股份有限公司及 Cognosphere Pte., Ltd. (HoYoVerse) 无关。",
+    "precautions2": "本站是一个由《原神》玩家制作并运营的网站，与开发商上海米哈游网络科技股份有限公司及 Cognosphere Pte., Ltd. (HoYoverse) 无关。",
     "operatorTitle": "运营者及贡献者",
     "operator": "运营者：Xicri ({twitterLink} / {githubLink})",
     "contributor": "中文翻译：Bill Haku ({bilibiliLink} / {twitterLink} / {githubLink})",
