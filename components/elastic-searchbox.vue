@@ -35,9 +35,28 @@ const props = defineProps({
 const searchBox = ref<HTMLInputElement | null>(null);
 
 //
+// methods
+//
+const updateSearchBoxWidth = (): void => {
+  const el = searchBox.value;
+  if (el) {
+    const textLength = (0 < el.value.length) ? el.value.length : props.placeholder.length;
+    el.style.width = `${textLength * 1.05}em`;
+  }
+};
+
+//
+// Lifecycle Hooks
+//
+onMounted(() => {
+  updateSearchBoxWidth();
+});
+
+//
 // event handlers
 //
 const onInput = (evt: Event): void => {
+  updateSearchBoxWidth();
   emit("input", evt);
 };
 const stopPropagation = (evt: MouseEvent): void => {

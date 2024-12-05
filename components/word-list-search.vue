@@ -215,7 +215,6 @@ const removeTag = (tagIndex: number): void => {
 
   &__input {
     flex-shrink: 0;
-    width: 100%;
   }
   &__taglist {
     border: 0;
