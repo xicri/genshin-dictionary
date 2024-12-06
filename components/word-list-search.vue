@@ -2,16 +2,21 @@
   <div>
     <div class="search">
       <div class="search__box">
-        <div class="search__scrollable" @click="focusOnSearchBox" @dblclick="selectAll">
-          <div class="search__active-tags">
-            <div v-for="(tag, i) in tags" :key="tag" class="search__active-tag">
-              <span>{{ allTags[tag][locale] }}</span>
-              <span class="search__remove-tag" @click="removeTag(i)">☓</span>
-            </div>
+        <!-- <div class="search__scrollable" @click="focusOnSearchBox" @dblclick="selectAll"> -->
+          <div
+            contenteditable="true"
+            ref="searchBox"
+            class="search__input"
+            name="searchbox"
+            :placeholder="t('enterSearchTerms')"
+          >
+            <span
+              v-for="(tag, i) in tags"
+              :key="tag" class="search__active-tag"
+              :data-tag-name="allTags[tag][locale]"
+            />
           </div>
-
-          <elastic-searchbox ref="searchBox" class="search__input" name="searchbox" :placeholder="t('enterSearchTerms')" autocomplete="off" @input="updateSearchQuery" />
-        </div>
+        <!-- </div> -->
 
         <img
           src="~/assets/vendor/octicons/tag.svg"
@@ -167,29 +172,28 @@ const removeTag = (tagIndex: number): void => {
     padding-bottom: 0.5em;
   }
 
-  &__scrollable {
-    display: flex;
-    overflow-x: scroll;
-    width: calc(100% - 0.4em);
-    cursor: text;
+  // &__scrollable {
+  //   display: flex;
+  //   overflow-x: scroll;
+  //   width: 100%;
+  //   cursor: text;
 
-    // hide scroll bar
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
+  //   // hide scroll bar
+  //   -ms-overflow-style: none;
+  //   scrollbar-width: none;
+  //   &::-webkit-scrollbar {
+  //     display: none;
+  //   }
+  // }
 
-  &__active-tags {
-    display: contents;
-    flex-wrap: wrap;
-  }
+  // &__active-tags {
+  //   flex-wrap: wrap;
+  // }
   &__active-tag {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    gap: 0.34em;
+    // display: flex;
+    // flex-shrink: 0;
+    // align-items: center;
+    // gap: 0.34em;
 
     border-width: 2px;
     border-style: solid;
@@ -207,14 +211,22 @@ const removeTag = (tagIndex: number): void => {
     background-color: vars.$color-lightest;
 
     font-size: vars.$search-font-size;
+
+    &::before {
+      content: attr(data-tag-name);
+    }
   }
-  &__remove-tag {
-    font-weight: 1000;
-    cursor: pointer;
-  }
+  // &__remove-tag {
+  //   font-weight: 1000;
+  //   cursor: pointer;
+  // }
 
   &__input {
-    flex-shrink: 0;
+    outline: 0;
+
+    height: 2em;
+    overflow: hidden;
+    white-space: nowrap;
   }
   &__taglist {
     border: 0;
