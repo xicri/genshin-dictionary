@@ -10,11 +10,12 @@
             name="searchbox"
             :placeholder="t('enterSearchTerms')"
           >
+            <!-- Zero-width space (U+200B) is inserted in this tag -->
             <span
               v-for="(tag, i) in tags"
               :key="tag" class="search__active-tag"
               :data-tag-name="allTags[tag][locale]"
-            />
+            >&nbsp;</span>
           </div>
         <!-- </div> -->
 
@@ -165,6 +166,7 @@ const removeTag = (tagIndex: number): void => {
     align-items: center;
 
     width: 100%;
+    height: 2.5rem;
 
     border-bottom-color: vars.$color-dark;
     border-bottom-style: solid;
@@ -224,7 +226,8 @@ const removeTag = (tagIndex: number): void => {
   &__input {
     outline: 0;
 
-    height: 2em;
+    height: 100%;
+
     overflow: hidden;
     white-space: nowrap;
   }
