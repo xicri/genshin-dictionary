@@ -29,6 +29,9 @@ Thumbs.db
 # General
 #
 
+# Build files
+dist/
+
 # Editors
 .idea/
 .vscode/
@@ -51,16 +54,20 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # Output of 'npm pack'
 *.tgz
+
+# Astro
+.astro/
 
 # Nuxt
 .nuxt
 /.output/
 # When nitro.preset: "cloudflare-pages" is set in nuxt.config.ts,
 # build output is placed in dist/
-/dist/
+
 # dist/ directory is generated as a symlink when you run `nuxt generate`
 /dist
 

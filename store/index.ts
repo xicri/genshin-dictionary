@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import allWords from "~/dataset/words.json";
-import { candidate } from "../utils/utils.ts";
+import { candidate } from "../src/utils/utils.ts";
 import type { Locale, TagID, Word } from "../types";
 
 export const useDictionaryStore = defineStore("dictionary", {
