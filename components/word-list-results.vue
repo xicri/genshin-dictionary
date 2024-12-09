@@ -153,7 +153,7 @@ const wordList = ref<HTMLElement[] | null>(null);
 //
 // methods
 //
-const observer = process.client ? new IntersectionObserver((entries, observer) => {
+const observer = import.meta.client ? new IntersectionObserver((entries, observer) => {
   for (const entry of entries) {
     if (!entry.isIntersecting) {
       return;
