@@ -22,10 +22,11 @@ jobs:
         with:
           # See: https://github.com/actions/checkout#checkout-pull-request-head-commit-instead-of-merge-commit
           ref: ${{ github.event.pull_request.head.sha }}
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+          cache: pnpm
 
       - name: cache playwright browsers
         id: playwright-cache
@@ -34,8 +35,8 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ hashFiles('**/package-lock.json') }}
 
-      - run: npm ci
+      - run: pnpm install --frozen-lockfile
       - name: install system dependencies for Playwright
-        run: npx playwright install-deps chromium
-      - run: npm run build
-      - run: npm run vrt
+        run: pnpm exec playwright install-deps chromium
+      - run: pnpm build
+      - run: pnpm vrt

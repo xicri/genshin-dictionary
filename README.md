@@ -20,7 +20,6 @@ You may need experience in (or need to learn) following technology stack to cont
 ### Requirements
 
 - Node.js: The latest LTS version recommended
-- npm: The latest version recommended
 - (Windows only) PowerShell 7+
   - Some npm scripts needs `&&` support
 
@@ -28,8 +27,8 @@ You may need experience in (or need to learn) following technology stack to cont
 
 ```shell
 $ cd /path/to/genshin-dictionary
-$ npm ci
-$ npm run dev
+$ pnpm install
+$ pnpm dev
 ```
 
 Then open http://localhost:3000/ to view your local Genshin Dictionary.
@@ -37,11 +36,11 @@ Then open http://localhost:3000/ to view your local Genshin Dictionary.
 ### Test & Lint
 
 ```shell
-$ npm test
-$ npm run lint
+$ pnpm test
+$ pnpm lint
 ```
 
-`npm test` runs E2E tests by Playwright.
+`pnpm test` runs E2E tests by Playwright.
 If you use Linux, you need to install system dependencies.
 On Ubuntu and Ubuntu-based distributions, you can install dependencies automatically with following command:
 
@@ -51,4 +50,4 @@ $ sudo npx playwright install-deps
 
 ### Update translation dataset
 
-Translation dataset is fetched after `npm install` or `npm ci`. To update it, run `npm ci` again.
+Translation dataset is fetched after `pnpm install`. To update it, run `pnpm install` again.
