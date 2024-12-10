@@ -25,6 +25,8 @@
     "lint": "nuxt typecheck",
     "purge-cache": "esno ./scripts/purge-cache.ts",
     "update-nuxt": "nuxi upgrade --force",
+    "clean": "git clean -dX --exclude=\"!.env\" --force",
+    "refresh": "pnpm run clean && rm --force ./pnpm-lock.yaml && corepack up && pnpm install",
     "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && pnpm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
