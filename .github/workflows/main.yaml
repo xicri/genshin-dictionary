@@ -17,10 +17,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+          cache: pnpm
 
       - name: cache playwright browsers
         id: playwright-cache
@@ -29,8 +30,8 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ hashFiles('**/package-lock.json') }}
 
-      - run: npm ci
-      - run: npx playwright install-deps
-      - run: npm run build
-      - run: npm run lint
-      - run: npm test
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install-deps
+      - run: pnpm build
+      - run: pnpm lint
+      - run: pnpm test
