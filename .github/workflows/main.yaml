@@ -33,5 +33,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install-deps
       - run: pnpm run build
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
       - run: pnpm run lint
       - run: pnpm run test
