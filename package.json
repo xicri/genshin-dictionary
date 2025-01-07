@@ -47,7 +47,7 @@
     "pinia": "^2.2.6",
     "sass": "^1.83.1",
     "tsup": "^8.3.5",
-    "undici": "^6.21.0",
+    "undici": "^7.2.0",
     "wrangler": "^3.99.0"
   },
   "devDependencies": {
