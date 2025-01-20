@@ -59,7 +59,7 @@
     "reg-publish-s3-plugin": "^0.14.4",
     "reg-simple-keygen-plugin": "^0.14.2",
     "reg-suit": "^0.14.3",
-    "vitest": "^2.1.8",
+    "vitest": "^3.0.2",
     "vue-tsc": "^2.2.0",
     "xml2js": "^0.6.2"
   },
