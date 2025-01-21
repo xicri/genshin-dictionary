@@ -10,10 +10,6 @@
 # System
 #
 
-# Logs
-logs/
-*.log
-
 # PIDs
 *.pid
 *.seed
@@ -23,27 +19,38 @@ pids
 # File manager configs
 .directory
 Thumbs.db
-*.DS_Store
+.DS_Store
 
 #
-# General
+# Generic
 #
 
 # Editors
 .idea/
 .vscode/
 
-# Temporary files
+# Build directory
+## Nuxt creates dist as a symlink when you run `nuxt generate`, so trailing slash must not be added
+dist
+
+# tmp files
+temp/
 tmp/
 
-# dotenv environment variables file
+# Logs
+logs/
+*.log
+
+# dotenv
 .env
+.env.*
+!.env.example
 
 #
 # JavaScript
 #
 
-# NPM / Yarn
+# Package managers
 node_modules/
 .npm/
 .yarn-integrity
@@ -51,34 +58,48 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# Output of 'npm pack'
+# Output of `npm pack`
 *.tgz
-
-# Nuxt
-.nuxt
-/.output/
-# When nitro.preset: "cloudflare-pages" is set in nuxt.config.ts,
-# build output is placed in dist/
-/dist/
-# dist/ directory is generated as a symlink when you run `nuxt generate`
-/dist
 
 # npm is the package manager for this project.
 yarn.lock
+pnpm-lock.yaml
+bun.lockb
+npm-shrinkwrap.json
 
-# nuxt-simple-[robots|sitemap]
+# Node.js
+.node_repl_history
+
+# TypeScript
+*.tsbuildinfo
+
+# Frameworks
+## Nuxt
+.nuxt/
+.output/
+### nuxt-simple-[robots|sitemap]
 /public/robots.txt
 /public/sitemap.xml
+## Others
+.next/
+out/
+.svelte-kit/
+.astro/
 
-# Playwright
-.last-run.json
-
-# Cloudflare / Wrangler
-.wrangler
+# Platforms
+## Cloudflare
+.wrangler/
 .dev.vars
 worker-configuration.d.ts
 
-# Misc
-.node_repl_history
+## Others
+.vercel/
+.netlify/
+
+# ESLint
 .eslintcache
+
+# Playwright
+.last-run.json
