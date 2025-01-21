@@ -43,7 +43,7 @@ tmp/
 # JavaScript
 #
 
-# NPM / Yarn
+# Package managers
 node_modules/
 .npm/
 .yarn-integrity
@@ -64,7 +64,9 @@ yarn-error.log*
 # dist/ directory is generated as a symlink when you run `nuxt generate`
 /dist
 
-# npm is the package manager for this project.
+# pnpm is the package manager for this project.
+package-lock.json
+npm-shrinkwrap.json
 yarn.lock
 
 # nuxt-simple-[robots|sitemap]
