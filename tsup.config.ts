@@ -14,4 +14,7 @@ export default defineConfig({
   minify: true,
   splitting: false,
   clean: true,
+
+  // Any npm packages should be bundled for Cloudflare Pages Functions
+  noExternal: [ /.+/ ],
 });
