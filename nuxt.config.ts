@@ -89,18 +89,13 @@ export default defineNuxtConfig({
       ...([ "en", "ja" , "zh-CN" ].map(lang => [
         { loc: `/${lang}` },
         { loc: `/${lang}/history` },
+        { loc: `/${lang}/about` },
+        { loc: `/${lang}/opendata` },
         ...(words.map(word => ({ loc: `/${lang}/${word.id}`, lastmod: word.updatedAt }))),
         ...(Object.keys(tags).map(tagID => ({ loc: `/${lang}/tags/${tagID}` }))),
       ]).flat()),
-      // Pages not translated yet
-      { loc: "/ja/about" },
-      { loc: "/ja/opendata" },
     ],
     exclude: [
-      "/en/about",
-      "/en/opendata",
-      "/zh-CN/about",
-      "/zh-CN/opendata",
     ],
   },
 
