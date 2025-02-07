@@ -34,7 +34,7 @@
     "@escapace/accept-language-parser": "^1.6.7",
     "@nuxt/devtools": "^1.7.0",
     "@nuxtjs/i18n": "^9.1.5",
-    "@nuxtjs/robots": "^4.1.11",
+    "@nuxtjs/robots": "^5.2.2",
     "@nuxtjs/sitemap": "^7.2.2",
     "@pinia/nuxt": "^0.9.0",
     "@types/lodash-es": "^4.17.9",
