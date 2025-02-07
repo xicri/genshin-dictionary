@@ -84,7 +84,7 @@ export default defineNuxtConfig({
 
   sitemap: {
     autoLastmod: false,
-    cacheTtl: 0, // disable cache
+    cacheMaxAgeSeconds: 0, // disable cache
     urls: [
       ...([ "en", "ja" , "zh-CN" ].map(lang => [
         { loc: `/${lang}` },
