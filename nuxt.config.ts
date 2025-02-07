@@ -96,6 +96,7 @@ export default defineNuxtConfig({
       ]).flat()),
     ],
     exclude: [
+      "/",
     ],
   },
 
