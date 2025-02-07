@@ -26,7 +26,7 @@ export default defineNuxtConfig({
         declaration: false,
 
         types: [
-          "@cloudflare/workers-types/2023-07-01",
+          "@cloudflare/workers-types",
         ],
       },
       // Relative paths are based on .nuxt/tsconfig.json.
