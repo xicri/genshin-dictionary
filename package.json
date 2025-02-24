@@ -26,8 +26,8 @@
     "purge-cache": "esno ./scripts/purge-cache.ts",
     "update-nuxt": "nuxi upgrade --force",
     "clean": "git clean -dX --exclude=\"!.env\" --force",
-    "refresh": "npm run clean && rm --force ./package-lock.json && npm install",
-    "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
+    "refresh": "pnpm run clean && rm --force ./pnpm-lock.yaml && corepack up && pnpm install",
+    "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && pnpm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20250129.0",
@@ -67,6 +67,7 @@
   },
   "engines": {
     "node": "22.x",
-    "npm": ">=11"
-  }
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af"
 }
