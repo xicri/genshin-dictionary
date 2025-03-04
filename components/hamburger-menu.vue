@@ -37,7 +37,8 @@
 
         <div class="menu__bottomline">
           <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://x.com/xicri_gi" target="_blank" rel="noopener">X (Twitter)</a>
+          <a href="https://bsky.app/profile/xicri.genshin-dictionary.com" target="_blank" rel="noopener">Bluesky</a>
+          <a href="https://focalorus.io/@xicri" target="_blank" rel="noopener">Misskey</a>
         </div>
       </div>
     </nav>
