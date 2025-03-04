@@ -55,6 +55,7 @@ useHead({
   ],
   link: [
     { rel: "icon", href: "/images/favicon.svg", type: "image/svg+xml" },
+    { rel: "me", href: "https://focalorus.io/@xicri" },
     ...(link ?? []),
   ],
   script: [
