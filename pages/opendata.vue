@@ -143,7 +143,7 @@
         "disclaimer": "The owner of this website and the contributors of The Data assumes no responsibility for any damages while you use, modify, publish, or redistribute The Data."
       },
 
-      "contactText": "If you have any questions, contact via {twitterLink}. (You don't have to follow me to send me the DMs.)"
+      "contactText": "If you have any questions, contact via {blueskyLink}. (You don't have to follow me to send me the DMs.)"
     },
     "ja": {
       "introText": "本サイトの対訳表データは CSV 形式 (一般向け) 及び JSON 形式 (技術者向け) で配布しています。データは、基本的に自由に加工し掲載・再配布して頂いて構いません。(詳細は利用条件の項をお読み下さい)",
@@ -197,7 +197,7 @@
         "disclaimer": "本データの利用・加工・掲載・再配布に伴い、あなたや第三者に何らかの損害が生じた場合、当サイトの運営者及び本データへの開発貢献者は一切の責任を負いません。"
       },
 
-      "contactText": "ご不明点があれば、{twitterLink} にてお問い合わせ下さい。(フォロー外から DM をお送り頂くことも可能です。)"
+      "contactText": "ご不明点があれば、{blueskyLink} にてお問い合わせ下さい。(フォロー外から DM をお送り頂くことも可能です。)"
     },
     "zh-CN": {
       "introText": "本站的翻译数据以 CSV（适合普通用户）和 JSON（适合开发者）格式提供。您可以自由修改和再分发这些数据。（详细信息请参阅“使用条款”部分）",
@@ -250,7 +250,7 @@
         },
         "disclaimer": "本站运营者及数据贡献者对您在使用、修改、发布或再分发数据过程中造成的任何损失概不负责。"
       },
-      "contactText": "如有任何问题，请通过 {twitterLink} 联系运营者。（无需关注即可发送私信）"
+      "contactText": "如有任何问题，请通过 {blueskyLink} 联系运营者。（无需关注即可发送私信）"
     },
     "zh-TW": {
       "introText": "本站的翻譯資料以 CSV（適合一般使用者）及 JSON（適合開發者）格式提供。您可以自由修改及再分發這些資料。（詳細資訊請參閱「使用條款」部分）",
@@ -298,7 +298,7 @@
         },
         "disclaimer": "本站運營者及資料貢獻者對您在使用、修改、發佈或再分發資料過程中造成的任何損失概不負責。"
       },
-      "contactText": "如有任何問題，請透過 {twitterLink} 聯絡運營者。（無需追蹤亦可發送私訊）"
+      "contactText": "如有任何問題，請透過 {blueskyLink} 聯絡運營者。（無需追蹤亦可發送私訊）"
     }
   }
 </i18n>
@@ -363,8 +363,8 @@ const downloadLink = computed(() => {
 });
 
 const contactText = computed(() => {
-  const twitterLink = "<a href=\"https://x.com/xicri_gi\" target=\"_blank\" rel=\"noopener\">X (Twitter)</a>";
-  return t("contactText", { twitterLink });
+  const blueskyLink = "<a href=\"https://bsky.app/profile/xicri.genshin-dictionary.com\" target=\"_blank\" rel=\"noopener\">Bluesky</a>";
+  return t("contactText", { blueskyLink });
 });
 </script>
 
