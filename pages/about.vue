@@ -16,7 +16,7 @@
 
         <h3>{{ t("operatorTitle") }}</h3>
         <ul>
-          <li v-html="operatorText"></li>
+          <li v-html="t('operator', { twitterLink, githubLink })"></li>
           <li v-html="contributorText"></li>
         </ul>
 
@@ -158,6 +158,11 @@ const wordCount = words.length;
 
 const createLink = (url: string, text: string) => `<a href="${ url }" target="_blank" rel="noopener">${ text }</a>`;
 
+const twitterLink = createLink("https://x.com/xicri_gi", "X (Twitter)");
+const githubLink = createLink("https://github.com/xicri", "GitHub");
+const issuesLink = createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues");
+const discussionsLink = createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions");
+
 const aboutIntroText = computed(() => {
   const genshinLink = createLink(
     locale.value === "zh-CN" ? "https://ys.mihoyo.com" : "https://genshin.hoyoverse.com",
@@ -166,28 +171,22 @@ const aboutIntroText = computed(() => {
   return t("aboutIntro", { genshinLink });
 });
 
-const operatorText = computed(() => {
-  const twitterLink = createLink("https://x.com/xicri_gi", "X (Twitter)");
-  const githubLink = createLink("https://github.com/xicri", "GitHub");
-  return t("operator", { twitterLink, githubLink });
-});
-
 const contributorText = computed(() => {
-  const bilibiliLink = createLink("https://space.bilibili.com/158463764", "BiliBili");
-  const twitterLink = createLink("https://x.com/Haku_Bill", "X (Twitter)");
-  const githubLink = createLink("https://github.com/Bill-Haku", "GitHub");
-  return t("contributor", { bilibiliLink, twitterLink, githubLink });
+  const billhakuBilibiliLink = createLink("https://space.bilibili.com/158463764", "BiliBili");
+  const billhakuTwitterLink = createLink("https://x.com/Haku_Bill", "X (Twitter)");
+  const billhakuGithubLink = createLink("https://github.com/Bill-Haku", "GitHub");
+  return t("contributor", {
+    bilibiliLink: billhakuBilibiliLink,
+    twitterLink: billhakuTwitterLink,
+    githubLink: billhakuGithubLink,
+  });
 });
 
-const contactText = computed(() => {
-  const twitterLink = createLink("https://x.com/xicri_gi", "X (Twitter)");
-  const issuesLink = createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues");
-  const discussionsLink = createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions");
-
-  return t("contact1", { twitterLink }) + "<br />"
-    + t("contact2", { issuesLink, discussionsLink }) + "<br />"
-    + t("contact3");
-});
+const contactText = computed(() => [
+  t("contact1", { twitterLink }),
+  t("contact2", { issuesLink, discussionsLink }),
+  t("contact3"),
+].join("<br />"));
 
 const credits1Text = computed(() => {
   const genshinDictionaryLink = createLink("http://anemoarchon.s205.xrea.com/#/gdic", t("genshinDictionary"));
