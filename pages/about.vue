@@ -16,7 +16,7 @@
 
         <h3>{{ t("operatorTitle") }}</h3>
         <ul>
-          <li v-html="operatorText"></li>
+          <li v-html="t('operator', { misskeyLink, blueskyLink, githubLink })"></li>
           <li v-html="contributorText"></li>
         </ul>
 
@@ -43,9 +43,9 @@
     "precautions1": "Since the translations on this website are the proprietary terms for a computer game, the most of the words are not literally translated.",
     "precautions2": "This website is fanmade and not affiliated or endorsed by miHoYo and HoYoverse (Cognosphere).",
     "operatorTitle": "Owner and Contributors",
-    "operator": "Owner: Xicri ({twitterLink} / {githubLink})",
+    "operator": "Owner: Xicri ({misskeyLink} / {blueskyLink} / {githubLink})",
     "contributor": "Initial Chinese translation: Bill Haku ({bilibiliLink} / {twitterLink} / {githubLink})",
-    "contact1": "Contact the owner on {twitterLink}. (DM available)",
+    "contact1": "Contact the owner on {misskeyLink} or {blueskyLink}.",
     "contact2": "If you have any bug reports, questions for opendata/API, or any other technical inquiries, GitHub {issuesLink} and  {discussionsLink} are also available for the contact.",
     "contact3": "English or Japanese are preferrable languages to contact.",
     "creditsTitle": "Credits",
@@ -68,9 +68,9 @@
     "precautions1": "本サイトはゲームの固有名詞等の対訳を掲載している都合上、意訳が多く、一般的な意味とは訳が異なる場合がありますので、ご注意下さい。",
     "precautions2": "このサイトは一プレイヤーが運営しているファンサイトであり、開発元である HoYoverse (Cognosphere 社) 及び miHoYo 社とは関係ありません。",
     "operatorTitle": "運営者・貢献者",
-    "operator": "運営者: シクリ ({twitterLink} / {githubLink})",
+    "operator": "運営者: シクリ ({misskeyLink} / {blueskyLink}  / {githubLink})",
     "contributor": "中国語翻訳データ作成: Bill Haku ({bilibiliLink} / {twitterLink} / {githubLink})",
-    "contact1": "お問い合わせなどの際は {twitterLink} からご連絡下さい。(DM 可)",
+    "contact1": "お問い合わせなどの際は {misskeyLink} 又は {blueskyLink} からご連絡下さい。",
     "contact2": "バグ報告やオープンデータ・API 関連、その他技術的なお問い合わせについては、GitHub の {issuesLink} や {discussionsLink} からお問い合わせ頂いても構いません。",
     "contact3": "お問い合わせの際は、できるだけ日本語又は英語でお願いします。",
     "creditsTitle": "クレジット",
@@ -93,9 +93,9 @@
     "precautions1": "由于本站收录的是《原神》中的专有词汇，因此大多数单词并非直译。",
     "precautions2": "本站是一个由《原神》玩家制作并运营的网站，与开发商上海米哈游网络科技股份有限公司及 Cognosphere Pte., Ltd. (HoYoverse) 无关。",
     "operatorTitle": "运营者及贡献者",
-    "operator": "运营者：Xicri ({twitterLink} / {githubLink})",
+    "operator": "运营者：Xicri ({misskeyLink} / {blueskyLink}  / {githubLink})",
     "contributor": "中文翻译：Bill Haku ({bilibiliLink} / {twitterLink} / {githubLink})",
-    "contact1": "通过 {twitterLink} 联系运营者（可发送私信）。",
+    "contact1": "通过 {misskeyLink} 及 {blueskyLink} 联系运营者。",
     "contact2": "如果您发现错误，或对开放数据、API 及其他技术相关问题有疑问，也可通过 GitHub {issuesLink} 及 GitHub {discussionsLink} 联系。",
     "contact3": "请尽量使用英语或日语联系运营者。",
     "creditsTitle": "致谢",
@@ -133,6 +133,12 @@ const wordCount = words.length;
 
 const createLink = (url: string, text: string) => `<a href="${url}" target="_blank" rel="noopener">${text}</a>`;
 
+const misskeyLink = createLink("https://focalorus.io/@xicri", "Misskey (Mastodon) ― xicri@focalorus.io");
+const blueskyLink = createLink("https://bsky.app/profile/genshin-dictionary.com", "Bluesky");
+const githubLink = createLink("https://github.com/xicri", "GitHub");
+const issuesLink = createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues");
+const discussionsLink = createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions");
+
 const aboutIntroText = computed(() => {
   const genshinLink = createLink(
     locale.value === "zh-CN" ? "https://ys.mihoyo.com" : "https://genshin.hoyoverse.com",
@@ -141,28 +147,22 @@ const aboutIntroText = computed(() => {
   return t("aboutIntro", { genshinLink });
 });
 
-const operatorText = computed(() => {
-  const twitterLink = createLink("https://x.com/xicri_gi", "X (Twitter)");
-  const githubLink = createLink("https://github.com/xicri", "GitHub");
-  return t("operator", { twitterLink, githubLink });
-});
-
 const contributorText = computed(() => {
-  const bilibiliLink = createLink("https://space.bilibili.com/158463764", "BiliBili");
-  const twitterLink = createLink("https://x.com/Haku_Bill", "X (Twitter)");
-  const githubLink = createLink("https://github.com/Bill-Haku", "GitHub");
-  return t("contributor", { bilibiliLink, twitterLink, githubLink });
+  const billhakuBilibiliLink = createLink("https://space.bilibili.com/158463764", "BiliBili");
+  const billhakuTwitterLink = createLink("https://x.com/Haku_Bill", "X (Twitter)");
+  const billhakuGithubLink = createLink("https://github.com/Bill-Haku", "GitHub");
+  return t("contributor", {
+    bilibiliLink: billhakuBilibiliLink,
+    twitterLink: billhakuTwitterLink,
+    githubLink: billhakuGithubLink,
+  });
 });
 
-const contactText = computed(() => {
-  const twitterLink = createLink("https://x.com/xicri_gi", "X (Twitter)");
-  const issuesLink = createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues");
-  const discussionsLink = createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions");
-
-  return t("contact1", { twitterLink }) + "<br />"
-    + t("contact2", { issuesLink, discussionsLink }) + "<br />"
-    + t("contact3");
-});
+const contactText = computed(() => [
+  t("contact1", { misskeyLink, blueskyLink }),
+  t("contact2", { issuesLink, discussionsLink }),
+  t("contact3"),
+].join("<br />"));
 
 const credits1Text = computed(() => {
   const genshinDictionaryLink = createLink("http://anemoarchon.s205.xrea.com/#/gdic", t("genshinDictionary"));
