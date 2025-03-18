@@ -31,7 +31,7 @@ const title = ref(`${tags[tagID].title[locale.value]} | ${t("siteTitle")}`);
 useHead({
   title,
   meta: [
-    { hid: "og:title", property: "og:title", content: title.value },
+    { property: "og:title", content: title.value },
   ],
 });
 

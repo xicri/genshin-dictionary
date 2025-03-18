@@ -55,9 +55,9 @@ if (locale.value === "en") {
 useHead({
   title,
   meta: [
-    { hid: "og:title", property: "og:title", content: title },
-    { hid: "description", name: "description", content: description },
-    { hid: "og:description", property: "og:description", content: description },
+    { property: "og:title", content: title },
+    { name: "description", content: description },
+    { property: "og:description", content: description },
   ],
 });
 

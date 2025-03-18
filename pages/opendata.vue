@@ -261,7 +261,7 @@ const title = `${t("opendataTitle")} | ${t("siteTitle")}`;
 useHead({
   title,
   meta: [
-    { hid: "og:title", property: "og:title", content: title },
+    { property: "og:title", content: title },
   ],
 });
 

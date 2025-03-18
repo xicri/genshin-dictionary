@@ -11,7 +11,7 @@ const title = `${ t("siteTitle") } ― ${ t("indexTitleDesc") }`;
 useHead({
   title,
   meta: [
-    { hid: "og:title", property: "og:title", content: title },
+    { property: "og:title", content: title },
   ],
 });
 </script>
