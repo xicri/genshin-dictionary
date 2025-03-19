@@ -50,7 +50,7 @@
     "sass": "^1.83.1",
     "tsup": "^8.4.0",
     "undici": "^7.4.0",
-    "wrangler": "^3.111.0"
+    "wrangler": "^4.2.0"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.758.0",
