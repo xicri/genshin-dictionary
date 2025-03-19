@@ -30,10 +30,10 @@
     "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
   },
   "dependencies": {
-    "@cloudflare/workers-types": "^4.20250129.0",
+    "@cloudflare/workers-types": "^4.20250319.0",
     "@escapace/accept-language-parser": "^1.6.7",
     "@nuxt/devtools": "^2.1.1",
-    "@nuxtjs/i18n": "^9.1.5",
+    "@nuxtjs/i18n": "^9.3.2",
     "@nuxtjs/robots": "^5.2.2",
     "@nuxtjs/sitemap": "^7.2.2",
     "@pinia/nuxt": "0.10.1",
@@ -45,7 +45,7 @@
     "klona": "^2.0.4",
     "lodash-es": "^4.17.21",
     "luxon": "^3.5.0",
-    "nuxt": "^3.15.4",
+    "nuxt": "^3.16.1",
     "pinia": "^3.0.1",
     "sass": "^1.83.1",
     "tsup": "^8.4.0",
