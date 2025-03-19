@@ -10,12 +10,9 @@ updates:
       security:
         applies-to: "security-updates"
         update-types:
+          - "major"
           - "minor"
           - "patch"
-      security-breaking:
-        applies-to: "security-updates"
-        update-types:
-          - "major"
       compatible:
         applies-to: "version-updates"
         update-types:
