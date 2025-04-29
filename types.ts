@@ -1,6 +1,6 @@
 import type allTags from "./dataset/tags.json";
 
-export type Locale = "en" | "ja" | "zh-CN";
+export type Locale = "en" | "ja" | "zh-CN" | "zh-TW";
 
 export type TagID = keyof typeof allTags;
 
@@ -10,6 +10,7 @@ export type Word = {
   ja: string;
   pronunciationJa?: string;
   zhCN?: string;
+  zhTW?: string;
   pinyins?: {
     char: string;
     pron: string;
@@ -22,6 +23,7 @@ export type Word = {
     en: string;
     ja: string;
     zhCN: string;
+    zhTW: string;
     ref: string;
     refURL: string;
   }[];
@@ -29,6 +31,7 @@ export type Word = {
     en: string[];
     ja: string[];
     zhCN: string[];
+    zhTW: string[];
   };
   updatedAt: string;
   createdAt: string;

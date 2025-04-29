@@ -20,6 +20,10 @@
   "zh-CN": {
     "notfound": "页面不存在",
     "returnToIndex": "返回到首页"
+  },
+  "zh-TW": {
+    "notfound": "頁面不存在",
+    "returnToIndex": "返回到首頁"
   }
 }
 </i18n>

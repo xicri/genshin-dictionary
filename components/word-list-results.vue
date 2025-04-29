@@ -5,14 +5,23 @@
         <template v-if="locale === 'en'">
           <translation lang="en" :word="word.en" />
           <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
+          <translation lang="zh-TW" :word="word.zhTW" />
           <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
         </template>
         <template v-if="locale === 'ja'">
           <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
           <translation lang="en" :word="word.en" />
           <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
+          <translation lang="zh-TW" :word="word.zhTW" />
         </template>
         <template v-if="locale === 'zh-CN'">
+          <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
+          <translation lang="zh-TW" :word="word.zhTW" />
+          <translation lang="en" :word="word.en" />
+          <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
+        </template>
+        <template v-if="locale === 'zh-TW'">
+          <translation lang="zh-TW" :word="word.zhTW" />
           <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
           <translation lang="en" :word="word.en" />
           <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
@@ -38,7 +47,7 @@
           v-html="word.notesEn"
         ></div>
         <div
-          v-if="word.notesZh && locale === 'zh-CN'"
+          v-if="word.notesZh && (locale === 'zh-CN' || locale === 'zh-TW')"
           class="results__description-section"
           data-e2e="notesZh"
           v-html="word.notesZh"
@@ -72,7 +81,7 @@
               src="~/assets/vendor/octicons/link.svg"
               width="12"
               height="12"
-              :alt="t('permalinkAlt', { word: word[locale === 'zh-CN' ? 'zhCN' : locale] })"
+              :alt="t('permalinkAlt', { word: word[locale === 'zh-CN' ? 'zhCN' : (locale === 'zh-TW' ? 'zhTW' : locale)] })"
               decoding="async"
               class="results__permalink--icon"
             />
@@ -82,7 +91,7 @@
             src="~/assets/vendor/octicons/copy.svg"
             width="12"
             height="12"
-            :alt="t('copyLink', { word: word[locale === 'zh-CN' ? 'zhCN' : locale] })"
+            :alt="t('copyLink', { word: word[locale === 'zh-CN' ? 'zhCN' : (locale === 'zh-TW' ? 'zhTW' : locale)] })"
             decoding="async"
             class="results__permalink--copy"
             @click="copyLink(word.id, $event)"
@@ -91,7 +100,7 @@
             src="~/assets/vendor/octicons/check.svg"
             width="12"
             height="12"
-            :alt="t('copyLinkDone', { word: word[locale === 'zh-CN' ? 'zhCN' : locale] })"
+            :alt="t('copyLinkDone', { word: word[locale === 'zh-CN' ? 'zhCN' : (locale === 'zh-TW' ? 'zhTW' : locale)] })"
             decoding="async"
             class="results__permalink--copied"
             style="display: none;"
@@ -124,6 +133,13 @@
     "permalinkAlt": "{word}的链接",
     "copyLink": "复制{word}的链接",
     "copyLinkDone": "已复制{word}的链接"
+  },
+  "zh-TW": {
+    "example": "範例",
+    "permalink": "永久連結",
+    "permalinkAlt": "{word}的連結",
+    "copyLink": "複製{word}的連結",
+    "copyLinkDone": "已複製{word}的連結"
   }
 }
 </i18n>

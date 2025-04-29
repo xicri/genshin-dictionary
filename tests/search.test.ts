@@ -29,7 +29,7 @@ test("search words including 'ヴァヴィヴヴェヴォ' by 'ばびぶべぼ'"
 type Fixture = {
   result: string;
   input: string;
-  lang: "en" | "ja" | "zhCN";
+  lang: "en" | "ja" | "zhCN" | "zhTW";
 };
 
 const fixtures: Fixture[] = [
@@ -48,6 +48,11 @@ const fixtures: Fixture[] = [
     input: "神里凌华",
     lang: "zhCN",
   },
+  {
+    result: "神里綾華",
+    input: "神里凌華",
+    lang: "zhTW",
+  }
 ];
 
 for (const { result, input, lang } of fixtures) {

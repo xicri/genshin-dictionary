@@ -20,6 +20,9 @@ let description;
 if (lang === "zh-CN") {
   siteName = "原神中英日辞典";
   description = "一个在线的中英日三语原神游戏用语辞典";
+} else if (lang === "zh-TW") {
+  siteName = "原神中英日辭典";
+  description = "一個線上的中英日三語原神遊戲用語辭典";
 } else if (lang === "ja-JP") {
   siteName = "原神英語・中国語辞典";
   description = "原神の固有名詞等の英語表記、及び中国語表記の一覧を掲載しています。";

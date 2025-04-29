@@ -65,6 +65,12 @@
     "tags": "标签",
     "openListOfTags": "打开标签列表",
     "closeListOfTags": "收起标签列表"
+  },
+  "zh-TW": {
+    "enterSearchTerms": "輸入搜尋關鍵字…",
+    "tags": "標籤",
+    "openListOfTags": "開啟標籤列表",
+    "closeListOfTags": "關閉標籤列表"
   }
 }
 </i18n>

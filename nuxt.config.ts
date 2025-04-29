@@ -75,6 +75,11 @@ export default defineNuxtConfig({
         language: "zh-CN",
         name: "简体中文",
       },
+      {
+        code: "zh-TW",
+        language: "zh-TW",
+        name: "繁體中文",
+      }
     ],
     strategy: "prefix",
     baseUrl: "https://genshin-dictionary.com",
@@ -86,7 +91,7 @@ export default defineNuxtConfig({
     autoLastmod: false,
     cacheMaxAgeSeconds: 0, // disable cache
     urls: [
-      ...([ "en", "ja" , "zh-CN" ].map(lang => [
+      ...([ "en", "ja" , "zh-CN", "zh-TW" ].map(lang => [
         { loc: `/${lang}` },
         { loc: `/${lang}/history` },
         { loc: `/${lang}/about` },

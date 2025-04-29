@@ -44,10 +44,15 @@ if (locale.value === "en") {
               + (word.zhCN ? `、中国語表記は「${word.zhCN}」` : "")
               + " ― このサイトはゲーム「原神」の用語の、日本語・英語・中国語の対訳を掲載しています。";
 } else if (locale.value === "zh-CN") {
-  title = (word.zhCN ? `"${word.zhCN}"的英语和日语翻译` : `"${word.en}"的日语翻译`) + ` | ${ t("siteTitle") }`;
+  title = (word.zhCN ? `"${word.zhCN}"的英语和日语翻译` : `"${word.en}"的日语翻译`) + ` | ${t("siteTitle")}`;
   description = word.zhCN ?
     `"${word.zhCN}"的英语是"${word.en}"，日语是"${word.ja}"。` : // TODO TranslationChanged
     `"${word.en}"的日语是"${word.ja}"。`;
+} else if (locale.value === "zh-TW") {
+  title = (word.zhTW ? `"${word.zhTW}"的英語和日語翻譯` : `"${word.en}"的日語翻譯`) + ` | ${t("siteTitle")}`;
+  description = word.zhTW ?
+    `"${word.zhTW}"的英語是"${word.en}"，日語是"${word.ja}"。` : // TODO TranslationChanged
+    `"${word.en}"的日語是"${word.ja}"。`;
 } else {
   throw new Error(`Unexpected locale: ${locale.value}`);
 }

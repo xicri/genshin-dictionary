@@ -21,7 +21,7 @@ const props = defineProps({
     type: String,
     required: true,
     validator(val) {
-      return (typeof val === "string" && [ "en", "ja", "zh-CN" ].includes(val));
+      return (typeof val === "string" && [ "en", "ja", "zh-CN", "zh-TW" ].includes(val));
     },
   },
   word: {
@@ -49,6 +49,8 @@ if (props.lang === "en") {
   langName = t("langNameJa");
 } else if (props.lang === "zh-CN") {
   langName = t("langNameZhCN");
+} else if (props.lang === "zh-TW") {
+  langName = t("langNameZhTW");
 }
 if (0 < props.pinyins.length) {
   wordWithPinyin = escapeHtmlString(props.word);

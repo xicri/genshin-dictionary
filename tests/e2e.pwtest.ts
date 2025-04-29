@@ -9,14 +9,16 @@ const ip = "127.0.0.1";
 const port = 5678;
 
 function getRandomLang(): Locale {
-  const random = Math.floor(Math.random() * 3);
+  const random = Math.floor(Math.random() * 4);
 
   if (random === 0) {
     return "en";
   } else if (random === 1) {
     return "ja";
-  } else { // if (2 <= random)
+  } else if (random === 2) {
     return "zh-CN";
+  } else { // if (3 <= random)
+    return "zh-TW";
   }
 }
 
@@ -72,11 +74,13 @@ describe("The Genshin English Dictionary", () => {
     const ja = await word.$("span[data-e2e='ja']");
     const en = await word.$("*[data-e2e='en']");
     const zhCN = await word.$("*[data-e2e='zh-CN']");
+    const zhTW = await word.$("*[data-e2e='zh-TW']");
     const pronunciationJa = await word.$(".results__pronunciation-ja");
 
     expect(await ja!.innerText()).toBe("燃え盛る炎の魔女");
     expect(await en!.innerText()).toBe("Crimson Witch of Flames");
     expect(await zhCN!.innerText()).toBe("炽烈的炎之魔女");
+    expect(await zhTW!.innerText()).toBe("熾烈的炎之魔女");
     expect(await pronunciationJa!.innerText()).toBe("(もえさかるほのおのまじょ)");
 
     const tags = await word.$$(".results__tags > a");
@@ -158,7 +162,7 @@ describe("The Genshin English Dictionary", () => {
     return;
   });
 
-  for (const lang of [ "en", "ja", "zh-CN" ]) {
+  for (const lang of [ "en", "ja", "zh-CN", "zh-TW" ]) {
     const rootURL = `http://${ip}:${port}/${lang}`;
 
     test(`search by Japanese (${lang})`, async ({ page }) => {
@@ -199,8 +203,10 @@ describe("The Genshin English Dictionary", () => {
         expect(await tagName!.innerText()).toBe("A Piece of Artifacts");
       } else if (lang === "ja") {
         expect(await tagName!.innerText()).toBe("聖遺物（個別名）");
-      } else { // if (lang === "zh-CN")
+      } else if (lang === "zh-CN") {
         expect(await tagName!.innerText()).toBe("圣遗物（单件名）");
+      } else if (lang === "zh-TW") {
+        expect(await tagName!.innerText()).toBe("聖遺物（單件名）");
       }
 
       expect(await tag.getAttribute("href")).toBe(`/${lang}/tags/artifact-piece`);
@@ -257,8 +263,10 @@ describe("The Genshin English Dictionary", () => {
         expect(notFoundMessage).toBe("Your search did not match any words in this dictionary.");
       } else if (lang === "ja") {
         expect(notFoundMessage).toBe("該当する語彙が見つかりませんでした。");
-      } else { // if (lang === "zh-CN")
+      } else if (lang === "zh-CN") {
         expect(notFoundMessage).toBe("未找到匹配的词汇。");
+      } else if (lang === "zh-TW") {
+        expect(notFoundMessage).toBe("未找到符合的詞彙。");
       }
 
       return;
@@ -271,8 +279,10 @@ describe("The Genshin English Dictionary", () => {
         await expect(page.title()).resolves.toBe("\"Lumine\" is \"荧\" in Chinese | Genshin Dictionary");
       } else if (lang === "ja") {
         await expect(page.title()).resolves.toBe("「蛍」は英語で \"Lumine\" | 原神 英語・中国語辞典");
-      } else { // if (lang === "zh-CN")
+      } else if (lang === "zh-CN") {
         await expect(page.title()).resolves.toBe("\"荧\"的英语和日语翻译 | 原神中英日辞典");
+      } else if (lang === "zh-TW") {
+        await expect(page.title()).resolves.toBe("\"熒\"的英語和日語翻譯 | 原神中英日辭典");
       }
 
       return;
@@ -285,8 +295,10 @@ describe("The Genshin English Dictionary", () => {
         expect(await page.title()).toBe("Chinese & Japanese translations for words related to Liyue | Genshin Dictionary");
       } else if (lang === "ja") {
         expect(await page.title()).toBe("璃月に関する言葉の英語・中国語表記一覧 | 原神 英語・中国語辞典");
-      } else { // if (lang === "zh-CN")
+      } else if (lang === "zh-CN") {
         expect(await page.title()).toBe("关于璃月的词语的英语和日语翻译 | 原神中英日辞典");
+      } else if (lang === "zh-TW") {
+        expect(await page.title()).toBe("關於璃月的詞語的英語和日語翻譯 | 原神中英日辭典");
       }
 
       return;
@@ -304,6 +316,7 @@ describe("redirection by language settings works properly", () => {
     { code: "en-GB", localeDir: "en" },
     { code: "zh", localeDir: "zh-CN" },
     { code: "zh-CN", localeDir: "zh-CN" },
+    { code: "zh-TW", localeDir: "zh-TW" },
     { code: "fr", localeDir: "en" }, // fallback to English
   ];
 

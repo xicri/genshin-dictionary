@@ -27,6 +27,10 @@
   "zh-CN": {
     "updatedOn": "更新于{createdAt}",
     "noRecentUpdates": "无近期更新。"
+  },
+  "zh-TW": {
+    "updatedOn": "更新於{createdAt}",
+    "noRecentUpdates": "無近期更新。"
   }
 }
 </i18n>

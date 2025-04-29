@@ -59,8 +59,13 @@
   },
   "zh-CN": {
     "about": "关于",
-    "opendata": "开放数据与API (β)",
+    "opendata": "开放数据与 API (β)",
     "history": "更新记录"
+  },
+  "zh-TW": {
+    "about": "關於",
+    "opendata": "開放資料與 API (β)",
+    "history": "更新紀錄"
   }
 }
 </i18n>
