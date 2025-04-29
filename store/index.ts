@@ -29,29 +29,33 @@ export const useDictionaryStore = defineStore("dictionary", {
           const wordsMatchWithNotes = [];
 
           for (const word of allWords as Word[]) {
-            if ( // 1. exact match with en, ja, and zhCN, and pronunciationJa
+            if ( // 1. exact match with en, ja, zhCN, and zhTW, and pronunciationJa
               candidate(word.ja).equals(state.query) ||
               candidate(word.en).equals(state.query) ||
               candidate(word.zhCN).equals(state.query) ||
+              candidate(word.zhTW).equals(state.query) ||
               candidate(word.pronunciationJa).equals(state.query)
             ) {
               wordsExactMatch.push(word);
-            } else if ( // 2. exact match with variants.en, variants.ja, and variants.zhCN
+            } else if ( // 2. exact match with variants.en, variants.ja, variants.zhCN, and variants.zhTW
               (word.variants?.ja?.some(variant => candidate(variant).equals(state.query)) ?? false) ||
               (word.variants?.en?.some(variant => candidate(variant).equals(state.query)) ?? false) ||
-              (word.variants?.zhCN?.some(variant => candidate(variant).equals(state.query)) ?? false)
+              (word.variants?.zhCN?.some(variant => candidate(variant).equals(state.query)) ?? false) ||
+              (word.variants?.zhTW?.some(variant => candidate(variant).equals(state.query)) ?? false)
             ) {
               wordsExactMatchWithVariants.push(word);
-            } else if ( // 3. forward/backword/partial match with en, ja, and zhCN
+            } else if ( // 3. forward/backword/partial match with en, ja, zhCN, and zhTW
               candidate(word.ja).includes(state.query) ||
               candidate(word.en).includes(state.query) ||
-              candidate(word.zhCN).includes(state.query)
+              candidate(word.zhCN).includes(state.query) ||
+              candidate(word.zhTW).includes(state.query)
             ) {
               wordsPartialMatch.push(word);
-            } else if ( // 4. forward/backword/partial match with variants.en, variants.ja, and variants.zhCN
+            } else if ( // 4. forward/backword/partial match with variants.en, variants.ja, variants.zhCN, and variants.zhTW
               (word.variants?.ja?.some(variant => candidate(variant).includes(state.query)) ?? false) ||
               (word.variants?.en?.some(variant => candidate(variant).includes(state.query)) ?? false) ||
-              (word.variants?.zhCN?.some(variant => candidate(variant).includes(state.query)) ?? false)
+              (word.variants?.zhCN?.some(variant => candidate(variant).includes(state.query)) ?? false) ||
+              (word.variants?.zhTW?.some(variant => candidate(variant).includes(state.query)) ?? false)
             ) {
               wordsPartialMatchWithVariants.push(word);
             } else if ( // 5. forward/backword/partial match with pronunciationJa
@@ -64,7 +68,7 @@ export const useDictionaryStore = defineStore("dictionary", {
             ) {
               wordsMatchWithNotes.push(word);
             } else if ( // 6-2. exact/forward/backword/partial match with notesZh (on Chinese UI only)
-              state.currentLocale === "zh-CN" &&
+              (state.currentLocale === "zh-CN" || state.currentLocale === "zh-TW") &&
               candidate(word.notesZh).includes(state.query)
             ) {
               wordsMatchWithNotes.push(word);

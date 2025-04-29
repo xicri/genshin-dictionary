@@ -30,6 +30,10 @@
   "zh-CN": {
     "siteTitleL1": "原神",
     "siteTitleL2": "中英日辞典"
+  },
+  "zh-TW": {
+    "siteTitleL1": "原神",
+    "siteTitleL2": "中英日辭典"
   }
 }
 </i18n>
