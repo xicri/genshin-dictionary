@@ -28,7 +28,7 @@
     "update-nuxt": "nuxi upgrade --force",
     "clean": "git clean -dX --exclude=\"!.env\" --force",
     "refresh": "pnpm clean && rm --force ./pnpm-lock.yaml && corepack up && pnpm install",
-    "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare"
+    "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && esno ./scripts/build.ts"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20250327.0",

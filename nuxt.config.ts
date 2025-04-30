@@ -1,3 +1,4 @@
+import { defineNuxtConfig } from "nuxt/config";
 import tags from "./dataset/tags.json";
 import words from "./dataset/words.json";
 
