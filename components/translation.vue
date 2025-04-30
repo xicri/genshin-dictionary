@@ -18,11 +18,8 @@ import type { Locale } from "~/types";
 
 const props = defineProps({
   lang: {
-    type: String,
+    type: String as PropType<Locale>,
     required: true,
-    validator(val) {
-      return (typeof val === "string" && [ "en", "ja", "zh-CN", "zh-TW" ].includes(val));
-    },
   },
   word: {
     type: String,
