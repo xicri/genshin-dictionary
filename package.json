@@ -19,6 +19,7 @@
     "preview": "wrangler pages dev --local",
     "test": "vitest run && playwright test",
     "test:server": "wrangler pages dev --local --show-interactive-dev-session=false --port=5678",
+    "test:prepare": "playwright install-deps && playwright install",
     "vrt": "concurrently --kill-others --success=first \"npm:test:server\" \"npm:vrt:screenshot\" && npm run vrt:reg",
     "vrt:screenshot": "sleep 5 && esno ./scripts/vrt-screenshot.ts",
     "vrt:reg": "./scripts/vrt-reg.sh",
@@ -27,7 +28,7 @@
     "update-nuxt": "nuxi upgrade --force",
     "clean": "git clean -dX --exclude=\"!.env\" --force",
     "refresh": "pnpm clean && rm --force ./pnpm-lock.yaml && corepack up && pnpm install",
-    "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && (pnpm list @playwright/test && playwright install || echo 'Playwright installation skipped.')"
+    "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20250327.0",
