@@ -13,7 +13,7 @@ const { htmlAttrs, meta, link } = useLocaleHead({
   lang: true,
   seo: true,
 }).value;
-const lang: "en-US" | "ja-JP" | "zh-CN" = htmlAttrs?.lang ?? "en-US";
+const lang = htmlAttrs?.lang ?? "en-US";
 let siteName;
 let description;
 
@@ -23,7 +23,7 @@ if (lang === "zh-CN") {
 } else if (lang === "ja-JP") {
   siteName = "原神英語・中国語辞典";
   description = "原神の固有名詞等の英語表記、及び中国語表記の一覧を掲載しています。";
-} else {
+} else { // en-US or others
   siteName = "Genshin Dictionary";
   description = "An online English-Chinese-Japanese dictionary for terms in Genshin Impact";
 }
