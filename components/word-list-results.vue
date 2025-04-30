@@ -5,23 +5,23 @@
         <template v-if="locale === 'en'">
           <translation lang="en" :word="word.en" />
           <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
-          <translation lang="zh-TW" :word="word.zhTW" />
+          <translation v-if="word.zhTW" lang="zh-TW" :word="word.zhTW" />
           <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
         </template>
         <template v-if="locale === 'ja'">
           <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
           <translation lang="en" :word="word.en" />
           <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
-          <translation lang="zh-TW" :word="word.zhTW" />
+          <translation v-if="word.zhTW" lang="zh-TW" :word="word.zhTW" />
         </template>
         <template v-if="locale === 'zh-CN'">
           <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
-          <translation lang="zh-TW" :word="word.zhTW" />
+          <translation v-if="word.zhTW" lang="zh-TW" :word="word.zhTW" />
           <translation lang="en" :word="word.en" />
           <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
         </template>
         <template v-if="locale === 'zh-TW'">
-          <translation lang="zh-TW" :word="word.zhTW" />
+          <translation v-if="word.zhTW" lang="zh-TW" :word="word.zhTW" />
           <translation v-if="word.zhCN" lang="zh-CN" :word="word.zhCN" :pinyins="word.pinyins" />
           <translation lang="en" :word="word.en" />
           <translation v-if="word.ja" lang="ja" :word="word.ja" :kana="word.pronunciationJa" />
