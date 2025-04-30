@@ -1,6 +1,7 @@
 import type allTags from "./dataset/tags.json";
+import { locales as localeConfigs } from "./nuxt.config.ts";
 
-export type Locale = "en" | "ja" | "zh-CN" | "zh-TW";
+export type Locale = typeof localeConfigs[number]["code"];
 
 export type TagID = keyof typeof allTags;
 
