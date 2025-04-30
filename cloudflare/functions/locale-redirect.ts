@@ -1,9 +1,9 @@
 import { parse } from "@escapace/accept-language-parser";
-
-type AvailableLocale = "en" | "ja" | "zh-CN" | "zh-TW";
+import locales from "../../tmp/locales.json";
+import type { Locale } from "~/types.ts";
 
 const redirectByLanguage: PagesFunction = async ({ request }) => {
-  const getUserLanguage = (acceptLanguage: string): AvailableLocale => {
+  const getUserLanguage = (acceptLanguage: string): Locale => {
     const languages = parse(acceptLanguage);
 
     for (const language of languages) {
@@ -45,10 +45,8 @@ const redirectByLanguage: PagesFunction = async ({ request }) => {
   }
 
   if (
-    path === "/en" || path.startsWith("/en/")
-    || path === "/ja" || path.startsWith("/ja/")
-    || path === "/zh-CN" || path.startsWith("/zh-CN/")
-    || path === "/zh-TW" || path.startsWith("/zh-TW/")
+    locales.some((locale) => `/${locale}` === path)
+    || locales.some((locale) => path.startsWith(`/${locale}/`))
   ) {
     // This should not happen by normal usecase unless there is a bug
     const destURL = new URL(path, baseURL);

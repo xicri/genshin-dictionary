@@ -1,9 +1,33 @@
 import { defineNuxtConfig } from "nuxt/config";
 import tags from "./dataset/tags.json";
 import words from "./dataset/words.json";
+import type { LocaleObject } from "@nuxtjs/i18n";
 
 const isLocal = !process.env.SERVER_ENV || process.env.SERVER_ENV === "local";
 const tagIDs = Object.keys(tags);
+
+export const locales = [
+  {
+    code: "en",
+    language: "en",
+    name: "English",
+  },
+  {
+    code: "ja",
+    language: "ja-JP",
+    name: "日本語",
+  },
+  {
+    code: "zh-CN",
+    language: "zh-CN",
+    name: "简体中文",
+  },
+  {
+    code: "zh-TW",
+    language: "zh-TW",
+    name: "繁體中文",
+  },
+] as const satisfies LocaleObject<string>[];
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-02-07",
@@ -69,28 +93,7 @@ export default defineNuxtConfig({
   ],
 
   i18n: {
-    locales: [
-      {
-        code: "en",
-        language: "en",
-        name: "English",
-      },
-      {
-        code: "ja",
-        language: "ja-JP",
-        name: "日本語",
-      },
-      {
-        code: "zh-CN",
-        language: "zh-CN",
-        name: "简体中文",
-      },
-      {
-        code: "zh-TW",
-        language: "zh-TW",
-        name: "繁體中文",
-      }
-    ],
+    locales,
     strategy: "prefix",
     baseUrl: "https://genshin-dictionary.com",
     detectBrowserLanguage: false,
@@ -101,13 +104,13 @@ export default defineNuxtConfig({
     autoLastmod: false,
     cacheMaxAgeSeconds: 0, // disable cache
     urls: [
-      ...([ "en", "ja" , "zh-CN", "zh-TW" ].map(lang => [
-        { loc: `/${lang}` },
-        { loc: `/${lang}/history` },
-        { loc: `/${lang}/about` },
-        { loc: `/${lang}/opendata` },
-        ...(words.map(word => ({ loc: `/${lang}/${word.id}`, lastmod: word.updatedAt }))),
-        ...(tagIDs.map(tagID => ({ loc: `/${lang}/tags/${tagID}` }))),
+      ...(locales.map(({ code: locale }) => [
+        { loc: `/${locale}` },
+        { loc: `/${locale}/history` },
+        { loc: `/${locale}/about` },
+        { loc: `/${locale}/opendata` },
+        ...(words.map(word => ({ loc: `/${locale}/${word.id}`, lastmod: word.updatedAt }))),
+        ...(tagIDs.map(tagID => ({ loc: `/${locale}/tags/${tagID}` }))),
       ]).flat()),
     ],
     exclude: [
