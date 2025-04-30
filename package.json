@@ -32,7 +32,6 @@
     "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && esno ./scripts/build.ts"
   },
   "dependencies": {
-    "@escapace/accept-language-parser": "^1.6.7",
     "@nuxt/devtools": "^2.3.2",
     "@nuxtjs/i18n": "^9.4.0",
     "@nuxtjs/robots": "^5.2.2",
@@ -41,6 +40,7 @@
     "@types/lodash-es": "^4.17.9",
     "@types/luxon": "^3.6.0",
     "@types/node": "^22.13.14",
+    "accept-language": "^3.0.20",
     "dotenv": "^16.4.7",
     "esno": "^4.8.0",
     "klona": "^2.0.4",
