@@ -11,8 +11,8 @@ export default defineI18nConfig(() => ({
       opendataTitle: "Open Data / API (β)",
       langNameEn: "English",
       langNameJa: "Japanese",
-      langNameZhCN: "Simplified Chinese",
-      langNameZhTW: "Traditional Chinese",
+      langNameZhCN: "S. Chinese",
+      langNameZhTW: "T. Chinese",
     },
     ja: {
       siteTitle: "原神 英語・中国語辞典",
@@ -23,8 +23,8 @@ export default defineI18nConfig(() => ({
       opendataTitle: "オープンデータ・API (β)",
       langNameEn: "英語",
       langNameJa: "日本語",
-      langNameZhCN: "中国語簡体字",
-      langNameZhTW: "中国語繁体字",
+      langNameZhCN: "中国語 (簡)",
+      langNameZhTW: "中国語 (繁)",
     },
     "zh-CN": {
       siteTitle: "原神中英日辞典",
