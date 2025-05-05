@@ -228,7 +228,8 @@ describe("The Genshin English Dictionary", () => {
         const notes = await word.$("div[data-e2e='notes']");
         expect(await notes!.innerText()).toBe("中国語の「螭虎岩」は古い時代の表記で、現在は簡略化されて「吃虎岩」と表記されるようになったという設定");
         expect(await word.$("div[data-e2e='notesZh']")).toBeNull();
-      } else if (lang === "zh-CN") {
+      } else if (lang === "zh-CN" || lang === "zh-TW") {
+        // Currently, the note in Simplified Chinese is shown when the browser language is zh-TW
         const notesZh = await word.$("div[data-e2e='notesZh']");
         expect(await notesZh!.innerText()).toBe("此地曾名为螭虎岩，但随着时间流逝百姓将此地简化为了吃虎岩。特此说明。");
         expect(await word.$("div[data-e2e='notes']")).toBeNull();
