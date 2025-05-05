@@ -9,12 +9,12 @@ const redirectByLanguage: PagesFunction = async ({ request }) => {
     for (const language of languages) {
       if (language.code === "ja") {
         return "ja";
-      } else if (language.code === "zh-CN") {
-        return "zh-CN";
-      } else if (language.code === "zh-TW") {
-        return "zh-TW";
       } else if (language.code === "zh") {
-        return "zh-CN";
+        if (language.region === "TW") {
+          return "zh-TW";
+        } else {
+          return "zh-CN";
+        }
       } else {
         return "en";
       }
