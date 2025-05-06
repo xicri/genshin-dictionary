@@ -121,11 +121,7 @@ async function downloadDataset() {
   console.info("Copied dataset into the public directory");
 }
 
-/**
- * Generates hisotyry.json
- * @returns {{ [key:string]: object[]}}
- */
-function generateHistoryJson() {
+async function generateHistoryJson() {
   /**
    * Reverse-sort by the key of the object
    * @param {{ [key: string]: unknown }} obj - object to reverse-sort
@@ -141,6 +137,9 @@ function generateHistoryJson() {
 
     return newObj;
   }
+
+  /** @type {{ default: { createdAt: string, [key:string]: unknown }[] }} */
+  const { default: allWords } = await import("../dataset/words.json", { with: { type: "json" }});
 
   /** @type {{ [key:string]: { [key:string]: unknown }[]}} */
   const history = {};
@@ -169,8 +168,16 @@ function generateHistoryJson() {
     }
   }
 
-  return reverseSortObject(history);
+  const builtDatasetDirPath = resolve(import.meta.dirname, "../dataset/build");
+  await mkdir(builtDatasetDirPath, { recursive: true });
+
+  await writeFile(resolve(builtDatasetDirPath, "history.ts"), `
+    import type { Word } from "../../types.ts";
+    export default ${
+      JSON.stringify(reverseSortObject(history), undefined, 2)
+    } as { [date: string]: Word[] };
+  `);
 }
 
 await downloadDataset();
-generateHistoryJson();
+await generateHistoryJson();
