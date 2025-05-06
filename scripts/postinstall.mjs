@@ -121,20 +121,29 @@ async function downloadDataset() {
   console.info("Copied dataset into the public directory");
 }
 
-type History = { [key:string]: Word[]};
-
-function generateHistoryJson(): History {
-  function reverseSortObject<T extends { [key: string]: unknown }>(obj: T): T {
-    const newObj: { [key:string]: unknown } = {};
+/**
+ * Generates hisotyry.json
+ * @returns {{ [key:string]: object[]}}
+ */
+function generateHistoryJson() {
+  /**
+   * Reverse-sort by the key of the object
+   * @param {{ [key: string]: unknown }} obj - object to reverse-sort
+   * @returns {{ [key: string]: unknown }} - { [UPDATED_AT]: GIVEN_OBJECT[] }
+   */
+  function reverseSortObject(obj) {
+    /** @type {{ [key:string]: unknown }} */
+    const newObj = {};
 
     for (const key of Object.keys(obj).sort().reverse()) {
       newObj[key] = obj[key];
     }
 
-    return newObj as T;
+    return newObj;
   }
 
-  const history: History = {};
+  /** @type {{ [key:string]: { [key:string]: unknown }[]}} */
+  const history = {};
 
   for (const word of allWords) {
     const createdAt = DateTime.fromISO(word.createdAt);
@@ -149,7 +158,7 @@ function generateHistoryJson(): History {
     if (!Array.isArray(history[createdAtJa])) {
       history[createdAtJa] = [];
     }
-    history[createdAtJa].push(word as Word);
+    history[createdAtJa].push(word);
   }
 
   // If 300+ words are updated at once, that would be considered resetting createdAt
