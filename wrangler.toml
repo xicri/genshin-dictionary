@@ -1,6 +1,6 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "genshin-dictionary"
-compatibility_date = "2024-11-11"
+compatibility_date = "2025-04-02"
 pages_build_output_dir = "./dist"
 
 # Smart Placement
