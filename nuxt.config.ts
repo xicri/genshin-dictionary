@@ -2,15 +2,24 @@ import tags from "./dataset/tags.json";
 import words from "./dataset/words.json";
 
 const isLocal = !process.env.SERVER_ENV || process.env.SERVER_ENV === "local";
+const tagIDs = Object.keys(tags);
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-02-07",
-  ssr: true, // Enable prerender
+  ssr: true,
   components: true,
 
   nitro: {
+    preset: "cloudflare-pages",
     prerender: {
       autoSubfolderIndex: false,
+      routes: [ "en", "ja", "zh-CN", "zh-TW" ].map((locale) => [
+        `/${ locale }`,
+        ...(tagIDs.map((tagID) => `/${ locale }/tags/${ tagID }`)),
+        `/${ locale }/about`,
+        `/${ locale }/history`,
+        `/${ locale }/opendata`,
+      ]).flat(),
     },
   },
 
@@ -97,7 +106,7 @@ export default defineNuxtConfig({
         { loc: `/${lang}/about` },
         { loc: `/${lang}/opendata` },
         ...(words.map(word => ({ loc: `/${lang}/${word.id}`, lastmod: word.updatedAt }))),
-        ...(Object.keys(tags).map(tagID => ({ loc: `/${lang}/tags/${tagID}` }))),
+        ...(tagIDs.map(tagID => ({ loc: `/${lang}/tags/${tagID}` }))),
       ]).flat()),
     ],
     exclude: [
