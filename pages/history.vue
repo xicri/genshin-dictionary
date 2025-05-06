@@ -37,7 +37,7 @@
 
 <script lang="ts" setup>
 import { isEmpty } from "lodash-es";
-import { getHistory } from "~/utils/utils.ts";
+import _history from "~/dataset/build/history.ts";
 import type { Locale } from "~/types.ts";
 
 const { t } = useI18n<[], Locale>();
@@ -50,8 +50,8 @@ useHead({
   ],
 });
 
-const { data: history } = useLazyAsyncData("history", async () => getHistory());
-const { data: empty } = useLazyAsyncData("empty", async () => isEmpty(getHistory()));
+const history = _history;
+const empty = isEmpty(_history);
 </script>
 
 <style lang="scss" scoped>
