@@ -15,7 +15,7 @@
   "type": "module",
   "scripts": {
     "dev": "nuxt dev",
-    "build": "esno ./scripts/build-redirects.ts && tsup && nuxt generate",
+    "build": "esno ./scripts/build-redirects.ts && tsup && nuxt build",
     "preview": "wrangler pages dev --local",
     "test": "vitest run && playwright test",
     "test:server": "wrangler pages dev --local --show-interactive-dev-session=false --port=5678",
