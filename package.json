@@ -27,7 +27,7 @@
     "update-nuxt": "nuxi upgrade --force",
     "clean": "git clean -dX --exclude=\"!.env\" --force",
     "refresh": "npm run clean && rm --force ./package-lock.json && npm install",
-    "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && npm list @playwright/test && playwright install || echo 'Playwright installation skipped.'"
+    "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && (npm list @playwright/test && playwright install || echo 'Playwright installation skipped.')"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20250327.0",
