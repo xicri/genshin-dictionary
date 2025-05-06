@@ -33,7 +33,8 @@ jobs:
           key: playwright-${{ hashFiles('**/package-lock.json') }}
 
       - run: pnpm install --frozen-lockfile
-      - run: pnpm test:prepare
       - run: pnpm build
       - run: pnpm lint
       - run: pnpm test
+      - run: pnpm e2e:prepare
+      - run: pnpm e2e
