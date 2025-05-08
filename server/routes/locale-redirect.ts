@@ -2,8 +2,12 @@ import { parse } from "@escapace/accept-language-parser";
 import locales from "../../tmp/locales.json";
 import type { Locale } from "~/types.ts";
 
-const redirectByLanguage: PagesFunction = async ({ request }) => {
-  const getUserLanguage = (acceptLanguage: string): Locale => {
+export default defineEventHandler((event) => {
+  const getUserLanguage = (acceptLanguage: string | null | undefined): Locale => {
+    if (!acceptLanguage) {
+      return "en";
+    }
+
     const languages = parse(acceptLanguage);
 
     for (const language of languages) {
@@ -24,7 +28,12 @@ const redirectByLanguage: PagesFunction = async ({ request }) => {
     return "en";
   };
 
-  const reqURL = new URL(request.url);
+  if (!event.node.req.url) {
+    console.error("[ERROR] Missing event.node.req.url in locale-redirect.ts.");
+    return Response.redirect("/en?why=node-req-url-not-given", 302);
+  }
+
+  const reqURL = getRequestURL(event);
   const baseURL = `${ reqURL.protocol }//${ reqURL.host }`;
   const rawPath = reqURL.searchParams.get("path");
   const path = rawPath ? decodeURIComponent(rawPath) : undefined;
@@ -53,12 +62,10 @@ const redirectByLanguage: PagesFunction = async ({ request }) => {
     destURL.searchParams.append("why", "already-locale-given");
     return Response.redirect(destURL.href, 302);
   } else {
-    const acceptLanguage = request.headers.get("Accept-Language") as string;
+    const acceptLanguage = event.headers.get("Accept-Language");
     const userLanguage = getUserLanguage(acceptLanguage);
 
     const destURL = new URL(`/${ userLanguage + path }`, baseURL);
     return Response.redirect(destURL.href, 302);
   }
-};
-
-export const onRequestGet: PagesFunction = redirectByLanguage;
+});

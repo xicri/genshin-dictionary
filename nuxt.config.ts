@@ -58,10 +58,6 @@ export default defineNuxtConfig({
         newLine: "lf",
         removeComments: true,
         declaration: false,
-
-        types: [
-          "@cloudflare/workers-types",
-        ],
       },
       // Relative paths are based on .nuxt/tsconfig.json.
       // ../ means project root.
@@ -71,7 +67,6 @@ export default defineNuxtConfig({
         "../public/dataset/**",
         // Cloudflare
         "../.wrangler/**",
-        "../functions/**",
       ],
     },
   },
