@@ -5,6 +5,8 @@ on:
     types:
       - completed
 
+permissions: {}
+
 jobs:
   trigger:
     if: ${{ github.event.check_run.name == 'Cloudflare Pages' && github.event.check_run.conclusion == 'success' && github.event.check_run.head_sha == github.sha && github.ref == 'refs/heads/main' && github.repository_owner == 'xicri' }}
