@@ -1,4 +1,4 @@
-name: "vrt"
+name: "VRT"
 
 on:
   pull_request:
