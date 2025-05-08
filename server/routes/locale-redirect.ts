@@ -14,7 +14,10 @@ export default defineEventHandler((event) => {
       if (language.code === "ja") {
         return "ja";
       } else if (language.code === "zh") {
-        if (language.region === "TW") {
+        if (
+          language.region === "TW"
+          || language.region === "HK"
+        ) {
           return "zh-TW";
         } else {
           return "zh-CN";
