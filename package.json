@@ -21,7 +21,7 @@
     "e2e": "playwright test",
     "e2e:server": "wrangler pages dev --local --show-interactive-dev-session=false --port=5678",
     "e2e:prepare": "playwright install-deps && playwright install",
-    "vrt": "concurrently --kill-others --success=first \"npm:test:server\" \"npm:vrt:screenshot\" && npm run vrt:reg",
+    "vrt": "concurrently --kill-others --success=first \"npm:e2e:server\" \"npm:vrt:screenshot\" && npm run vrt:reg",
     "vrt:screenshot": "sleep 5 && esno ./scripts/vrt-screenshot.ts",
     "vrt:reg": "./scripts/vrt-reg.sh",
     "lint": "nuxt typecheck",
