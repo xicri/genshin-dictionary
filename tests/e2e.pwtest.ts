@@ -307,47 +307,47 @@ describe("The Genshin English Dictionary", () => {
   }
 });
 
-// TODO Redirections only work on production.
+describe("redirection by language settings works properly", () => {
+  const rootURL = `http://${ip}:${port}`;
+  const langs = [
+    { code: "ja", localeDir: "ja" },
+    { code: "ja-JP", localeDir: "ja" },
+    { code: "en", localeDir: "en" },
+    { code: "en-US", localeDir: "en" },
+    { code: "en-GB", localeDir: "en" },
+    { code: "zh", localeDir: "zh-CN" },
+    { code: "zh-CN", localeDir: "zh-CN" },
+    { code: "zh-TW", localeDir: "zh-TW" },
+    { code: "fr", localeDir: "en" }, // fallback to English
+  ];
 
-// describe("redirection by language settings works properly", () => {
-//   const rootURL = `http://${ip}:${port}`;
-//   const langs = [
-//     { code: "ja", localeDir: "ja" },
-//     { code: "ja-JP", localeDir: "ja" },
-//     { code: "en", localeDir: "en" },
-//     { code: "en-US", localeDir: "en" },
-//     { code: "en-GB", localeDir: "en" },
-//     { code: "zh", localeDir: "zh-CN" },
-//     { code: "zh-CN", localeDir: "zh-CN" },
-//     { code: "zh-TW", localeDir: "zh-TW" },
-//     { code: "fr", localeDir: "en" }, // fallback to English
-//   ];
-//
-//   for (const { code, localeDir } of langs) {
-//     test(`/ (${code})`, async () => {
-//       const res = await fetch(`${ rootURL }/locale-redirect?path=%2F`, { // `%2F` === `/`
-//         headers: {
-//           "Accept-Language": code,
-//         },
-//       });
-//
-//       expect(res.redirected).toBe(true);
-//       expect(res.url).toBe(`${ rootURL }/${ localeDir }`);
-//     });
-//
-//     test(`/[wordid] (${code})`, async () => {
-//       const res = await fetch(`${ rootURL }/locale-redirect?path=%2Flumine`, { // `%2F` === `/`
-//         headers: {
-//           "Accept-Language": code,
-//         },
-//       });
-//
-//       expect(res.redirected).toBe(true);
-//       expect(res.url).toBe(`${ rootURL }/${ localeDir }/lumine`);
-//     });
-//   }
-// });
-//
+  for (const { code, localeDir } of langs) {
+    test(`/ (${code})`, async () => {
+      const res = await fetch(`${ rootURL }/locale-redirect?path=%2F`, { // `%2F` === `/`
+        headers: {
+          "Accept-Language": code,
+        },
+      });
+
+      expect(res.redirected).toBe(true);
+      expect(res.url).toBe(`${ rootURL }/${ localeDir }`);
+    });
+
+    test(`/[wordid] (${code})`, async () => {
+      const res = await fetch(`${ rootURL }/locale-redirect?path=%2Flumine`, { // `%2F` === `/`
+        headers: {
+          "Accept-Language": code,
+        },
+      });
+
+      expect(res.redirected).toBe(true);
+      expect(res.url).toBe(`${ rootURL }/${ localeDir }/lumine`);
+    });
+  }
+});
+
+// TODO The redirections by public/_headers file are only work on production.
+
 // describe("redirection", () => {
 //   const rootURL = `http://localhost:${port}`;
 //
