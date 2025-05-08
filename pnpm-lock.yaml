@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@escapace/accept-language-parser':
-        specifier: ^1.6.7
-        version: 1.6.7
       '@nuxt/devtools':
         specifier: ^2.3.2
         version: 2.4.0(vite@6.3.5(@types/node@22.15.15)(jiti@2.4.2)(sass@1.87.0)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1))(vue@3.5.13(typescript@5.8.3))
@@ -35,6 +32,9 @@ importers:
       '@types/node':
         specifier: ^22.13.14
         version: 22.15.15
+      accept-language:
+        specifier: ^3.0.20
+        version: 3.0.20
       dotenv:
         specifier: ^16.4.7
         version: 16.5.0
@@ -728,10 +728,6 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
-
-  '@escapace/accept-language-parser@1.6.7':
-    resolution: {integrity: sha512-juuCIkeG01mzueO3/GwcQYiJYJj9S38VLm+DuPdpVSGRLWLL5DGG6ZnTH0UAOQ7X2T+JPKwqv+16CpUgLjMVeA==}
-    engines: {pnpm: '>=9.14.4'}
 
   '@eslint-community/eslint-utils@4.7.0':
     resolution: {integrity: sha512-dyybb3AcajC7uha6CvhdVRJqaKyn7w2YKqKyAN37NKYgZT36w+iRb0Dymmc5qEJ549c/S31cMMSFd75bteCpCw==}
@@ -2081,6 +2077,9 @@ packages:
     resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
     engines: {node: '>=6.5'}
 
+  accept-language@3.0.20:
+    resolution: {integrity: sha512-xklPzRma4aoDEPk0ZfMjeuxB2FP4JBYlAR25OFUqCoOYDjYo6wGwAs49SnTN/MoB5VpnNX9tENfZ+vEIFmHQMQ==}
+
   accepts@2.0.0:
     resolution: {integrity: sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==}
     engines: {node: '>= 0.6'}
@@ -2260,6 +2259,10 @@ packages:
 
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+
+  bcp47@1.1.2:
+    resolution: {integrity: sha512-JnkkL4GUpOvvanH9AZPX38CxhiLsXMBicBY2IAtqiVN8YulGDQybUydWA4W6yAMtw6iShtw+8HEF6cfrTHU+UQ==}
+    engines: {node: '>=0.10'}
 
   bindings@1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
@@ -6907,8 +6910,6 @@ snapshots:
   '@esbuild/win32-x64@0.25.4':
     optional: true
 
-  '@escapace/accept-language-parser@1.6.7': {}
-
   '@eslint-community/eslint-utils@4.7.0(eslint@9.26.0(jiti@2.4.2))':
     dependencies:
       eslint: 9.26.0(jiti@2.4.2)
@@ -8659,6 +8660,10 @@ snapshots:
     dependencies:
       event-target-shim: 5.0.1
 
+  accept-language@3.0.20:
+    dependencies:
+      bcp47: 1.1.2
+
   accepts@2.0.0:
     dependencies:
       mime-types: 3.0.1
@@ -8866,6 +8871,8 @@ snapshots:
     optional: true
 
   base64-js@1.5.1: {}
+
+  bcp47@1.1.2: {}
 
   bindings@1.5.0:
     dependencies:

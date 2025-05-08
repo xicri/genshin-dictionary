@@ -1,34 +1,23 @@
-import { parse } from "@escapace/accept-language-parser";
+import acceptLanguage from "accept-language";
 import locales from "../../tmp/locales.json";
 import type { Locale } from "~/types.ts";
 
 export default defineEventHandler((event) => {
-  const getUserLanguage = (acceptLanguage: string | null | undefined): Locale => {
-    if (!acceptLanguage) {
+  const getUserLanguage = (requestedAcceptLanguage: string | null | undefined): Locale => {
+    acceptLanguage.languages(locales);
+
+    const lang = acceptLanguage.get(requestedAcceptLanguage);
+    if (!lang) {
+      return "en";
+    } else if (lang === "ja" || lang === "zh-CN" || lang === "zh-TW") {
+      return lang;
+    } else if (lang === "zh-HK") {
+      return "zh-TW";
+    } else if (lang === "zh" || lang === "zh-SG" || lang.startsWith("zh-")) {
+      return "zh-CN";
+    } else {
       return "en";
     }
-
-    const languages = parse(acceptLanguage);
-
-    for (const language of languages) {
-      if (language.code === "ja") {
-        return "ja";
-      } else if (language.code === "zh") {
-        if (
-          language.region === "TW"
-          || language.region === "HK"
-        ) {
-          return "zh-TW";
-        } else {
-          return "zh-CN";
-        }
-      } else {
-        return "en";
-      }
-    }
-
-    // If acceptLanguage is not sent from client
-    return "en";
   };
 
   if (!event.node.req.url) {
