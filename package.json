@@ -18,7 +18,7 @@
     "build": "esno ./scripts/build.ts && tsup && nuxt build",
     "preview": "wrangler pages dev --local",
     "test": "vitest run",
-    "e2e": "playwright test",
+    "e2e": "playwright test --shard=\"${SHARD_INDEX}/${SHARD_TOTAL}\"",
     "e2e:server": "wrangler pages dev --local --show-interactive-dev-session=false --port=5678",
     "e2e:prepare": "playwright install chromium webkit --with-deps",
     "vrt": "concurrently --kill-others --success=first \"npm:e2e:server\" \"npm:vrt:screenshot\" && npm run vrt:reg",
