@@ -45,7 +45,7 @@ If you use Linux, you need to install system dependencies.
 On Ubuntu and Ubuntu-based distributions, you can install dependencies automatically with following command:
 
 ```shell
-$ sudo npx playwright install-deps
+$ sudo pnpm playwright install-deps
 ```
 
 ### Update translation dataset
