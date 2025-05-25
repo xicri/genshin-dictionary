@@ -38,7 +38,7 @@ jobs:
           key: playwright-${{ hashFiles('**/package-lock.json') }}
 
       - run: pnpm install --frozen-lockfile
-      - name: install system dependencies for Playwright
-        run: pnpm exec playwright install-deps chromium
+      - name: Install browsers & system deps for Playwright
+        run: pnpm e2e:prepare
       - run: pnpm build
       - run: pnpm vrt
