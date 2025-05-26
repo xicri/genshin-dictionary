@@ -55,6 +55,7 @@
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.779.0",
     "@playwright/test": "^1.50.1",
+    "@xicri/configs": "^2025.6.15",
     "concurrently": "^9.1.2",
     "playwright": "^1.33.0",
     "reg-notify-github-plugin": "^0.14.4",
