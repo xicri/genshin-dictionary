@@ -26,5 +26,5 @@ jobs:
 
       - name: Purge cache of Cloudflare CDN
         run: |
-          pnpm install esno undici
+          pnpm install jiti undici
           pnpm purge-cache
