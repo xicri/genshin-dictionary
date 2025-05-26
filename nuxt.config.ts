@@ -51,14 +51,9 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
     tsConfig: {
-      compilerOptions: {
-        allowImportingTsExtensions: true,
-        checkJs: true,
-
-        newLine: "lf",
-        removeComments: true,
-        declaration: false,
-      },
+      extends: [
+        "@xicri/configs/tsconfig",
+      ],
       // Relative paths are based on .nuxt/tsconfig.json.
       // ../ means project root.
       exclude: [
