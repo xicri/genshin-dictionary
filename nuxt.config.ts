@@ -79,7 +79,10 @@ export default defineNuxtConfig({
     "@nuxtjs/robots",
     "@nuxtjs/sitemap",
     "@pinia/nuxt",
-    ...(isLocal ? [ "@nuxt/devtools" ] : []),
+    ...(isLocal ? [
+      "@nuxt/devtools",
+      "@nuxt/eslint",
+    ] : []),
   ],
 
   i18n: {
@@ -110,6 +113,12 @@ export default defineNuxtConfig({
 
   devtools: {
     enabled: isLocal,
+  },
+
+  eslint: {
+    config: {
+      standalone: false,
+    },
   },
 
   // For nuxt-simple-robots and nuxt-simple-sitemap
