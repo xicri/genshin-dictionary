@@ -95,7 +95,7 @@ const { locale, t } = useI18n<[], Locale>({
 //
 // Refs
 //
-const searchBox = ref<InstanceType<typeof ElasticSearchbox>|null>(null);
+const searchBox = ref<InstanceType<typeof ElasticSearchbox> | null>(null);
 const { tags } = storeToRefs(store);
 const displayTagListOnMobile = ref(false);
 

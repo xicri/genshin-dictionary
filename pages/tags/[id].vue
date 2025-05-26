@@ -15,7 +15,7 @@ const getTagIdFromParams = (route: RouteLocationNormalizedLoaded): TagID => {
     throw createError({ statusCode: 404, fatal: true });
   }
 
-  return <TagID>tagID;
+  return tagID as TagID;
 };
 
 const { $pinia } = useNuxtApp();
@@ -26,7 +26,7 @@ const route = useRoute();
 const store = useDictionaryStore($pinia);
 
 const tagID = getTagIdFromParams(route);
-const title = ref(`${tags[tagID].title[locale.value]} | ${t("siteTitle")}`);
+const title = ref(`${ tags[tagID].title[locale.value] } | ${ t("siteTitle") }`);
 
 useHead({
   title,
@@ -49,7 +49,7 @@ onMounted(() => {
 });
 
 const onSearch = (): void => {
-  const root = `/${locale.value}`;
+  const root = `/${ locale.value }`;
 
   if (window.location.pathname !== root) {
     history.pushState({}, "", root);

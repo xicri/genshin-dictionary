@@ -4,10 +4,10 @@ const zone = process.env.CLOUDFLARE_ZONE;
 const apiToken = process.env.CLOUDFLARE_API_TOKEN;
 
 try {
-  const res = await fetch(`https://api.cloudflare.com/client/v4/zones/${zone}/purge_cache`, {
+  const res = await fetch(`https://api.cloudflare.com/client/v4/zones/${ zone }/purge_cache`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${apiToken}`,
+      Authorization: `Bearer ${ apiToken }`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -15,7 +15,7 @@ try {
     }),
   });
 
-  const json = await res.json() as { success?: true };
+  const json = await res.json() as { success?: true; };
 
   if (json.success === true) {
     console.info("Cache successfully purged!");

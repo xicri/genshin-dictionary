@@ -41,7 +41,7 @@ import _history from "~/dataset/build/history.ts";
 import type { Locale } from "~/types.ts";
 
 const { t } = useI18n<[], Locale>();
-const title = `${t("historyTitle")} | ${t("siteTitle")}`;
+const title = `${ t("historyTitle") } | ${ t("siteTitle") }`;
 
 useHead({
   title,

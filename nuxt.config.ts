@@ -87,7 +87,7 @@ export default defineNuxtConfig({
     strategy: "prefix",
     baseUrl: "https://genshin-dictionary.com",
     detectBrowserLanguage: false,
-    vueI18n: "i18n.config.ts"
+    vueI18n: "i18n.config.ts",
   },
 
   sitemap: {
@@ -95,12 +95,12 @@ export default defineNuxtConfig({
     cacheMaxAgeSeconds: 0, // disable cache
     urls: [
       ...(locales.map(({ code: locale }) => [
-        { loc: `/${locale}` },
-        { loc: `/${locale}/history` },
-        { loc: `/${locale}/about` },
-        { loc: `/${locale}/opendata` },
-        ...(words.map(word => ({ loc: `/${locale}/${word.id}`, lastmod: word.updatedAt }))),
-        ...(tagIDs.map(tagID => ({ loc: `/${locale}/tags/${tagID}` }))),
+        { loc: `/${ locale }` },
+        { loc: `/${ locale }/history` },
+        { loc: `/${ locale }/about` },
+        { loc: `/${ locale }/opendata` },
+        ...(words.map((word) => ({ loc: `/${ locale }/${ word.id }`, lastmod: word.updatedAt }))),
+        ...(tagIDs.map((tagID) => ({ loc: `/${ locale }/tags/${ tagID }` }))),
       ]).flat()),
     ],
     exclude: [
