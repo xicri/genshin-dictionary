@@ -2,7 +2,6 @@
   "name": "genshin-dictionary-editor",
   "version": "1.0.0",
   "description": "Editor for Genshin Dictionary",
-  "license": "MIT",
   "private": true,
   "type": "module",
   "scripts": {
