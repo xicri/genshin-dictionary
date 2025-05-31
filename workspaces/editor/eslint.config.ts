@@ -1,24 +1,45 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { core, nodejs, unbundled } from "@xicri/configs/eslint";
+import type { Linter } from "eslint";
 
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+  baseDirectory: import.meta.dirname,
 });
 
-const eslintConfig = [
+const configs: Linter.Config[] = [
+  {
+    ignores: [
+      ".next/",
+    ],
+  },
+
+  ...core,
+  ...nodejs,
+  ...unbundled,
   ...compat.extends(
     "next/core-web-vitals",
     "next/typescript",
-  ),
+  ).map((config) => {
+    delete config.plugins?.import;
+
+    return config;
+  }),
+
   {
+    // Do not add `files: [ "*" ],` here.
+
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        // TODO Use `project: true` instead if you use `astro` ruleset.
+        // project: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    files: [ "**/*.ts", "**/*.tsx" ],
     rules: {
-      "@typescript-eslint/ban-ts-comment": "warn",
-      "@typescript-eslint/no-empty-object-type": "warn",
-      "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-unused-vars": [
         "warn",
         {
@@ -33,9 +54,6 @@ const eslintConfig = [
       ],
     },
   },
-  {
-    ignores: [ ".next/" ],
-  },
 ];
 
-export default eslintConfig;
+export default configs;
