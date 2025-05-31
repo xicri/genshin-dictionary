@@ -38,6 +38,9 @@ logs/
 .env.*
 !.env.example
 
+# SQLite database
+*.db
+
 #
 # JavaScript
 #
@@ -74,9 +77,11 @@ npm-shrinkwrap.json
 ### nuxt-simple-[robots|sitemap]
 /public/robots.txt
 /public/sitemap.xml
-## Others
+## Next.js
 .next/
 out/
+next-env.d.ts
+## Others
 .svelte-kit/
 .astro/
 

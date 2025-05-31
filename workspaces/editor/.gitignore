@@ -1,13 +1,10 @@
-build
-dist / media
-node_modules
-.DS_Store
-.env
-.next
-.vercel
+# PayloadCMS
 
-# Payload default media upload directory
+## Payload default media upload directory
 public/media/
 
 public/robots.txt
 public/sitemap*.xml
+
+src/app/(payload)/admin/importMap.js
+src/payload-types.ts
