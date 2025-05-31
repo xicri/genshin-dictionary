@@ -14,7 +14,8 @@
     "lint": "tsc --noEmit && next lint",
     "fix": "next lint --fix",
     "payload": "payload",
-    "reinstall": "rm -rf node_modules && rm pnpm-lock.yaml && pnpm --ignore-workspace install"
+    "clean": "git clean -dX --exclude=\"!.env\" --force",
+    "refresh": "pnpm run clean && rm --force ./pnpm-lock.yaml && corepack up && pnpm install"
   },
   "dependencies": {
     "@payloadcms/admin-bar": "3.40.0",
