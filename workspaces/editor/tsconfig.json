@@ -1,50 +1,41 @@
 {
+  "extends": "@xicri/configs/tsconfig",
   "compilerOptions": {
-    /* Strictness */
-    "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    
+
     "baseUrl": ".",
     "esModuleInterop": true,
     "target": "ES2022",
     "lib": [
+      "ES2022",
       "DOM",
-      "DOM.Iterable",
-      "ES2022"
+      "DOM.Iterable"
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "incremental": true,
     "jsx": "preserve",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
     "sourceMap": true,
-    "isolatedModules": true,
+
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@payload-config": [
-        "./src/payload.config.ts"
-      ],
-      "react": [
-        "./node_modules/@types/react"
-      ],
       "@/*": [
         "./src/*"
       ],
+      "@payload-config": [
+        "./src/payload.config.ts"
+      ]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "**/*.js",
+    "**/*.mjs",
+    "**/*.jsx",
     ".next/types/**/*.ts",
     "redirects.js",
     "next.config.js",
