@@ -6,13 +6,11 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "dev:prod": "rm -rf .next && pnpm build && pnpm start",
     "start": "next start",
     "build": "next build",
     "postbuild": "next-sitemap --config next-sitemap.config.cjs",
     "generate:importmap": "payload generate:importmap",
     "generate:types": "payload generate:types",
-    "ii": "pnpm --ignore-workspace install",
     "lint": "tsc --noEmit && next lint",
     "fix": "next lint --fix",
     "payload": "payload",
