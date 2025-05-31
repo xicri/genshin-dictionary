@@ -5,15 +5,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "pnpm build:payload && next dev",
     "start": "next start",
-    "build": "next build",
-    "postbuild": "next-sitemap --config next-sitemap.config.cjs",
-    "generate:importmap": "payload generate:importmap",
-    "generate:types": "payload generate:types",
+    "build": "pnpm build:payload && pnpm build:app && pnpm build:sitemap",
+    "build:app": "next build",
+    "build:payload": "payload generate:importmap && payload generate:types",
+    "build:sitemap": "next-sitemap --config next-sitemap.config.cjs",
     "lint": "tsc --noEmit && next lint",
     "fix": "next lint --fix",
-    "payload": "payload"
+    "payload": "payload",
+    "prepare": "pnpm build:payload"
   },
   "dependencies": {
     "@payloadcms/admin-bar": "3.40.0",
