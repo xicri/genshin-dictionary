@@ -13,7 +13,7 @@
     "generate:importmap": "payload generate:importmap",
     "generate:types": "payload generate:types",
     "ii": "pnpm --ignore-workspace install",
-    "lint": "next lint",
+    "lint": "tsc --noEmit && next lint",
     "fix": "next lint --fix",
     "payload": "payload",
     "reinstall": "rm -rf node_modules && rm pnpm-lock.yaml && pnpm --ignore-workspace install"
@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
+    "@xicri/configs": "latest",
     "@tailwindcss/typography": "^0.5.13",
     "@types/escape-html": "^1.0.2",
     "@types/node": "22.5.4",
