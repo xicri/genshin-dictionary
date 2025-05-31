@@ -1,27 +1,27 @@
-import type { FieldHook } from 'payload'
+import type { FieldHook } from "payload";
 
 const format = (val: string): string =>
   val
-    .replace(/ /g, '-')
-    .replace(/[^\w-]+/g, '')
-    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(/[^\w-]+/g, "")
+    .toLowerCase();
 
-const formatSlug =
-  (fallback: string): FieldHook =>
-  ({ data, operation, originalDoc, value }) => {
-    if (typeof value === 'string') {
-      return format(value)
-    }
-
-    if (operation === 'create') {
-      const fallbackData = data?.[fallback] || originalDoc?.[fallback]
-
-      if (fallbackData && typeof fallbackData === 'string') {
-        return format(fallbackData)
+const formatSlug
+  = (fallback: string): FieldHook =>
+    ({ data, operation, originalDoc, value }) => {
+      if (typeof value === "string") {
+        return format(value);
       }
-    }
 
-    return value
-  }
+      if (operation === "create") {
+        const fallbackData = data?.[fallback] || originalDoc?.[fallback];
 
-export default formatSlug
+        if (fallbackData && typeof fallbackData === "string") {
+          return format(fallbackData);
+        }
+      }
+
+      return value;
+    };
+
+export default formatSlug;

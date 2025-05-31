@@ -1,94 +1,93 @@
-import type { Block } from 'payload'
-
 import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
-} from '@payloadcms/richtext-lexical'
+} from "@payloadcms/richtext-lexical";
+import type { Block } from "payload";
 
 export const Archive: Block = {
-  slug: 'archive',
-  interfaceName: 'ArchiveBlock',
+  slug: "archive",
+  interfaceName: "ArchiveBlock",
   fields: [
     {
-      name: 'introContent',
-      type: 'richText',
+      name: "introContent",
+      type: "richText",
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
           return [
             ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+            HeadingFeature({ enabledHeadingSizes: [ "h1", "h2", "h3", "h4" ]}),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
-          ]
+          ];
         },
       }),
-      label: 'Intro Content',
+      label: "Intro Content",
     },
     {
-      name: 'populateBy',
-      type: 'select',
-      defaultValue: 'collection',
+      name: "populateBy",
+      type: "select",
+      defaultValue: "collection",
       options: [
         {
-          label: 'Collection',
-          value: 'collection',
+          label: "Collection",
+          value: "collection",
         },
         {
-          label: 'Individual Selection',
-          value: 'selection',
+          label: "Individual Selection",
+          value: "selection",
         },
       ],
     },
     {
-      name: 'relationTo',
-      type: 'select',
+      name: "relationTo",
+      type: "select",
       admin: {
-        condition: (_, siblingData) => siblingData.populateBy === 'collection',
+        condition: (_, siblingData) => siblingData.populateBy === "collection",
       },
-      defaultValue: 'posts',
-      label: 'Collections To Show',
+      defaultValue: "posts",
+      label: "Collections To Show",
       options: [
         {
-          label: 'Posts',
-          value: 'posts',
+          label: "Posts",
+          value: "posts",
         },
       ],
     },
     {
-      name: 'categories',
-      type: 'relationship',
+      name: "categories",
+      type: "relationship",
       admin: {
-        condition: (_, siblingData) => siblingData.populateBy === 'collection',
+        condition: (_, siblingData) => siblingData.populateBy === "collection",
       },
       hasMany: true,
-      label: 'Categories To Show',
-      relationTo: 'categories',
+      label: "Categories To Show",
+      relationTo: "categories",
     },
     {
-      name: 'limit',
-      type: 'number',
+      name: "limit",
+      type: "number",
       admin: {
-        condition: (_, siblingData) => siblingData.populateBy === 'collection',
+        condition: (_, siblingData) => siblingData.populateBy === "collection",
         step: 1,
       },
       defaultValue: 10,
-      label: 'Limit',
+      label: "Limit",
     },
     {
-      name: 'selectedDocs',
-      type: 'relationship',
+      name: "selectedDocs",
+      type: "relationship",
       admin: {
-        condition: (_, siblingData) => siblingData.populateBy === 'selection',
+        condition: (_, siblingData) => siblingData.populateBy === "selection",
       },
       hasMany: true,
-      label: 'Selection',
-      relationTo: ['posts'],
+      label: "Selection",
+      relationTo: [ "posts" ],
     },
   ],
   labels: {
-    plural: 'Archives',
-    singular: 'Archive',
+    plural: "Archives",
+    singular: "Archive",
   },
-}
+};

@@ -1,61 +1,61 @@
-import { Field } from 'payload'
+import type { Field } from "payload";
 
 export const searchFields: Field[] = [
   {
-    name: 'slug',
-    type: 'text',
+    name: "slug",
+    type: "text",
     index: true,
     admin: {
       readOnly: true,
     },
   },
   {
-    name: 'meta',
-    label: 'Meta',
-    type: 'group',
+    name: "meta",
+    label: "Meta",
+    type: "group",
     index: true,
     admin: {
       readOnly: true,
     },
     fields: [
       {
-        type: 'text',
-        name: 'title',
-        label: 'Title',
+        type: "text",
+        name: "title",
+        label: "Title",
       },
       {
-        type: 'text',
-        name: 'description',
-        label: 'Description',
+        type: "text",
+        name: "description",
+        label: "Description",
       },
       {
-        name: 'image',
-        label: 'Image',
-        type: 'upload',
-        relationTo: 'media',
+        name: "image",
+        label: "Image",
+        type: "upload",
+        relationTo: "media",
       },
     ],
   },
   {
-    label: 'Categories',
-    name: 'categories',
-    type: 'array',
+    label: "Categories",
+    name: "categories",
+    type: "array",
     admin: {
       readOnly: true,
     },
     fields: [
       {
-        name: 'relationTo',
-        type: 'text',
+        name: "relationTo",
+        type: "text",
       },
       {
-        name: 'categoryID',
-        type: 'text',
+        name: "categoryID",
+        type: "text",
       },
       {
-        name: 'title',
-        type: 'text',
+        name: "title",
+        type: "text",
       },
     ],
   },
-]
+];

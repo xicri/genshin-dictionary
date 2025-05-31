@@ -1,17 +1,17 @@
-'use client'
-import { Button } from '@/components/ui/button'
-import { CopyIcon } from '@payloadcms/ui/icons/Copy'
-import { useState } from 'react'
+"use client";
+import { CopyIcon } from "@payloadcms/ui/icons/Copy";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
-export function CopyButton({ code }: { code: string }) {
-  const [text, setText] = useState('Copy')
+export function CopyButton({ code }: { code: string; }) {
+  const [ text, setText ] = useState("Copy");
 
   function updateCopyStatus() {
-    if (text === 'Copy') {
-      setText(() => 'Copied!')
+    if (text === "Copy") {
+      setText(() => "Copied!");
       setTimeout(() => {
-        setText(() => 'Copy')
-      }, 1000)
+        setText(() => "Copy");
+      }, 1000);
     }
   }
 
@@ -19,15 +19,15 @@ export function CopyButton({ code }: { code: string }) {
     <div className="flex justify-end align-middle">
       <Button
         className="flex gap-1"
-        variant={'secondary'}
+        variant="secondary"
         onClick={async () => {
-          await navigator.clipboard.writeText(code)
-          updateCopyStatus()
+          await navigator.clipboard.writeText(code);
+          updateCopyStatus();
         }}
       >
         <p>{text}</p>
         <CopyIcon />
       </Button>
     </div>
-  )
+  );
 }

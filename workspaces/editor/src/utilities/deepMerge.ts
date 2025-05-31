@@ -4,32 +4,33 @@
 /**
  * Simple object check.
  * @param item
- * @returns {boolean}
+ * @returns
  */
 export function isObject(item: unknown): item is object {
-  return typeof item === 'object' && !Array.isArray(item)
+  return typeof item === "object" && !Array.isArray(item);
 }
 
 /**
  * Deep merge two objects.
  * @param target
  * @param ...sources
+ * @param source
  */
 export default function deepMerge<T, R>(target: T, source: R): T {
-  const output = { ...target }
+  const output = { ...target };
   if (isObject(target) && isObject(source)) {
     Object.keys(source).forEach((key) => {
       if (isObject(source[key])) {
         if (!(key in target)) {
-          Object.assign(output, { [key]: source[key] })
+          Object.assign(output, { [key]: source[key] });
         } else {
-          output[key] = deepMerge(target[key], source[key])
+          output[key] = deepMerge(target[key], source[key]);
         }
       } else {
-        Object.assign(output, { [key]: source[key] })
+        Object.assign(output, { [key]: source[key] });
       }
-    })
+    });
   }
 
-  return output
+  return output;
 }
