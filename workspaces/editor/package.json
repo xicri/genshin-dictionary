@@ -9,7 +9,7 @@
     "start": "next start",
     "build": "pnpm build:payload && pnpm build:app && pnpm build:sitemap",
     "build:app": "next build",
-    "build:payload": "payload generate:importmap && payload generate:types",
+    "build:payload": "touch \"./src/app/(payload)/admin/importMap.js\" && payload generate:importmap && payload generate:types",
     "build:sitemap": "next-sitemap --config next-sitemap.config.cjs",
     "lint": "tsc --noEmit && next lint",
     "fix": "next lint --fix",
