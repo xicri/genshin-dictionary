@@ -5,7 +5,7 @@ import redirects from "./redirects.js";
 
 const NEXT_PUBLIC_SERVER_URL = env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${ env.VERCEL_PROJECT_PRODUCTION_URL }`
-  : undefined || env.__NEXT_PRIVATE_ORIGIN || "http://localhost:3000";
+  : env.__NEXT_PRIVATE_ORIGIN || "http://localhost:3000";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
