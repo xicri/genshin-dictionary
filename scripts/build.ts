@@ -23,14 +23,14 @@ const buildLocaleJson = async () => {
   const tmpDirPath = join(import.meta.dirname, "../tmp/");
   const localeCodes = locales.map((locale) => locale.code);
 
-  await mkdir(tmpDirPath, { recursive: true })
+  await mkdir(tmpDirPath, { recursive: true });
   await writeFile(
     join(tmpDirPath, "locales.json"),
     JSON.stringify(localeCodes, undefined, 2),
   );
-}
+};
 
 await Promise.all([
   buildRedirectConf(),
   buildLocaleJson(),
-])
+]);

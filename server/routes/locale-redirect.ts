@@ -1,6 +1,6 @@
 import { parse } from "@escapace/accept-language-parser";
-import locales from "../../tmp/locales.json";
 import type { Locale } from "~/types.ts";
+import locales from "../../tmp/locales.json";
 
 export default defineEventHandler((event) => {
   const getUserLanguage = (acceptLanguage: string | null | undefined): Locale => {
@@ -57,8 +57,8 @@ export default defineEventHandler((event) => {
   }
 
   if (
-    locales.some((locale) => `/${locale}` === path)
-    || locales.some((locale) => path.startsWith(`/${locale}/`))
+    locales.some((locale) => `/${ locale }` === path)
+    || locales.some((locale) => path.startsWith(`/${ locale }/`))
   ) {
     // This should not happen by normal usecase unless there is a bug
     const destURL = new URL(path, baseURL);
