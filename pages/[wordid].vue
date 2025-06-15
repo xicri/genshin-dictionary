@@ -54,7 +54,7 @@ if (locale.value === "en") {
     ? `"${ word.zhTW }"的英語是"${ word.en }"，日語是"${ word.ja }"。` // TODO TranslationChanged
     : `"${ word.en }"的日語是"${ word.ja }"。`;
 } else {
-  throw new Error(`Unexpected locale: ${ locale.value }`);
+  throw new Error("Unexpected locale");
 }
 
 useHead({
