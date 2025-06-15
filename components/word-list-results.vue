@@ -169,7 +169,7 @@ const wordList = ref<HTMLElement[] | null>(null);
 //
 // methods
 //
-const observer = process.client ? new IntersectionObserver((entries, observer) => {
+const observer = import.meta.client ? new IntersectionObserver((entries, observer) => {
   for (const entry of entries) {
     if (!entry.isIntersecting) {
       return;
@@ -205,7 +205,7 @@ onUpdated(async () => {
 //
 const localePath = useLocalePath();
 const copyLink = async (wordId: string, $event: MouseEvent): Promise<void> => {
-  navigator.clipboard.writeText(`https://genshin-dictionary.com/${locale.value}/${wordId}`);
+  navigator.clipboard.writeText(`https://genshin-dictionary.com/${ locale.value }/${ wordId }`);
 
   const copyImg = $event.target as HTMLElement;
   const copiedImg = copyImg?.parentElement?.getElementsByClassName("results__permalink--copied")[0] as HTMLElement;

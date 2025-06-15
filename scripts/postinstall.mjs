@@ -7,6 +7,7 @@
  */
 import { copyFile, mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { env } from "node:process";
 import "dotenv/config";
 import { DateTime } from "luxon";
 import { fetch } from "undici";
@@ -20,8 +21,8 @@ async function copyFromURL(src, dest) {
   const res = await fetch(src);
 
   if (400 <= res.status) {
-    throw new Error(`Failed to fetch ${src}
-Status code: ${res.status}`);
+    throw new Error(`Failed to fetch ${ src }
+Status code: ${ res.status }`);
   }
 
   const str = await res.text();
@@ -31,37 +32,37 @@ Status code: ${res.status}`);
 async function downloadDataset() {
   await mkdir(resolve(import.meta.dirname, "../dataset/redirect/"), { recursive: true });
 
-  if (process.env.LANGDATA_PATH) {
-    console.info(`Copying dataset from ${process.env.LANGDATA_PATH}`);
+  if (env.LANGDATA_PATH) {
+    console.info(`Copying dataset from ${ env.LANGDATA_PATH }`);
 
     await Promise.all([
       copyFile(
-        resolve(process.env.LANGDATA_PATH, "dist/words.json"),
+        resolve(env.LANGDATA_PATH, "dist/words.json"),
         resolve(import.meta.dirname, "../dataset/words.json"),
       ),
       copyFile(
-        resolve(process.env.LANGDATA_PATH, "dist/words.csv"),
+        resolve(env.LANGDATA_PATH, "dist/words.csv"),
         resolve(import.meta.dirname, "../dataset/words.csv"),
       ),
       copyFile(
-        resolve(process.env.LANGDATA_PATH, "dist/words-sjis.csv"),
+        resolve(env.LANGDATA_PATH, "dist/words-sjis.csv"),
         resolve(import.meta.dirname, "../dataset/words-sjis.csv"),
       ),
       copyFile(
-        resolve(process.env.LANGDATA_PATH, "dist/tags.json"),
+        resolve(env.LANGDATA_PATH, "dist/tags.json"),
         resolve(import.meta.dirname, "../dataset/tags.json"),
       ),
       copyFile(
-        resolve(process.env.LANGDATA_PATH, "dist/redirect/words.json"),
+        resolve(env.LANGDATA_PATH, "dist/redirect/words.json"),
         resolve(import.meta.dirname, "../dataset/redirect/words.json"),
       ),
       copyFile(
-        resolve(process.env.LANGDATA_PATH, "dist/redirect/tags.json"),
+        resolve(env.LANGDATA_PATH, "dist/redirect/tags.json"),
         resolve(import.meta.dirname, "../dataset/redirect/tags.json"),
       ),
     ]);
 
-    console.info(`Copied dataset from ${process.env.LANGDATA_PATH}`);
+    console.info(`Copied dataset from ${ env.LANGDATA_PATH }`);
   } else {
     console.info("Fetching dataset from dataset.genshin-dictionary.com...");
 

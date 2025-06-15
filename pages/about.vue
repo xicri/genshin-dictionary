@@ -142,7 +142,7 @@ import words from "~/dataset/words.json";
 import type { Locale } from "~/types.ts";
 
 const { locale, t } = useI18n<[], Locale>();
-const title = `${t("aboutTitle")} | ${t("siteTitle")}`;
+const title = `${ t("aboutTitle") } | ${ t("siteTitle") }`;
 const description = t("aboutDescription");
 
 useHead({
@@ -150,13 +150,13 @@ useHead({
   meta: [
     { property: "og:title", content: title },
     { name: "description", content: description },
-    { property: "og:description", content: description }
+    { property: "og:description", content: description },
   ],
 });
 
 const wordCount = words.length;
 
-const createLink = (url: string, text: string) => `<a href="${url}" target="_blank" rel="noopener">${text}</a>`;
+const createLink = (url: string, text: string) => `<a href="${ url }" target="_blank" rel="noopener">${ text }</a>`;
 
 const aboutIntroText = computed(() => {
   const genshinLink = createLink(
@@ -202,7 +202,7 @@ const credits2Text = computed(() => {
 
 const credits3Text = computed(() => {
   const octiconsLink = createLink("https://primer.style/octicons/", "Octicons");
-  const licenseLink = createLink("https://github.com/primer/octicons/blob/main/LICENSE", `MIT ${t("license")}`);
+  const licenseLink = createLink("https://github.com/primer/octicons/blob/main/LICENSE", `MIT ${ t("license") }`);
   return t("credits3", { octiconsLink, licenseLink });
 });
 

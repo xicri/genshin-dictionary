@@ -23,8 +23,8 @@ const { Contents: files } = await s3.send(new ListObjectsCommand({
 }));
 
 const filesToDelete = files
-  ?.map(file => ({ Key: file.Key }))
-  .filter(file => (file.Key?.startsWith(process.env.HASH_PROD ?? "") ?? false) || (file.Key?.startsWith(process.env.HASH_PR ?? "") ?? false));
+  ?.map((file) => ({ Key: file.Key }))
+  .filter((file) => (file.Key?.startsWith(process.env.HASH_PROD ?? "") ?? false) || (file.Key?.startsWith(process.env.HASH_PR ?? "") ?? false));
 
 if (filesToDelete && 0 < filesToDelete.length) {
   await s3.send(new DeleteObjectsCommand({

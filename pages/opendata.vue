@@ -303,7 +303,7 @@ import tags from "~/dataset/tags.json";
 import type { Locale } from "~/types.ts";
 
 const { locale, t } = useI18n<[], Locale>();
-const title = `${t("opendataTitle")} | ${t("siteTitle")}`;
+const title = `${ t("opendataTitle") } | ${ t("siteTitle") }`;
 
 useHead({
   title,
@@ -350,12 +350,12 @@ const jsonExample = `[
 ]`;
 
 const downloadLink = computed(() => {
-  const dlLink = '<a href="https://dataset.genshin-dictionary.com/words.json" target="_blank" rel="noopener">https://dataset.genshin-dictionary.com/words.json</a>';
+  const dlLink = "<a href=\"https://dataset.genshin-dictionary.com/words.json\" target=\"_blank\" rel=\"noopener\">https://dataset.genshin-dictionary.com/words.json</a>";
   return t("jsonUrlText", { url: dlLink });
 });
 
 const contactText = computed(() => {
-  const twitterLink = '<a href="https://x.com/xicri_gi" target="_blank" rel="noopener">X (Twitter)</a>';
+  const twitterLink = "<a href=\"https://x.com/xicri_gi\" target=\"_blank\" rel=\"noopener\">X (Twitter)</a>";
   return t("contactText", { twitterLink });
 });
 </script>

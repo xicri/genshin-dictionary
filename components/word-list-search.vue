@@ -82,7 +82,7 @@ import { storeToRefs } from "pinia";
 import allTags from "~/dataset/tags.json";
 import { useDictionaryStore } from "~/store/index.ts";
 import type ElasticSearchbox from "~/components/elastic-searchbox.vue";
-import type { Locale, TagID } from "~/types";
+import type { Locale, TagID } from "~/types.ts";
 
 const emit = defineEmits([ "search" ]);
 const { $pinia } = useNuxtApp();
@@ -95,7 +95,7 @@ const { locale, t } = useI18n<[], Locale>({
 //
 // Refs
 //
-const searchBox = ref<InstanceType<typeof ElasticSearchbox>|null>(null);
+const searchBox = ref<InstanceType<typeof ElasticSearchbox> | null>(null);
 const { tags } = storeToRefs(store);
 const displayTagListOnMobile = ref(false);
 
