@@ -71,7 +71,7 @@
 </i18n>
 
 <script lang="ts" setup>
-import type { Locale } from "~/types";
+import type { Locale } from "~/types.ts";
 
 //
 // refs
@@ -87,7 +87,7 @@ const open = ref(false);
 const localePath = useLocalePath();
 const switchLocalePath = useSwitchLocalePath();
 const toggleMenu = (evt: MouseEvent): void => {
-  open.value = (<HTMLInputElement>evt.target)?.checked;
+  open.value = (evt.target as HTMLInputElement)?.checked;
 };
 const closeMenu = (): void => {
   open.value = false;

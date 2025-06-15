@@ -52,11 +52,11 @@ const fixtures: Fixture[] = [
     result: "神里綾華",
     input: "神里凌華",
     lang: "zhTW",
-  }
+  },
 ];
 
 for (const { result, input, lang } of fixtures) {
-  test(`search by variants (${lang})`, () => {
+  test(`search by variants (${ lang })`, () => {
     const results = search(input);
     expect(results).toHaveLength(1);
     expect(results[0][lang]).toBe(result);
@@ -68,8 +68,8 @@ test("search order", () => {
 
   expect(words[0].ja).toBe("稲妻");
 
-  const partialMatchIndex = words.findIndex(word => word.ja?.includes("稲妻"));
-  const partialMatchNotesIndex = words.findIndex(word => word.notes?.includes("稲妻"));
+  const partialMatchIndex = words.findIndex((word) => word.ja?.includes("稲妻"));
+  const partialMatchNotesIndex = words.findIndex((word) => word.notes?.includes("稲妻"));
 
   expect(partialMatchIndex).toBeLessThan(partialMatchNotesIndex);
 });

@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { escapeHtmlString } from "~/utils/utils.ts";
-import type { Locale } from "~/types";
+import type { Locale } from "~/types.ts";
 
 const props = defineProps({
   lang: {
@@ -30,7 +30,7 @@ const props = defineProps({
     default: "",
   },
   pinyins: {
-    type: Array as PropType<{ char: string, pron: string }[]>,
+    type: Array as PropType<{ char: string; pron: string; }[]>,
     default: () => [],
   },
 });
@@ -55,7 +55,7 @@ if (0 < props.pinyins.length) {
     const escapedChar = escapeHtmlString(char);
     const escapedPron = escapeHtmlString(pron);
 
-    wordWithPinyin = wordWithPinyin.replaceAll(escapedChar, `<ruby>${escapedChar}<rp>(</rp><rt class="results__pinyin">${escapedPron}</rt><rp>)</rp></ruby>`);
+    wordWithPinyin = wordWithPinyin.replaceAll(escapedChar, `<ruby>${ escapedChar }<rp>(</rp><rt class="results__pinyin">${ escapedPron }</rt><rp>)</rp></ruby>`);
   }
 }
 </script>
@@ -77,7 +77,6 @@ if (0 < props.pinyins.length) {
     width: 4.5em;
     white-space: nowrap;
   }
-
 
   &__ja {
     display: flex;

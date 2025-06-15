@@ -1,5 +1,5 @@
+import type { locales as localeConfigs } from "./nuxt.config.ts";
 import type allTags from "./dataset/tags.json";
-import { locales as localeConfigs } from "./nuxt.config.ts";
 
 export type Locale = typeof localeConfigs[number]["code"];
 
@@ -17,7 +17,7 @@ export type Word = {
     pron: string;
   }[];
   notes?: string;
-  notesEn?:string;
+  notesEn?: string;
   notesZh?: string;
   tags?: TagID[];
   examples?: {

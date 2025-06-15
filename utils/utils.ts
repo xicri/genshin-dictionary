@@ -44,7 +44,7 @@ class CandidateString {
 export const candidate = (str: string | undefined): CandidateString => new CandidateString(str);
 
 export const sleep = async (ms: number): Promise<void> =>
-  new Promise(resolve =>
+  new Promise((resolve) =>
     setTimeout(() => resolve(undefined), ms)
   );
 
@@ -57,9 +57,9 @@ export const escapeHtmlString = (html: string): string => {
 
   return html.replace(/[&<>]/g, (charToEscape) => {
     if (
-      charToEscape === "&" ||
-      charToEscape === "<" ||
-      charToEscape === ">"
+      charToEscape === "&"
+      || charToEscape === "<"
+      || charToEscape === ">"
     ) {
       return map[charToEscape];
     } else {
