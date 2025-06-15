@@ -35,10 +35,8 @@ useHead({
   ],
 });
 
-useLazyAsyncData("initTag", async () => {
-  store.$reset();
-  store.addTags(tagID);
-});
+store.$reset();
+store.addTags(tagID);
 
 onMounted(() => {
   // Reset on browser back
