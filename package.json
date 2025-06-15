@@ -66,6 +66,7 @@
     "reg-simple-keygen-plugin": "^0.14.2",
     "reg-suit": "^0.14.3",
     "vitest": "^3.1.1",
+    "vue-component-type-helpers": "^2.2.10",
     "vue-tsc": "^2.2.8",
     "xml2js": "^0.6.2"
   },

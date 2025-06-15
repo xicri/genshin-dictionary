@@ -83,6 +83,7 @@ import allTags from "~/dataset/tags.json";
 import { useDictionaryStore } from "~/store/index.ts";
 import type ElasticSearchbox from "~/components/elastic-searchbox.vue";
 import type { Locale, TagID } from "~/types.ts";
+import type { ComponentExposed } from "vue-component-type-helpers";
 
 const emit = defineEmits([ "search" ]);
 const { $pinia } = useNuxtApp();
@@ -95,7 +96,7 @@ const { locale, t } = useI18n<[], Locale>({
 //
 // Refs
 //
-const searchBox = ref<InstanceType<typeof ElasticSearchbox> | null>(null);
+const searchBox = useTemplateRef<ComponentExposed<typeof ElasticSearchbox>>("searchBox");
 const { tags } = storeToRefs(store);
 const displayTagListOnMobile = ref(false);
 
@@ -115,15 +116,16 @@ const AvailableTags = computed(() => {
 //
 // Event handlers
 //
-const updateSearchQuery = debounce((evt) => {
-  store.updateSearchQuery(evt.target.value);
+const updateSearchQuery = debounce((evt: Event) => {
+  store.updateSearchQuery((evt.target as HTMLInputElement)?.value);
   emit("search");
 }, 500);
 const focusOnSearchBox = (): void => {
-  const el = searchBox.value?.$el;
-  if (el) {
-    el.setSelectionRange(el.value.length, el.value.length);
-    el.focus();
+  if (searchBox.value) {
+    const searchBoxTextLength = searchBox.value.getTextLength() ?? null;
+
+    searchBox.value.setSelectionRange(searchBoxTextLength, searchBoxTextLength);
+    searchBox.value.focus();
   }
 };
 const selectAll = (): void => {

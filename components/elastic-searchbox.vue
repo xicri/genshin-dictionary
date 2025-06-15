@@ -14,25 +14,24 @@
 <script lang="ts" setup>
 const emit = defineEmits([ "input" ]);
 
-const props = defineProps({
-  name: {
-    type: String,
-    default: "",
-  },
-  placeholder: {
-    type: String,
-    default: "",
-  },
-  autocomplete: {
-    type: String,
-    default: "",
-  },
-});
+const props = defineProps<{
+  name: string;
+  placeholder: string;
+  autocomplete: string;
+}>();
 
 //
 // refs
 //
-const searchBox = ref<HTMLInputElement | null>(null);
+const searchBox = useTemplateRef<HTMLInputElement>("searchBox");
+
+defineExpose({
+  focus: () => searchBox.value?.focus(),
+  setSelectionRange: (
+    (...args) => searchBox.value?.setSelectionRange(...args)
+  ) satisfies typeof HTMLInputElement.prototype.setSelectionRange,
+  getTextLength: () => searchBox.value?.value.length,
+});
 
 //
 // methods
