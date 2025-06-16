@@ -12,8 +12,8 @@ import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from "
 const collections: CollectionSlug[] = [
   "categories",
   "media",
-  "pages",
-  "posts",
+  "words",
+  "tags",
   "forms",
   "form-submissions",
   "search",
@@ -207,7 +207,7 @@ export const seed = async ({
   // Do not create posts with `Promise.all` because we want the posts to be created in order
   // This way we can sort them by `createdAt` or `publishedAt` and they will be in the expected order
   const post1Doc = await payload.create({
-    collection: "posts",
+    collection: "tags",
     depth: 0,
     context: {
       disableRevalidate: true,
@@ -216,7 +216,7 @@ export const seed = async ({
   });
 
   const post2Doc = await payload.create({
-    collection: "posts",
+    collection: "tags",
     depth: 0,
     context: {
       disableRevalidate: true,
@@ -225,7 +225,7 @@ export const seed = async ({
   });
 
   const post3Doc = await payload.create({
-    collection: "posts",
+    collection: "tags",
     depth: 0,
     context: {
       disableRevalidate: true,
@@ -236,21 +236,21 @@ export const seed = async ({
   // update each post with related posts
   await payload.update({
     id: post1Doc.id,
-    collection: "posts",
+    collection: "tags",
     data: {
       relatedPosts: [ post2Doc.id, post3Doc.id ],
     },
   });
   await payload.update({
     id: post2Doc.id,
-    collection: "posts",
+    collection: "tags",
     data: {
       relatedPosts: [ post1Doc.id, post3Doc.id ],
     },
   });
   await payload.update({
     id: post3Doc.id,
-    collection: "posts",
+    collection: "tags",
     data: {
       relatedPosts: [ post1Doc.id, post2Doc.id ],
     },
@@ -268,12 +268,12 @@ export const seed = async ({
 
   const [ _, contactPage ] = await Promise.all([
     payload.create({
-      collection: "pages",
+      collection: "words",
       depth: 0,
       data: home({ heroImage: imageHomeDoc, metaImage: image2Doc }),
     }),
     payload.create({
-      collection: "pages",
+      collection: "words",
       depth: 0,
       data: contactPageData({ contactForm: contactForm }),
     }),
@@ -298,7 +298,7 @@ export const seed = async ({
               type: "reference",
               label: "Contact",
               reference: {
-                relationTo: "pages",
+                relationTo: "words",
                 value: contactPage.id,
               },
             },

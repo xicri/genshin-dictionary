@@ -26,7 +26,7 @@ export const RelatedPosts: React.FC<RelatedPostsProps> = (props) => {
             return null;
           }
 
-          return <Card key={index} doc={doc} relationTo="posts" showCategories />;
+          return <Card key={index} doc={doc} relationTo="tags" showCategories />;
         })}
       </div>
     </div>

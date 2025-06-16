@@ -15,7 +15,7 @@ import type { Metadata } from "next";
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise });
   const pages = await payload.find({
-    collection: "pages",
+    collection: "words",
     draft: false,
     limit: 1000,
     overrideAccess: false,
@@ -47,7 +47,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = "home" } = await paramsPromise;
   const url = "/" + slug;
 
-  let page: RequiredDataFromCollectionSlug<"pages"> | null;
+  let page: RequiredDataFromCollectionSlug<"words"> | null;
 
   page = await queryPageBySlug({
     slug,
@@ -93,7 +93,7 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string; }) => {
   const payload = await getPayload({ config: configPromise });
 
   const result = await payload.find({
-    collection: "pages",
+    collection: "words",
     draft,
     limit: 1,
     pagination: false,

@@ -6,7 +6,7 @@ type HomeArgs = {
   metaImage: Media;
 };
 
-export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<"pages"> = ({
+export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<"words"> = ({
   heroImage,
   metaImage,
 }) => {
@@ -567,7 +567,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<"pages"> =
           },
         },
         populateBy: "collection",
-        relationTo: "posts",
+        relationTo: "tags",
       },
       {
         blockName: "CTA",
