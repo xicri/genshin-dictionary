@@ -55,7 +55,7 @@ onMounted(() => {
 //
 // event handlers
 //
-const onInput = (evt: Event): void => {
+const onInput = (evt: InputEvent): void => {
   updateSearchBoxWidth();
   emit("input", evt);
 };

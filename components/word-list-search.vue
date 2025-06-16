@@ -115,8 +115,8 @@ const AvailableTags = computed(() => {
 //
 // Event handlers
 //
-const updateSearchQuery = debounce((evt) => {
-  store.updateSearchQuery(evt.target.value);
+const updateSearchQuery = debounce((evt: InputEvent) => {
+  store.updateSearchQuery((evt.target as HTMLInputElement)?.value);
   emit("search");
 }, 500);
 const focusOnSearchBox = (): void => {
