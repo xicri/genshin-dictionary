@@ -32,7 +32,15 @@ const props = defineProps({
 //
 // refs
 //
-const searchBox = ref<HTMLInputElement | null>(null);
+const searchBox = useTemplateRef<HTMLInputElement>("searchBox");
+
+defineExpose({
+  focus: () => searchBox.value?.focus(),
+  setSelectionRange: (
+    (...args) => searchBox.value?.setSelectionRange(...args)
+  ) satisfies typeof HTMLInputElement.prototype.setSelectionRange,
+  getTextLength: () => searchBox.value?.value.length,
+});
 
 //
 // methods
