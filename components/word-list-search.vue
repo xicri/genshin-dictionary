@@ -95,7 +95,7 @@ const { locale, t } = useI18n<[], Locale>({
 //
 // Refs
 //
-const searchBox = ref<InstanceType<typeof ElasticSearchbox> | null>(null);
+const searchBox = useTemplateRef<InstanceType<typeof ElasticSearchbox>>("searchBox");
 const { tags } = storeToRefs(store);
 const displayTagListOnMobile = ref(false);
 
@@ -120,17 +120,22 @@ const updateSearchQuery = debounce((evt: InputEvent) => {
   emit("search");
 }, 500);
 const focusOnSearchBox = (): void => {
-  const el = searchBox.value?.$el;
-  if (el) {
-    el.setSelectionRange(el.value.length, el.value.length);
-    el.focus();
+  if (searchBox.value) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- TODO fixme
+    const searchBoxTextLength = searchBox.value.getTextLength() ?? null;
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- TODO fixme
+    searchBox.value.setSelectionRange(searchBoxTextLength, searchBoxTextLength);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- TODO fixme
+    searchBox.value.focus();
   }
 };
 const selectAll = (): void => {
-  const el = searchBox.value?.$el;
-  if (el) {
-    el.setSelectionRange(0, el.value.length);
-    el.focus();
+  if (searchBox.value) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- TODO fixme
+    searchBox.value.setSelectionRange(0, searchBox.value.getTextLength() ?? null);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- TODO fixme
+    searchBox.value.focus();
   }
 };
 const closeTagList = (): void => {
