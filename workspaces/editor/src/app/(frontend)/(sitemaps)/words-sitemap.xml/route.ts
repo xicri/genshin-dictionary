@@ -12,7 +12,7 @@ const getPagesSitemap = unstable_cache(
       || "https://example.com";
 
     const results = await payload.find({
-      collection: "pages",
+      collection: "words",
       overrideAccess: false,
       draft: false,
       depth: 0,

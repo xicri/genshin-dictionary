@@ -12,7 +12,7 @@ const getPostsSitemap = unstable_cache(
       || "https://example.com";
 
     const results = await payload.find({
-      collection: "posts",
+      collection: "tags",
       overrideAccess: false,
       draft: false,
       depth: 0,
