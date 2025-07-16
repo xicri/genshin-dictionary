@@ -68,11 +68,21 @@ export const useDictionaryStore = defineStore("dictionary", {
             ) {
               wordsMatchWithNotes.push(word);
             } else if ( // 6-2. exact/forward/backword/partial match with notesZh (on Chinese UI only)
-              (state.currentLocale === "zh-CN" || state.currentLocale === "zh-TW")
+              state.currentLocale === "en"
+              && candidate(word.notesEn).includes(state.query)
+            ) {
+              wordsMatchWithNotes.push(word);
+            } else if ( // 6-3. exact/forward/backword/partial match with notesZh (on Chinese UI only)
+              state.currentLocale === "zh-CN"
               && candidate(word.notesZh).includes(state.query)
             ) {
               wordsMatchWithNotes.push(word);
-            } else if ( // 6-3. exact/forward/backword/partial match with ntoes and notesZh
+            } else if ( // 6-4. exact/forward/backword/partial match with notesZh (on Chinese UI only)
+              state.currentLocale === "zh-TW"
+              && candidate(word.notesZhTW).includes(state.query)
+            ) {
+              wordsMatchWithNotes.push(word);
+            } else if ( // 6-5. exact/forward/backword/partial match with ntoes and notesZh
               !state.currentLocale
               && (
                 candidate(word.notes).includes(state.query)
