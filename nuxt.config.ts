@@ -1,6 +1,6 @@
 import { defineNuxtConfig } from "nuxt/config";
-import tags from "./dataset/tags.json";
-import words from "./dataset/words.json";
+import tags from "./dataset/tags.json" with { type: "json" };
+import words from "./dataset/words.json" with { type: "json" };
 import type { LocaleObject } from "@nuxtjs/i18n";
 import type { Word } from "./types.ts";
 
