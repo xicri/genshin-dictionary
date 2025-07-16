@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 import { useDictionaryStore } from "~/store/index.ts";
-import type { Locale } from "~/types.ts";
+import type { Locale } from "~/utils/types.ts";
 
 const { $pinia } = useNuxtApp();
 const { locale, t } = useI18n<[], Locale>();

@@ -12,7 +12,7 @@ import "dotenv/config";
 import { DateTime } from "luxon";
 import { fetch } from "undici";
 
-const datasetDirPath = resolve(import.meta.dirname, "../dataset");
+const datasetDirPath = resolve(import.meta.dirname, "../app/dataset");
 
 /**
  * Copy file from URL and save it on local disk.
@@ -143,7 +143,7 @@ async function generateHistoryJson() {
   }
 
   /** @type {{ default: { createdAt: string, [key:string]: unknown }[] }} */
-  const { default: allWords } = await import("../dataset/words.json", { with: { type: "json" }});
+  const { default: allWords } = await import("../app/dataset/words.json", { with: { type: "json" }});
 
   /** @type {{ [key:string]: { [key:string]: unknown }[]}} */
   const history = {};
@@ -176,7 +176,7 @@ async function generateHistoryJson() {
   await mkdir(builtDatasetDirPath, { recursive: true });
 
   await writeFile(resolve(builtDatasetDirPath, "history.ts"), `
-    import type { Word } from "../../types.ts";
+    import type { Word } from "../../utils/types.ts";
     export default ${
       JSON.stringify(reverseSortObject(history), undefined, 2)
     } as { [date: string]: Word[] };

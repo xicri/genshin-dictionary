@@ -1,8 +1,8 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { locales } from "../nuxt.config.ts";
-import tagRedirects from "../dataset/redirect/tags.json";
-import wordRedirects from "../dataset/redirect/words.json";
+import tagRedirects from "../app/dataset/redirect/tags.json";
+import wordRedirects from "../app/dataset/redirect/words.json";
 
 const buildRedirectConf = async () => {
   const cfPagesRedirectConf: string = [

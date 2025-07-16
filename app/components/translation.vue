@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { escapeHtmlString } from "~/utils/utils.ts";
-import type { Locale } from "~/types.ts";
+import type { Locale } from "~/utils/types.ts";
 
 const props = defineProps({
   lang: {

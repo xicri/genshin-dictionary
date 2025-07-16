@@ -1,7 +1,7 @@
 import { setActivePinia, createPinia } from "pinia";
 import { beforeEach, expect, test } from "vitest";
-import { useDictionaryStore } from "~/store/index.ts";
-import type { Word } from "../types.ts";
+import { useDictionaryStore } from "../app/store/index.ts";
+import type { Word } from "../app/utils/types.ts";
 
 function search(query: string): Word[] {
   const store = useDictionaryStore();

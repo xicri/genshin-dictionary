@@ -139,7 +139,7 @@
 
 <script lang="ts" setup>
 import words from "~/dataset/words.json";
-import type { Locale } from "~/types.ts";
+import type { Locale } from "~/utils/types.ts";
 
 const { locale, t } = useI18n<[], Locale>();
 const title = `${ t("aboutTitle") } | ${ t("siteTitle") }`;

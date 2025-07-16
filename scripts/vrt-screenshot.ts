@@ -1,7 +1,7 @@
 import { mkdir, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { chromium } from "playwright";
-import { sleep } from "../utils/utils.ts";
+import { sleep } from "../app/utils/utils.ts";
 
 const envs = [
   { id: "current", baseURL: "https://genshin-dictionary.com" },

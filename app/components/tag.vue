@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import allTags from "~/dataset/tags.json";
-import type { Locale, TagID } from "~/types.ts";
+import type { Locale, TagID } from "~/utils/types.ts";
 
 const { locale } = useI18n<[], Locale>();
 

@@ -1,5 +1,5 @@
 import { parse } from "@escapace/accept-language-parser";
-import type { Locale } from "~/types.ts";
+import type { Locale } from "~/utils/types.ts";
 import locales from "../../tmp/locales.json";
 
 export default defineEventHandler((event) => {

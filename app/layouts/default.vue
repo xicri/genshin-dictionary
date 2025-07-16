@@ -39,7 +39,7 @@
 </i18n>
 
 <script lang="ts" setup>
-import type { Locale } from "~/types.ts";
+import type { Locale } from "~/utils/types.ts";
 
 const { t } = useI18n<[], Locale>({
   useScope: "local",

@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import tags from "~/dataset/tags.json";
 import { useDictionaryStore } from "~/store/index.ts";
-import type { Locale, TagID } from "~/types.ts";
+import type { Locale, TagID } from "~/utils/types.ts";
 import type { RouteLocationNormalizedLoaded } from "#vue-router";
 
 const getTagIdFromParams = (route: RouteLocationNormalizedLoaded): TagID => {

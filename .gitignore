@@ -1,7 +1,7 @@
 #
 # Project-specific
 #
-/dataset/
+/app/dataset/
 /functions/
 /public/dataset/
 /public/_redirects

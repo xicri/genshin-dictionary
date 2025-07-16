@@ -1,5 +1,5 @@
-import type { locales as localeConfigs } from "./nuxt.config.ts";
-import type allTags from "./dataset/tags.json";
+import type { locales as localeConfigs } from "../../nuxt.config.ts";
+import type allTags from "../dataset/tags.json";
 
 export type Locale = typeof localeConfigs[number]["code"];
 
