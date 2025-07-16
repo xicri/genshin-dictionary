@@ -225,15 +225,27 @@ describe("The Genshin English Dictionary", () => {
       if (lang === "ja") {
         const notes = await word.$("div[data-e2e='notes']");
         expect(await notes!.innerText()).toBe("中国語の「螭虎岩」は古い時代の表記で、現在は簡略化されて「吃虎岩」と表記されるようになったという設定");
+        expect(await word.$("div[data-e2e='notesEn']")).toBeNull();
         expect(await word.$("div[data-e2e='notesZh']")).toBeNull();
-      } else if (lang === "zh-CN" || lang === "zh-TW") {
-        // Currently, the note in Simplified Chinese is shown when the browser language is zh-TW
+        expect(await word.$("div[data-e2e='notesZhTW']")).toBeNull();
+      } else if (lang === "zh-CN") {
         const notesZh = await word.$("div[data-e2e='notesZh']");
         expect(await notesZh!.innerText()).toBe("此地曾名为螭虎岩，但随着时间流逝百姓将此地简化为了吃虎岩。特此说明。");
         expect(await word.$("div[data-e2e='notes']")).toBeNull();
+        expect(await word.$("div[data-e2e='notesEn']")).toBeNull();
+        expect(await word.$("div[data-e2e='notesZhTW']")).toBeNull();
+      } else if (lang === "zh-TW") {
+        const notesZhTW = await word.$("div[data-e2e='notesZhTW']");
+        expect(await notesZhTW!.innerText()).toBe("TODO");
+        expect(await word.$("div[data-e2e='notes']")).toBeNull();
+        expect(await word.$("div[data-e2e='notesEn']")).toBeNull();
+        expect(await word.$("div[data-e2e='notesZh']")).toBeNull();
       } else { // if (lang === "en")
+        const notesEn = await word.$("div[data-e2e='notesEn']");
+        expect(await notesEn!.innerText()).toBe("TODO");
         expect(await word.$("div[data-e2e='notes']")).toBeNull();
         expect(await word.$("div[data-e2e='notesZh']")).toBeNull();
+        expect(await word.$("div[data-e2e='notesZhTW']")).toBeNull();
       }
     });
 
