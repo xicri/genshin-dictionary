@@ -19,6 +19,7 @@ export type Word = {
   notes?: string;
   notesEn?: string;
   notesZh?: string;
+  notesZhTW?: string;
   tags?: TagID[];
   examples?: {
     en: string;
