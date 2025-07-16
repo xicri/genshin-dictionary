@@ -2,6 +2,7 @@ import { defineNuxtConfig } from "nuxt/config";
 import tags from "./dataset/tags.json";
 import words from "./dataset/words.json";
 import type { LocaleObject } from "@nuxtjs/i18n";
+import type { Word } from "./types.ts";
 
 const isLocal = !process.env.SERVER_ENV || process.env.SERVER_ENV === "local";
 const tagIDs = Object.keys(tags);
@@ -102,7 +103,7 @@ export default defineNuxtConfig({
         { loc: `/${ locale }/history` },
         { loc: `/${ locale }/about` },
         { loc: `/${ locale }/opendata` },
-        ...(words.map((word) => ({ loc: `/${ locale }/${ word.id }`, lastmod: word.updatedAt }))),
+        ...((words as Word[]).map((word) => ({ loc: `/${ locale }/${ word.id }`, lastmod: word.updatedAt }))),
         ...(tagIDs.map((tagID) => ({ loc: `/${ locale }/tags/${ tagID }` }))),
       ]).flat()),
     ],
