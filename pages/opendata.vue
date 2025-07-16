@@ -44,6 +44,7 @@
           <li><code>pronunciationJa</code> ― {{ t("propertyPronunciationJa") }}</li>
           <li><code>notes</code> ― {{ t("propertyNotes") }}</li>
           <li><code>notesZh</code> ― {{ t("propertyNotesZh") }}</li>
+          <li><code>notesZhTW</code> ― {{ t("propertyNotesZhTW") }}</li>
           <li><code>variants</code> ― {{ t("propertyVariants") }}</li>
           <li><code>variants.en</code> ― {{ t("propertyVariantsEn") }}</li>
           <li><code>variants.ja</code> ― {{ t("propertyVariantsJa") }}</li>
@@ -109,7 +110,8 @@
       "propertyZhCN": "Simplified Chinese translation",
       "propertyPronunciationJa": "Japanese pronunciation in Kana. It can include Hiragana, Katakana, and symbols.",
       "propertyNotes": "Note for Japanese speakers. It can include HTML tags.",
-      "propertyNotesZh": "Note for (Simplified) Chinese speakers. It can include HTML tags.",
+      "propertyNotesZh": "Note for Simplified Chinese speakers. It can include HTML tags.",
+      "propertyNotesZhTW": "Note for Traditional Chinese speakers. It can include HTML tags.",
       "propertyVariants": "Variants such as commonly known typo and unofficial nicknames. For example, \"凌华\", the Chinese mistype of Ayaka (绫华) and \"CW\", a short name of an Artifact \"Crimson Witch of Flames\".",
       "propertyVariantsEn": "English variants",
       "propertyVariantsJa": "Japanese variants",
@@ -161,8 +163,9 @@
       "propertyJa": "日本語名",
       "propertyZhCN": "簡体字中国語名",
       "propertyPronunciationJa": "日本語の読み。ひらがな、カタカナ、記号が含まれます。",
-      "propertyNotes": "備考 (日本語話者向け)。HTML タグが含まれる場合があります。",
-      "propertyNotesZh": "備考 (中国語話者向け)。HTML タグが含まれる場合があります。",
+      "propertyNotes": "日本語話者向け備考。HTML タグが含まれる場合があります。",
+      "propertyNotesZh": "中国語 (簡体字) 話者向け備考。HTML タグが含まれる場合があります。",
+      "propertyNotesZhTW": "中国語 (繁体字) 話者向け。HTML タグが含まれる場合があります。",
       "propertyVariants": "よくある誤記や通称等。例えば鍾離の誤記「鐘離」や、聖遺物「血染めの騎士道」の略称「血染め」などが含まれます。",
       "propertyVariantsEn": "英語の誤記や通称等",
       "propertyVariantsJa": "日本語の誤記や通称等",
@@ -215,7 +218,8 @@
       "propertyZhCN": "词条的简体中文翻译",
       "propertyPronunciationJa": "词条的日语发音，可能包含平假名、片假名及符号。",
       "propertyNotes": "面向日语用户的备注，可包含 HTML 标签。",
-      "propertyNotesZh": "面向中文用户的备注，可包含 HTML 标签。",
+      "propertyNotesZh": "Note for Simplified Chinese speakers. It can include HTML tags.",
+      "propertyNotesZhTW": "Note for Traditional Chinese speakers. It can include HTML tags.",
       "propertyVariants": "常见错别字或非官方昵称，例如“凌华”是绫华的中文错别字，“CW”是圣遗物“炽烈的炎之魔女”的简称。",
       "propertyVariantsEn": "词条的英文变体",
       "propertyVariantsJa": "词条的日文变体",
@@ -265,7 +269,8 @@
       "propertyZhCN": "詞條的簡體中文翻譯",
       "propertyPronunciationJa": "詞條的日文讀音，可能包含平假名、片假名及符號。",
       "propertyNotes": "面向日語使用者的備註，可包含 HTML 標籤。",
-      "propertyNotesZh": "面向中文使用者的備註，可包含 HTML 標籤。",
+      "propertyNotesZh": "Note for Simplified Chinese speakers. It can include HTML tags.",
+      "propertyNotesZhTW": "Note for Traditional Chinese speakers. It can include HTML tags.",
       "propertyVariants": "常見錯別字或非官方暱稱，例如「凌華」是綾華的中文錯別字，「CW」是聖遺物「熾烈的炎之魔女」的簡稱。",
       "propertyVariantsEn": "詞條的英文變體",
       "propertyVariantsJa": "詞條的日文變體",
@@ -320,13 +325,14 @@ const jsonExample = `[
     "zhCN": "钟离",
     "zhTW": "鍾離",
     "pronunciationJa": "しょうり",
-    "notes": "読みは「ヂョンリー」",
-    "notesZh": "锺离是中国古代早已有之的一个汉字复姓。…",
+    "notes": "読みは「ヂョンリー」(<a href=\\"https://youtu.be/p10yiwULJA8?t=118\\" target=\\"_blank\\" rel=\\"noopener\\">参考動画</a>)",
+    "notesZh": "「锺离」（曾经简化字写作「钟离」）是中国古代早已有之的汉字复姓。…",
+    "notesZhTW": "「鍾離」是中國古代早已有之的漢字複姓。…",
     "variants": {
       "ja": [ "鐘離" ]
     },
     "createdAt": "2022-01-01",
-    "updatedAt": "2022-01-01",
+    "updatedAt": "2025-01-01",
     "tags": [ "liyue", "character-main" ]
   },
   {
@@ -335,16 +341,18 @@ const jsonExample = `[
     "ja": "稲妻人 / 稲妻の",
     "zhCN": "稻妻人 / 稻妻的",
     "zhTW": "稻妻人 / 稻妻的",
-    "pronunciationJa": "いなずまじん",
+    "pronunciationJa": "いなずまじん / いなずまの",
     "notes": "元々 Inazuman は非公式にプレイヤーの間で使われる言葉であったが…(以下略)",
     "examples": [{
       "en": "Inazumans are definitely more particular about etiquette than Mondstadters!",
       "ja": "モンド人よりも、稲妻人の方が礼儀に対して気を配っている。",
+      "zhCN": "比起蒙德人，稻妻人更加在意礼节。",
+      "zhTW": "比起蒙德人，稻妻人更加在意禮節。",
       "ref": "トーマ, キャラクター実戦紹介 トーマ「烈炎の守護」",
-      "refURL": "https://www.youtube.com/watch?v=jvmz4TrPgUE&t=16s"
+      "refURL": "https://www.youtube.com/watch?v=HPoeE5PRWTw&t=15s"
     }],
     "createdAt": "2022-01-01",
-    "updatedAt": "2022-01-01",
+    "updatedAt": "2025-01-01",
     "tags": [ "inazuma" ]
   }
 ]`;
