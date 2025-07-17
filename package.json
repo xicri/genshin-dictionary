@@ -43,7 +43,7 @@
     "@types/lodash-es": "^4.17.9",
     "@types/luxon": "^3.6.0",
     "@types/node": "^22.13.14",
-    "dotenv": "^16.4.7",
+    "dotenv": "^17.2.0",
     "jiti": "^2.4.2",
     "klona": "^2.0.4",
     "lodash-es": "^4.17.21",
