@@ -1,7 +1,7 @@
 @use "~/assets/styles/variables.scss" as vars;
 
 html {
-  font-family: "Noto Sans CJK JP", "Meiryo", "Hiragino Sans", sans-serif;
+  font-family: sans-serif, system-ui, -apple-system, "Noto Sans CJK";
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
