@@ -35,14 +35,14 @@
   "dependencies": {
     "@escapace/accept-language-parser": "^1.6.7",
     "@nuxt/devtools": "^2.3.2",
-    "@nuxt/eslint": "1.5.2",
+    "@nuxt/eslint": "1.6.0",
     "@nuxtjs/i18n": "^9.4.0",
     "@nuxtjs/robots": "^5.2.2",
     "@nuxtjs/sitemap": "^7.2.2",
-    "@pinia/nuxt": "0.11.1",
+    "@pinia/nuxt": "0.11.2",
     "@types/lodash-es": "^4.17.9",
     "@types/luxon": "^3.6.0",
-    "@types/node": "^24.0.14",
+    "@types/node": "^24.0.15",
     "dotenv": "^17.2.0",
     "jiti": "^2.4.2",
     "klona": "^2.0.4",
@@ -51,11 +51,11 @@
     "nuxt": "^3.17.1",
     "pinia": "^3.0.1",
     "sass": "^1.86.1",
-    "undici": "^7.6.0",
-    "wrangler": "^4.7.1"
+    "undici": "^7.12.0",
+    "wrangler": "^4.25.0"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.779.0",
+    "@aws-sdk/client-s3": "^3.848.0",
     "@playwright/test": "^1.50.1",
     "@xicri/configs": "^2025.6.15",
     "concurrently": "^9.1.2",
