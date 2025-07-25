@@ -3,8 +3,8 @@ import { anyone } from "../access/anyone";
 import { authenticated } from "../access/authenticated";
 import type { CollectionConfig } from "payload";
 
-export const Categories: CollectionConfig = {
-  slug: "categories",
+export const Tags: CollectionConfig = {
+  slug: "tags",
   access: {
     create: authenticated,
     delete: authenticated,
@@ -12,11 +12,12 @@ export const Categories: CollectionConfig = {
     update: authenticated,
   },
   admin: {
-    useAsTitle: "title",
+    useAsTitle: "label",
   },
   fields: [
     {
-      name: "title",
+      name: "label",
+      label: "Label",
       type: "text",
       required: true,
     },

@@ -6,6 +6,8 @@ import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import sharp from "sharp"; // sharp-import
 import { Media } from "./collections/Media.ts";
 import { Users } from "./collections/Users/index.ts";
+import { Tags } from "./collections/Tags.ts";
+import { Words } from "./collections/Words.ts";
 import { Footer } from "./Footer/config.ts";
 import { Header } from "./Header/config.ts";
 import { plugins } from "./plugins/index.ts";
@@ -62,6 +64,8 @@ export default buildConfig({
   collections: [
     Media,
     Users,
+    Tags,
+    Words,
   ],
   cors: [ getServerSideURL() ].filter(Boolean),
   globals: [
