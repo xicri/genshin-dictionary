@@ -8,6 +8,8 @@ import { defaultLexical } from "@/fields/defaultLexical.ts";
 import { searchFields } from "@/search/fieldOverrides.ts";
 import { beforeSyncWithSearch } from "@/search/beforeSync.ts";
 import { Users } from "./collections/Users.ts";
+import { Tags } from "./collections/Tags.ts";
+import { Words } from "./collections/Words.ts";
 import { getServerSideURL } from "./utilities/getURL.ts";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -55,11 +57,13 @@ export default buildConfig({
   }),
   collections: [
     Users,
+    Tags,
+    Words,
   ],
   cors: [ getServerSideURL() ].filter(Boolean),
   plugins: [
     searchPlugin({
-      collections: [ "posts" ],
+      collections: [ "words" ],
       beforeSync: beforeSyncWithSearch,
       searchOverrides: {
         fields: ({ defaultFields }) => {
