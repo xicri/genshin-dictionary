@@ -3,14 +3,6 @@
   "description": "An online Japanese-English dictionary for terms in Genshin Impact",
   "license": "Apache-2.0",
   "author": "Xicri (https://genshin-dictionary.com/)",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xicri/genshin-dictionary.git"
-  },
-  "bugs": {
-    "url": "https://github.com/xicri/genshin-dictionary/issues"
-  },
-  "homepage": "https://genshin-dictionary.com",
   "private": true,
   "type": "module",
   "scripts": {
@@ -24,12 +16,8 @@
     "vrt": "pnpm e2e:prepare && concurrently --kill-others --success=first \"npm:e2e:server\" \"npm:vrt:screenshot\" && npm run vrt:reg",
     "vrt:screenshot": "sleep 5 && jiti ./scripts/vrt-screenshot.ts",
     "vrt:reg": "./scripts/vrt-reg.sh",
-    "lint": "nuxt typecheck && eslint",
-    "fix": "eslint --fix",
-    "purge-cache": "jiti ./scripts/purge-cache.ts",
+    "lint": "nuxt typecheck",
     "update-nuxt": "nuxi upgrade --force",
-    "clean": "git clean -dX --exclude=\"!.env\" --force",
-    "refresh": "pnpm clean && rm --force ./pnpm-lock.yaml && corepack up && pnpm install",
     "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && jiti ./scripts/build.ts"
   },
   "dependencies": {
@@ -57,9 +45,7 @@
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.848.0",
     "@playwright/test": "^1.50.1",
-    "@xicri/configs": "^2025.6.15",
     "concurrently": "^9.1.2",
-    "eslint": "^9.27.0",
     "playwright": "^1.33.0",
     "reg-notify-github-plugin": "^0.14.4",
     "reg-publish-s3-plugin": "^0.14.4",
@@ -68,10 +54,5 @@
     "vitest": "^3.1.1",
     "vue-tsc": "^3.0.3",
     "xml2js": "^0.6.2"
-  },
-  "engines": {
-    "node": "22.x || 24.x",
-    "pnpm": ">=9"
-  },
-  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
+  }
 }
