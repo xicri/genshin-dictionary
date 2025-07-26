@@ -1,8 +1,18 @@
 import { core, nodejs, vue } from "@xicri/configs/eslint";
+import { withNuxt } from "./.nuxt/eslint.config.mjs";
 
-const configs = [
+const configs = withNuxt([
+  {
+    ignores: [
+      "./.nuxt/**",
+      "./dist/**",
+      "./dataset/**",
+    ],
+  },
+
   ...core,
   ...nodejs,
+  ...vue,
 
   {
     // Do not add `files: [ "*" ],` here.
@@ -14,6 +24,6 @@ const configs = [
       },
     },
   },
-];
+]);
 
 export default configs;

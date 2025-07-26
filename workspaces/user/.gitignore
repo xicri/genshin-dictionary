@@ -1,0 +1,7 @@
+#
+# Project-specific
+#
+/dataset/
+/functions/
+/public/dataset/
+/public/_redirects
