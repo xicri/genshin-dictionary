@@ -1,0 +1,42 @@
+{
+  "name": "genshin-dictionary",
+  "description": "An online Japanese-English dictionary for terms in Genshin Impact",
+  "license": "Apache-2.0",
+  "author": "Xicri (https://genshin-dictionary.com/)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xicri/genshin-dictionary.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xicri/genshin-dictionary/issues"
+  },
+  "homepage": "https://genshin-dictionary.com",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm -r run dev",
+    "build": "pnpm -r run build",
+    "preview": "pnpm -r run preview",
+    "test": "pnpm -r run test",
+    "e2e": "pnpm -r run e2e",
+    "e2e:server": "pnpm -r run e2e:server",
+    "e2e:prepare": "pnpm -r run e2e:prepare",
+    "vrt": "pnpm -r run vrt",
+    "update-nuxt": "pnpm -r run update-nuxt",
+    "lint": "pnpm -r run lint && eslint",
+    "fix": "eslint --fix",
+    "purge-cache": "jiti ./scripts/purge-cache.ts",
+    "clean": "git clean -dX --exclude=\"!.env\" --force",
+    "refresh": "pnpm clean && rm --force ./pnpm-lock.yaml && corepack up && pnpm install"
+  },
+  "devDependencies": {
+    "@xicri/configs": "^2025.6.15",
+    "eslint": "^9.27.0",
+    "undici": "^7.12.0"
+  },
+  "engines": {
+    "node": "22.x || 24.x",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
+}
