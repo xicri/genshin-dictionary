@@ -15,7 +15,7 @@ import {
   PreviewField,
 } from "@payloadcms/plugin-seo/fields";
 import { slugField } from "@/fields/slug";
-import { authenticated } from "../../access/authenticated";
+import { member } from "../../access/member.ts";
 import { authenticatedOrPublished } from "../../access/authenticatedOrPublished";
 import { Banner } from "../../blocks/Banner/config";
 import { Code } from "../../blocks/Code/config";
@@ -29,10 +29,10 @@ import type { CollectionConfig } from "payload";
 export const Posts: CollectionConfig<"posts"> = {
   slug: "posts",
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: member,
+    delete: member,
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: member,
   },
   // This config controls what's populated by default when a post is referenced
   // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property

@@ -1,15 +1,15 @@
-import { authenticated } from "../access/authenticated.ts";
+import { owner } from "../access/owner.ts";
 import type { CollectionConfig } from "payload";
 
 export const Users: CollectionConfig = {
   auth: true,
   slug: "users",
   access: {
-    admin: authenticated,
-    create: authenticated,
-    delete: authenticated,
-    read: authenticated,
-    update: authenticated,
+    admin: owner,
+    create: owner,
+    delete: owner,
+    read: owner,
+    update: owner,
   },
   admin: {
     defaultColumns: [ "name", "email" ],
@@ -19,6 +19,16 @@ export const Users: CollectionConfig = {
     {
       name: "name",
       type: "text",
+    },
+    {
+      name: "role",
+      type: "select",
+      options: [
+        { label: "Owner", value: "owner" },
+        { label: "Member", value: "member" },
+      ],
+      defaultValue: "member",
+      required: true,
     },
   ],
   timestamps: true,
