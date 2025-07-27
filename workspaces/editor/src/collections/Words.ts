@@ -226,6 +226,7 @@ export const Words: CollectionConfig = {
         },
       ],
     },
+    // TODO
     // /** The date this word is added */
     // createdAt?: string;
     // /** The date this word is updated */
