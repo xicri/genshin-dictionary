@@ -18,13 +18,6 @@ updates:
         update-types:
           - "minor"
           - "patch"
-    # Ignore ESLint-related packages until my ESLint config is ready for v9 & flat config
-    ignore:
-      - dependency-name: "eslint"
-        versions: ">= 9"
-      - dependency-name: "typescript-eslint"
-      - dependency-name: "eslint-plugin-*"
-      - dependency-name: "eslint-config-*"
 
   - package-ecosystem: "github-actions"
     directory: "/"
