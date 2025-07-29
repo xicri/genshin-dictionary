@@ -2,7 +2,7 @@ import type { CheckboxField, TextField } from "payload";
 
 type Slug = (fieldToUse: string) => [TextField, CheckboxField];
 
-export const slugField: Slug = (fieldToUse = "title") => {
+export const slugField: Slug = (fieldToUse) => {
   const checkBoxField: CheckboxField = {
     name: "slugLock",
     type: "checkbox",

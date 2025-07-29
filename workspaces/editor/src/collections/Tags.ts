@@ -39,6 +39,6 @@ export const Tags: CollectionConfig = {
       type: "text",
       required: true,
     },
-    ...slugField(),
+    ...slugField("en"),
   ],
 };

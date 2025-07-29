@@ -231,6 +231,6 @@ export const Words: CollectionConfig = {
     // /** The date this word is updated */
     // updatedAt?: string;
 
-    ...slugField(),
+    ...slugField("en"),
   ],
 };
