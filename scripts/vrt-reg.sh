@@ -38,7 +38,7 @@ if [[ "${HASH_PROD}" == "${HASH_PR}" ]]; then
   exit 1
 fi
 
-AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" pnpm exec jiti "${PROJECT_ROOT}/scripts/vrt-reg-cleanup-r2.ts"
+AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" node "${PROJECT_ROOT}/scripts/vrt-reg-cleanup-r2.mjs"
 
 #
 # upload current screenshots
@@ -49,8 +49,8 @@ mv "${PROJECT_ROOT}/tmp/reg-suit/current" "${PROJECT_ROOT}/tmp/reg-suit/actual"
 export EXPECTED_KEY=""
 export ACTUAL_KEY="${HASH_PROD}"
 
-pnpm exec reg-suit compare
-pnpm exec reg-suit publish
+npx reg-suit compare
+npx reg-suit publish
 
 #
 # compare new screenshots and current ones
@@ -62,4 +62,4 @@ mv "${PROJECT_ROOT}/tmp/reg-suit/new" "${PROJECT_ROOT}/tmp/reg-suit/actual"
 export EXPECTED_KEY="${HASH_PROD}"
 export ACTUAL_KEY="${HASH_PR}"
 
-pnpm exec reg-suit run
+npx reg-suit run
