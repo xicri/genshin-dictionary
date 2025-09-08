@@ -33,7 +33,7 @@
     "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && jiti ./scripts/build.ts"
   },
   "dependencies": {
-    "@escapace/accept-language-parser": "^1.6.7",
+    "@escapace/accept-language-parser": "^2.1.1",
     "@nuxt/devtools": "^2.6.3",
     "@nuxt/eslint": "1.9.0",
     "@nuxtjs/i18n": "^9.4.0",
