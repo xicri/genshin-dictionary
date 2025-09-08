@@ -36,7 +36,7 @@
     "@escapace/accept-language-parser": "^1.6.7",
     "@nuxt/devtools": "^2.6.3",
     "@nuxt/eslint": "1.9.0",
-    "@nuxtjs/i18n": "^9.4.0",
+    "@nuxtjs/i18n": "^10.0.6",
     "@nuxtjs/robots": "^5.5.1",
     "@nuxtjs/sitemap": "^7.2.2",
     "@pinia/nuxt": "0.11.2",
