@@ -98,6 +98,8 @@ describe("The Genshin English Dictionary", () => {
     // When Nuxt finishes the page load process, Nuxt seems to reset scroll position to the top.
     await page.waitForTimeout(1400);
 
+    // @ts-expect-error - You don't have to declare window and document object
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
 
     await page.waitForTimeout(1400); // Wait for additional words loaded
@@ -140,8 +142,9 @@ describe("The Genshin English Dictionary", () => {
     await page.goto(rootURL);
     await page.waitForTimeout(1400); // Wait for page initialization process
 
-    // Do not run test on Desktop
-    if (840 < await page.evaluate(() => window.innerWidth)) {
+    // @ts-expect-error - You don't have to declare window and document object
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
+    if (840 < await page.evaluate(() => window.innerWidth)) { // Do not run test on Desktop
       return;
     }
 
