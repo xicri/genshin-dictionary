@@ -2,7 +2,7 @@ import { defineNuxtConfig } from "nuxt/config";
 import tags from "./app/dataset/tags.json" with { type: "json" };
 import words from "./app/dataset/words.json" with { type: "json" };
 import type { LocaleObject } from "@nuxtjs/i18n";
-import type { Word } from "~/utils/types.ts";
+import type { Word } from "./app/utils/types.ts";
 
 const isLocal = !process.env.SERVER_ENV || process.env.SERVER_ENV === "local";
 const tagIDs = Object.keys(tags);
