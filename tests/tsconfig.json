@@ -1,0 +1,6 @@
+{
+  "extends": "@xicri/configs/tsconfig/nodejs",
+  "include": [
+    "./**/*.ts"
+  ]
+}
