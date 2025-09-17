@@ -11,7 +11,7 @@ import type { RouteLocationNormalizedLoaded } from "#vue-router";
 const getTagIdFromParams = (route: RouteLocationNormalizedLoaded): TagID => {
   const tagID = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
 
-  if (!Object.keys(tags).includes(tagID)) { // unexpected tagID given
+  if (!tagID || !Object.keys(tags).includes(tagID)) { // unexpected tagID given
     throw createError({ statusCode: 404, fatal: true });
   }
 

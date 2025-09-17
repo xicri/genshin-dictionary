@@ -19,8 +19,14 @@ const onSearch = (): void => {
   }
 };
 
+const wordID = Array.isArray(route.params.wordid) ? route.params.wordid[0] : route.params.wordid;
+
+if (!wordID) {
+  throw createError({ statusCode: 404, fatal: true });
+}
+
 store.$reset();
-store.queryByID(Array.isArray(route.params.wordid) ? route.params.wordid[0] : route.params.wordid);
+store.queryByID(wordID);
 const word = store.searchResults[0];
 
 if (!word) {

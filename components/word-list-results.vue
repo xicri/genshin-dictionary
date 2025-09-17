@@ -188,10 +188,10 @@ const observer = import.meta.client ? new IntersectionObserver((entries, observe
 }) : null;
 
 const addIntersectionObserver = (): void => {
-  const wordEls = wordList.value;
+  const lastWord = wordList.value?.[wordList.value.length - 1];
 
-  if (wordEls && 0 < wordEls.length) {
-    observer?.observe(wordEls[wordEls.length - 1]); // add observer to the last word element
+  if (lastWord) {
+    observer?.observe(lastWord); // add observer to the last word element
   }
 };
 
