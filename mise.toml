@@ -1,0 +1,77 @@
+[tools]
+node = { version = "24" }
+
+[tasks]
+  [tasks.dev]
+  run = "nuxt dev"
+
+  [tasks.build]
+  run = "jiti ./scripts/build.ts && nuxt build"
+  env = { NODE_ENV = "production" }
+
+  [tasks.preview]
+  run = "wrangler pages dev --local"
+
+  [tasks.lint]
+  run = [
+    "nuxt typecheck",
+    "eslint"
+  ]
+
+  [tasks.fix]
+  run = "eslint --fix"
+
+  [tasks.test]
+  run = "vitest run"
+
+  [tasks.e2e]
+  run = "playwright test --shard=\"${SHARD_INDEX}/${SHARD_TOTAL}\""
+
+  [tasks."e2e:server"]
+  run = "wrangler pages dev --local --show-interactive-dev-session=false --port=5678"
+
+  [tasks."e2e:prepare"]
+  run = "playwright install chromium webkit --with-deps"
+
+  [tasks.vrt]
+  run = "pnpm e2e:prepare && concurrently --kill-others --success=first \"npm:e2e:server\" \"npm:vrt:screenshot\" && npm run vrt:reg"
+
+  [tasks."vrt:screenshot"]
+  run = "sleep 5 && jiti ./scripts/vrt-screenshot.ts"
+
+  [tasks."vrt:reg"]
+  run = "./scripts/vrt-reg.sh"
+
+  [tasks."purge-cache"]
+  run = "jiti ./scripts/purge-cache.ts"
+
+  [tasks."update-nuxt"]
+  run = "nuxi upgrade --force"
+
+  [tasks.clean]
+  run = "git clean -dX --exclude=\"!.env\" --force"
+
+  [tasks.refresh]
+  run = [
+    { task = "clean" },
+    "rm --force ./pnpm-lock.yaml",
+    "corepack enable",
+    "corepack up",
+    "mise install"
+  ]
+
+[hooks]
+postinstall = [
+  "corepack enable",
+  "pnpm install --frozen-lockfile",
+  "node ./scripts/postinstall.mjs",
+  "nuxt prepare",
+  "jiti ./scripts/build.ts",
+]
+
+[env]
+_.path = "./node_modules/.bin"
+
+[settings]
+jobs = 8
+experimental = true
