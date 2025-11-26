@@ -52,9 +52,9 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
     tsConfig: {
-      extends: [
-        "@xicri/configs/tsconfig",
-      ],
+      compilerOptions: {
+        allowImportingTsExtensions: true,
+      },
       // Relative paths are based on .nuxt/tsconfig.json.
       // ../ means project root.
       exclude: [
@@ -118,7 +118,19 @@ export default defineNuxtConfig({
 
   eslint: {
     config: {
-      standalone: false,
+      nuxt: {
+        sortConfigKeys: false,
+      },
+      stylistic: {
+        arrowParens: true,
+        braceStyle: "1tbs",
+        blockSpacing: true,
+        commaDangle: "always-multiline",
+        indent: 2,
+        quoteProps: "as-needed",
+        quotes: "double",
+        semi: true,
+      },
     },
   },
 
