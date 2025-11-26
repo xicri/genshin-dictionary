@@ -45,7 +45,7 @@ export const candidate = (str: string | undefined): CandidateString => new Candi
 
 export const sleep = async (ms: number): Promise<void> =>
   new Promise((resolve) =>
-    setTimeout(() => resolve(undefined), ms)
+    setTimeout(() => resolve(undefined), ms),
   );
 
 export const escapeHtmlString = (html: string): string => {
