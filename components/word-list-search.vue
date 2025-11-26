@@ -106,6 +106,7 @@ const AvailableTags = computed(() => {
   const availableTags = klona(allTags);
 
   for (const searchTag of tags.value) {
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete -- TODO fixme
     delete availableTags[searchTag];
   }
 
@@ -121,20 +122,15 @@ const updateSearchQuery = debounce((evt: InputEvent) => {
 }, 500);
 const focusOnSearchBox = (): void => {
   if (searchBox.value) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- TODO fixme
     const searchBoxTextLength = searchBox.value.getTextLength() ?? null;
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- TODO fixme
     searchBox.value.setSelectionRange(searchBoxTextLength, searchBoxTextLength);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- TODO fixme
     searchBox.value.focus();
   }
 };
 const selectAll = (): void => {
   if (searchBox.value) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- TODO fixme
     searchBox.value.setSelectionRange(0, searchBox.value.getTextLength() ?? null);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- TODO fixme
     searchBox.value.focus();
   }
 };
