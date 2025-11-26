@@ -20,6 +20,7 @@ You may need experience in (or need to learn) following technology stack to cont
 ### Requirements
 
 - Node.js: The latest LTS version recommended
+  - or you can install it via [mise](https://mise.jdx.dev/installing-mise.html)
 - (Windows only) PowerShell 7+
   - Some npm scripts needs `&&` support
 
@@ -27,6 +28,7 @@ You may need experience in (or need to learn) following technology stack to cont
 
 ```shell
 $ cd /path/to/genshin-dictionary
+$ mise install # If you use mise to install Node.js
 $ pnpm install
 $ pnpm dev
 ```
