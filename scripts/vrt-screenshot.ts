@@ -40,7 +40,7 @@ for (const env of envs) {
               .split("/")
               .filter((str) => !!str)
               .join("_")
-          }.png`
+          }.png`,
         ),
         fullPage: target.fullPage,
       });

@@ -161,7 +161,7 @@ const createLink = (url: string, text: string) => `<a href="${ url }" target="_b
 const aboutIntroText = computed(() => {
   const genshinLink = createLink(
     locale.value === "zh-CN" ? "https://ys.mihoyo.com" : "https://genshin.hoyoverse.com",
-    t("genshinImpact")
+    t("genshinImpact"),
   );
   return t("aboutIntro", { genshinLink });
 });
