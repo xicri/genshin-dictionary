@@ -9,18 +9,18 @@ If you want to contribute this project by adding new words or fixing wrong trans
 
 ## Development
 
-Genshin Dictionary is a website based on Nuxt 3.
+Genshin Dictionary is a website based on Next.js.
 You may need experience in (or need to learn) following technology stack to contribute this project:
 
-- JavaScript (ES2015+)
-- Nuxt 3
-- Vue 3 (Composition API)
+- TypeScript
+- Next.js
+- React
 - Scss (Understanding for BEM is required)
 
 ### Requirements
 
 - Node.js: The latest LTS version recommended
-  - or you can install it via [mise](https://mise.jdx.dev/installing-mise.html)
+- npm: The latest version recommended
 - (Windows only) PowerShell 7+
   - Some npm scripts needs `&&` support
 
@@ -28,9 +28,8 @@ You may need experience in (or need to learn) following technology stack to cont
 
 ```shell
 $ cd /path/to/genshin-dictionary
-$ mise install # If you use mise to install Node.js
-$ pnpm install
-$ pnpm dev
+$ npm ci
+$ npm run dev
 ```
 
 Then open http://localhost:3000/ to view your local Genshin Dictionary.
@@ -38,18 +37,18 @@ Then open http://localhost:3000/ to view your local Genshin Dictionary.
 ### Test & Lint
 
 ```shell
-$ pnpm test
-$ pnpm lint
+$ npm test
+$ npm run lint
 ```
 
-`pnpm test` runs E2E tests by Playwright.
+`npm test` runs E2E tests by Playwright.
 If you use Linux, you need to install system dependencies.
 On Ubuntu and Ubuntu-based distributions, you can install dependencies automatically with following command:
 
 ```shell
-$ sudo pnpm playwright install-deps
+$ sudo npx playwright install-deps
 ```
 
 ### Update translation dataset
 
-Translation dataset is fetched after `pnpm install`. To update it, run `pnpm install` again.
+Translation dataset is fetched after `npm install` or `npm ci`. To update it, run `npm ci` again.

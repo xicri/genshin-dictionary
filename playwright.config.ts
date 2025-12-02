@@ -2,13 +2,13 @@ import { defineConfig, devices } from "@playwright/test";
 
 const debugOptions = {
   // headless: false,
-  launchOptions: {
-    slowMo: 1000,
-  },
+  // launchOptions: {
+  //   slowMo: 50,
+  // },
 };
 
-export default defineConfig({
-  testMatch: /.*(pwtest)\.(js|ts|mjs)/,
+const config = defineConfig({
+  testMatch: /.*(pwtest)\.ts/,
   workers: 1, // disable concurrent tests
 
   projects: [
@@ -34,23 +34,24 @@ export default defineConfig({
         ...debugOptions,
       },
     },
-    // Temporarily disable Firefox tests because it does not pass for unknown reason
-    // {
-    //   name: "Firefox - Desktop",
-    //   use: {
-    //     ...devices["Desktop Firefox"],
-    //     ...debugOptions,
-    //   },
-    // },
+    {
+      name: "Firefox - Desktop",
+      use: {
+        ...devices["Desktop Firefox"],
+        ...debugOptions,
+      },
+    },
   ],
 
   webServer: {
-    command: "pnpm e2e:server",
-    url: "http://localhost:5678/ja",
+    command: "PORT=5678 npm start",
+    url: "http://localhost:5678/ja/",
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,
   },
   use: {
-    baseURL: "http://localhost:5678/ja",
+    baseURL: "http://localhost:5678/ja/",
   },
 });
+
+export default config;

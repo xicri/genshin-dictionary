@@ -1,18 +1,20 @@
-name: "VRT"
+name: "vrt"
 
 on:
   pull_request:
     branches:
       - main
-
-permissions: {}
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
 
 jobs:
   vrt:
     timeout-minutes: 15
     env:
       SERVER_ENV: local
-      AWS_REGION: auto # Cloudflare R2's region should be `auto`.
       AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
       REG_SUIT_GITHUB_CLIENT_ID: ${{ secrets.REG_SUIT_GITHUB_CLIENT_ID }}
@@ -20,34 +22,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      - uses: actions/checkout@v3
         with:
           # See: https://github.com/actions/checkout#checkout-pull-request-head-commit-instead-of-merge-commit
           ref: ${{ github.event.pull_request.head.sha }}
-      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      - uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+      - uses: actions/setup-node@v3
         with:
-          node-version: 22
-          cache: pnpm
+          node-version: 18
+          cache: npm
 
       - name: cache playwright browsers
         id: playwright-cache
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        uses: actions/cache@v3
         with:
           path: ~/.cache/ms-playwright
-          key: playwright
+          key: playwright-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Cache deb files
-        id: deb-cache
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
-        with:
-          path: /var/cache/apt/archives
-          # To avoid keeping caches of too old deb files,
-          # refresh it when the lock file is updated
-          key: deb-${{ hashFiles('**/pnpm-lock.yaml') }}
-
-      - run: pnpm install --frozen-lockfile
-      - name: Install browsers & system deps for Playwright
-        run: pnpm e2e:prepare
-      - run: pnpm build
-      - run: pnpm vrt
+      - run: npm ci
+      - name: install system dependencies for Playwright
+        run: npx playwright install-deps chromium
+      - run: npm run build
+      - run: npm run vrt
