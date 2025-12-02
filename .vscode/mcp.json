@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "eslint": {
+      "command": "pnpm",
+      "args": ["exec", "eslint", "--mcp"]
+    },
+    "next-devtools": {
+      "command": "pnpm",
+      "args": ["exec", "next-devtools-mcp"]
+    }
+  }
+}

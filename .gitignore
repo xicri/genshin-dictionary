@@ -27,7 +27,6 @@ Thumbs.db
 
 # Editors
 .idea/
-.vscode/
 
 # Build directory
 ## Nuxt creates dist as a symlink when you run `nuxt generate`, so trailing slash must not be added
