@@ -28,4 +28,4 @@ jobs:
       - name: Purge cache of Cloudflare CDN
         run: |
           pnpm install jiti undici
-          pnpm purge-cache
+          mise purge-cache

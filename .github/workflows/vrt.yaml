@@ -47,8 +47,8 @@ jobs:
           # refresh it when the lock file is updated
           key: deb-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-      - run: pnpm install --frozen-lockfile
+      - run: mise install
       - name: Install browsers & system deps for Playwright
-        run: pnpm e2e:prepare
-      - run: pnpm build
-      - run: pnpm vrt
+        run: mise e2e:prepare
+      - run: mise build
+      - run: mise vrt

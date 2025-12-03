@@ -26,7 +26,7 @@ jobs:
           node-version: 24
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: pnpm lint
-      - run: pnpm test
+      - run: mise install
+      - run: mise build
+      - run: mise lint
+      - run: mise test

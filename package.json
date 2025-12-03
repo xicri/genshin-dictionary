@@ -14,23 +14,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxt dev",
-    "build": "jiti ./scripts/build.ts && nuxt build",
-    "preview": "wrangler pages dev --local",
-    "test": "vitest run",
-    "e2e": "playwright test --shard=\"${SHARD_INDEX}/${SHARD_TOTAL}\"",
-    "e2e:server": "wrangler pages dev --local --show-interactive-dev-session=false --port=5678",
-    "e2e:prepare": "playwright install chromium webkit --with-deps",
-    "vrt": "pnpm e2e:prepare && concurrently --kill-others --success=first \"npm:e2e:server\" \"npm:vrt:screenshot\" && npm run vrt:reg",
-    "vrt:screenshot": "sleep 5 && jiti ./scripts/vrt-screenshot.ts",
-    "vrt:reg": "./scripts/vrt-reg.sh",
-    "lint": "nuxt typecheck && eslint",
-    "fix": "eslint --fix",
-    "purge-cache": "jiti ./scripts/purge-cache.ts",
     "update-nuxt": "nuxi upgrade --force",
-    "clean": "git clean -dX --exclude=\"!.env\" --force",
-    "refresh": "pnpm clean && rm --force ./pnpm-lock.yaml && corepack up && pnpm install",
-    "postinstall": "node ./scripts/postinstall.mjs && nuxt prepare && jiti ./scripts/build.ts"
   },
   "dependencies": {
     "@escapace/accept-language-parser": "^1.6.7",
