@@ -4,6 +4,9 @@ node = { version = "24" }
 [hooks]
 postinstall = "corepack enable"
 
+[env]
+_.file = ".env"
+
 [settings]
 jobs = 8
 experimental = true
