@@ -12,12 +12,12 @@ mode = "smart"
 [env.production.vars]
 NODE_ENV = "production"
 SERVER_ENV = "production"
-NODE_VERSION = "22"
+NODE_VERSION = "24"
 
 [env.preview.vars]
 NODE_ENV = "production" # To omit devDependencies
 SERVER_ENV = "preview"
-NODE_VERSION = "22"
+NODE_VERSION = "24"
 
 [dev]
 port = 3000
