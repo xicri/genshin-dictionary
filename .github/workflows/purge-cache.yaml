@@ -5,7 +5,8 @@ on:
     types:
       - completed
 
-permissions: {}
+permissions:
+  contents: read
 
 jobs:
   trigger:
