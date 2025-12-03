@@ -7,7 +7,7 @@
 /public/_redirects
 
 #
-# System
+# Generic
 #
 
 # PIDs
@@ -21,14 +21,11 @@ pids
 Thumbs.db
 .DS_Store
 
-#
-# Generic
-#
-
 # Editors
 .idea/
 
 # Build directory
+build/
 ## Nuxt creates dist as a symlink when you run `nuxt generate`, so trailing slash must not be added
 dist
 
@@ -40,10 +37,24 @@ tmp/
 logs/
 *.log
 
+# Archives
+*.zip
+*.tar.gz
+*.tar.xz
+*.tar
+*.tgz
+
 # dotenv
 .env
 .env.*
 !.env.example
+
+# mise
+mise.local.toml
+
+# SQLite DB
+*.db
+*.db-journal
 
 #
 # JavaScript
@@ -58,9 +69,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
-# Output of `npm pack`
-*.tgz
 
 # pnpm is the package manager for this project.
 package-lock.json
@@ -81,6 +89,7 @@ npm-shrinkwrap.json
 ### nuxt-simple-[robots|sitemap]
 /public/robots.txt
 /public/sitemap.xml
+
 ## Others
 .next/
 out/
@@ -96,6 +105,10 @@ worker-configuration.d.ts
 ## Others
 .vercel/
 .netlify/
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
 
 # ESLint
 .eslintcache
