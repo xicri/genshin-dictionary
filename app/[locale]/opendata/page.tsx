@@ -1,19 +1,19 @@
 import Head from "next/head";
 import { I18n, validateLocale } from "@/libs/i18n";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import type { BuiltWord, Locale } from "@/types";
 import { Sentence } from "@/components/Sentence";
 import { Article } from "@/components/Article";
-import allTags from "../../public/dataset/tags.json";
-
+import allTags from "../../../public/dataset/tags.json";
 import { styles } from "@/styles/article";
+import type { BuiltWord, Locale } from "@/types";
 
 type Props = {
-  locale: Locale,
-  wordDataExample: string,
+  params: Promise<{ locale: string }>;
 };
 
-export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
+export default async function OpendataPage({ params }: Props): Promise<JSX.Element> {
+  const { locale: localeParam } = await params;
+  const locale = validateLocale(localeParam);
+
   const wordDataExampleObject: BuiltWord[] = [
     {
       id: "zhongli",
@@ -24,44 +24,37 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
       notes: "読みは「ヂョンリー」",
       notesZh: "锺离是中国古代早已有之的一个汉字复姓。…",
       variants: {
-        ja: [ "鐘離" ],
+        ja: ["鐘離"],
       },
       createdAt: "2022-01-01",
       updatedAt: "2022-01-01",
-      tags: [ "liyue", "character-main" ],
+      tags: ["liyue", "character-main"],
     },
     {
       id: "inazuman",
       en: "Inazuman",
       ja: "稲妻人",
-      zhCN: "稻妻人 / 稻妻的",
+      zhCN: "稻妾人 / 稻妾的",
       pronunciationJa: "いなずまじん",
       notes: "元々 Inazuman は非公式にプレイヤーの間で使われる言葉であったが…(以下略)",
       examples: [{
         en: "Inazumans are definitely more particular about etiquette than Mondstadters!",
-        ja: "モンド人よりも、稲妻人の方が礼儀に対して気を配っている。",
+        ja: "モンド人よりも、稲妹人の方が礼儀に対して気を配っている。",
         ref: "トーマ, キャラクター実戦紹介 トーマ「烈炎の守護」",
         refURL: "https://www.youtube.com/watch?v=jvmz4TrPgUE&t=16s",
       }],
       createdAt: "2022-01-01",
       updatedAt: "2022-01-01",
-      tags: [ "inazuma" ],
+      tags: ["inazuma"],
     },
   ];
 
-  return {
-    props: {
-      locale: validateLocale(locale),
-      wordDataExample: JSON.stringify(wordDataExampleObject, null, 2)
-        .replace(/\]$/, `
+  const wordDataExample = JSON.stringify(wordDataExampleObject, null, 2)
+    .replace(/\]$/, `
   // ...
 ]
-`),
-    },
-  };
-};
+`);
 
-export default function AboutPage({ locale, wordDataExample }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   const i18n = new I18n(locale, {
     en: {
       opendataTitle: "Open Data / API (β)",
@@ -74,34 +67,34 @@ export default function AboutPage({ locale, wordDataExample }: InferGetStaticPro
     },
   });
 
-  const title = `${ i18n.t("opendataTitle") } | ${ i18n.t("siteTitle") }`;
+  const title = `${i18n.t("opendataTitle")} | ${i18n.t("siteTitle")}`;
   // const description = t("opendataDescription"); // TODO
 
   return (
     <>
-      <style jsx>{ styles }</style>
+      <style jsx>{styles}</style>
 
       <Head>
-        <title>{ title }</title>
-        <meta property="og:title" content={ title } />
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
         {/* TODO
         <meta name="description" content={ description } />
         <meta property="og:description" content={ description } />
         */}
-        { locale !== "ja" ? (<meta name="robots" content="noindex" />) : "" }
+        {locale !== "ja" ? <meta name="robots" content="noindex" /> : null}
       </Head>
 
       <div className="article__wrapper-outer">
         <div className="article__wrapper-inner">
           <Article locale={locale}>
-            <h2>{ i18n.t("opendataTitle") }</h2>
+            <h2>{i18n.t("opendataTitle")}</h2>
 
             <main>
-              { locale !== "ja" ? (
+              {locale !== "ja" ? (
                 <p>
                   <strong>This page is not translated to English/Simplified Chinese yet.</strong>
                 </p>
-              ) : "" }
+              ) : null}
 
               <p>
                 <Sentence lang="en">
@@ -180,7 +173,7 @@ export default function AboutPage({ locale, wordDataExample }: InferGetStaticPro
                 <Sentence lang="zh-CN">JSON は以下の例のように、オブジェクトの配列になっています。</Sentence>
               </p>
               <code>
-                <pre>{ wordDataExample }</pre>
+                <pre>{wordDataExample}</pre>
               </code>
               <p>
                 <Sentence lang="en">各オブジェクトのプロパティは以下の通りです:</Sentence>
@@ -327,9 +320,9 @@ export default function AboutPage({ locale, wordDataExample }: InferGetStaticPro
                   <Sentence lang="zh-CN">タグ。タグは以下の種類が存在します:</Sentence>
 
                   <ul>
-                    { Object.entries(allTags).map(([ tagID, tag ]) => (
-                      <li key={ tagID }>
-                        <code>{ tagID }</code> ― { tag[locale] }
+                    {Object.entries(allTags).map(([tagID, tag]) => (
+                      <li key={tagID}>
+                        <code>{tagID}</code> ― {tag[locale]}
                       </li>
                     ))}
                   </ul>

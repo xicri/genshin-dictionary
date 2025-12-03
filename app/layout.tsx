@@ -1,6 +1,7 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import { Html, Head, Body } from "next/document";
+import type { ReactNode } from "react";
 
-export default function Document(): JSX.Element {
+export default function RootLayout({ children }: { children: ReactNode }): JSX.Element {
   return (
     <Html>
       <Head>
@@ -14,17 +15,16 @@ export default function Document(): JSX.Element {
 
         <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
       </Head>
-      <body>
-        <Main />
-        <NextScript />
-        { process.env.SERVER_ENV === "production" ? (
+      <Body>
+        {children}
+        {process.env.SERVER_ENV === "production" ? (
           <script
             src="https://static.cloudflareinsights.com/beacon.min.js"
             data-cf-beacon='{"token": "1f401150384f4aaa9d14b208aac9fdba"}'
             defer
           ></script>
-        ) : "" }
-      </body>
+        ) : null}
+      </Body>
     </Html>
   );
 }

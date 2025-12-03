@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { ClosingLayer } from "@/components/ClosingLayer";
-import { I18n, validateLocale } from "@/libs/i18n";
+import { I18n, getAvailableLocales } from "@/libs/i18n";
 import type { ChangeEvent } from "react";
 import type { Locale } from "@/types";
 
@@ -11,7 +10,7 @@ type Props = {
 };
 
 export function HamburgerMenu({ locale }: Props): JSX.Element {
-  const { locales } = useRouter();
+  const locales = getAvailableLocales();
   const [ open, setOpen ] = useState(false);
 
   //
@@ -164,13 +163,13 @@ export function HamburgerMenu({ locale }: Props): JSX.Element {
         <div className="menu__nav-padding">
           <ul className="menu__items">
             <li className="menu__item">
-              <Link href="/about/">{ i18n.t("about") }</Link>
+              <Link href={`/${locale}/about/`}>{ i18n.t("about") }</Link>
             </li>
             <li className="menu__item">
-              <Link href="/opendata/">{ i18n.t("opendata") }</Link>
+              <Link href={`/${locale}/opendata/`}>{ i18n.t("opendata") }</Link>
             </li>
             <li className="menu__item">
-              <Link href="/history/">{ i18n.t("history") }</Link>
+              <Link href={`/${locale}/history/`}>{ i18n.t("history") }</Link>
             </li>
             <li className="menu__item">
               <a href="https://translate.genshin-dictionary.com" target="_blank" rel="noopener">{ i18n.t("translate") }</a>
@@ -182,22 +181,15 @@ export function HamburgerMenu({ locale }: Props): JSX.Element {
             Languages
           </h2>
           <div className="menu__languages-list">
-            { locales?.filter(loc => loc !== "default")
-              .map(_loc => {
-                const loc = validateLocale(_loc);
-
-                return (
-                  <Link
-                    href="#" // Check if there is a way to avoid appending #
-                    key={loc}
-                    className="menu__languages-item"
-                    locale={loc}
-                  >
-                    { localeToLocaleName(loc) }
-                  </Link>
-                );
-              })
-            }
+            {locales.map((loc) => (
+              <Link
+                href={`/${loc}/`}
+                key={loc}
+                className="menu__languages-item"
+              >
+                {localeToLocaleName(loc)}
+              </Link>
+            ))}
           </div>
 
           <div className="menu__bottomline">

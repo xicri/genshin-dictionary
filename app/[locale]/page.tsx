@@ -1,24 +1,20 @@
 import Head from "next/head";
 import { WordList } from "@/components/WordList";
 import { validateLocale } from "@/libs/i18n";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Locale } from "@/types";
 
 type Props = {
-  locale: Locale,
+  params: Promise<{ locale: string }>;
 };
 
-export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => ({
-  props: {
-    locale: validateLocale(locale),
-  },
-});
+export default async function IndexPage({ params }: Props): Promise<JSX.Element> {
+  const { locale: localeParam } = await params;
+  const locale = validateLocale(localeParam);
 
-export default function Index({ locale }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   return (
     <>
       <Head>
-        {/* Same as default title & description defined in _app.tsx:
+        {/* Same as default title & description defined in [locale]/layout.tsx:
 
           <title>{`${ t("siteTitle") } ― ${ t("titleDesc") }`}</title>
           <meta property="og:title" content={`${ t("siteTitle") } ― ${ t("titleDesc") }`} />

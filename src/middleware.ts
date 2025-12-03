@@ -4,21 +4,25 @@ import { validateLocale } from "./libs/i18n";
 import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest): NextResponse {
-  const res = NextResponse.next();
+  const pathname = req.nextUrl.pathname;
 
   // Ignore files with extension (≒ files under public directory)
-  if (/\.(.*)$/.test(req.nextUrl.pathname)) {
-    return res;
+  if (/\.(.*)$/.test(pathname)) {
+    return NextResponse.next();
   }
 
-  if (req.nextUrl.locale === "default") { // root path without locale path
-    const path = req.nextUrl.pathname + req.nextUrl.search + req.nextUrl.hash;
+  // Check if pathname starts with a locale
+  const pathnameHasLocale = /^\/(\w{2}|zh-CN)($|\/)/.test(pathname);
 
+  if (!pathnameHasLocale) {
+    // root path without locale path
     const localeInCookie = req.cookies.get("NEXT_LOCALE")?.value;
 
     if (localeInCookie) {
       const locale = validateLocale(localeInCookie);
-      return NextResponse.redirect(`${req.nextUrl.protocol}//${req.nextUrl.host}/${locale}${path}`);
+      return NextResponse.redirect(
+        new URL(`/${locale}${pathname}${req.nextUrl.search}`, req.url)
+      );
     } else {
       const acceptLanguageString = req.headers.get("Accept-Language");
 
@@ -30,22 +34,38 @@ export function middleware(req: NextRequest): NextResponse {
             acceptLanguage.code === "en" ||
             acceptLanguage.code === "ja"
           ) {
-            return NextResponse.redirect(`${req.nextUrl.protocol}//${req.nextUrl.host}/${acceptLanguage.code}${path}`);
+            return NextResponse.redirect(
+              new URL(`/${acceptLanguage.code}${pathname}${req.nextUrl.search}`, req.url)
+            );
           } else if (acceptLanguage.code === "zh") {
-            return NextResponse.redirect(`${req.nextUrl.protocol}//${req.nextUrl.host}/zh-CN${path}`);
+            return NextResponse.redirect(
+              new URL(`/zh-CN${pathname}${req.nextUrl.search}`, req.url)
+            );
           }
         }
 
         // If supported languages are not in Accept-Language, redirect to /en/
-        return NextResponse.redirect(`${req.nextUrl.protocol}//${req.nextUrl.host}/en${path}`);
+        return NextResponse.redirect(
+          new URL(`/en${pathname}${req.nextUrl.search}`, req.url)
+        );
       } else {
-        return NextResponse.redirect(`${req.nextUrl.protocol}//${req.nextUrl.host}/en${path}`);
+        return NextResponse.redirect(
+          new URL(`/en${pathname}${req.nextUrl.search}`, req.url)
+        );
       }
     }
-  } else { // with locale path (/en/*, /ja/*, /zh-CN/*)
-    res.cookies.set("NEXT_LOCALE", req.nextUrl.locale);
-    return res;
+  } else {
+    // with locale path (/en/*, /ja/*, /zh-CN/*)
+    const localeMatch = pathname.match(/^\/(\w{2}|zh-CN)/);
+    if (localeMatch) {
+      const locale = localeMatch[1];
+      const res = NextResponse.next();
+      res.cookies.set("NEXT_LOCALE", locale);
+      return res;
+    }
   }
+
+  return NextResponse.next();
 }
 
 export const config = {

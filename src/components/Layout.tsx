@@ -85,7 +85,7 @@ export function Layout({ children, locale }: Props): JSX.Element {
       <div className="layout-default__nav-wrapper">
         <nav className="layout-default__nav">
           <h1>
-            <Link href="/">
+            <Link href={`/${locale}/`}>
               <img src="/images/favicon.svg" alt={ i18n.t("siteTitle") } width="48" height="48" className="layout-default__logo" decoding="async" />
               <span className="layout-default__title">{ i18n.t("siteTitle") }</span>
             </Link>

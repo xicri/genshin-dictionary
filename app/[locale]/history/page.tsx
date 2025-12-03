@@ -1,20 +1,16 @@
 import Head from "next/head";
 import { WordList } from "@/components/WordList";
 import { I18n, validateLocale } from "@/libs/i18n";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Locale } from "@/types";
 
 type Props = {
-  locale: Locale,
+  params: Promise<{ locale: string }>;
 };
 
-export const getStaticProps: GetStaticProps<Props> = async ({ locale }): Promise<{ props: Props }> => ({
-  props: {
-    locale: validateLocale(locale),
-  },
-});
+export default async function HistoryPage({ params }: Props): Promise<JSX.Element> {
+  const { locale: localeParam } = await params;
+  const locale = validateLocale(localeParam);
 
-export default function HistoryPage({ locale }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   const i18n = new I18n(locale, {
     en: {
       title: "Update History",
@@ -29,13 +25,13 @@ export default function HistoryPage({ locale }: InferGetStaticPropsType<typeof g
       // description: "", // TODO
     },
   });
-  const title = `${ i18n.t("title") } | ${ i18n.t("siteTitle") }`;
+  const title = `${i18n.t("title")} | ${i18n.t("siteTitle")}`;
 
   return (
     <>
       <Head>
-        <title>{ title }</title>
-        <meta property="og:title" content={ title } />
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
         {/* TODO
           <meta name="description" content={ t("description") } />
           <meta property="og:description" content={ t("description") } />
@@ -69,7 +65,7 @@ export default function HistoryPage({ locale }: InferGetStaticPropsType<typeof g
       `}</style>
 
       <div className="history">
-        <h2>{ i18n.t("title") }</h2>
+        <h2>{i18n.t("title")}</h2>
 
         <WordList locale={locale} historyMode={true} />
       </div>

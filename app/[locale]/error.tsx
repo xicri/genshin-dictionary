@@ -1,20 +1,19 @@
+"use client";
+
 import Head from "next/head";
 import Link from "next/link";
 import { I18n, validateLocale } from "@/libs/i18n";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import type { Locale } from "@/types";
 
 type Props = {
-  locale: Locale,
+  error: Error & { digest?: string };
+  reset: () => void;
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }): Promise<{ props: Props }> => ({
-  props: {
-    locale: validateLocale(locale),
-  },
-});
+export default function ErrorPage({ error, reset }: Props): JSX.Element {
+  // Try to determine locale from current URL or default to 'en'
+  const locale = "en" as Locale; // Default to English for error pages
 
-export default function NotFound({ locale }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   const i18n = new I18n(locale, {
     en: {
       internalServerError: "System Error",
@@ -74,17 +73,17 @@ export default function NotFound({ locale }: InferGetStaticPropsType<typeof getS
       `}</style>
 
       <Head>
-        <title>{ i18n.t("internalServerError") }</title>
+        <title>{i18n.t("internalServerError")}</title>
       </Head>
 
       <div className="error">
         <div className="error__wrapper">
           <h1 className="error__title">
-            { i18n.t("internalServerError") }
+            {i18n.t("internalServerError")}
           </h1>
           <p className="error__message" dangerouslySetInnerHTML={{ __html: i18n.t("errorMsg") }}></p>
 
-          <p className="error__return"><Link href="/">{ i18n.t("returnToIndex") }</Link></p>
+          <p className="error__return"><Link href="/">{i18n.t("returnToIndex")}</Link></p>
         </div>
       </div>
     </>

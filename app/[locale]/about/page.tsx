@@ -1,23 +1,19 @@
 import Head from "next/head";
 import { I18n, validateLocale } from "@/libs/i18n";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import type { Locale } from "@/types";
 import { Sentence } from "@/components/Sentence";
 import { Article } from "@/components/Article";
-import allWords from "../../public/dataset/words.json";
+import allWords from "../../../public/dataset/words.json";
 import { styles } from "@/styles/article";
+import type { Locale } from "@/types";
 
 type Props = {
-  locale: Locale,
+  params: Promise<{ locale: string }>;
 };
 
-export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => ({
-  props: {
-    locale: validateLocale(locale),
-  },
-});
+export default async function AboutPage({ params }: Props): Promise<JSX.Element> {
+  const { locale: localeParam } = await params;
+  const locale = validateLocale(localeParam);
 
-export default function AboutPage({ locale }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   const i18n = new I18n(locale, {
     en: {
       aboutTitle: "About this website",
@@ -33,34 +29,34 @@ export default function AboutPage({ locale }: InferGetStaticPropsType<typeof get
     },
   });
 
-  const title = `${ i18n.t("aboutTitle") } | ${ i18n.t("siteTitle") }`;
+  const title = `${i18n.t("aboutTitle")} | ${i18n.t("siteTitle")}`;
   const description = i18n.t("aboutDescription");
 
   const wordCount = allWords.length;
 
   return (
     <>
-      <style jsx>{ styles }</style>
+      <style jsx>{styles}</style>
 
       <Head>
-        <title>{ title }</title>
-        <meta property="og:title" content={ title } />
-        <meta name="description" content={ description } />
-        <meta property="og:description" content={ description } />
-        { locale !== "ja" ? (<meta name="robots" content="noindex" />) : "" }
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
+        <meta name="description" content={description} />
+        <meta property="og:description" content={description} />
+        {locale !== "ja" ? <meta name="robots" content="noindex" /> : null}
       </Head>
 
       <div className="article__wrapper-outer">
         <div className="article__wrapper-inner">
           <Article locale={locale}>
-            <h2>{ i18n.t("aboutTitle") }</h2>
+            <h2>{i18n.t("aboutTitle")}</h2>
 
             <main>
-              { locale !== "ja" ? (
+              {locale !== "ja" ? (
                 <p>
                   <strong>This page is not translated to English/Simplified Chinese yet.</strong>
                 </p>
-              ) : "" }
+              ) : null}
               <p>
                 <Sentence lang="en">
                   このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「<a href="https://genshin.hoyoverse.com" target="_blank" rel="noopener">原神</a>」で用いられる固有名詞等の日本語・英語・中国語対訳表です。
@@ -73,9 +69,9 @@ export default function AboutPage({ locale }: InferGetStaticPropsType<typeof get
                 </Sentence>
               </p>
               <p>
-                <Sentence lang="en">現在の収録単語数は{ wordCount }語です。</Sentence>
-                <Sentence lang="ja">現在の収録単語数は{ wordCount }語です。</Sentence>
-                <Sentence lang="zh-CN">現在の収録単語数は{ wordCount }語です。</Sentence>
+                <Sentence lang="en">現在の収録単語数は{wordCount}語です。</Sentence>
+                <Sentence lang="ja">現在の収録単語数は{wordCount}語です。</Sentence>
+                <Sentence lang="zh-CN">現在の収録単語数は{wordCount}語です。</Sentence>
               </p>
 
               <h3>

@@ -35,27 +35,21 @@ const nextConfig = {
 
     for (const [ src, dest ] of Object.entries(wordRedirects)) {
       redirs.push({
-        source: `/${src}/`,
-        destination: `/${dest}/`,
+        source: `/:locale(en|ja|zh-CN)/${src}/`,
+        destination: `/:locale/${dest}/`,
         permanent: true,
       });
     }
 
     for (const [ src, dest ] of Object.entries(tagRedirects)) {
       redirs.push({
-        source: `/tags/${src}/`,
-        destination: `/tags/${dest}/`,
+        source: `/:locale(en|ja|zh-CN)/tags/${src}/`,
+        destination: `/:locale/tags/${dest}/`,
         permanent: true,
       });
     }
 
     return redirs;
-  },
-
-  i18n: {
-    locales: [ "default", "en", "ja", "zh-CN" ],
-    defaultLocale: "default",
-    localeDetection: false, // middleware handles locale redirection on root
   },
 };
 
