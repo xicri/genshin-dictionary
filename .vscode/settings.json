@@ -1,0 +1,39 @@
+{
+  "javascript.preferences.importModuleSpecifierEnding": "js",
+  "javascript.preferences.quoteStyle": "double",
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+
+  "eslint.useFlatConfig": true,
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact",
+    "vue",
+    "svelte",
+    "astro",
+    "html",
+    "json",
+    "jsonc",
+    "json5",
+  ],
+
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "never"
+  },
+  "eslint.format.enable": true,
+  "eslint.codeActionsOnSave.mode": "problems",
+  "eslint.codeActionsOnSave.rules": [
+    "@stylistic/arrow-parens",
+    "@stylistic/quotes",
+    "@stylistic/semi",
+    "@stylistic/space-before-blocks",
+    "@stylistic/space-before-function-paren",
+    "@stylistic/space-in-parens"
+  ],
+
+  "prettier.enable": false
+}
