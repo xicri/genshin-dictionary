@@ -12,6 +12,10 @@
     "mode": "smart"
   },
 
+  "build": {
+    "command": "npm install -g @jdxcode/mise && mise build"
+  },
+
   "env": {
     "production": {
       "vars": {
