@@ -13,9 +13,6 @@
   "homepage": "https://genshin-dictionary.com",
   "private": true,
   "type": "module",
-  "scripts": {
-    "update-nuxt": "nuxi upgrade --force",
-  },
   "dependencies": {
     "@escapace/accept-language-parser": "^1.6.7",
     "@nuxt/devtools": "^2.6.3",
