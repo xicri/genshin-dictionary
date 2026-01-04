@@ -363,7 +363,7 @@ const downloadLink = computed(() => {
 });
 
 const contactText = computed(() => {
-  const twitterLink = "<a href=\"https://x.com/xicri_gi\" target=\"_blank\" rel=\"noopener\">X (Twitter)</a>";
+  const twitterLink = "<a href=\"https://bsky.app/profile/xicri.genshin-dictionary.com\" target=\"_blank\" rel=\"noopener\">Bluesky</a>";
   return t("contactText", { twitterLink });
 });
 </script>

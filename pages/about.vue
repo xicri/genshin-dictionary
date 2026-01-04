@@ -167,7 +167,7 @@ const aboutIntroText = computed(() => {
 });
 
 const operatorText = computed(() => {
-  const twitterLink = createLink("https://x.com/xicri_gi", "X (Twitter)");
+  const twitterLink = createLink("https://bsky.app/profile/xicri.genshin-dictionary.com", "Bluesky");
   const githubLink = createLink("https://github.com/xicri", "GitHub");
   return t("operator", { twitterLink, githubLink });
 });
@@ -180,7 +180,7 @@ const contributorText = computed(() => {
 });
 
 const contactText = computed(() => {
-  const twitterLink = createLink("https://x.com/xicri_gi", "X (Twitter)");
+  const twitterLink = createLink("https://bsky.app/profile/xicri.genshin-dictionary.com", "Bluesky");
   const issuesLink = createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues");
   const discussionsLink = createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions");
 
