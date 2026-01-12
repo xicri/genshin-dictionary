@@ -8,6 +8,9 @@
 ## dataset
 /static/dataset/
 
+## inlang / Paraglide JS
+/src/lib/paraglide/
+
 #
 # Generic
 #
