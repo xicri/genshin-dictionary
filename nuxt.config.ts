@@ -4,7 +4,6 @@ import words from "./dataset/words.json" with { type: "json" };
 import type { LocaleObject } from "@nuxtjs/i18n";
 import type { Word } from "./types.ts";
 
-const isLocal = !process.env.SERVER_ENV || process.env.SERVER_ENV === "local";
 const tagIDs = Object.keys(tags);
 
 export const locales = [
@@ -31,14 +30,8 @@ export const locales = [
 ] as const satisfies LocaleObject<string>[];
 
 export default defineNuxtConfig({
-  compatibilityDate: "2025-02-07",
-  ssr: true,
-  components: true,
-
   nitro: {
-    preset: "cloudflare-pages",
     prerender: {
-      autoSubfolderIndex: false,
       routes: [ "en", "ja", "zh-CN", "zh-TW" ].map((locale) => [
         `/${ locale }`,
         ...(tagIDs.map((tagID) => `/${ locale }/tags/${ tagID }`)),
@@ -46,24 +39,6 @@ export default defineNuxtConfig({
         `/${ locale }/history`,
         `/${ locale }/opendata`,
       ]).flat(),
-    },
-  },
-
-  typescript: {
-    strict: true,
-    tsConfig: {
-      compilerOptions: {
-        allowImportingTsExtensions: true,
-      },
-      // Relative paths are based on .nuxt/tsconfig.json.
-      // ../ means project root.
-      exclude: [
-        // Dataset from genshin-langdata
-        "../dataset/**",
-        "../public/dataset/**",
-        // Cloudflare
-        "../.wrangler/**",
-      ],
     },
   },
 
@@ -80,10 +55,6 @@ export default defineNuxtConfig({
     "@nuxtjs/robots",
     "@nuxtjs/sitemap",
     "@pinia/nuxt",
-    ...(isLocal ? [
-      "@nuxt/devtools",
-      "@nuxt/eslint",
-    ] : []),
   ],
 
   i18n: {
@@ -110,28 +81,6 @@ export default defineNuxtConfig({
     exclude: [
       "/",
     ],
-  },
-
-  devtools: {
-    enabled: isLocal,
-  },
-
-  eslint: {
-    config: {
-      nuxt: {
-        sortConfigKeys: false,
-      },
-      stylistic: {
-        arrowParens: true,
-        braceStyle: "1tbs",
-        blockSpacing: true,
-        commaDangle: "always-multiline",
-        indent: 2,
-        quoteProps: "as-needed",
-        quotes: "double",
-        semi: true,
-      },
-    },
   },
 
   // For nuxt-simple-robots and nuxt-simple-sitemap

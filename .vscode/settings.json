@@ -32,7 +32,8 @@
     "@stylistic/semi",
     "@stylistic/space-before-blocks",
     "@stylistic/space-before-function-paren",
-    "@stylistic/space-in-parens"
+    "@stylistic/space-in-parens",
+    "svelte/indent"
   ],
 
   "prettier.enable": false
