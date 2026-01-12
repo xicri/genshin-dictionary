@@ -114,4 +114,5 @@ vite.config.ts.timestamp-*
 .eslintcache
 
 # Playwright
+test-results/
 .last-run.json
