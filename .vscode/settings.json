@@ -3,6 +3,10 @@
   "javascript.preferences.quoteStyle": "double",
   "typescript.preferences.preferTypeOnlyAutoImports": true,
 
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
   "eslint.useFlatConfig": true,
   "eslint.validate": [
     "javascript",
