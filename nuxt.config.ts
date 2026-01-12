@@ -30,18 +30,6 @@ export const locales = [
 ] as const satisfies LocaleObject<string>[];
 
 export default defineNuxtConfig({
-  nitro: {
-    prerender: {
-      routes: [ "en", "ja", "zh-CN", "zh-TW" ].map((locale) => [
-        `/${ locale }`,
-        ...(tagIDs.map((tagID) => `/${ locale }/tags/${ tagID }`)),
-        `/${ locale }/about`,
-        `/${ locale }/history`,
-        `/${ locale }/opendata`,
-      ]).flat(),
-    },
-  },
-
   css: [ "~/assets/styles/global.scss" ],
 
   runtimeConfig: {
@@ -51,19 +39,10 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    "@nuxtjs/i18n",
     "@nuxtjs/robots",
     "@nuxtjs/sitemap",
     "@pinia/nuxt",
   ],
-
-  i18n: {
-    locales,
-    strategy: "prefix",
-    baseUrl: "https://genshin-dictionary.com",
-    detectBrowserLanguage: false,
-    vueI18n: "i18n.config.ts",
-  },
 
   sitemap: {
     autoLastmod: false,

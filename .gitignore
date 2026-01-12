@@ -6,6 +6,9 @@
 /static/dataset/
 /_redirects
 
+# inlang / Paraglide JS
+/src/lib/paraglide/
+
 #
 # Generic
 #
