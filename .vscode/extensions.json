@@ -5,6 +5,7 @@
     "hverlin.mise-vscode",
     "tamasfe.even-better-toml",
     "mrmlnc.vscode-json5",
-    "svelte.svelte-vscode"
+    "svelte.svelte-vscode",
+    "inlang.vs-code-extension"
   ]
 }
