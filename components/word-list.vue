@@ -1,16 +1,3 @@
-<template>
-  <div class="word-list">
-    <div class="word-list__wrapper">
-      <word-list-search class="word-list__search" @search="$emit('search')" />
-      <word-list-results :words="searchResults" class="word-list__results" />
-    </div>
-
-    <p v-if="searchResults.length <= 0" data-e2e="empty">
-      {{ t("notFound") }}
-    </p>
-  </div>
-</template>
-
 <i18n lang="json">
 {
   "en": {
@@ -29,19 +16,19 @@
 </i18n>
 
 <script lang="ts" setup>
-import { storeToRefs } from "pinia";
-import { useDictionaryStore } from "~/store/index.ts";
-import type { Locale } from "~/types.ts";
+  import { storeToRefs } from "pinia";
+  import { useDictionaryStore } from "~/store/index.ts";
+  import type { Locale } from "~/types.ts";
 
-defineEmits([ "search" ]);
+  defineEmits([ "search" ]);
 
-const { $pinia } = useNuxtApp();
-const { t, locale } = useI18n<[], Locale>({
-  useScope: "local",
-});
-const store = useDictionaryStore($pinia);
-store.setLocale(locale.value);
-const { searchResults } = storeToRefs(store);
+  const { $pinia } = useNuxtApp();
+  const { t, locale } = useI18n<[], Locale>({
+    useScope: "local",
+  });
+  const store = useDictionaryStore($pinia);
+  store.setLocale(locale.value);
+  const { searchResults } = storeToRefs(store);
 </script>
 
 <style lang="scss" scoped>
@@ -95,3 +82,16 @@ const { searchResults } = storeToRefs(store);
   }
 }
 </style>
+
+<template>
+<div class="word-list">
+  <div class="word-list__wrapper">
+    <word-list-search class="word-list__search" @search="$emit('search')" />
+    <word-list-results :words="searchResults" class="word-list__results" />
+  </div>
+
+  <p v-if="searchResults.length <= 0" data-e2e="empty">
+    {{ t("notFound") }}
+  </p>
+</div>
+</template>
