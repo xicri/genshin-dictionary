@@ -15,24 +15,29 @@
 }
 </i18n>
 
-<script lang="ts" setup>
+<script lang="ts">
   import { storeToRefs } from "pinia";
   import { useDictionaryStore } from "~/store/index.ts";
-  import type { Locale } from "~/types.ts";
+  import WordListSearch from "$lib/components/WordListSearch.svelte";
+  import WordCard from "$lib/components/WordCard.svelte";
+  import { m } from "$lib/paraglide/messages.js";
+  import { getLocale } from "$lib/paraglide/runtime.js";
 
-  defineEmits([ "search" ]);
+  type Props = {
+    onsearch?: () => void;
+  };
+
+  const { onsearch }: Props = $props();
 
   const { $pinia } = useNuxtApp();
-  const { t, locale } = useI18n<[], Locale>({
-    useScope: "local",
-  });
+  const locale = getLocale();
   const store = useDictionaryStore($pinia);
-  store.setLocale(locale.value);
+  store.setLocale(locale);
   const { searchResults } = storeToRefs(store);
 </script>
 
-<style lang="scss" scoped>
-@use "~/assets/styles/variables.scss" as vars;
+<style lang="scss">
+@use "$lib/styles/variables.scss" as vars;
 
 .word-list {
   display: flex;
@@ -83,15 +88,15 @@
 }
 </style>
 
-<template>
 <div class="word-list">
   <div class="word-list__wrapper">
-    <word-list-search class="word-list__search" @search="$emit('search')" />
-    <word-list-results :words="searchResults" class="word-list__results" />
+    <WordListSearch class="word-list__search" {onsearch} />
+    <WordCard words={searchResults} class="word-list__results" />
   </div>
 
-  <p v-if="searchResults.length <= 0" data-e2e="empty">
-    {{ t("notFound") }}
-  </p>
+  {#if searchResults.length <= 0}
+    <p data-e2e="empty">
+      { m.notFound() }
+    </p>
+  {/if}
 </div>
-</template>

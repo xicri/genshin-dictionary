@@ -1,15 +1,16 @@
-<script lang="ts" setup>
-  defineEmits([ "close" ]);
+<script lang="ts">
+  type Props = {
+    enabled?: boolean;
+    onclose?: () => void;
+  };
 
-  defineProps({
-    enabled: {
-      type: Boolean,
-      default: false,
-    },
-  });
+  const {
+    enabled = false,
+    onclose = () => {},
+  }: Props = $props();
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .closer {
   position: fixed;
   width: 100vw;
@@ -21,6 +22,8 @@
 }
 </style>
 
-<template>
-  <div :style="{ display: enabled ? 'block' : 'none' }" class="closer" @click="$emit('close')"></div>
-</template>
+<div
+  style:display={ enabled ? "block" : "none" }
+  class="closer"
+  onclick={onclose}
+></div>

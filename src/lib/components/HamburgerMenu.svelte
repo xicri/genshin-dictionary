@@ -23,32 +23,36 @@
 }
 </i18n>
 
-<script lang="ts" setup>
-  import type { Locale } from "~/types.ts";
+<script lang="ts">
+  import ClosingLayer from "$lib/components/ClosingLayer.svelte";
+  import { m } from "$lib/paraglide/messages.js";
+  import { locales, localizeHref, setLocale } from "$lib/paraglide/runtime.js";
+
+  const langNames = {
+    en: "English",
+    ja: "日本語",
+    "zh-CN": "简体中文",
+    "zh-TW": "繁體中文",
+  };
 
   //
-  // refs
+  // states
   //
-  const { locales, t } = useI18n<[], Locale>({
-    useScope: "local",
-  });
-  const open = ref(false);
+  let open: boolean = $state(false);
 
   //
   // event handlers
   //
-  const localePath = useLocalePath();
-  const switchLocalePath = useSwitchLocalePath();
   const toggleMenu = (evt: MouseEvent): void => {
-    open.value = (evt.target as HTMLInputElement)?.checked;
+    open = (evt.target as HTMLInputElement)?.checked;
   };
   const closeMenu = (): void => {
-    open.value = false;
+    open = false;
   };
 </script>
 
-<style lang="scss" scoped>
-@use "~/assets/styles/variables.scss" as vars;
+<style lang="scss">
+@use "$lib/styles/variables.scss" as vars;
 
 li {
   list-style: none;
@@ -133,50 +137,47 @@ a {
 }
 </style>
 
-<template>
-  <div>
-    <input id="menu-switch" type="checkbox" :checked="open" style="display: none;" @click="toggleMenu" />
-    <label class="menu__icon" for="menu-switch">
-      <div class="menu__icon-line"></div>
-      <div class="menu__icon-line"></div>
-      <div class="menu__icon-line"></div>
-    </label>
-    <nav class="menu__nav">
-      <div class="menu__nav-padding">
-        <ul class="menu__items">
-          <!-- localePath() generates path without trailing slash, so append manually -->
-          <li class="menu__item">
-            <a :href="localePath('/about')">{{ t("about") }}</a>
-          </li>
-          <li class="menu__item">
-            <a :href="localePath('/opendata')">{{ t("opendata") }}</a>
-          </li>
-          <li class="menu__item">
-            <a :href="localePath('/history')">{{ t("history") }}</a>
-          </li>
-        </ul>
+<div>
+  <input id="menu-switch" type="checkbox" checked={open} style="display: none;" onclick={toggleMenu} />
+  <label class="menu__icon" for="menu-switch">
+    <div class="menu__icon-line"></div>
+    <div class="menu__icon-line"></div>
+    <div class="menu__icon-line"></div>
+  </label>
+  <nav class="menu__nav">
+    <div class="menu__nav-padding">
+      <ul class="menu__items">
+        <li class="menu__item">
+          <a href={localizeHref("/about")}>{ m.about() }</a>
+        </li>
+        <li class="menu__item">
+          <a href={localizeHref("/opendata")}>{ m.opendata() }</a>
+        </li>
+        <li class="menu__item">
+          <a href={localizeHref("/history")}>{ m.history() }</a>
+        </li>
+      </ul>
 
-        <h2 class="menu__languages-title">
-          Languages
-        </h2>
-        <div class="menu__languages-list">
-          <NuxtLink
-            v-for="locale in locales"
-            :key="locale.code"
+      <h2 class="menu__languages-title">
+        Languages
+      </h2>
+      <div class="menu__languages-list">
+        {#each locales as locale, index (index) }
+          <button
+            onclick={() => setLocale(locale)}
             class="menu__languages-item"
-            :to="switchLocalePath(locale.code)"
           >
-            {{ locale.name }}
-          </NuxtLink>
-        </div>
-
-        <div class="menu__bottomline">
-          <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://bsky.app/profile/xicri.genshin-dictionary.com" target="_blank" rel="noopener">Bluesky</a>
-          <a href="https://focalorus.io/@xicri" target="_blank" rel="noopener">Misskey</a>
-        </div>
+            { langNames[locale] }
+          </button>
+        {/each}
       </div>
-    </nav>
-    <closing-layer :enabled="open" @close="closeMenu" />
-  </div>
-</template>
+
+      <div class="menu__bottomline">
+        <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://bsky.app/profile/xicri.genshin-dictionary.com" target="_blank" rel="noopener">Bluesky</a>
+        <a href="https://focalorus.io/@xicri" target="_blank" rel="noopener">Misskey</a>
+      </div>
+    </div>
+  </nav>
+  <ClosingLayer enabled={open} onclose={closeMenu} />
+</div>
