@@ -1,24 +1,3 @@
-<i18n lang="json">
-{
-  "en": {
-    "notfound": "This page is not found",
-    "returnToIndex": "Return to index"
-  },
-  "ja": {
-    "notfound": "このページは存在しません",
-    "returnToIndex": "トップページへ戻る"
-  },
-  "zh-CN": {
-    "notfound": "页面不存在",
-    "returnToIndex": "返回到首页"
-  },
-  "zh-TW": {
-    "notfound": "頁面不存在",
-    "returnToIndex": "返回到首頁"
-  }
-}
-</i18n>
-
 <script lang="ts">
   import { page } from "$app/state";
   import { m } from "$lib/paraglide/messages.js";

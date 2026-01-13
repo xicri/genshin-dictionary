@@ -1,36 +1,3 @@
-<i18n lang="json">
-{
-  "en": {
-    "example": "Example",
-    "permalink": "Permalink",
-    "permalinkAlt": "Link to {word}",
-    "copyLink": "Copy link to {word}",
-    "copyLinkDone": "Copied link to {word}"
-  },
-  "ja": {
-    "example": "例文",
-    "permalink": "固定リンク",
-    "permalinkAlt": "{word}のページへのリンク",
-    "copyLink": "{word}のページへのリンクをコピー",
-    "copyLinkDone": "{word}のページへのリンクのコピーが完了しました"
-  },
-  "zh-CN": {
-    "example": "示例",
-    "permalink": "永久链接",
-    "permalinkAlt": "{word}的链接",
-    "copyLink": "复制{word}的链接",
-    "copyLinkDone": "已复制{word}的链接"
-  },
-  "zh-TW": {
-    "example": "範例",
-    "permalink": "永久連結",
-    "permalinkAlt": "{word}的連結",
-    "copyLink": "複製{word}的連結",
-    "copyLinkDone": "已複製{word}的連結"
-  }
-}
-</i18n>
-
 <script lang="ts">
   import Tag from "$lib/components/Tag.svelte";
   import Translation from "$lib/components/Translation.svelte";
