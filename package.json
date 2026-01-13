@@ -46,6 +46,7 @@
     "luxon": "^3.7.2",
     "nuxt": "^3.17.1",
     "sass": "^1.97.3",
+    "sitemap": "^9.0.0",
     "undici": "^7.20.0"
   },
   "devDependencies": {
