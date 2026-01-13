@@ -1,37 +1,3 @@
-<template>
-  <div class="article__wrapper-outer">
-    <div class="article__wrapper-inner">
-      <h2>{{ t("aboutTitle") }}</h2>
-
-      <main>
-        <p v-html="aboutIntroText"></p>
-        <p>{{ t("wordCount", { count: wordCount }) }}</p>
-
-        <h3>{{ t("precautionsTitle") }}</h3>
-        <p>{{ t("precautions1") }}</p>
-        <p v-if="locale === 'ja'">
-          読み仮名は検索精度の向上を目的として付けており、その正確性について十分な調査をしておりません。間違いが多く含まれる可能性があることをご了承下さい。
-        </p>
-        <p>{{ t("precautions2") }}</p>
-
-        <h3>{{ t("operatorTitle") }}</h3>
-        <ul>
-          <li v-html="t('operator', { blueskyLink, githubLink })"></li>
-          <li v-html="contributorText"></li>
-        </ul>
-
-        <p v-html="contactText"></p>
-
-        <h3>{{ t("creditsTitle") }}</h3>
-        <p v-html="credits1Text"></p>
-        <p v-html="credits2Text"></p>
-        <p v-html="credits3Text"></p>
-        <p v-html="credits4Text"></p>
-      </main>
-    </div>
-  </div>
-</template>
-
 <i18n lang="json">
 {
   "en": {
@@ -138,77 +104,111 @@
 </i18n>
 
 <script lang="ts" setup>
-import words from "~/dataset/words.json";
-import type { Locale } from "~/types.ts";
+  import words from "~/dataset/words.json";
+  import type { Locale } from "~/types.ts";
 
-const { locale, t } = useI18n<[], Locale>();
-const title = `${ t("aboutTitle") } | ${ t("siteTitle") }`;
-const description = t("aboutDescription");
+  const { locale, t } = useI18n<[], Locale>();
+  const title = `${ t("aboutTitle") } | ${ t("siteTitle") }`;
+  const description = t("aboutDescription");
 
-useHead({
-  title,
-  meta: [
-    { property: "og:title", content: title },
-    { name: "description", content: description },
-    { property: "og:description", content: description },
-  ],
-});
-
-const wordCount = words.length;
-
-const createLink = (url: string, text: string) => `<a href="${ url }" target="_blank" rel="noopener">${ text }</a>`;
-
-const blueskyLink = createLink("https://bsky.app/profile/xicri.genshin-dictionary.com", "Bluesky");
-const githubLink = createLink("https://github.com/xicri", "GitHub");
-const issuesLink = createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues");
-const discussionsLink = createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions");
-
-const aboutIntroText = computed(() => {
-  const genshinLink = createLink(
-    locale.value === "zh-CN" ? "https://ys.mihoyo.com" : "https://genshin.hoyoverse.com",
-    t("genshinImpact"),
-  );
-  return t("aboutIntro", { genshinLink });
-});
-
-const contributorText = computed(() => {
-  const billhakuBilibiliLink = createLink("https://space.bilibili.com/158463764", "BiliBili");
-  const billhakuTwitterLink = createLink("https://x.com/Haku_Bill", "X (Twitter)");
-  const billhakuGithubLink = createLink("https://github.com/Bill-Haku", "GitHub");
-  return t("contributor", {
-    bilibiliLink: billhakuBilibiliLink,
-    twitterLink: billhakuTwitterLink,
-    githubLink: billhakuGithubLink,
+  useHead({
+    title,
+    meta: [
+      { property: "og:title", content: title },
+      { name: "description", content: description },
+      { property: "og:description", content: description },
+    ],
   });
-});
 
-const contactText = computed(() => [
-  t("contact1", { blueskyLink }),
-  t("contact2", { issuesLink, discussionsLink }),
-  t("contact3"),
-].join("<br />"));
+  const wordCount = words.length;
 
-const credits1Text = computed(() => {
-  const genshinDictionaryLink = createLink("http://anemoarchon.s205.xrea.com/#/gdic", t("genshinDictionary"));
-  const genshinKanjiLabLink = createLink("https://x.com/genshin_kanji", t("genshinKanjiLab"));
-  return t("credits1", { genshinDictionaryLink, genshinKanjiLabLink });
-});
+  const createLink = (url: string, text: string) => `<a href="${ url }" target="_blank" rel="noopener">${ text }</a>`;
 
-const credits2Text = computed(() => {
-  const genshinWikiLink = createLink("https://genshin-impact.fandom.com/wiki/Genshin_Impact_Wiki", "Genshin Impact Wiki (Fandom)");
-  return t("credits2", { genshinWikiLink });
-});
+  const blueskyLink = createLink("https://bsky.app/profile/xicri.genshin-dictionary.com", "Bluesky");
+  const githubLink = createLink("https://github.com/xicri", "GitHub");
+  const issuesLink = createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues");
+  const discussionsLink = createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions");
 
-const credits3Text = computed(() => {
-  const octiconsLink = createLink("https://primer.style/octicons/", "Octicons");
-  const licenseLink = createLink("https://github.com/primer/octicons/blob/main/LICENSE", `MIT ${ t("license") }`);
-  return t("credits3", { octiconsLink, licenseLink });
-});
+  const aboutIntroText = computed(() => {
+    const genshinLink = createLink(
+      locale.value === "zh-CN" ? "https://ys.mihoyo.com" : "https://genshin.hoyoverse.com",
+      t("genshinImpact"),
+    );
+    return t("aboutIntro", { genshinLink });
+  });
 
-const credits4Text = computed(() => {
-  const logoTypeGothicLink = createLink("http://www.fontna.com/blog/1226/", t("logoTypeGothic"));
-  return t("credits4", { logoTypeGothicLink });
-});
+  const contributorText = computed(() => {
+    const billhakuBilibiliLink = createLink("https://space.bilibili.com/158463764", "BiliBili");
+    const billhakuTwitterLink = createLink("https://x.com/Haku_Bill", "X (Twitter)");
+    const billhakuGithubLink = createLink("https://github.com/Bill-Haku", "GitHub");
+    return t("contributor", {
+      bilibiliLink: billhakuBilibiliLink,
+      twitterLink: billhakuTwitterLink,
+      githubLink: billhakuGithubLink,
+    });
+  });
+
+  const contactText = computed(() => [
+    t("contact1", { blueskyLink }),
+    t("contact2", { issuesLink, discussionsLink }),
+    t("contact3"),
+  ].join("<br />"));
+
+  const credits1Text = computed(() => {
+    const genshinDictionaryLink = createLink("http://anemoarchon.s205.xrea.com/#/gdic", t("genshinDictionary"));
+    const genshinKanjiLabLink = createLink("https://x.com/genshin_kanji", t("genshinKanjiLab"));
+    return t("credits1", { genshinDictionaryLink, genshinKanjiLabLink });
+  });
+
+  const credits2Text = computed(() => {
+    const genshinWikiLink = createLink("https://genshin-impact.fandom.com/wiki/Genshin_Impact_Wiki", "Genshin Impact Wiki (Fandom)");
+    return t("credits2", { genshinWikiLink });
+  });
+
+  const credits3Text = computed(() => {
+    const octiconsLink = createLink("https://primer.style/octicons/", "Octicons");
+    const licenseLink = createLink("https://github.com/primer/octicons/blob/main/LICENSE", `MIT ${ t("license") }`);
+    return t("credits3", { octiconsLink, licenseLink });
+  });
+
+  const credits4Text = computed(() => {
+    const logoTypeGothicLink = createLink("http://www.fontna.com/blog/1226/", t("logoTypeGothic"));
+    return t("credits4", { logoTypeGothicLink });
+  });
 </script>
 
 <style lang="scss" src="~/assets/styles/articles.scss" scoped></style>
+
+<template>
+  <div class="article__wrapper-outer">
+    <div class="article__wrapper-inner">
+      <h2>{{ t("aboutTitle") }}</h2>
+
+      <main>
+        <p v-html="aboutIntroText"></p>
+        <p>{{ t("wordCount", { count: wordCount }) }}</p>
+
+        <h3>{{ t("precautionsTitle") }}</h3>
+        <p>{{ t("precautions1") }}</p>
+        <p v-if="locale === 'ja'">
+          読み仮名は検索精度の向上を目的として付けており、その正確性について十分な調査をしておりません。間違いが多く含まれる可能性があることをご了承下さい。
+        </p>
+        <p>{{ t("precautions2") }}</p>
+
+        <h3>{{ t("operatorTitle") }}</h3>
+        <ul>
+          <li v-html="t('operator', { blueskyLink, githubLink })"></li>
+          <li v-html="contributorText"></li>
+        </ul>
+
+        <p v-html="contactText"></p>
+
+        <h3>{{ t("creditsTitle") }}</h3>
+        <p v-html="credits1Text"></p>
+        <p v-html="credits2Text"></p>
+        <p v-html="credits3Text"></p>
+        <p v-html="credits4Text"></p>
+      </main>
+    </div>
+  </div>
+</template>

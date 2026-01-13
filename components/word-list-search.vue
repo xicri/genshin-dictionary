@@ -1,51 +1,3 @@
-<template>
-  <div>
-    <div class="search">
-      <div class="search__box">
-        <div class="search__scrollable" @click="focusOnSearchBox" @dblclick="selectAll">
-          <div class="search__active-tags">
-            <div v-for="(tag, i) in tags" :key="tag" class="search__active-tag">
-              <span>{{ allTags[tag][locale] }}</span>
-              <span class="search__remove-tag" @click="removeTag(i)">☓</span>
-            </div>
-          </div>
-
-          <elastic-searchbox ref="searchBox" class="search__input" name="searchbox" :placeholder="t('enterSearchTerms')" autocomplete="off" @input="updateSearchQuery" />
-        </div>
-
-        <img
-          src="~/assets/vendor/octicons/tag.svg"
-          width="24"
-          height="24"
-          :alt="t('openListOfTags')"
-          decoding="async"
-          class="search__taglist-icon"
-          @click="toggleTagList"
-        />
-      </div>
-      <div ref="taglist" :class="{ search__taglist: true, 'search__taglist-display-mobile': displayTagListOnMobile }">
-        <div class="search__taglist-inner">
-          <span class="search__taglist-title">{{ t("tags") }}:</span>
-          <span v-for="(availableTag, id) in AvailableTags" :key="id" class="search__tag" @click="addTag(id)">
-            {{ availableTag[locale] }} <span class="search__tag-add">+</span>
-          </span>
-        </div>
-
-        <img
-          src="~/assets/vendor/octicons/x.svg"
-          width="24"
-          height="24"
-          :alt="t('closeListOfTags')"
-          decoding="async"
-          class="search__taglist-close"
-          @click="closeTagList"
-        />
-      </div>
-    </div>
-    <closing-layer :enabled="displayTagListOnMobile" @close="closeTagList" />
-  </div>
-</template>
-
 <i18n lang="json">
 {
   "en": {
@@ -76,79 +28,79 @@
 </i18n>
 
 <script lang="ts" setup>
-import { klona } from "klona/json";
-import { debounce } from "lodash-es";
-import { storeToRefs } from "pinia";
-import allTags from "~/dataset/tags.json";
-import { useDictionaryStore } from "~/store/index.ts";
-import type ElasticSearchbox from "~/components/elastic-searchbox.vue";
-import type { Locale, TagID } from "~/types.ts";
+  import { klona } from "klona/json";
+  import { debounce } from "lodash-es";
+  import { storeToRefs } from "pinia";
+  import allTags from "~/dataset/tags.json";
+  import { useDictionaryStore } from "~/store/index.ts";
+  import type ElasticSearchbox from "~/components/elastic-searchbox.vue";
+  import type { Locale, TagID } from "~/types.ts";
 
-const emit = defineEmits([ "search" ]);
-const { $pinia } = useNuxtApp();
-const store = useDictionaryStore($pinia);
+  const emit = defineEmits([ "search" ]);
+  const { $pinia } = useNuxtApp();
+  const store = useDictionaryStore($pinia);
 
-const { locale, t } = useI18n<[], Locale>({
-  useScope: "local",
-});
+  const { locale, t } = useI18n<[], Locale>({
+    useScope: "local",
+  });
 
-//
-// Refs
-//
-const searchBox = useTemplateRef<InstanceType<typeof ElasticSearchbox>>("searchBox");
-const { tags } = storeToRefs(store);
-const displayTagListOnMobile = ref(false);
+  //
+  // Refs
+  //
+  const searchBox = useTemplateRef<InstanceType<typeof ElasticSearchbox>>("searchBox");
+  const { tags } = storeToRefs(store);
+  const displayTagListOnMobile = ref(false);
 
-//
-// Computed
-//
-const AvailableTags = computed(() => {
-  const availableTags = klona(allTags);
+  //
+  // Computed
+  //
+  const AvailableTags = computed(() => {
+    const availableTags = klona(allTags);
 
-  for (const searchTag of tags.value) {
-    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete -- TODO fixme
-    delete availableTags[searchTag];
-  }
+    for (const searchTag of tags.value) {
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete -- TODO fixme
+      delete availableTags[searchTag];
+    }
 
-  return availableTags;
-});
+    return availableTags;
+  });
 
-//
-// Event handlers
-//
-const updateSearchQuery = debounce((evt: InputEvent) => {
-  store.updateSearchQuery((evt.target as HTMLInputElement)?.value);
-  emit("search");
-}, 500);
-const focusOnSearchBox = (): void => {
-  if (searchBox.value) {
-    const searchBoxTextLength = searchBox.value.getTextLength() ?? null;
+  //
+  // Event handlers
+  //
+  const updateSearchQuery = debounce((evt: InputEvent) => {
+    store.updateSearchQuery((evt.target as HTMLInputElement)?.value);
+    emit("search");
+  }, 500);
+  const focusOnSearchBox = (): void => {
+    if (searchBox.value) {
+      const searchBoxTextLength = searchBox.value.getTextLength() ?? null;
 
-    searchBox.value.setSelectionRange(searchBoxTextLength, searchBoxTextLength);
-    searchBox.value.focus();
-  }
-};
-const selectAll = (): void => {
-  if (searchBox.value) {
-    searchBox.value.setSelectionRange(0, searchBox.value.getTextLength() ?? null);
-    searchBox.value.focus();
-  }
-};
-const closeTagList = (): void => {
-  displayTagListOnMobile.value = false;
-};
-const toggleTagList = (): void => {
-  displayTagListOnMobile.value = !displayTagListOnMobile.value;
-};
-const addTag = (tagID: TagID): void => {
-  store.addTags(tagID);
-  emit("search");
-  closeTagList();
-};
-const removeTag = (tagIndex: number): void => {
-  store.removeTag(tagIndex);
-  emit("search");
-};
+      searchBox.value.setSelectionRange(searchBoxTextLength, searchBoxTextLength);
+      searchBox.value.focus();
+    }
+  };
+  const selectAll = (): void => {
+    if (searchBox.value) {
+      searchBox.value.setSelectionRange(0, searchBox.value.getTextLength() ?? null);
+      searchBox.value.focus();
+    }
+  };
+  const closeTagList = (): void => {
+    displayTagListOnMobile.value = false;
+  };
+  const toggleTagList = (): void => {
+    displayTagListOnMobile.value = !displayTagListOnMobile.value;
+  };
+  const addTag = (tagID: TagID): void => {
+    store.addTags(tagID);
+    emit("search");
+    closeTagList();
+  };
+  const removeTag = (tagIndex: number): void => {
+    store.removeTag(tagIndex);
+    emit("search");
+  };
 </script>
 
 <style lang="scss" scoped>
@@ -334,3 +286,51 @@ const removeTag = (tagIndex: number): void => {
   }
 }
 </style>
+
+<template>
+  <div>
+<div class="search">
+  <div class="search__box">
+    <div class="search__scrollable" @click="focusOnSearchBox" @dblclick="selectAll">
+      <div class="search__active-tags">
+        <div v-for="(tag, i) in tags" :key="tag" class="search__active-tag">
+          <span>{{ allTags[tag][locale] }}</span>
+          <span class="search__remove-tag" @click="removeTag(i)">☓</span>
+        </div>
+      </div>
+
+      <elastic-searchbox ref="searchBox" class="search__input" name="searchbox" :placeholder="t('enterSearchTerms')" autocomplete="off" @input="updateSearchQuery" />
+    </div>
+
+    <img
+      src="~/assets/vendor/octicons/tag.svg"
+      width="24"
+      height="24"
+      :alt="t('openListOfTags')"
+      decoding="async"
+      class="search__taglist-icon"
+      @click="toggleTagList"
+    />
+  </div>
+  <div ref="taglist" :class="{ search__taglist: true, 'search__taglist-display-mobile': displayTagListOnMobile }">
+    <div class="search__taglist-inner">
+      <span class="search__taglist-title">{{ t("tags") }}:</span>
+      <span v-for="(availableTag, id) in AvailableTags" :key="id" class="search__tag" @click="addTag(id)">
+        {{ availableTag[locale] }} <span class="search__tag-add">+</span>
+      </span>
+    </div>
+
+    <img
+      src="~/assets/vendor/octicons/x.svg"
+      width="24"
+      height="24"
+      :alt="t('closeListOfTags')"
+      decoding="async"
+      class="search__taglist-close"
+      @click="closeTagList"
+    />
+  </div>
+</div>
+<closing-layer :enabled="displayTagListOnMobile" @close="closeTagList" />
+  </div>
+</template>

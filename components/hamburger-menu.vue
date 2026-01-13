@@ -1,51 +1,3 @@
-<template>
-  <div>
-    <input id="menu-switch" type="checkbox" :checked="open" style="display: none;" @click="toggleMenu" />
-    <label class="menu__icon" for="menu-switch">
-      <div class="menu__icon-line"></div>
-      <div class="menu__icon-line"></div>
-      <div class="menu__icon-line"></div>
-    </label>
-    <nav class="menu__nav">
-      <div class="menu__nav-padding">
-        <ul class="menu__items">
-          <!-- localePath() generates path without trailing slash, so append manually -->
-          <li class="menu__item">
-            <a :href="localePath('/about')">{{ t("about") }}</a>
-          </li>
-          <li class="menu__item">
-            <a :href="localePath('/opendata')">{{ t("opendata") }}</a>
-          </li>
-          <li class="menu__item">
-            <a :href="localePath('/history')">{{ t("history") }}</a>
-          </li>
-        </ul>
-
-        <h2 class="menu__languages-title">
-          Languages
-        </h2>
-        <div class="menu__languages-list">
-          <NuxtLink
-            v-for="locale in locales"
-            :key="locale.code"
-            class="menu__languages-item"
-            :to="switchLocalePath(locale.code)"
-          >
-            {{ locale.name }}
-          </NuxtLink>
-        </div>
-
-        <div class="menu__bottomline">
-          <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://bsky.app/profile/xicri.genshin-dictionary.com" target="_blank" rel="noopener">Bluesky</a>
-          <a href="https://focalorus.io/@xicri" target="_blank" rel="noopener">Misskey</a>
-        </div>
-      </div>
-    </nav>
-    <closing-layer :enabled="open" @close="closeMenu" />
-  </div>
-</template>
-
 <i18n lang="json">
 {
   "en": {
@@ -72,27 +24,27 @@
 </i18n>
 
 <script lang="ts" setup>
-import type { Locale } from "~/types.ts";
+  import type { Locale } from "~/types.ts";
 
-//
-// refs
-//
-const { locales, t } = useI18n<[], Locale>({
-  useScope: "local",
-});
-const open = ref(false);
+  //
+  // refs
+  //
+  const { locales, t } = useI18n<[], Locale>({
+    useScope: "local",
+  });
+  const open = ref(false);
 
-//
-// event handlers
-//
-const localePath = useLocalePath();
-const switchLocalePath = useSwitchLocalePath();
-const toggleMenu = (evt: MouseEvent): void => {
-  open.value = (evt.target as HTMLInputElement)?.checked;
-};
-const closeMenu = (): void => {
-  open.value = false;
-};
+  //
+  // event handlers
+  //
+  const localePath = useLocalePath();
+  const switchLocalePath = useSwitchLocalePath();
+  const toggleMenu = (evt: MouseEvent): void => {
+    open.value = (evt.target as HTMLInputElement)?.checked;
+  };
+  const closeMenu = (): void => {
+    open.value = false;
+  };
 </script>
 
 <style lang="scss" scoped>
@@ -180,3 +132,51 @@ a {
   }
 }
 </style>
+
+<template>
+  <div>
+    <input id="menu-switch" type="checkbox" :checked="open" style="display: none;" @click="toggleMenu" />
+    <label class="menu__icon" for="menu-switch">
+      <div class="menu__icon-line"></div>
+      <div class="menu__icon-line"></div>
+      <div class="menu__icon-line"></div>
+    </label>
+    <nav class="menu__nav">
+      <div class="menu__nav-padding">
+        <ul class="menu__items">
+          <!-- localePath() generates path without trailing slash, so append manually -->
+          <li class="menu__item">
+            <a :href="localePath('/about')">{{ t("about") }}</a>
+          </li>
+          <li class="menu__item">
+            <a :href="localePath('/opendata')">{{ t("opendata") }}</a>
+          </li>
+          <li class="menu__item">
+            <a :href="localePath('/history')">{{ t("history") }}</a>
+          </li>
+        </ul>
+
+        <h2 class="menu__languages-title">
+          Languages
+        </h2>
+        <div class="menu__languages-list">
+          <NuxtLink
+            v-for="locale in locales"
+            :key="locale.code"
+            class="menu__languages-item"
+            :to="switchLocalePath(locale.code)"
+          >
+            {{ locale.name }}
+          </NuxtLink>
+        </div>
+
+        <div class="menu__bottomline">
+          <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://bsky.app/profile/xicri.genshin-dictionary.com" target="_blank" rel="noopener">Bluesky</a>
+          <a href="https://focalorus.io/@xicri" target="_blank" rel="noopener">Misskey</a>
+        </div>
+      </div>
+    </nav>
+    <closing-layer :enabled="open" @close="closeMenu" />
+  </div>
+</template>
