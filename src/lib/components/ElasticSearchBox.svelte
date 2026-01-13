@@ -1,66 +1,64 @@
-<script lang="ts" setup>
-  const emit = defineEmits([ "input" ]);
+<script lang="ts">
+  import { onMount } from "svelte";
+  import type { FormEventHandler, FullAutoFill } from "svelte/elements";
 
-  const props = defineProps({
-    name: {
-      type: String,
-      default: "",
-    },
-    placeholder: {
-      type: String,
-      default: "",
-    },
-    autocomplete: {
-      type: String,
-      default: "",
-    },
-  });
+  type Props = {
+    name?: string;
+    placeholder?: string;
+    autocomplete?: FullAutoFill;
+    oninput?: FormEventHandler<HTMLInputElement>;
+  };
 
-  //
-  // refs
-  //
-  const searchBox = useTemplateRef<HTMLInputElement>("searchBox");
+  const {
+    name,
+    placeholder,
+    autocomplete,
+    oninput: onInputFromParent,
+  }: Props = $props();
 
-  defineExpose({
-    focus: () => searchBox.value?.focus(),
-    setSelectionRange: (
-      (...args) => searchBox.value?.setSelectionRange(...args)
-    ) satisfies typeof HTMLInputElement.prototype.setSelectionRange,
-    getTextLength: () => searchBox.value?.value.length,
-  });
+  let searchBox: HTMLInputElement;
+
+  export const focus = () => searchBox?.focus();
+
+  export const setSelectionRange = (
+    (...args) => searchBox?.setSelectionRange(...args)
+  ) satisfies typeof HTMLInputElement.prototype.setSelectionRange;
+
+  export const getTextLength = () => searchBox?.value.length ?? 0;
 
   //
   // methods
   //
   const updateSearchBoxWidth = (): void => {
-    const el = searchBox.value;
-    if (el) {
-      const textLength = (0 < el.value.length) ? el.value.length : props.placeholder.length;
-      el.style.width = `${ textLength * 1.05 }em`;
+    if (searchBox) {
+      const textLength = (0 < searchBox.value.length) ? searchBox.value.length : placeholder?.length ?? 0;
+      searchBox.style.width = `${ textLength * 1.05 }em`;
     }
   };
 
   //
   // Lifecycle Hooks
   //
-  onMounted(() => {
+  onMount(() => {
     updateSearchBoxWidth();
   });
 
   //
   // event handlers
   //
-  const onInput = (evt: InputEvent): void => {
+  const onInput: FormEventHandler<HTMLInputElement> = (evt): void => {
     updateSearchBoxWidth();
-    emit("input", evt);
+    if (onInputFromParent) {
+      onInputFromParent(evt);
+    }
   };
   const stopPropagation = (evt: MouseEvent): void => {
     evt.stopPropagation();
   };
 </script>
 
-<style lang="scss" scoped>
-@use "~/assets/styles/variables.scss" as vars;
+<style lang="scss">
+@use "$lib/assets/styles/variables.scss" as vars;
 
 .elastic-searchbox {
   border-width: 0;
@@ -75,15 +73,13 @@
 }
 </style>
 
-<template>
-  <input
-    ref="searchBox"
-    type="search"
-    class="elastic-searchbox"
-    :name="name"
-    :placeholder="placeholder"
-    :autocomplete="autocomplete"
-    @input="onInput"
-    @click="stopPropagation"
-  />
-</template>
+<input
+  bind:this={searchBox}
+  type="search"
+  class="elastic-searchbox"
+  {name}
+  {placeholder}
+  {autocomplete}
+  oninput={onInput}
+  onclick={stopPropagation}
+/>

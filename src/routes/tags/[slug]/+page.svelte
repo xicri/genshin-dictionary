@@ -1,40 +1,37 @@
-<script lang="ts" setup>
-  import tags from "~/dataset/tags.json";
+<script lang="ts">
+  import { error } from "@sveltejs/kit";
+  import { onMount } from "svelte";
+  import WordList from "$lib/components/WordList.svelte";
+  import { m } from "$lib/paraglide/messages.js";
+  import { getLocale } from "$lib/paraglide/runtime.js";
+  import tags from "../../../../dataset/tags.json";
   import { useDictionaryStore } from "~/store/index.ts";
-  import type { Locale, TagID } from "~/types.ts";
-  import type { RouteLocationNormalizedLoaded } from "#vue-router";
+  import type { TagID } from "$lib/types.ts";
+  import type { PageProps } from "./$types";
 
-  const getTagIdFromParams = (route: RouteLocationNormalizedLoaded): TagID => {
-    const tagID = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
+  let { data }: PageProps = $props();
+
+  const getTagIdFromParams = (): TagID => {
+    const tagID = data.slug;
 
     if (!Object.keys(tags).includes(tagID)) { // unexpected tagID given
-      throw createError({ statusCode: 404, fatal: true });
+      error(404, "Not found");
     }
 
     return tagID as TagID;
   };
 
   const { $pinia } = useNuxtApp();
-  const { locale, t } = useI18n<[], Locale>({
-    useScope: "local",
-  });
-  const route = useRoute();
+  const locale = getLocale();
   const store = useDictionaryStore($pinia);
 
-  const tagID = getTagIdFromParams(route);
-  const title = ref(`${ tags[tagID].title[locale.value] } | ${ t("siteTitle") }`);
-
-  useHead({
-    title,
-    meta: [
-      { property: "og:title", content: title.value },
-    ],
-  });
+  const tagID = getTagIdFromParams();
+  let title = $state(`${ tags[tagID].title[locale] } | ${ m.siteTitle() }`);
 
   store.$reset();
   store.addTags(tagID);
 
-  onMounted(() => {
+  onMount(() => {
     // Reset on browser back
     window.onpopstate = () => {
       store.$reset();
@@ -43,15 +40,18 @@
   });
 
   const onSearch = (): void => {
-    const root = `/${ locale.value }`;
+    const root = `/${ locale }`;
 
     if (window.location.pathname !== root) {
       history.pushState({}, "", root);
-      title.value = t("siteTitle");
+      title = m.siteTitle();
     }
   };
 </script>
 
-<template>
-  <word-list @search="onSearch" />
-</template>
+<svelte:head>
+  <title>{title}</title>
+  <meta property="og:title" content={title} />
+</svelte:head>
+
+<WordList onsearch={onSearch} />

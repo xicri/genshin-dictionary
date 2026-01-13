@@ -1,4 +1,4 @@
-<style lang="scss" scoped>
+<style lang="scss">
   .spacer {
     flex-grow: 1;
   }
