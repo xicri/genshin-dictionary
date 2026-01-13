@@ -1,43 +1,40 @@
-<script lang="ts" setup>
-  import { escapeHtmlString } from "~/utils/utils.ts";
-  import type { Locale } from "~/types.ts";
+<script lang="ts">
+  import { m } from "$lib/paraglide/messages.js";
+  import { escapeHtmlString } from "$lib/utils.ts";
+  import type { Locale } from "$lib/types.ts";
 
-  const props = defineProps({
-    lang: {
-      type: String as PropType<Locale>,
-      required: true,
-    },
-    word: {
-      type: String,
-      required: true,
-    },
-    kana: {
-      type: String,
-      default: "",
-    },
-    pinyins: {
-      type: Array as PropType<{ char: string; pron: string; }[]>,
-      default: () => [],
-    },
-  });
+  type Props = {
+    lang: Locale;
+    word: string;
+    kana?: string;
+    pinyins?: {
+      char: string;
+      pron: string;
+    }[];
+  };
 
-  const { t } = useI18n<[], Locale>();
+  const {
+    lang,
+    word,
+    kana = "",
+    pinyins = [],
+  }: Props = $props();
 
   let langName: string;
   let wordWithPinyin: string;
 
-  if (props.lang === "en") {
-    langName = t("langNameEn");
-  } else if (props.lang === "ja") {
-    langName = t("langNameJa");
-  } else if (props.lang === "zh-CN") {
-    langName = t("langNameZhCN");
-  } else if (props.lang === "zh-TW") {
-    langName = t("langNameZhTW");
+  if (lang === "en") {
+    langName = m.langNameEn();
+  } else if (lang === "ja") {
+    langName = m.langNameJa();
+  } else if (lang === "zh-CN") {
+    langName = m.langNameZhCN();
+  } else if (lang === "zh-TW") {
+    langName = m.langNameZhTW();
   }
-  if (0 < props.pinyins.length) {
-    wordWithPinyin = escapeHtmlString(props.word);
-    for (const { char, pron } of props.pinyins) {
+  if (0 < pinyins.length) {
+    wordWithPinyin = escapeHtmlString(word);
+    for (const { char, pron } of pinyins) {
       const escapedChar = escapeHtmlString(char);
       const escapedPron = escapeHtmlString(pron);
 
@@ -46,8 +43,8 @@
   }
 </script>
 
-<style lang="scss" scoped>
-@use "~/assets/styles/variables.scss" as vars;
+<style lang="scss">
+@use "$lib/styles/variables.scss" as vars;
 
 .results {
   &__translation {
@@ -88,16 +85,21 @@
 }
 </style>
 
-<template>
-  <div class="results__translation">
-    <span class="results__langname results__translation-item">{{ langName }}: </span>
-    <div class="results__translation-item">
-      <div class="results__ja">
-        <span v-if="wordWithPinyin" lang="zh-CN" data-e2e="zh-CN" v-html="wordWithPinyin"></span>
-        <span v-else :lang="lang" :data-e2e="lang">{{ word }}</span>
+<div class="results__translation">
+  <span class="results__langname results__translation-item">{ langName }: </span>
+  <div class="results__translation-item">
+    <div class="results__ja">
+      <span lang={lang} data-e2e={lang}>
+        {#if wordWithPinyin}
+          {@html wordWithPinyin}
+        {:else}
+          { word }
+        {/if}
+      </span>
 
-        <span v-if="kana" class="results__pronunciation-ja">({{ kana }})</span>
-      </div>
+      {#if kana}
+        <span class="results__pronunciation-ja">({ kana })</span>
+      {/if}
     </div>
   </div>
-</template>
+</div>

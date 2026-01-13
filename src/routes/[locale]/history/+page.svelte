@@ -19,27 +19,20 @@
 }
 </i18n>
 
-<script lang="ts" setup>
+<script lang="ts">
   import { isEmpty } from "lodash-es";
-  import _history from "~/dataset/build/history.ts";
-  import type { Locale } from "~/types.ts";
+  import { m } from "$lib/paraglide/messages.js";
+  import WordCard from "$lib/components/WordCard.svelte";
+  import _history from "../../../dataset/build/history.ts";
 
-  const { t } = useI18n<[], Locale>();
-  const title = `${ t("historyTitle") } | ${ t("siteTitle") }`;
-
-  useHead({
-    title,
-    meta: [
-      { property: "og:title", content: title },
-    ],
-  });
+  const title = `${ m.historyTitle() } | ${ m.siteTitle() }`;
 
   const history = _history;
   const empty = isEmpty(_history);
 </script>
 
-<style lang="scss" scoped>
-@use "~/assets/styles/variables.scss" as vars;
+<style lang="scss">
+@use "$lib/styles/variables.scss" as vars;
 
 .history {
   display: flex;
@@ -87,18 +80,25 @@
 }
 </style>
 
-<template>
-  <div class="history">
-    <h2>{{ t("historyTitle") }}</h2>
-    <div v-for="(words, createdAt) in history" :key="createdAt" class="history__wrapper">
-      <h3 class="history__updated-at">
-        {{ t("updatedOn", { createdAt: createdAt }) }}
-      </h3>
-      <word-list-results :words="words" />
-    </div>
+<svelte:head>
+  <title>{title}</title>
+  <meta property="og:title" content={title} />
+</svelte:head>
 
-    <p v-if="empty" class="history__empty">
-      {{ t("noRecentUpdates") }}
+<div class="history">
+  <h2>{ m.historyTitle() }</h2>
+  {#each Object.entries(history) as [ createdAt, words ] (createdAt)}
+    <div class="history__wrapper">
+      <h3 class="history__updated-at">
+        { m.updatedOn({ createdAt }) }
+      </h3>
+      <WordCard {words} />
+    </div>
+  {/each}
+
+  {#if empty}
+    <p class="history__empty">
+      { m.noRecentUpdates() }
     </p>
-  </div>
-</template>
+  {/if}
+</div>

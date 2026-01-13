@@ -211,19 +211,14 @@
   }
 </i18n>
 
-<script lang="ts" setup>
-  import tags from "~/dataset/tags.json";
-  import type { Locale } from "~/types.ts";
+<script lang="ts">
+  import { m } from "$lib/paraglide/messages";
+  import { getLocale } from "$lib/paraglide/runtime.js";
+  import tags from "../../../dataset/tags.json";
+  import type { Locale } from "$lib/types.ts";
 
-  const { locale, t } = useI18n<[], Locale>();
-  const title = `${ t("opendataTitle") } | ${ t("siteTitle") }`;
-
-  useHead({
-    title,
-    meta: [
-      { property: "og:title", content: title },
-    ],
-  });
+  const locale = getLocale();
+  const title = `${ m.opendataTitle() } | ${ m.siteTitle() }`;
 
   const jsonExample = `[
     {
@@ -265,107 +260,116 @@
     }
   ]`;
 
-  const downloadLink = computed(() => {
-    const dlLink = "<a href=\"https://dataset.genshin-dictionary.com/words.json\" target=\"_blank\" rel=\"noopener\">https://dataset.genshin-dictionary.com/words.json</a>";
-    return t("jsonUrlText", { url: dlLink });
+  const downloadLink = m.jsonUrlText({
+    url: "<a href=\"https://dataset.genshin-dictionary.com/words.json\" target=\"_blank\" rel=\"noopener\">https://dataset.genshin-dictionary.com/words.json</a>",
   });
 
-  const contactText = computed(() => {
-    const blueskyLink = "<a href=\"https://bsky.app/profile/xicri.genshin-dictionary.com\" target=\"_blank\" rel=\"noopener\">Bluesky</a>";
-    return t("contactText", { blueskyLink });
+  const contactText = m.contactText({
+    blueskyLink: "<a href=\"https://bsky.app/profile/xicri.genshin-dictionary.com\" target=\"_blank\" rel=\"noopener\">Bluesky</a>",
   });
 </script>
 
-<style lang="scss" src="~/assets/styles/articles.scss" scoped></style>
+<svelte:head>
+  <title>{title}</title>
+  <meta property="og:title" content={title} />
+</svelte:head>
 
-<template>
-  <div class="article__wrapper-outer">
-    <div class="article__wrapper-inner">
-      <h2>{{ t("opendataTitle") }}</h2>
+<style lang="scss" src="~/assets/styles/articles.scss"></style>
 
-      <main>
-        <p>{{ t("introText") }}</p>
+<div class="article__wrapper-outer">
+  <div class="article__wrapper-inner">
+    <h2>{ m.opendataTitle() }</h2>
 
-        <h3>{{ t("csvTitle") }}</h3>
-        <ul>
-          <li>
-            <a href="https://dataset.genshin-dictionary.com/words.csv" target="_blank">
-              {{ t("csvDownloadUtf8") }}
-            </a>
-          </li>
-          <li>
-            <a href="https://dataset.genshin-dictionary.com/words-sjis.csv" target="_blank">
-              {{ t("csvDownloadShiftJis") }}
-            </a>
-          </li>
-        </ul>
-        <p v-if="locale === 'ja'">
+    <main>
+      <p>{ m.introText() }</p>
+
+      <h3>{ m.csvTitle() }</h3>
+      <ul>
+        <li>
+          <a href="https://dataset.genshin-dictionary.com/words.csv" target="_blank">
+            { m.csvDownloadUtf8() }
+          </a>
+        </li>
+        <li>
+          <a href="https://dataset.genshin-dictionary.com/words-sjis.csv" target="_blank">
+            { m.csvDownloadShiftJis() }
+          </a>
+        </li>
+      </ul>
+      {#if locale === "ja"}
+        <p>
           Excel を用いて CSV を開く場合は、Shift_JIS 版の利用を推奨します。UTF-8 版を用いると文字化けする可能性があります。<br />
           その他のソフトウェアを用いる場合についても、文字化けが発生する場合は UTF-8 版と Shift_JIS 版の両方を試してみて下さい。
         </p>
+      {/if}
 
-        <h3>{{ t("jsonTitle") }}</h3>
+      <h3>{ m.jsonTitle() }</h3>
 
-        <h4>{{ t("jsonUrlTitle") }}</h4>
-        <p v-html="downloadLink"></p>
+      <h4>{ m.jsonUrlTitle() }</h4>
+      <p>
+        {@html downloadLink}
+      </p>
 
-        <h4>{{ t("jsonFormatTitle") }}</h4>
-        <p>{{ t("jsonFormatText") }}</p>
-        <code>
-          <pre>{{ jsonExample }}</pre>
-        </code>
+      <h4>{ m.jsonFormatTitle() }</h4>
+      <p>{ m.jsonFormatText() }</p>
+      <code>
+        <pre>{ jsonExample }</pre>
+      </code>
 
-        <p>{{ t("propertyTitle") }}</p>
-        <ul>
-          <li><code>id</code> ― {{ t("propertyId") }}</li>
-          <li><code>en</code> ― {{ t("propertyEn") }}</li>
-          <li><code>ja</code> ― {{ t("propertyJa") }}</li>
-          <li><code>zhCN</code> ― {{ t("propertyZhCN") }}</li>
-          <li><code>pronunciationJa</code> ― {{ t("propertyPronunciationJa") }}</li>
-          <li><code>notes</code> ― {{ t("propertyNotes") }}</li>
-          <li><code>notesZh</code> ― {{ t("propertyNotesZh") }}</li>
-          <li><code>notesZhTW</code> ― {{ t("propertyNotesZhTW") }}</li>
-          <li><code>variants</code> ― {{ t("propertyVariants") }}</li>
-          <li><code>variants.en</code> ― {{ t("propertyVariantsEn") }}</li>
-          <li><code>variants.ja</code> ― {{ t("propertyVariantsJa") }}</li>
-          <li><code>examples</code> ― {{ t("propertyExamples") }}</li>
-          <li><code>examples[].en</code> ― {{ t("propertyExamplesEn") }}</li>
-          <li><code>examples[].ja</code> ― {{ t("propertyExamplesJa") }}</li>
-          <li><code>examples[].ref</code> ― {{ t("propertyExamplesRef") }}</li>
-          <li><code>examples[].refURL</code> ― {{ t("propertyExamplesRefURL") }}</li>
-          <li><code>createdAt</code> ― {{ t("propertyCreatedAt") }}</li>
-          <li><code>updatedAt</code> ― {{ t("propertyUpdatedAt") }}</li>
-          <li>
-            <code>tags</code> ― {{ t("propertyTags") }}
-            <ul>
-              <li v-for="[ tagID, tag ] in Object.entries(tags)" :key="tagID">
-                <code>{{ tagID }}</code> ― {{ tag[locale as Locale] }}
+      <p>{ m.propertyTitle() }</p>
+      <ul>
+        <li><code>id</code> ― { m.propertyId() }</li>
+        <li><code>en</code> ― { m.propertyEn() }</li>
+        <li><code>ja</code> ― { m.propertyJa() }</li>
+        <li><code>zhCN</code> ― { m.propertyZhCN() }</li>
+        <li><code>pronunciationJa</code> ― { m.propertyPronunciationJa() }</li>
+        <li><code>notes</code> ― { m.propertyNotes() }</li>
+        <li><code>notesZh</code> ― { m.propertyNotesZh() }</li>
+        <li><code>notesZhTW</code> ― { m.propertyNotesZhTW() }</li>
+        <li><code>variants</code> ― { m.propertyVariants() }</li>
+        <li><code>variants.en</code> ― { m.propertyVariantsEn() }</li>
+        <li><code>variants.ja</code> ― { m.propertyVariantsJa() }</li>
+        <li><code>examples</code> ― { m.propertyExamples() }</li>
+        <li><code>examples[].en</code> ― { m.propertyExamplesEn() }</li>
+        <li><code>examples[].ja</code> ― { m.propertyExamplesJa() }</li>
+        <li><code>examples[].ref</code> ― { m.propertyExamplesRef() }</li>
+        <li><code>examples[].refURL</code> ― { m.propertyExamplesRefURL() }</li>
+        <li><code>createdAt</code> ― { m.propertyCreatedAt() }</li>
+        <li><code>updatedAt</code> ― { m.propertyUpdatedAt() }</li>
+        <li>
+          <code>tags</code> ― { m.propertyTags() }
+          <ul>
+            {#each Object.entries(tags) as [ tagID, tag ] (tagID)}
+              <li>
+                <code>{ tagID }</code> ― { tag[locale as Locale] }
               </li>
-            </ul>
-          </li>
-        </ul>
+            {/each}
+          </ul>
+        </li>
+      </ul>
 
-        <h4>{{ t("compatibilityTitle") }}</h4>
-        <p>{{ t("compatibilityText") }}</p>
+      <h4>{ m.compatibilityTitle() }</h4>
+      <p>{ m.compatibilityText() }</p>
 
-        <h3>{{ t("usageNotesTitle") }}</h3>
-        <p>{{ t("lastUpdated") }}</p>
-        <ul class="usage-notes">
-          <li>{{ t("usageNotes.basic") }}</li>
-          <li>{{ t("usageNotes.citation") }}</li>
-          <li>
-            {{ t("usageNotes.revocation.intro") }}
-            <ul>
-              <li>{{ t("usageNotes.revocation.rights") }}</li>
-              <li>{{ t("usageNotes.revocation.terms") }}</li>
-              <li>{{ t("usageNotes.revocation.laws") }}</li>
-              <li>{{ t("usageNotes.revocation.request") }}</li>
-            </ul>
-          </li>
-          <li>{{ t("usageNotes.disclaimer") }}</li>
-        </ul>
-        <p v-html="contactText"></p>
-      </main>
-    </div>
+      <h3>{ m.usageNotesTitle() }</h3>
+      <p>{ m.lastUpdated() }</p>
+      <ul class="usage-notes">
+        <li>{ m.usageNotes.basic() }</li>
+        <li>{ m.usageNotes.citation() }</li>
+        <li>
+          { m.usageNotes.revocation.intro() }
+          <ul>
+            <li>{ m.usageNotes.revocation.rights() }</li>
+            <li>{ m.usageNotes.revocation.terms() }</li>
+            <li>{ m.usageNotes.revocation.laws() }</li>
+            <li>{ m.usageNotes.revocation.request() }</li>
+          </ul>
+        </li>
+        <li>{ m.usageNotes.disclaimer() }</li>
+      </ul>
+      <p>
+        {@html contactText}
+      </p>
+    </main>
   </div>
-</template>
+</div>
