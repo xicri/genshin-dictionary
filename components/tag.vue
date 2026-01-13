@@ -1,23 +1,17 @@
-<template>
-  <div class="tag">
-    <span>{{ TagName }}</span>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import allTags from "~/dataset/tags.json";
-import type { Locale, TagID } from "~/types.ts";
+  import allTags from "~/dataset/tags.json";
+  import type { Locale, TagID } from "~/types.ts";
 
-const { locale } = useI18n<[], Locale>();
+  const { locale } = useI18n<[], Locale>();
 
-const props = defineProps({
-  tagid: {
-    type: String as PropType<TagID>,
-    required: true,
-  },
-});
+  const props = defineProps({
+    tagid: {
+      type: String as PropType<TagID>,
+      required: true,
+    },
+  });
 
-const TagName = computed(() => allTags[props.tagid][locale.value]);
+  const TagName = computed(() => allTags[props.tagid][locale.value]);
 </script>
 
 <style lang="scss" scoped>
@@ -40,3 +34,9 @@ const TagName = computed(() => allTags[props.tagid][locale.value]);
   background-color: vars.$color-lightest;
 }
 </style>
+
+<template>
+  <div class="tag">
+    <span>{{ TagName }}</span>
+  </div>
+</template>

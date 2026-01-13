@@ -1,16 +1,12 @@
-<template>
-  <div :style="{ display: enabled ? 'block' : 'none' }" class="closer" @click="$emit('close')"></div>
-</template>
-
 <script lang="ts" setup>
-defineEmits([ "close" ]);
+  defineEmits([ "close" ]);
 
-defineProps({
-  enabled: {
-    type: Boolean,
-    default: false,
-  },
-});
+  defineProps({
+    enabled: {
+      type: Boolean,
+      default: false,
+    },
+  });
 </script>
 
 <style lang="scss" scoped>
@@ -24,3 +20,7 @@ defineProps({
   background-color: transparent;
 }
 </style>
+
+<template>
+  <div :style="{ display: enabled ? 'block' : 'none' }" class="closer" @click="$emit('close')"></div>
+</template>

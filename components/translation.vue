@@ -1,63 +1,49 @@
-<template>
-  <div class="results__translation">
-    <span class="results__langname results__translation-item">{{ langName }}: </span>
-    <div class="results__translation-item">
-      <div class="results__ja">
-        <span v-if="wordWithPinyin" lang="zh-CN" data-e2e="zh-CN" v-html="wordWithPinyin"></span>
-        <span v-else :lang="lang" :data-e2e="lang">{{ word }}</span>
-
-        <span v-if="kana" class="results__pronunciation-ja">({{ kana }})</span>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import { escapeHtmlString } from "~/utils/utils.ts";
-import type { Locale } from "~/types.ts";
+  import { escapeHtmlString } from "~/utils/utils.ts";
+  import type { Locale } from "~/types.ts";
 
-const props = defineProps({
-  lang: {
-    type: String as PropType<Locale>,
-    required: true,
-  },
-  word: {
-    type: String,
-    required: true,
-  },
-  kana: {
-    type: String,
-    default: "",
-  },
-  pinyins: {
-    type: Array as PropType<{ char: string; pron: string; }[]>,
-    default: () => [],
-  },
-});
+  const props = defineProps({
+    lang: {
+      type: String as PropType<Locale>,
+      required: true,
+    },
+    word: {
+      type: String,
+      required: true,
+    },
+    kana: {
+      type: String,
+      default: "",
+    },
+    pinyins: {
+      type: Array as PropType<{ char: string; pron: string; }[]>,
+      default: () => [],
+    },
+  });
 
-const { t } = useI18n<[], Locale>();
+  const { t } = useI18n<[], Locale>();
 
-let langName: string;
-let wordWithPinyin: string;
+  let langName: string;
+  let wordWithPinyin: string;
 
-if (props.lang === "en") {
-  langName = t("langNameEn");
-} else if (props.lang === "ja") {
-  langName = t("langNameJa");
-} else if (props.lang === "zh-CN") {
-  langName = t("langNameZhCN");
-} else if (props.lang === "zh-TW") {
-  langName = t("langNameZhTW");
-}
-if (0 < props.pinyins.length) {
-  wordWithPinyin = escapeHtmlString(props.word);
-  for (const { char, pron } of props.pinyins) {
-    const escapedChar = escapeHtmlString(char);
-    const escapedPron = escapeHtmlString(pron);
-
-    wordWithPinyin = wordWithPinyin.replaceAll(escapedChar, `<ruby>${ escapedChar }<rp>(</rp><rt class="results__pinyin">${ escapedPron }</rt><rp>)</rp></ruby>`);
+  if (props.lang === "en") {
+    langName = t("langNameEn");
+  } else if (props.lang === "ja") {
+    langName = t("langNameJa");
+  } else if (props.lang === "zh-CN") {
+    langName = t("langNameZhCN");
+  } else if (props.lang === "zh-TW") {
+    langName = t("langNameZhTW");
   }
-}
+  if (0 < props.pinyins.length) {
+    wordWithPinyin = escapeHtmlString(props.word);
+    for (const { char, pron } of props.pinyins) {
+      const escapedChar = escapeHtmlString(char);
+      const escapedPron = escapeHtmlString(pron);
+
+      wordWithPinyin = wordWithPinyin.replaceAll(escapedChar, `<ruby>${ escapedChar }<rp>(</rp><rt class="results__pinyin">${ escapedPron }</rt><rp>)</rp></ruby>`);
+    }
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -101,3 +87,17 @@ if (0 < props.pinyins.length) {
   }
 }
 </style>
+
+<template>
+  <div class="results__translation">
+    <span class="results__langname results__translation-item">{{ langName }}: </span>
+    <div class="results__translation-item">
+      <div class="results__ja">
+        <span v-if="wordWithPinyin" lang="zh-CN" data-e2e="zh-CN" v-html="wordWithPinyin"></span>
+        <span v-else :lang="lang" :data-e2e="lang">{{ word }}</span>
+
+        <span v-if="kana" class="results__pronunciation-ja">({{ kana }})</span>
+      </div>
+    </div>
+  </div>
+</template>

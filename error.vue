@@ -1,12 +1,3 @@
-<template>
-  <div>
-    <h1 class="error__title">
-      {{ t("notfound") }}
-    </h1>
-    <h2><a href="/">{{ t("returnToIndex") }}</a></h2>
-  </div>
-</template>
-
 <i18n lang="json">
 {
   "en": {
@@ -59,3 +50,12 @@ h1, h2 {
   }
 }
 </style>
+
+<template>
+<div>
+  <h1 class="error__title">
+    {{ t("notfound") }}
+  </h1>
+  <h2><a href="/">{{ t("returnToIndex") }}</a></h2>
+</div>
+</template>
