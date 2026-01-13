@@ -1,3 +1,14 @@
 {
-  "$schema": "https://inlang.com/schema/inlang-message-format"
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "siteTitle": "Genshin Dictionary",
+  "indexTitleDesc": "An online English-Chinese-Japanese dictionary of the terms in Genshin Impact",
+  "aboutTitle": "About this website",
+  "aboutDescription": "About Genshin Dictionary. This website is an online English-Chinese-Japanese dictionary of the terms in Genshin Impact.",
+  "historyTitle": "Update History",
+  "opendataTitle": "Open Data / API (β)",
+  "langNameEn": "English",
+  "langNameJa": "Japanese",
+  "langNameZhCN": "S. Chinese",
+  "langNameZhTW": "T. Chinese"
 }

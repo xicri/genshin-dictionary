@@ -1,3 +1,14 @@
 {
-  "$schema": "https://inlang.com/schema/inlang-message-format"
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "siteTitle": "原神 英語・中国語辞典",
+  "indexTitleDesc": "原神の固有名詞等の英語表記、及び中国語表記の一覧を掲載しています。",
+  "aboutTitle": "このサイトについて",
+  "aboutDescription": "原神英語・中国語辞典についての説明です。このサイトは PC・スマートフォン・プレイステーション4/5用ゲーム「原神」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
+  "historyTitle": "更新履歴",
+  "opendataTitle": "オープンデータ・API (β)",
+  "langNameEn": "英語",
+  "langNameJa": "日本語",
+  "langNameZhCN": "中国語 (簡)",
+  "langNameZhTW": "中国語 (繁)"
 }
