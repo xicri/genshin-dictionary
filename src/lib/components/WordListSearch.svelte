@@ -1,32 +1,3 @@
-<i18n lang="json">
-{
-  "en": {
-    "enterSearchTerms": "Enter search terms...",
-    "tags": "Tags",
-    "openListOfTags": "Open the list of tags",
-    "closeListOfTags": "Close the list of tags"
-  },
-  "ja": {
-    "enterSearchTerms": "検索ワードを入力…",
-    "tags": "タグ",
-    "openListOfTags": "タグ一覧を開く",
-    "closeListOfTags": "タグ一覧を閉じる"
-  },
-  "zh-CN": {
-    "enterSearchTerms": "输入搜索关键词…",
-    "tags": "标签",
-    "openListOfTags": "打开标签列表",
-    "closeListOfTags": "收起标签列表"
-  },
-  "zh-TW": {
-    "enterSearchTerms": "輸入搜尋關鍵字…",
-    "tags": "標籤",
-    "openListOfTags": "開啟標籤列表",
-    "closeListOfTags": "關閉標籤列表"
-  }
-}
-</i18n>
-
 <script lang="ts">
   import { klona } from "klona/json";
   import { debounce } from "lodash-es";

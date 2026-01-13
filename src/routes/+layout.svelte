@@ -1,24 +1,3 @@
-<i18n lang="json">
-{
-  "en": {
-    "siteTitleL1": "Genshin",
-    "siteTitleL2": "Dictionary"
-  },
-  "ja": {
-    "siteTitleL1": "原神 英語・",
-    "siteTitleL2": "中国語辞典"
-  },
-  "zh-CN": {
-    "siteTitleL1": "原神",
-    "siteTitleL2": "中英日辞典"
-  },
-  "zh-TW": {
-    "siteTitleL1": "原神",
-    "siteTitleL2": "中英日辭典"
-  }
-}
-</i18n>
-
 <script lang="ts">
   import { resolve } from "$app/paths";
   import HamburgerMenu from "$lib/components/HamburgerMenu.svelte";
