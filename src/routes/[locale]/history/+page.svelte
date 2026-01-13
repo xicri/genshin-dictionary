@@ -1,24 +1,3 @@
-<i18n lang="json">
-{
-  "en": {
-    "updatedOn": "Updated on {createdAt}",
-    "noRecentUpdates": "No recent updates."
-  },
-  "ja": {
-    "updatedOn": "{createdAt} 更新",
-    "noRecentUpdates": "直近の更新はありません。"
-  },
-  "zh-CN": {
-    "updatedOn": "更新于{createdAt}",
-    "noRecentUpdates": "无近期更新。"
-  },
-  "zh-TW": {
-    "updatedOn": "更新於{createdAt}",
-    "noRecentUpdates": "無近期更新。"
-  }
-}
-</i18n>
-
 <script lang="ts">
   import { isEmpty } from "lodash-es";
   import { m } from "$lib/paraglide/messages.js";

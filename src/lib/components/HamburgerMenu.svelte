@@ -1,28 +1,3 @@
-<i18n lang="json">
-{
-  "en": {
-    "about": "About",
-    "opendata": "Opendata / API",
-    "history": "History"
-  },
-  "ja": {
-    "about": "このサイトについて",
-    "opendata": "オープンデータ・API",
-    "history": "更新履歴"
-  },
-  "zh-CN": {
-    "about": "关于",
-    "opendata": "开放数据与 API (β)",
-    "history": "更新记录"
-  },
-  "zh-TW": {
-    "about": "關於",
-    "opendata": "開放資料與 API (β)",
-    "history": "更新紀錄"
-  }
-}
-</i18n>
-
 <script lang="ts">
   import ClosingLayer from "$lib/components/ClosingLayer.svelte";
   import { m } from "$lib/paraglide/messages.js";
