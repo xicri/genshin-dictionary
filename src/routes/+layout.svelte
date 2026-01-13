@@ -19,17 +19,17 @@
 }
 </i18n>
 
-<script lang="ts" setup>
-  import type { Locale } from "~/types.ts";
+<script lang="ts">
+  import { resolve } from "$app/paths";
+  import HamburgerMenu from "$lib/components/HamburgerMenu.svelte";
+  import Spacer from "$lib/components/Spacer.svelte";
+  import { m } from "$lib/paraglide/messages.js";
 
-  const { t } = useI18n<[], Locale>({
-    useScope: "local",
-  });
-  const localePath = useLocalePath();
+  const { children } = $props();
 </script>
 
-<style lang="scss" scoped>
-@use "~/assets/styles/variables.scss" as vars;
+<style lang="scss">
+@use "$lib/styles/variables.scss" as vars;
 
 .layout-default {
   &__nav-wrapper {
@@ -65,21 +65,19 @@
 }
 </style>
 
-<template>
-  <div>
-    <div class="layout-default__nav-wrapper">
-      <nav class="layout-default__nav">
-        <h1>
-          <a :href="localePath('/')" class="layout-default__title">
-            <span>{{ t("siteTitleL1") }}</span><span>{{ t("siteTitleL2") }}</span>
-          </a>
-        </h1>
+<div>
+  <div class="layout-default__nav-wrapper">
+    <nav class="layout-default__nav">
+      <h1>
+        <a href={resolve("/")} class="layout-default__title">
+          <span>{ m.siteTitleL1() }</span><span>{ m.siteTitleL2() }</span>
+        </a>
+      </h1>
 
-        <spacer />
-        <hamburger-menu />
-      </nav>
-    </div>
-
-    <slot></slot>
+      <Spacer />
+      <HamburgerMenu />
+    </nav>
   </div>
-</template>
+
+  {@render children()}
+</div>

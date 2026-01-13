@@ -1,21 +1,20 @@
-<script lang="ts" setup>
-  import allTags from "~/dataset/tags.json";
-  import type { Locale, TagID } from "~/types.ts";
+<script lang="ts">
+  import { getLocale } from "$lib/paraglide/runtime.js";
+  import allTags from "../../../dataset/tags.json";
+  import type { TagID } from "$lib/types";
 
-  const { locale } = useI18n<[], Locale>();
+  type Props = {
+    tagid: TagID;
+  };
 
-  const props = defineProps({
-    tagid: {
-      type: String as PropType<TagID>,
-      required: true,
-    },
-  });
+  const { tagid }: Props = $props();
+  const currentLocale = getLocale();
 
-  const TagName = computed(() => allTags[props.tagid][locale.value]);
+  const tagName = allTags[tagid][currentLocale];
 </script>
 
-<style lang="scss" scoped>
-@use "~/assets/styles/variables.scss" as vars;
+<style lang="scss">
+@use "$lib/styles/variables.scss" as vars;
 
 .tag {
   border-width: 2px;
@@ -35,8 +34,6 @@
 }
 </style>
 
-<template>
-  <div class="tag">
-    <span>{{ TagName }}</span>
-  </div>
-</template>
+<div class="tag">
+  <span>{ tagName }</span>
+</div>

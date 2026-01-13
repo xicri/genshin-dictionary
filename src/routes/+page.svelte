@@ -1,17 +1,13 @@
-<script lang="ts" setup>
-  import type { Locale } from "~/types.ts";
+<script lang="ts">
+  import WordList from "$lib/components/WordList.svelte";
+  import { m } from "$lib/paraglide/messages.js";
 
-  const { t } = useI18n<[], Locale>();
-  const title = `${ t("siteTitle") } ― ${ t("indexTitleDesc") }`;
-
-  useHead({
-    title,
-    meta: [
-      { property: "og:title", content: title },
-    ],
-  });
+  const title = `${ m.siteTitle() } ― ${ m.indexTitleDesc() }`;
 </script>
 
-<template>
-  <word-list />
-</template>
+<svelte:head>
+  <title>{title}</title>
+  <meta property="og:title" content={title} />
+</svelte:head>
+
+<WordList />
