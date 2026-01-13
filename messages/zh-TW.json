@@ -1,3 +1,14 @@
 {
-  "$schema": "https://inlang.com/schema/inlang-message-format"
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "siteTitle": "原神中英日辭典",
+  "indexTitleDesc": "一個線上中英日三語原神遊戲用語辭典",
+  "aboutTitle": "關於本網站",
+  "aboutDescription": "關於原神中英日辭典。本網站是一個線上中英日三語原神遊戲用語辭典。",
+  "historyTitle": "更新紀錄",
+  "opendataTitle": "開放資料與 API (β)",
+  "langNameEn": "英語",
+  "langNameJa": "日語",
+  "langNameZhCN": "簡體中文",
+  "langNameZhTW": "繁體中文"
 }
