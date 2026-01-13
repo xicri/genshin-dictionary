@@ -21,6 +21,10 @@ export default defineConfig({
       ],
       urlPatterns: [
         {
+          pattern: "/sitemap.xml",
+          localized: locales.map((locale) => ([ locale, "/sitemap.xml" ])),
+        },
+        {
           pattern: "/",
           localized: locales.map((locale) => ([
             locale,
