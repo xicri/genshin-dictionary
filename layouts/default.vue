@@ -1,22 +1,3 @@
-<template>
-  <div>
-    <div class="layout-default__nav-wrapper">
-      <nav class="layout-default__nav">
-        <h1>
-          <a :href="localePath('/')" class="layout-default__title">
-            <span>{{ t("siteTitleL1") }}</span><span>{{ t("siteTitleL2") }}</span>
-          </a>
-        </h1>
-
-        <spacer />
-        <hamburger-menu />
-      </nav>
-    </div>
-
-    <slot></slot>
-  </div>
-</template>
-
 <i18n lang="json">
 {
   "en": {
@@ -39,12 +20,12 @@
 </i18n>
 
 <script lang="ts" setup>
-import type { Locale } from "~/types.ts";
+  import type { Locale } from "~/types.ts";
 
-const { t } = useI18n<[], Locale>({
-  useScope: "local",
-});
-const localePath = useLocalePath();
+  const { t } = useI18n<[], Locale>({
+    useScope: "local",
+  });
+  const localePath = useLocalePath();
 </script>
 
 <style lang="scss" scoped>
@@ -83,3 +64,22 @@ const localePath = useLocalePath();
   }
 }
 </style>
+
+<template>
+  <div>
+    <div class="layout-default__nav-wrapper">
+      <nav class="layout-default__nav">
+        <h1>
+          <a :href="localePath('/')" class="layout-default__title">
+            <span>{{ t("siteTitleL1") }}</span><span>{{ t("siteTitleL2") }}</span>
+          </a>
+        </h1>
+
+        <spacer />
+        <hamburger-menu />
+      </nav>
+    </div>
+
+    <slot></slot>
+  </div>
+</template>

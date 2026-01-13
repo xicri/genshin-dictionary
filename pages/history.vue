@@ -1,19 +1,3 @@
-<template>
-  <div class="history">
-    <h2>{{ t("historyTitle") }}</h2>
-    <div v-for="(words, createdAt) in history" :key="createdAt" class="history__wrapper">
-      <h3 class="history__updated-at">
-        {{ t("updatedOn", { createdAt: createdAt }) }}
-      </h3>
-      <word-list-results :words="words" />
-    </div>
-
-    <p v-if="empty" class="history__empty">
-      {{ t("noRecentUpdates") }}
-    </p>
-  </div>
-</template>
-
 <i18n lang="json">
 {
   "en": {
@@ -36,22 +20,22 @@
 </i18n>
 
 <script lang="ts" setup>
-import { isEmpty } from "lodash-es";
-import _history from "~/dataset/build/history.ts";
-import type { Locale } from "~/types.ts";
+  import { isEmpty } from "lodash-es";
+  import _history from "~/dataset/build/history.ts";
+  import type { Locale } from "~/types.ts";
 
-const { t } = useI18n<[], Locale>();
-const title = `${ t("historyTitle") } | ${ t("siteTitle") }`;
+  const { t } = useI18n<[], Locale>();
+  const title = `${ t("historyTitle") } | ${ t("siteTitle") }`;
 
-useHead({
-  title,
-  meta: [
-    { property: "og:title", content: title },
-  ],
-});
+  useHead({
+    title,
+    meta: [
+      { property: "og:title", content: title },
+    ],
+  });
 
-const history = _history;
-const empty = isEmpty(_history);
+  const history = _history;
+  const empty = isEmpty(_history);
 </script>
 
 <style lang="scss" scoped>
@@ -102,3 +86,19 @@ const empty = isEmpty(_history);
   }
 }
 </style>
+
+<template>
+  <div class="history">
+    <h2>{{ t("historyTitle") }}</h2>
+    <div v-for="(words, createdAt) in history" :key="createdAt" class="history__wrapper">
+      <h3 class="history__updated-at">
+        {{ t("updatedOn", { createdAt: createdAt }) }}
+      </h3>
+      <word-list-results :words="words" />
+    </div>
+
+    <p v-if="empty" class="history__empty">
+      {{ t("noRecentUpdates") }}
+    </p>
+  </div>
+</template>
