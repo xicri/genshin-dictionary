@@ -27,83 +27,90 @@
 }
 </i18n>
 
-<script lang="ts" setup>
+<script lang="ts">
   import { klona } from "klona/json";
   import { debounce } from "lodash-es";
   import { storeToRefs } from "pinia";
-  import allTags from "~/dataset/tags.json";
+  import allTags from "../../../dataset/tags.json";
   import { useDictionaryStore } from "~/store/index.ts";
-  import type ElasticSearchbox from "~/components/elastic-searchbox.vue";
-  import type { Locale, TagID } from "~/types.ts";
+  import ClosingLayer from "$lib/components/ClosingLayer.svelte";
+  import ElasticSearchBox from "$lib/components/ElasticSearchBox.svelte";
+  import { m } from "$lib/paraglide/messages.js";
+  import { getLocale } from "$lib/paraglide/runtime.js";
+  import type { TagID } from "$lib/types.ts";
+  import type { FormEventHandler } from "svelte/elements";
 
-  const emit = defineEmits([ "search" ]);
+  type Props = {
+    onsearch?: () => void;
+  };
+
+  const { onsearch }: Props = $props();
+
   const { $pinia } = useNuxtApp();
   const store = useDictionaryStore($pinia);
 
-  const { locale, t } = useI18n<[], Locale>({
-    useScope: "local",
-  });
+  const locale = getLocale();
 
-  //
-  // Refs
-  //
-  const searchBox = useTemplateRef<InstanceType<typeof ElasticSearchbox>>("searchBox");
+  let searchBox: typeof ElasticSearchBox.prototype | undefined;
   const { tags } = storeToRefs(store);
-  const displayTagListOnMobile = ref(false);
+  let displayTagListOnMobile = $state(false);
 
-  //
-  // Computed
-  //
-  const AvailableTags = computed(() => {
-    const availableTags = klona(allTags);
+  const availableTags = $derived.by(() => {
+    const _availableTags = klona(allTags);
 
     for (const searchTag of tags.value) {
-      delete availableTags[searchTag];
+      delete _availableTags[searchTag];
     }
 
-    return availableTags;
+    return _availableTags;
   });
 
   //
   // Event handlers
   //
-  const updateSearchQuery = debounce((evt: InputEvent) => {
+  const updateSearchQuery: FormEventHandler<HTMLInputElement> = debounce(((evt) => {
     store.updateSearchQuery((evt.target as HTMLInputElement)?.value);
-    emit("search");
-  }, 500);
+    if (onsearch) {
+      onsearch();
+    }
+  }) as FormEventHandler<HTMLInputElement>, 500);
   const focusOnSearchBox = (): void => {
-    if (searchBox.value) {
-      const searchBoxTextLength = searchBox.value.getTextLength() ?? null;
+    if (searchBox) {
+      const searchBoxTextLength = searchBox.getTextLength() ?? null;
 
-      searchBox.value.setSelectionRange(searchBoxTextLength, searchBoxTextLength);
-      searchBox.value.focus();
+      searchBox.setSelectionRange(searchBoxTextLength, searchBoxTextLength);
+      searchBox.focus();
     }
   };
   const selectAll = (): void => {
-    if (searchBox.value) {
-      searchBox.value.setSelectionRange(0, searchBox.value.getTextLength() ?? null);
-      searchBox.value.focus();
+    if (searchBox) {
+      searchBox.setSelectionRange(0, searchBox.getTextLength() ?? null);
+      searchBox.focus();
     }
   };
   const closeTagList = (): void => {
-    displayTagListOnMobile.value = false;
+    displayTagListOnMobile = false;
   };
   const toggleTagList = (): void => {
-    displayTagListOnMobile.value = !displayTagListOnMobile.value;
+    displayTagListOnMobile = !displayTagListOnMobile;
   };
   const addTag = (tagID: TagID): void => {
     store.addTags(tagID);
-    emit("search");
+    if (onsearch) {
+      onsearch();
+    }
     closeTagList();
   };
   const removeTag = (tagIndex: number): void => {
     store.removeTag(tagIndex);
-    emit("search");
+    if (onsearch) {
+      onsearch();
+    }
   };
 </script>
 
-<style lang="scss" scoped>
-@use "~/assets/styles/variables.scss" as vars;
+<style lang="scss">
+@use "$lib/styles/variables.scss" as vars;
 
 .search {
   width: 100%;
@@ -286,50 +293,58 @@
 }
 </style>
 
-<template>
-  <div>
 <div class="search">
   <div class="search__box">
-    <div class="search__scrollable" @click="focusOnSearchBox" @dblclick="selectAll">
+    <div class="search__scrollable" onclick={focusOnSearchBox} ondblclick={selectAll}>
       <div class="search__active-tags">
-        <div v-for="(tag, i) in tags" :key="tag" class="search__active-tag">
-          <span>{{ allTags[tag][locale] }}</span>
-          <span class="search__remove-tag" @click="removeTag(i)">☓</span>
-        </div>
+        {#each tags as tag, i (tag)}
+          <div class="search__active-tag">
+            <span>{ allTags[tag][locale] }</span>
+            <span class="search__remove-tag" onclick={() => removeTag(i)}>☓</span>
+          </div>
+        {/each}
       </div>
 
-      <elastic-searchbox ref="searchBox" class="search__input" name="searchbox" :placeholder="t('enterSearchTerms')" autocomplete="off" @input="updateSearchQuery" />
+      <ElasticSearchBox
+        bind:this={searchBox}
+        class="search__input"
+        name="searchbox"
+        placeholder={m.enterSearchTerms()}
+        autocomplete="off"
+        oninput={updateSearchQuery}
+      />
     </div>
 
     <img
       src="/vendor/octicons/tag.svg"
       width="24"
       height="24"
-      :alt="t('openListOfTags')"
+      alt={m.openListOfTags()}
       decoding="async"
       class="search__taglist-icon"
-      @click="toggleTagList"
+      onclick={toggleTagList}
     />
   </div>
-  <div ref="taglist" :class="{ search__taglist: true, 'search__taglist-display-mobile': displayTagListOnMobile }">
+  <div class="search__taglist" class:search__taglist-display-mobile={displayTagListOnMobile}>
     <div class="search__taglist-inner">
-      <span class="search__taglist-title">{{ t("tags") }}:</span>
-      <span v-for="(availableTag, id) in AvailableTags" :key="id" class="search__tag" @click="addTag(id)">
-        {{ availableTag[locale] }} <span class="search__tag-add">+</span>
-      </span>
+      <span class="search__taglist-title">{ m.tags() }:</span>
+      {#each Object.entries(availableTags) as [ id, availableTag ] (id)}
+        <span class="search__tag" onclick={() => addTag(id as keyof typeof availableTags)}>
+          { availableTag[locale] } <span class="search__tag-add">+</span>
+        </span>
+      {/each}
     </div>
 
     <img
       src="/vendor/octicons/x.svg"
       width="24"
       height="24"
-      :alt="t('closeListOfTags')"
+      alt={m.closeListOfTags()}
       decoding="async"
       class="search__taglist-close"
-      @click="closeTagList"
+      onclick={closeTagList}
     />
   </div>
 </div>
-<closing-layer :enabled="displayTagListOnMobile" @close="closeTagList" />
-  </div>
-</template>
+
+<ClosingLayer enabled={displayTagListOnMobile} onclose={closeTagList} />

@@ -19,21 +19,13 @@
 }
 </i18n>
 
-<script setup>
-defineProps({
-  error: {
-    type: Object,
-    required: true,
-  },
-});
-
-const { t } = useI18n({
-  useScope: "local",
-});
+<script lang="ts">
+  import { page } from "$app/state";
+  import { m } from "$lib/paraglide/messages.js";
 </script>
 
-<style lang="scss" scoped>
-@use "~/assets/styles/variables.scss" as vars;
+<style lang="scss">
+@use "$lib/styles/variables.scss" as vars;
 
 h1, h2 {
   display: block;
@@ -51,11 +43,11 @@ h1, h2 {
 }
 </style>
 
-<template>
-<div>
+{#if page.status === 404}
   <h1 class="error__title">
-    {{ t("notfound") }}
+    { m.notfound() }
   </h1>
-  <h2><a href="/">{{ t("returnToIndex") }}</a></h2>
-</div>
-</template>
+  <h2><a href="/">{ m.returnToIndex() }</a></h2>
+{:else}
+  <h1>{page.status + (page.error ? `: ${ page.error.message }` : "")}</h1>
+{/if}
