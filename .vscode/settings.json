@@ -15,7 +15,7 @@
     "html",
     "json",
     "jsonc",
-    "json5",
+    "json5"
   ],
 
   "editor.formatOnSave": true,
