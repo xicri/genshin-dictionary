@@ -1,20 +1,3 @@
-<i18n lang="json">
-{
-  "en": {
-    "notFound": "Your search did not match any words in this dictionary."
-  },
-  "ja": {
-    "notFound": "該当する語彙が見つかりませんでした。"
-  },
-  "zh-CN": {
-    "notFound": "未找到匹配的词汇。"
-  },
-  "zh-TW": {
-    "notFound": "未找到符合的詞彙。"
-  }
-}
-</i18n>
-
 <script lang="ts">
   import { storeToRefs } from "pinia";
   import { useDictionaryStore } from "~/store/index.ts";
