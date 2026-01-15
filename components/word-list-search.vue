@@ -58,7 +58,6 @@
     const availableTags = klona(allTags);
 
     for (const searchTag of tags.value) {
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete -- TODO fixme
       delete availableTags[searchTag];
     }
 
