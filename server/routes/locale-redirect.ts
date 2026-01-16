@@ -1,6 +1,6 @@
 import { parse } from "@escapace/accept-language-parser";
 import type { Locale } from "~/types.ts";
-import locales from "../../tmp/locales.json";
+import { locales } from "../../project.inlang/settings.json";
 
 export default defineEventHandler((event) => {
   const getUserLanguage = (acceptLanguage: string | null | undefined): Locale => {
