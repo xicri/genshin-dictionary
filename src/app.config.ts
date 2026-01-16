@@ -1,0 +1,5 @@
+export const headers = {
+  "Cross-Origin-Resource-Policy": "same-origin",
+  "Cross-Origin-Opener-Policy": "same-origin",
+  "X-Content-Type-Options": "nosniff",
+};
