@@ -12,43 +12,11 @@
 
   const createLink = (url: string, text: string) => `<a href="${ url }" target="_blank" rel="noopener">${ text }</a>`;
 
-  const blueskyLink = createLink("https://bsky.app/profile/xicri.genshin-dictionary.com", "Bluesky");
-  const githubLink = createLink("https://github.com/xicri", "GitHub");
-  const issuesLink = createLink("https://github.com/xicri/genshin-dictionary/issues", "Issues");
-  const discussionsLink = createLink("https://github.com/xicri/genshin-dictionary/discussions", "Discussions");
-
   const aboutIntroText = m.aboutIntro({
     genshinLink: createLink(
       locale === "zh-CN" ? "https://ys.mihoyo.com" : "https://genshin.hoyoverse.com",
       m.genshinImpact(),
     ),
-  });
-
-  const contributorText = m.contributor({
-    bilibiliLink: createLink("https://space.bilibili.com/158463764", "BiliBili"),
-    twitterLink: createLink("https://x.com/Haku_Bill", "X (Twitter)"),
-    githubLink: createLink("https://github.com/Bill-Haku", "GitHub"),
-  });
-
-  const contactText = [
-    m.contact1({ blueskyLink }),
-    m.contact2({ issuesLink, discussionsLink }),
-    m.contact3(),
-  ].join("<br />");
-
-  const credits1Text = m.credits1({
-    genshinDictionaryLink: createLink("http://anemoarchon.s205.xrea.com/#/gdic", m.genshinDictionary()),
-    genshinKanjiLabLink: createLink("https://x.com/genshin_kanji", m.genshinKanjiLab()),
-  });
-  const credits2Text = m.credits2({
-    genshinWikiLink: createLink("https://genshin-impact.fandom.com/wiki/Genshin_Impact_Wiki", "Genshin Impact Wiki (Fandom)"),
-  });
-  const credits3Text = m.credits3({
-    octiconsLink: createLink("https://primer.style/octicons/", "Octicons"),
-    licenseLink: createLink("https://github.com/primer/octicons/blob/main/LICENSE", `MIT ${ m.license() }`),
-  });
-  const credits4Text = m.credits4({
-    logoTypeGothicLink: createLink("http://www.fontna.com/blog/1226/", m.logoTypeGothic()),
   });
 </script>
 
@@ -76,21 +44,61 @@
       {/if}
       <p>{ m.precautions2() }</p>
 
-      <h3>{ m.operatorTitle() }</h3>
+      <h3>{ m.contact() }</h3>
+      <p>
+        {m.contactInstruction()}
+      </p>
       <ul>
         <li>
-          {m.operator()} (<a href="https://bsky.app/profile/xicri.genshin-dictionary.com" target="_blank" rel="noopener">Bluesky</a> / <a href="https://github.com/xicri" target="_blank" rel="noopener">GitHub</a>)
+          <a href="https://bsky.app/profile/xicri.genshin-dictionary.com" target="_blank" rel="noopener">
+            Bluesky
+          </a> ({m.contactBlueskyChatAvailable()})
         </li>
-        <li>{@html contributorText}</li>
+        <li>
+          <a href="https://github.com/xicri/genshin-dictionary/issues" target="_blank" rel="noopener">
+            GitHub Issues
+          </a> ({m.contactGHIssuesFor()})
+        </li>
+        <li>
+          <a href="https://github.com/xicri/genshin-dictionary/discussions" target="_blank" rel="noopener">
+            GitHub Discussions
+          </a> ({m.contactGHDiscussionsFor()})
+        </li>
       </ul>
 
-      <p>{@html contactText}</p>
-
       <h3>{ m.creditsTitle() }</h3>
-      <p>{@html credits1Text}</p>
-      <p>{@html credits2Text}</p>
-      <p>{@html credits3Text}</p>
-      <p>{@html credits4Text}</p>
+      <p>
+        {m.creditsContributorsIntro()}
+      </p>
+      <ul>
+        <li>
+          <a href="https://github.com/xicri/genshin-dictionary/graphs/contributors" target="_blank" rel="noopener">
+            {m.creditsContributorsWebsite()}
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/xicri/genshin-langdata/graphs/contributors" target="_blank" rel="noopener">
+            {m.creditsContributorsWordData()}
+          </a>
+        </li>
+      </ul>
+
+      <p>
+        {m.creditsResourcesIntro()}
+      </p>
+
+      <ul>
+        <li>
+          <a href="https://primer.style/octicons/" target="_blank" rel="noopener">
+            Octicons
+          </a> ({m.creditsOcticonsLicensing()})
+        </li>
+        <li>
+          <a href="https://www.fontna.com/blog/1226/" target="_blank" rel="noopener">
+            {m.logoTypeGothic()}
+          </a> ({m.creditsLogoTypeGothicLicensing()})
+        </li>
+      </ul>
     </main>
   </div>
 </div>
