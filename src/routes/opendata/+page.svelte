@@ -141,18 +141,18 @@
       <h3>{ m.usageNotesTitle() }</h3>
       <p>{ m.lastUpdated() }</p>
       <ul class="usage-notes">
-        <li>{ m.usageNotes.basic() }</li>
-        <li>{ m.usageNotes.citation() }</li>
+        <li>{ m.usageNotesBasic() }</li>
+        <li>{ m.usageNotesCitation() }</li>
         <li>
-          { m.usageNotes.revocation.intro() }
+          { m.usageNotesRevocationIntro() }
           <ul>
-            <li>{ m.usageNotes.revocation.rights() }</li>
-            <li>{ m.usageNotes.revocation.terms() }</li>
-            <li>{ m.usageNotes.revocation.laws() }</li>
-            <li>{ m.usageNotes.revocation.request() }</li>
+            <li>{ m.usageNotesRevocationRights() }</li>
+            <li>{ m.usageNotesRevocationTerms() }</li>
+            <li>{ m.usageNotesRevocationLaws() }</li>
+            <li>{ m.usageNotesRevocationRequest() }</li>
           </ul>
         </li>
-        <li>{ m.usageNotes.disclaimer() }</li>
+        <li>{ m.usageNotesDisclaimer() }</li>
       </ul>
       <p>
         {@html contactText}

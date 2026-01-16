@@ -76,18 +76,14 @@
   "compatibilityText": "This data is currently β. We might apply breaking changes at anytime without announcement.",
   "usageNotesTitle": "Terms of use",
   "lastUpdated": "Last updated at: 2024/11/21",
-  "usageNotes": {
-    "basic": "You can modify and re-distribute CSVs and JSON data of the English-Chinese-Japanese translations (\"The Data\")",
-    "citation": "You don't have to give the credit to this website and provide link to its URL. (However, we welcome if you give the credit)",
-    "revocation": {
-      "intro": "We cancel the permission to redistribute The Data if:",
-      "rights": "you have violate the rights of the HoYoverse companies (i.e. miHoYo, Cognosphere, and their local branches and subsidiaries) and any thirdparties.",
-      "terms": "you violate agreements of the Genshin Impact game and its related services such as HoYoLab.",
-      "laws": "you violate Japanese law or the law of the country you live.",
-      "request": "the owner of this website request to stop redistribution."
-    },
-    "disclaimer": "The owner of this website and the contributors of The Data assumes no responsibility for any damages while you use, modify, publish, or redistribute The Data."
-  },
+  "usageNotesBasic": "You can modify and re-distribute CSVs and JSON data of the English-Chinese-Japanese translations (\"The Data\")",
+  "usageNotesCitation": "You don't have to give the credit to this website and provide link to its URL. (However, we welcome if you give the credit)",
+  "usageNotesRevocationIntro": "We cancel the permission to redistribute The Data if:",
+  "usageNotesRevocationRights": "you have violate the rights of the HoYoverse companies (i.e. miHoYo, Cognosphere, and their local branches and subsidiaries) and any thirdparties.",
+  "usageNotesRevocationTerms": "you violate agreements of the Genshin Impact game and its related services such as HoYoLab.",
+  "usageNotesRevocationLaws": "you violate Japanese law or the law of the country you live.",
+  "usageNotesRevocationRequest": "the owner of this website request to stop redistribution.",
+  "usageNotesDisclaimer": "The owner of this website and the contributors of The Data assumes no responsibility for any damages while you use, modify, publish, or redistribute The Data.",
   "contactText": "If you have any questions, contact via {blueskyLink}. (You don't have to follow me to send me the DMs.)",
 
   "about": "About",

@@ -76,18 +76,14 @@
   "compatibilityText": "目前資料屬於 β 版本，可能隨時進行重大更動，恕不另行通知。",
   "usageNotesTitle": "使用條款",
   "lastUpdated": "最後更新：2024/11/21",
-  "usageNotes": {
-    "basic": "您可以自由修改及再分發本站提供的中日英翻譯資料（以下簡稱「資料」）。",
-    "citation": "無需註明本站為資料來源或提供連結。（當然，如果您願意標註，我們將非常感謝。）",
-    "revocation": {
-      "intro": "在以下情況下，我們將取消您再分發資料的許可：",
-      "rights": "您侵犯了米哈遊（如上海米哈遊網絡科技股份有限公司、miHoYo、Cognosphere Pte., Ltd. (HoYoverse) 及其分支機構或子公司）或第三方的權益。",
-      "terms": "您違反了《原神》遊戲及其相關服務（如米遊社、HoYoLab）的使用條款。",
-      "laws": "您違反了日本法律或您所在國家的法律。",
-      "request": "本站運營者要求您停止再分發資料。"
-    },
-    "disclaimer": "本站運營者及資料貢獻者對您在使用、修改、發佈或再分發資料過程中造成的任何損失概不負責。"
-  },
+  "usageNotesBasic": "您可以自由修改及再分發本站提供的中日英翻譯資料（以下簡稱「資料」）。",
+  "usageNotesCitation": "無需註明本站為資料來源或提供連結。（當然，如果您願意標註，我們將非常感謝。）",
+  "usageNotesRevocationIntro": "在以下情況下，我們將取消您再分發資料的許可：",
+  "usageNotesRevocationRights": "您侵犯了米哈遊（如上海米哈遊網絡科技股份有限公司、miHoYo、Cognosphere Pte., Ltd. (HoYoverse) 及其分支機構或子公司）或第三方的權益。",
+  "usageNotesRevocationTerms": "您違反了《原神》遊戲及其相關服務（如米遊社、HoYoLab）的使用條款。",
+  "usageNotesRevocationLaws": "您違反了日本法律或您所在國家的法律。",
+  "usageNotesRevocationRequest": "本站運營者要求您停止再分發資料。",
+  "usageNotesDisclaimer": "本站運營者及資料貢獻者對您在使用、修改、發佈或再分發資料過程中造成的任何損失概不負責。",
   "contactText": "如有任何問題，請透過 {blueskyLink} 聯絡運營者。（無需追蹤亦可發送私訊）",
 
   "about": "關於",
