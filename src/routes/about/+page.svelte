@@ -29,12 +29,6 @@
     githubLink: createLink("https://github.com/Bill-Haku", "GitHub"),
   });
 
-  const contactText = [
-    m.contact1({ blueskyLink }),
-    m.contact2({ issuesLink, discussionsLink }),
-    m.contact3(),
-  ].join("<br />");
-
   const credits1Text = m.credits1({
     genshinDictionaryLink: createLink("http://anemoarchon.s205.xrea.com/#/gdic", m.genshinDictionary()),
     genshinKanjiLabLink: createLink("https://x.com/genshin_kanji", m.genshinKanjiLab()),
@@ -83,7 +77,11 @@
         <li>{@html contributorText}</li>
       </ul>
 
-      <p>{@html contactText}</p>
+      <p>
+        {m.contact1({ blueskyLink })}<br />
+        {m.contact2({ issuesLink, discussionsLink })}<br />
+        {m.contact3()}
+      </p>
 
       <h3>{ m.creditsTitle() }</h3>
       <p>{@html credits1Text}</p>
