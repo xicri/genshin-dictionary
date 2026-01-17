@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { klona } from "klona/json";
   import { debounce } from "lodash-es";
   import { storeToRefs } from "pinia";
   import allTags from "../../../dataset/tags.json";
@@ -27,7 +26,7 @@
   let displayTagListOnMobile = $state(false);
 
   const availableTags = $derived.by(() => {
-    const _availableTags = klona(allTags);
+    const _availableTags = structuredClone(allTags);
 
     for (const searchTag of tags.value) {
       delete _availableTags[searchTag];
