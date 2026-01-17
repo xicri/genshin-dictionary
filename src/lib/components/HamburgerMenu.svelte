@@ -91,18 +91,6 @@ a {
     font-size: 1rem;
     margin-bottom: 0.5rem;
   }
-  &__languages-list {
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.5em;
-
-    padding-left: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  &__languages-item {
-    color: vars.$color-dark;
-    cursor: pointer;
-  }
 
   &__bottomline {
     display: flex;
@@ -136,11 +124,11 @@ a {
       <h2 class="menu__languages-title">
         Languages
       </h2>
-      <div class="menu__languages-list">
+      <div class="flex flex-col gap-y-2 pl-6 mb-8">
         {#each locales as locale, index (index) }
           <button
             onclick={() => setLocale(locale)}
-            class="menu__languages-item"
+            class="text-dark cursor-pointer"
           >
             { langNames[locale] }
           </button>
