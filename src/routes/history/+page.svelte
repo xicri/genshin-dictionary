@@ -71,7 +71,10 @@
       <h3 class="history__updated-at">
         { m.updatedOn({ createdAt }) }
       </h3>
-      <WordCard {words} />
+
+      {#each words as word (word.id)}
+        <WordCard {word} />
+      {/each}
     </div>
   {/each}
 

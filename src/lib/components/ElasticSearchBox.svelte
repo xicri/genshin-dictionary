@@ -3,18 +3,20 @@
   import type { FormEventHandler, FullAutoFill } from "svelte/elements";
 
   type Props = {
+    value: string;
     name?: string;
     placeholder?: string;
     autocomplete?: FullAutoFill;
     oninput?: FormEventHandler<HTMLInputElement>;
   };
 
+  let { value = $bindable(), ...props }: Props = $props();
   const {
     name,
     placeholder,
     autocomplete,
     oninput: onInputFromParent,
-  }: Props = $props();
+  } = props;
 
   let searchBox: HTMLInputElement;
 
@@ -75,6 +77,7 @@
 
 <input
   bind:this={searchBox}
+  bind:value={value}
   type="search"
   class="elastic-searchbox"
   {name}
