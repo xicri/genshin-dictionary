@@ -35,7 +35,6 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/robots",
     "@nuxtjs/sitemap",
-    "@pinia/nuxt",
   ],
 
   sitemap: {
