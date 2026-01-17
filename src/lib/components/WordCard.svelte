@@ -4,58 +4,15 @@
   import { m } from "$lib/paraglide/messages.js";
   import { getLocale, localizeHref } from "$lib/paraglide/runtime.js";
   import { sleep } from "$lib/utils.ts";
-  import { useDictionaryStore } from "~/store/index.ts";
   import type { Word } from "$lib/types.ts";
 
   type Props = {
-    words: Word[];
+    word: Word;
   };
 
-  const { words }: Props = $props();
+  const { word }: Props = $props();
 
-  const { $pinia } = useNuxtApp();
   const locale = getLocale();
-
-  const store = useDictionaryStore($pinia);
-
-  //
-  // refs
-  //
-  let thisElement: HTMLElement;
-
-  //
-  // methods
-  //
-  const observer = new IntersectionObserver((entries, observer) => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) {
-        return;
-      }
-
-      observer.unobserve(entry.target);
-      store.loadMore();
-    }
-  });
-
-  const addIntersectionObserver = (): void => {
-    const wordEls = thisElement.children;
-
-    if (wordEls && 0 < wordEls.length) {
-      observer?.observe(wordEls[wordEls.length - 1]); // add observer to the last word element
-    }
-  };
-
-  //
-  // Lifecycle Hooks
-  //
-  onMounted(() => {
-    addIntersectionObserver();
-  });
-
-  onUpdated(async () => {
-    await nextTick();
-    addIntersectionObserver();
-  });
 
   //
   // event handlers
@@ -93,8 +50,6 @@ h5.linebreak {
 }
 
 .results {
-  width: 100%;
-
   &__word {
     display: flex;
     flex-direction: column;
@@ -168,177 +123,173 @@ h5.linebreak {
 }
 </style>
 
-<main bind:this={thisElement} class="results">
-  {#each words as word (word.en)}
-    <div class="results__word">
-      <h4 class="results__translations">
-        {#if locale === "en"}
-          <Translation lang="en" word={word.en} />
-          {#if word.zhCN}
-            <Translation lang="zh-CN" word={word.zhCN} pinyins={word.pinyins} />
-          {/if}
-          {#if word.zhTW}
-            <Translation lang="zh-TW" word={word.zhTW} />
-          {/if}
-          {#if word.ja}
-            <Translation lang="ja" word={word.ja} kana={word.pronunciationJa} />
-          {/if}
-        {:else if locale === "ja"}
-          {#if word.ja}
-            <Translation lang="ja" word={word.ja} kana={word.pronunciationJa} />
-          {/if}
-          <Translation lang="en" word={word.en} />
-          {#if word.zhCN}
-            <Translation lang="zh-CN" word={word.zhCN} pinyins={word.pinyins} />
-          {/if}
-          {#if word.zhTW}
-            <Translation lang="zh-TW" word={word.zhTW} />
-          {/if}
-        {:else if locale === "zh-CN"}
-          {#if word.zhCN}
-            <Translation lang="zh-CN" word={word.zhCN} pinyins={word.pinyins} />
-          {/if}
-          {#if word.zhTW}
-            <Translation lang="zh-TW" word={word.zhTW} />
-          {/if}
-          <Translation lang="en" word={word.en} />
-          {#if word.ja}
-            <Translation lang="ja" word={word.ja} kana={word.pronunciationJa} />
-          {/if}
-        {:else if locale === "zh-TW"}
-          {#if word.zhTW}
-            <Translation lang="zh-TW" word={word.zhTW} />
-          {/if}
-          {#if word.zhCN}
-            <Translation lang="zh-CN" word={word.zhCN} pinyins={word.pinyins} />
-          {/if}
-          <Translation lang="en" word={word.en} />
-          {#if word.ja}
-            <Translation lang="ja" word={word.ja} kana={word.pronunciationJa} />
-          {/if}
-        {/if}
-      </h4>
-      <div class="results__description">
-        <div class="results__tags results__description-section">
-          {#each word.tags || [] as tag (tag)}
-            <a href={localizeHref(`/tags/${ tag }`)}>
-              <Tag tagid={tag} />
-            </a>
-          {/each}
-        </div>
-
-        {#if word.notes && locale === "ja"}
-          <div
-            class="results__description-section"
-            data-e2e="notes"
-          >
-            {@html word.notes}
-          </div>
-        {:else if word.notesEn && locale === "en"}
-          <div
-            class="results__description-section"
-            data-e2e="notesEn"
-          >
-            {@html word.notesEn}
-          </div>
-        {:else if word.notesZh && locale === "zh-CN"}
-          <div
-            class="results__description-section"
-            data-e2e="notesZh"
-          >
-            {@html word.notesZh}
-          </div>
-        {:else if locale === "zh-TW" && (word.notesZhTW || word.notesZh)}
-          <div
-            class="results__description-section"
-            data-e2e="notesZhTW"
-          >
-            {@html word.notesZhTW ?? word.notesZh}
-          </div>
-        {/if}
-
-        {#if word.examples && 0 < word.examples.length}
-          <div class="results__description-section">
-            <h5 class="linebreak">
-              { m.example() }
-            </h5>
-            {#each word.examples as example (example.en)}
-              <div class="results__description-section-level2">
-                <p>&quot;{ example.en }&quot;</p>
-                <p>「{ example.ja }」</p>
-                {#if example.ref && locale === "ja"}
-                  <p class="results__example-ref">
-                    {#if example.refURL}
-                      ― <a href={example.refURL} target="_blank" rel="noopener">{ example.ref }</a>
-                    {:else}
-                      ― { example.ref }
-                    {/if}
-                  </p>
-                {/if}
-              </div>
-            {/each}
-          </div>
-        {/if}
-        <div class="results__permalink">
-          <a href={localizeHref(`/${ word.id }`)}>
-            <!--
-              Approximate values of width & height are specified in HTML to mitigate Comulative Layout Shift,
-              but actual values are specified in SCSS.
-            -->
-            <img
-              src="/vendor/octicons/link.svg"
-              width="12"
-              height="12"
-              alt={
-                m.permalinkAlt({
-                  word: word[
-                    locale === "zh-CN" ? "zhCN"
-                      : locale === "zh-TW" ? "zhTW"
-                      : locale
-                  ],
-                })
-              }
-              decoding="async"
-              class="results__permalink--icon"
-            />
-            <span class="results__permalink--text">{m.permalink()}</span>
-          </a>
-          <img
-            src="/vendor/octicons/copy.svg"
-            width="12"
-            height="12"
-            alt={
-              m.copyLink({
-                word: word[
-                  locale === "zh-CN" ? "zhCN"
-                    : locale === "zh-TW" ? "zhTW"
-                    : locale
-                ],
-              })
-            }
-            decoding="async"
-            class="results__permalink--copy"
-            onclick={(evt) => copyLink(word.id, evt)}
-          />
-          <img
-            src="/vendor/octicons/check.svg"
-            width="12"
-            height="12"
-            alt={
-              m.copyLinkDone({
-                word: word[
-                  locale === "zh-CN" ? "zhCN"
-                    : locale === "zh-TW" ? "zhTW"
-                    : locale
-                ],
-              })
-            }
-            decoding="async"
-            class="results__permalink--copied"
-            style="display: none;"
-          />
-        </div>
-      </div>
+<div class="results__word">
+  <h4 class="results__translations">
+    {#if locale === "en"}
+      <Translation lang="en" word={word.en} />
+      {#if word.zhCN}
+        <Translation lang="zh-CN" word={word.zhCN} pinyins={word.pinyins} />
+      {/if}
+      {#if word.zhTW}
+        <Translation lang="zh-TW" word={word.zhTW} />
+      {/if}
+      {#if word.ja}
+        <Translation lang="ja" word={word.ja} kana={word.pronunciationJa} />
+      {/if}
+    {:else if locale === "ja"}
+      {#if word.ja}
+        <Translation lang="ja" word={word.ja} kana={word.pronunciationJa} />
+      {/if}
+      <Translation lang="en" word={word.en} />
+      {#if word.zhCN}
+        <Translation lang="zh-CN" word={word.zhCN} pinyins={word.pinyins} />
+      {/if}
+      {#if word.zhTW}
+        <Translation lang="zh-TW" word={word.zhTW} />
+      {/if}
+    {:else if locale === "zh-CN"}
+      {#if word.zhCN}
+        <Translation lang="zh-CN" word={word.zhCN} pinyins={word.pinyins} />
+      {/if}
+      {#if word.zhTW}
+        <Translation lang="zh-TW" word={word.zhTW} />
+      {/if}
+      <Translation lang="en" word={word.en} />
+      {#if word.ja}
+        <Translation lang="ja" word={word.ja} kana={word.pronunciationJa} />
+      {/if}
+    {:else if locale === "zh-TW"}
+      {#if word.zhTW}
+        <Translation lang="zh-TW" word={word.zhTW} />
+      {/if}
+      {#if word.zhCN}
+        <Translation lang="zh-CN" word={word.zhCN} pinyins={word.pinyins} />
+      {/if}
+      <Translation lang="en" word={word.en} />
+      {#if word.ja}
+        <Translation lang="ja" word={word.ja} kana={word.pronunciationJa} />
+      {/if}
+    {/if}
+  </h4>
+  <div class="results__description">
+    <div class="results__tags results__description-section">
+      {#each word.tags || [] as tag (tag)}
+        <a href={localizeHref(`/tags/${ tag }`)}>
+          <Tag tagid={tag} />
+        </a>
+      {/each}
     </div>
-  {/each}
-</main>
+
+    {#if word.notes && locale === "ja"}
+      <div
+        class="results__description-section"
+        data-e2e="notes"
+      >
+        {@html word.notes}
+      </div>
+    {:else if word.notesEn && locale === "en"}
+      <div
+        class="results__description-section"
+        data-e2e="notesEn"
+      >
+        {@html word.notesEn}
+      </div>
+    {:else if word.notesZh && locale === "zh-CN"}
+      <div
+        class="results__description-section"
+        data-e2e="notesZh"
+      >
+        {@html word.notesZh}
+      </div>
+    {:else if locale === "zh-TW" && (word.notesZhTW || word.notesZh)}
+      <div
+        class="results__description-section"
+        data-e2e="notesZhTW"
+      >
+        {@html word.notesZhTW ?? word.notesZh}
+      </div>
+    {/if}
+
+    {#if word.examples && 0 < word.examples.length}
+      <div class="results__description-section">
+        <h5 class="linebreak">
+          { m.example() }
+        </h5>
+        {#each word.examples as example (example.en)}
+          <div class="results__description-section-level2">
+            <p>&quot;{ example.en }&quot;</p>
+            <p>「{ example.ja }」</p>
+            {#if example.ref && locale === "ja"}
+              <p class="results__example-ref">
+                {#if example.refURL}
+                  ― <a href={example.refURL} target="_blank" rel="noopener">{ example.ref }</a>
+                {:else}
+                  ― { example.ref }
+                {/if}
+              </p>
+            {/if}
+          </div>
+        {/each}
+      </div>
+    {/if}
+    <div class="results__permalink">
+      <a href={localizeHref(`/${ word.id }`)}>
+        <!--
+          Approximate values of width & height are specified in HTML to mitigate Comulative Layout Shift,
+          but actual values are specified in SCSS.
+        -->
+        <img
+          src="/vendor/octicons/link.svg"
+          width="12"
+          height="12"
+          alt={
+            m.permalinkAlt({
+              word: word[
+                locale === "zh-CN" ? "zhCN"
+                  : locale === "zh-TW" ? "zhTW"
+                  : locale
+              ],
+            })
+          }
+          decoding="async"
+          class="results__permalink--icon"
+        />
+        <span class="results__permalink--text">{m.permalink()}</span>
+      </a>
+      <img
+        src="/vendor/octicons/copy.svg"
+        width="12"
+        height="12"
+        alt={
+          m.copyLink({
+            word: word[
+              locale === "zh-CN" ? "zhCN"
+                : locale === "zh-TW" ? "zhTW"
+                : locale
+            ],
+          })
+        }
+        decoding="async"
+        class="results__permalink--copy"
+        onclick={(evt) => copyLink(word.id, evt)}
+      />
+      <img
+        src="/vendor/octicons/check.svg"
+        width="12"
+        height="12"
+        alt={
+          m.copyLinkDone({
+            word: word[
+              locale === "zh-CN" ? "zhCN"
+                : locale === "zh-TW" ? "zhTW"
+                : locale
+            ],
+          })
+        }
+        decoding="async"
+        class="results__permalink--copied"
+        style="display: none;"
+      />
+    </div>
+  </div>
+</div>

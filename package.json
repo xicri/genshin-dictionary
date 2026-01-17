@@ -38,7 +38,6 @@
     "@nuxtjs/i18n": "^9.4.0",
     "@nuxtjs/robots": "^5.7.0",
     "@nuxtjs/sitemap": "^7.6.0",
-    "@pinia/nuxt": "0.11.3",
     "@types/lodash-es": "^4.17.9",
     "@types/luxon": "^3.7.1",
     "dotenv": "^17.2.2",
@@ -46,7 +45,6 @@
     "lodash-es": "^4.17.23",
     "luxon": "^3.7.2",
     "nuxt": "^3.17.1",
-    "pinia": "^3.0.1",
     "sass": "^1.97.3",
     "undici": "^7.20.0"
   },

@@ -1,22 +1,67 @@
 <script lang="ts">
-  import { storeToRefs } from "pinia";
-  import { useDictionaryStore } from "~/store/index.ts";
+  import { onMount } from "svelte";
   import WordListSearch from "$lib/components/WordListSearch.svelte";
   import WordCard from "$lib/components/WordCard.svelte";
+  import { searchWords } from "$lib/search.ts";
   import { m } from "$lib/paraglide/messages.js";
   import { getLocale } from "$lib/paraglide/runtime.js";
+  import type { TagID } from "$lib/types.ts";
 
   type Props = {
     onsearch?: () => void;
+    tagSlug?: TagID;
   };
 
-  const { onsearch }: Props = $props();
+  const { tagSlug, onsearch }: Props = $props();
 
-  const { $pinia } = useNuxtApp();
+  let query: string = $state("");
+  let queryTagSlugs: TagID[] = $state(tagSlug ? [ tagSlug ] : []);
+  let maxWords: number = $state(100);
+
   const locale = getLocale();
-  const store = useDictionaryStore($pinia);
-  store.setLocale(locale);
-  const { searchResults } = storeToRefs(store);
+
+  const words = $derived(searchWords({
+    query,
+    queryTagSlugs,
+    maxWords,
+    locale,
+  }));
+
+  let resultsElement: HTMLElement;
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) {
+        return;
+      }
+
+      observer.unobserve(entry.target);
+      maxWords += 100;
+    }
+  });
+
+  const addIntersectionObserver = (): void => {
+    const wordEls = resultsElement.children;
+
+    if (wordEls && 0 < wordEls.length) {
+      observer?.observe(wordEls[wordEls.length - 1]); // add observer to the last word element
+    }
+  };
+
+  onMount(() => {
+    const reset = () => {
+      query = "";
+      queryTagSlugs = tagSlug ? [ tagSlug ] : [];
+      maxWords = 100;
+    };
+
+    // Reset on browser back
+    window.onpopstate = reset;
+
+    addIntersectionObserver();
+  });
+
+  $effect(() => addIntersectionObserver());
 </script>
 
 <style lang="scss">
@@ -40,6 +85,10 @@
 
     // avoid overwrapping search bar by Google AdSense
     z-index: 1;
+  }
+
+  &__results {
+    width: 100%;
   }
 }
 
@@ -73,11 +122,22 @@
 
 <div class="word-list">
   <div class="word-list__wrapper">
-    <WordListSearch class="word-list__search" {onsearch} />
-    <WordCard words={searchResults} class="word-list__results" />
+    <WordListSearch
+      class="word-list__search"
+      bind:query={query}
+      bind:queryTagSlugs={queryTagSlugs}
+      bind:maxWords={maxWords}
+      {onsearch}
+    />
+
+    <main bind:this={resultsElement} class="word-list__results">
+      {#each words as word (word.en)}
+        <WordCard {word} />
+      {/each}
+    </main>
   </div>
 
-  {#if searchResults.length <= 0}
+  {#if words.length <= 0}
     <p data-e2e="empty">
       { m.notFound() }
     </p>
