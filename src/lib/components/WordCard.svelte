@@ -13,6 +13,11 @@
   const { word }: Props = $props();
 
   const locale = getLocale();
+  const wordInCurrentLocale = $derived(word[
+    locale === "zh-CN" ? "zhCN"
+      : locale === "zh-TW" ? "zhTW"
+      : locale
+  ] ?? word.en);
 
   //
   // event handlers
@@ -242,15 +247,7 @@ h5.linebreak {
           src="/vendor/octicons/link.svg"
           width="12"
           height="12"
-          alt={
-            m.permalinkAlt({
-              word: word[
-                locale === "zh-CN" ? "zhCN"
-                  : locale === "zh-TW" ? "zhTW"
-                  : locale
-              ],
-            })
-          }
+          alt={ m.permalinkAlt({ word: wordInCurrentLocale }) }
           decoding="async"
           class="results__permalink--icon"
         />
@@ -260,15 +257,7 @@ h5.linebreak {
         src="/vendor/octicons/copy.svg"
         width="12"
         height="12"
-        alt={
-          m.copyLink({
-            word: word[
-              locale === "zh-CN" ? "zhCN"
-                : locale === "zh-TW" ? "zhTW"
-                : locale
-            ],
-          })
-        }
+        alt={ m.copyLink({ word: wordInCurrentLocale }) }
         decoding="async"
         class="results__permalink--copy"
         onclick={(evt) => copyLink(word.id, evt)}
@@ -277,15 +266,7 @@ h5.linebreak {
         src="/vendor/octicons/check.svg"
         width="12"
         height="12"
-        alt={
-          m.copyLinkDone({
-            word: word[
-              locale === "zh-CN" ? "zhCN"
-                : locale === "zh-TW" ? "zhTW"
-                : locale
-            ],
-          })
-        }
+        alt={ m.copyLinkDone({ word: wordInCurrentLocale }) }
         decoding="async"
         class="results__permalink--copied"
         style="display: none;"
