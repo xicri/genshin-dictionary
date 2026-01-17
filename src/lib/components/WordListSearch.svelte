@@ -1,49 +1,44 @@
 <script lang="ts">
-  import { debounce } from "lodash-es";
-  import { storeToRefs } from "pinia";
   import allTags from "../../../dataset/tags.json";
-  import { useDictionaryStore } from "~/store/index.ts";
   import ClosingLayer from "$lib/components/ClosingLayer.svelte";
   import ElasticSearchBox from "$lib/components/ElasticSearchBox.svelte";
   import { m } from "$lib/paraglide/messages.js";
   import { getLocale } from "$lib/paraglide/runtime.js";
   import type { TagID } from "$lib/types.ts";
-  import type { FormEventHandler } from "svelte/elements";
 
   type Props = {
+    query: string;
+    queryTagSlugs: TagID[];
+    maxWords: number;
     onsearch?: () => void;
   };
 
-  const { onsearch }: Props = $props();
-
-  const { $pinia } = useNuxtApp();
-  const store = useDictionaryStore($pinia);
+  let {
+    query = $bindable(),
+    queryTagSlugs = $bindable(),
+    maxWords = $bindable(),
+    onsearch,
+  }: Props = $props();
 
   const locale = getLocale();
 
   let searchBox: typeof ElasticSearchBox.prototype | undefined;
-  const { tags } = storeToRefs(store);
+  let activeTagIDs: TagID[] = $state([]);
   let displayTagListOnMobile = $state(false);
 
-  const availableTags = $derived.by(() => {
-    const _availableTags = structuredClone(allTags);
+  const inactiveTags = $derived.by(() => {
+    const _inactiveTags = structuredClone(allTags);
 
-    for (const searchTag of tags.value) {
-      delete _availableTags[searchTag];
+    for (const activeTagID of activeTagIDs) {
+      delete _inactiveTags[activeTagID];
     }
 
-    return _availableTags;
+    return _inactiveTags;
   });
 
   //
   // Event handlers
   //
-  const updateSearchQuery: FormEventHandler<HTMLInputElement> = debounce(((evt) => {
-    store.updateSearchQuery((evt.target as HTMLInputElement)?.value);
-    if (onsearch) {
-      onsearch();
-    }
-  }) as FormEventHandler<HTMLInputElement>, 500);
   const focusOnSearchBox = (): void => {
     if (searchBox) {
       const searchBoxTextLength = searchBox.getTextLength() ?? null;
@@ -65,14 +60,18 @@
     displayTagListOnMobile = !displayTagListOnMobile;
   };
   const addTag = (tagID: TagID): void => {
-    store.addTags(tagID);
+    queryTagSlugs.push(tagID);
+    maxWords = 100;
+
     if (onsearch) {
       onsearch();
     }
     closeTagList();
   };
   const removeTag = (tagIndex: number): void => {
-    store.removeTag(tagIndex);
+    queryTagSlugs.splice(tagIndex, 1);
+    maxWords = 100;
+
     if (onsearch) {
       onsearch();
     }
@@ -267,9 +266,9 @@
   <div class="search__box">
     <div class="search__scrollable" onclick={focusOnSearchBox} ondblclick={selectAll}>
       <div class="search__active-tags">
-        {#each tags as tag, i (tag)}
+        {#each queryTagSlugs as queryTagSlug, i (queryTagSlug)}
           <div class="search__active-tag">
-            <span>{ allTags[tag][locale] }</span>
+            <span>{ allTags[queryTagSlug][locale] }</span>
             <span class="search__remove-tag" onclick={() => removeTag(i)}>☓</span>
           </div>
         {/each}
@@ -277,11 +276,12 @@
 
       <ElasticSearchBox
         bind:this={searchBox}
+        bind:value={query}
         class="search__input"
         name="searchbox"
         placeholder={m.enterSearchTerms()}
         autocomplete="off"
-        oninput={updateSearchQuery}
+        oninput={() => onsearch?.()}
       />
     </div>
 
@@ -298,8 +298,8 @@
   <div class="search__taglist" class:search__taglist-display-mobile={displayTagListOnMobile}>
     <div class="search__taglist-inner">
       <span class="search__taglist-title">{ m.tags() }:</span>
-      {#each Object.entries(availableTags) as [ id, availableTag ] (id)}
-        <span class="search__tag" onclick={() => addTag(id as keyof typeof availableTags)}>
+      {#each Object.entries(inactiveTags) as [ id, availableTag ] (id)}
+        <span class="search__tag" onclick={() => addTag(id as keyof typeof inactiveTags)}>
           { availableTag[locale] } <span class="search__tag-add">+</span>
         </span>
       {/each}
