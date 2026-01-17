@@ -3,7 +3,6 @@ import { defineNuxtConfig } from "nuxt/config";
 export default defineNuxtConfig({
   modules: [
     "@nuxtjs/robots",
-    "@pinia/nuxt",
   ],
 
   // For nuxt-simple-robots and nuxt-simple-sitemap
