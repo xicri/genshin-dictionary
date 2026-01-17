@@ -78,14 +78,6 @@
     width: 100%;
   }
 
-  &__search {
-    padding-top: 1em;
-    padding-bottom: 1.2em;
-
-    // avoid overwrapping search bar by Google AdSense
-    z-index: 1;
-  }
-
   &__results {
     width: 100%;
   }
@@ -100,17 +92,6 @@
       margin-bottom: 4em;
     }
 
-    // Show search component at the bottom of the page on mobile devices
-    &__search {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      padding-left: vars.$side-margin;
-      padding-right: vars.$side-margin;
-      background-color: vars.$color-lightest;
-      box-shadow: 0 -0.2rem 5px #00000030;
-    }
-
     &__results {
       padding-left: vars.$side-margin;
       padding-right: vars.$side-margin;
@@ -122,7 +103,7 @@
 <div class="word-list">
   <div class="word-list__wrapper">
     <WordListSearch
-      class="word-list__search"
+      class="z-1 pt-4 pb-4 padding-side md:pl-0 md:pr-0 fixed md:static bottom-0 md:bottom-auto w-full md:w-auto bg-lightest md:bg-transparent shadow-md md:shadow-none"
       bind:query={query}
       bind:queryTagSlugs={queryTagSlugs}
       bind:maxWords={maxWords}
