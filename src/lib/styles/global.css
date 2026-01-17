@@ -1,5 +1,18 @@
-@use "~/assets/styles/variables.scss" as vars;
+@import "tailwindcss";
 
+@theme {
+  --color-dark: #013770;
+  --color-darkest: #001f48;
+  --color-light: #7fa3c8;
+  --color-lighter: #8badd4;
+  --color-lightest: #96b8dd;
+
+  --max-width: 840px;
+  --side-margin: 12px;
+  --search-font-size: 15px;
+}
+
+@layer base {
   html {
     font-family: sans-serif, system-ui, -apple-system, "Noto Sans CJK";
     font-size: 16px;
@@ -8,7 +21,7 @@
     -webkit-text-size-adjust: 100%;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
+    @apply box-border;
   }
 
   // remove the ☓ button on the right of the text input from Chrome
@@ -16,28 +29,28 @@
   input[type="search"]::-webkit-search-cancel-button,
   input[type="search"]::-webkit-search-results-button,
   input[type="search"]::-webkit-search-results-decoration {
-    display: none;
+    @apply hidden;
   }
 
   *,
   *::before,
   *::after {
-    box-sizing: border-box;
-    margin: 0;
+    @apply box-border m-0;
   }
 
   a {
-    text-decoration: none;
+    @apply no-underline;
   }
 
   a:link {
-    color: vars.$color-dark;
+    @apply text-dark
   }
+
   a:visited, a:hover, a:active {
-    color: vars.$color-darkest;
+    @apply text-darkest;
   }
 
   h2, h3 {
-    margin-bottom: 0.4em;
-    color: vars.$color-dark;
+    @apply text-dark mb-2
   }
+}
