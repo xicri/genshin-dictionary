@@ -111,6 +111,12 @@ pnpm vrt                 # Visual regression testing
 
 ## Important Gotchas & Decisions
 
+### Why Both Nuxt & SvelteKit Files Exist
+
+- **Legacy**: Some old Nuxt config files remain (app.vue, nuxt.config.ts)
+- **Always use SvelteKit & Paraglide JS patterns**: Use `+page.svelte`, `getLocale()`, `m.*()` messages
+- **Ignore references to**: `useRoute()`, `useI18n()` from vue-i18n, `@nuxtjs/i18n`
+
 ### Word Matching Algorithm Has 6 Priority Levels
 
 When writing search tests or fixing search bugs, understand [src/lib/words.ts](src/lib/words.ts) function `searchWords()`:
