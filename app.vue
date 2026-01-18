@@ -55,12 +55,5 @@ useHead({
     { rel: "me", href: "https://focalorus.io/@xicri" },
     ...(link ?? []),
   ],
-  script: [
-    ...(runtimeConfig.serverEnv === "production" ? [{
-      src: "https://static.cloudflareinsights.com/beacon.min.js",
-      "data-cf-beacon": "{\"token\": \"1f401150384f4aaa9d14b208aac9fdba\"}",
-      defer: true,
-    }] : []),
-  ],
 });
 </script>
