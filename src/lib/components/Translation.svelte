@@ -1,6 +1,5 @@
 <script lang="ts">
   import { m } from "$lib/paraglide/messages.js";
-  import { escapeHtmlString } from "$lib/utils.ts";
   import type { Locale } from "$lib/paraglide/runtime.js";
 
   type Props = {
@@ -21,7 +20,6 @@
   }: Props = $props();
 
   let langName: string;
-  let wordWithPinyin: string;
 
   if (lang === "en") {
     langName = m.langNameEn();
@@ -32,15 +30,19 @@
   } else if (lang === "zh-TW") {
     langName = m.langNameZhTW();
   }
-  if (0 < pinyins.length) {
-    wordWithPinyin = escapeHtmlString(word);
-    for (const { char, pron } of pinyins) {
-      const escapedChar = escapeHtmlString(char);
-      const escapedPron = escapeHtmlString(pron);
 
-      wordWithPinyin = wordWithPinyin.replaceAll(escapedChar, `<ruby>${ escapedChar }<rp>(</rp><rt class="results__pinyin">${ escapedPron }</rt><rp>)</rp></ruby>`);
-    }
-  }
+  const wordWithPinyin = $derived(
+    0 < pinyins.length ? word
+      .split("")
+      .map((char) => {
+        const pinyin = pinyins.find((pinyin) => char === pinyin.char);
+
+        return pinyin ?? {
+          char,
+          pron: undefined,
+        };
+      }) : undefined,
+  );
 </script>
 
 <style lang="scss">
@@ -77,21 +79,21 @@
 }
 </style>
 
-<style lang="scss">
-.results {
-  &__pinyin {
-    font-weight: lighter;
-  }
-}
-</style>
-
 <div class="results__translation">
   <span class="results__langname results__translation-item">{ langName }: </span>
   <div class="results__translation-item">
     <div class="results__ja">
       <span lang={lang} data-e2e={lang}>
         {#if wordWithPinyin}
-          {@html wordWithPinyin}
+          {#each wordWithPinyin as { char, pron }, index (index)}
+            {#if pron}
+              <ruby>
+                { char }<rp>(</rp><rt class="font-light">{ pron }</rt><rp>)</rp>
+              </ruby>
+            {:else}
+              {char}
+            {/if}
+          {/each}
         {:else}
           { word }
         {/if}
