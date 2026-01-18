@@ -43,9 +43,6 @@ useHead({
     { hid: "og:description", property: "og:description", content: description },
     { hid: "og:type", property: "og:type", content: "website" },
     { hid: "og:site_name", property: "og:site_name", content: siteName },
-    { hid: "twitter:card", property: "twitter:card", content: "summary" },
-    { hid: "twitter:site", property: "twitter:site", content: "@xicri_gi" },
-    { hid: "twitter:creator", property: "twitter:creator", content: "@xicri_gi" },
     {
       hid: "google-site-verification",
       name: "google-site-verification",
