@@ -56,7 +56,9 @@
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.971.0",
+    "@playwright/mcp": "latest",
     "@playwright/test": "^1.55.0",
+    "@sveltejs/mcp": "latest",
     "@xicri/configs": "^2025.6.15",
     "concurrently": "^9.2.1",
     "eslint": "^9.39.2",
