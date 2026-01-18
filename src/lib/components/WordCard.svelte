@@ -23,7 +23,7 @@
   // event handlers
   //
   const copyLink = async (wordId: string, $event: MouseEvent): Promise<void> => {
-    await navigator.clipboard.writeText("https://genshin-dictionary.com" + localizeHref(`/${ wordId }`));
+    await navigator.clipboard.writeText(`https://genshin-dictionary.com/${ wordId }`);
 
     const copyImg = $event.target as HTMLElement;
     const copiedImg = copyImg?.parentElement?.getElementsByClassName("results__permalink--copied")[0] as HTMLElement;
