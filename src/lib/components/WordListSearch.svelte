@@ -10,14 +10,12 @@
     query: string;
     queryTagSlugs: TagID[];
     maxWords: number;
-    onsearch?: () => void;
   };
 
   let {
     query = $bindable(),
     queryTagSlugs = $bindable(),
     maxWords = $bindable(),
-    onsearch,
   }: Props = $props();
 
   const locale = getLocale();
@@ -63,18 +61,11 @@
     queryTagSlugs.push(tagID);
     maxWords = 100;
 
-    if (onsearch) {
-      onsearch();
-    }
     closeTagList();
   };
   const removeTag = (tagIndex: number): void => {
     queryTagSlugs.splice(tagIndex, 1);
     maxWords = 100;
-
-    if (onsearch) {
-      onsearch();
-    }
   };
 </script>
 
@@ -281,7 +272,6 @@
         name="searchbox"
         placeholder={m.enterSearchTerms()}
         autocomplete="off"
-        oninput={() => onsearch?.()}
       />
     </div>
 
