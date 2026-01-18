@@ -65,6 +65,13 @@
 }
 </style>
 
+<svelte:head>
+  <meta name="description" content={m.indexTitleDesc()} />
+  <meta property="og:description" content={m.indexTitleDesc()} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={m.siteTitle()} />
+</svelte:head>
+
 <div>
   <div class="layout-default__nav-wrapper">
     <nav class="layout-default__nav">

@@ -32,12 +32,6 @@ export const locales = [
 export default defineNuxtConfig({
   css: [ "~/assets/styles/global.scss" ],
 
-  runtimeConfig: {
-    public: {
-      serverEnv: process.env.SERVER_ENV,
-    },
-  },
-
   modules: [
     "@nuxtjs/robots",
     "@nuxtjs/sitemap",
