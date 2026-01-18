@@ -8,11 +8,10 @@
   import type { TagID } from "$lib/types.ts";
 
   type Props = {
-    onsearch?: () => void;
     tagSlug?: TagID;
   };
 
-  const { tagSlug, onsearch }: Props = $props();
+  const { tagSlug }: Props = $props();
 
   let query: string = $state("");
   let queryTagSlugs: TagID[] = $state(tagSlug ? [ tagSlug ] : []);
@@ -127,7 +126,6 @@
       bind:query={query}
       bind:queryTagSlugs={queryTagSlugs}
       bind:maxWords={maxWords}
-      {onsearch}
     />
 
     <main bind:this={resultsElement} class="word-list__results">

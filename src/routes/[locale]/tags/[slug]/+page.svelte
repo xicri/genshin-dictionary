@@ -21,16 +21,7 @@
 
   const locale = getLocale();
   const tagSlug = getTagIdFromParams();
-  let title = $state(`${ tags[tagID].title[locale] } | ${ m.siteTitle() }`);
-
-  const onSearch = (): void => {
-    const root = `/${ locale }`;
-
-    if (window.location.pathname !== root) {
-      history.pushState({}, "", root);
-      title = m.siteTitle();
-    }
-  };
+  const title = `${ tags[tagSlug].title[locale] } | ${ m.siteTitle() }`;
 </script>
 
 <svelte:head>
@@ -38,4 +29,4 @@
   <meta property="og:title" content={title} />
 </svelte:head>
 
-<WordList {tagSlug} onsearch={onSearch} />
+<WordList {tagSlug} />
