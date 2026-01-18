@@ -24,6 +24,7 @@
   import HamburgerMenu from "$lib/components/HamburgerMenu.svelte";
   import Spacer from "$lib/components/Spacer.svelte";
   import { m } from "$lib/paraglide/messages.js";
+  import "$lib/styles/global.css";
 
   const { children } = $props();
 </script>
@@ -64,6 +65,13 @@
   }
 }
 </style>
+
+<svelte:head>
+  <meta name="description" content={m.indexTitleDesc()} />
+  <meta property="og:description" content={m.indexTitleDesc()} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={m.siteTitle()} />
+</svelte:head>
 
 <div>
   <div class="layout-default__nav-wrapper">
