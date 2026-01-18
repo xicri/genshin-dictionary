@@ -62,6 +62,9 @@
   });
 
   $effect(() => addIntersectionObserver());
+
+/** @returns `true` if no words matched with the search query. `false` if any search results were given. */
+  // export const getFirstWord = (): Word | undefined => searchResults[0];
 </script>
 
 <style lang="scss">
