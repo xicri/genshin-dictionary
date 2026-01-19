@@ -1,3 +1,5 @@
+# TODO delete me if Paraglide handles redirection from / to /en, /ja, etc.
+
 /*
   # maxage: 4 hours, s-maxage: 1 year
   Cache-Control: maxage=14400, s-maxage=31536000, public

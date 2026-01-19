@@ -1,3 +1,5 @@
+// TODO delete me if Paraglide handles redirection from / to /en, /ja, etc.
+
 import { parse } from "@escapace/accept-language-parser";
 import type { Locale } from "~/types.ts";
 import { locales } from "../../project.inlang/settings.json";
