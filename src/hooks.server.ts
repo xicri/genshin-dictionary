@@ -7,7 +7,7 @@ export const handle: Handle = ({ event, resolve }) => {
     "Cross-Origin-Opener-Policy": "same-origin",
     "X-Content-Type-Options": "nosniff",
 
-    "Cache-Control": "maxage=14400, s-maxage=31536000, public",
+    "Cache-Control": "max-age=14400, s-maxage=31536000, public",
   });
 
   return paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
