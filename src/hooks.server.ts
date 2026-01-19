@@ -3,7 +3,7 @@ import type { Handle } from "@sveltejs/kit";
 
 export const handle: Handle = ({ event, resolve }) => {
   event.setHeaders({
-    "Cross-Origin-Resource-Policy": "same-site",
+    "Cross-Origin-Resource-Policy": "same-origin",
     "Cross-Origin-Opener-Policy": "same-origin",
     "X-Content-Type-Options": "nosniff",
 
