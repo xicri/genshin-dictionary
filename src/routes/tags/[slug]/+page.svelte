@@ -3,7 +3,7 @@
   import WordList from "$lib/components/WordList.svelte";
   import { m } from "$lib/paraglide/messages.js";
   import { getLocale } from "$lib/paraglide/runtime.js";
-  import tags from "../../../../dataset/tags.json";
+  import tags from "$lib/dataset/tags.json";
   import type { TagID } from "$lib/types.ts";
   import type { PageProps } from "./$types";
 
