@@ -30,7 +30,7 @@
     "clean": "git clean -dX --exclude=\"!.env\" --force",
     "refresh": "pnpm clean && rm --force ./pnpm-lock.yaml && corepack up && pnpm install",
     "sync": "wrangler types && svelte-kit sync",
-    "prepare": "node ./scripts/postinstall.mjs && pnpm build"
+    "prepare": "svelte-kit sync && jiti ./scripts/prepare.ts && pnpm build"
   },
   "dependencies": {
     "@nuxt/devtools": "^2.6.3",
