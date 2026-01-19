@@ -1,6 +1,6 @@
 /*
   # maxage: 4 hours, s-maxage: 1 year
   Cache-Control: maxage=14400, s-maxage=31536000, public
-  Cross-Origin-Resource-Policy: same-site
+  Cross-Origin-Resource-Policy: same-origin
   Cross-Origin-Opener-Policy: same-origin
   X-Content-Type-Options: nosniff
