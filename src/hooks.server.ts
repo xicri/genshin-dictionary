@@ -7,6 +7,7 @@ export const handle: Handle = ({ event, resolve }) => {
     "Cross-Origin-Opener-Policy": "same-origin",
     "X-Content-Type-Options": "nosniff",
 
+    // max-age: 4 hours, s-maxage: 1 year
     "Cache-Control": "max-age=14400, s-maxage=31536000, public",
   });
 
