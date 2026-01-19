@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getLocale } from "$lib/paraglide/runtime.js";
-  import allTags from "../../../dataset/tags.json";
+  import allTags from "$lib/dataset/tags.json";
   import type { TagID } from "$lib/types";
 
   type Props = {
