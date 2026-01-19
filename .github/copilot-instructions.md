@@ -125,7 +125,7 @@ When writing search tests or fixing search bugs, understand [src/lib/words.ts](s
 
 - `dataset/words.json` and `dataset/tags.json` are bundled at build time
 - Cannot add/edit words via this repo—redirect to [genshin-langdata](https://github.com/xicri/genshin-langdata)
-- Redirects managed in `dataset/redirect/` (auto-generated into `static/_redirects` by build.ts)
+- Redirects managed in `dataset/redirect/` (auto-generated into `_redirects` by build.ts)
 
 ### Paraglide Messages Not Vue i18n
 
