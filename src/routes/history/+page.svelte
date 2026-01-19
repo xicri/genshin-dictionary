@@ -2,7 +2,7 @@
   import { isEmpty } from "lodash-es";
   import { m } from "$lib/paraglide/messages.js";
   import WordCard from "$lib/components/WordCard.svelte";
-  import _history from "../../../dataset/build/history.ts";
+  import _history from "$lib/dataset/build/history.ts";
 
   const title = `${ m.historyTitle() } | ${ m.siteTitle() }`;
 
