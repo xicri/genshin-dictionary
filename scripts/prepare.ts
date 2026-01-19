@@ -1,10 +1,3 @@
-/*
- * DO NOT CONVERT THIS FILE TO TYPESCRIPT!
- * This script has to run before `nuxt prepare` command because nuxt.config.ts requires dataset json files which are installed by this script.
- * However, tsconfig.json of this repository depends on .nuxt/tsconfig.json which is installed by `nuxt prepare` command,
- * so this script has to run after `nuxt prepare` if this script was TypeScript.
- * Therefore, you cannot convert this JavaScript file to TypeScript.
- */
 import { copyFile, mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { env } from "node:process";
@@ -17,10 +10,10 @@ const staticDatasetDestDirPath = resolve(import.meta.dirname, "../static/dataset
 
 /**
  * Copy file from URL and save it on local disk.
- * @param {string} src - URL of the source file
- * @param {string} dest - path to save the downloaded file
+ * @param src - URL of the source file
+ * @param dest - path to save the downloaded file
  */
-async function copyFromURL(src, dest) {
+async function copyFromURL(src: string, dest: string) {
   const res = await fetch(src);
 
   if (400 <= res.status) {
@@ -128,12 +121,11 @@ async function downloadDataset() {
 async function generateHistoryJson() {
   /**
    * Reverse-sort by the key of the object
-   * @param {{ [key: string]: unknown }} obj - object to reverse-sort
-   * @returns {{ [key: string]: unknown }} - { [UPDATED_AT]: GIVEN_OBJECT[] }
+   * @param obj - object to reverse-sort
+   * @returns `{ [UPDATED_AT]: GIVEN_OBJECT[] }`
    */
-  function reverseSortObject(obj) {
-    /** @type {{ [key:string]: unknown }} */
-    const newObj = {};
+  function reverseSortObject(obj: Record<string, unknown>) {
+    const newObj: Record<string, unknown> = {};
 
     for (const key of Object.keys(obj).sort().reverse()) {
       newObj[key] = obj[key];
@@ -142,11 +134,15 @@ async function generateHistoryJson() {
     return newObj;
   }
 
-  /** @type {{ default: { createdAt: string, [key:string]: unknown }[] }} */
-  const { default: allWords } = await import("../src/lib/dataset/words.json", { with: { type: "json" }});
+  type AllWordsImport = {
+    default: {
+      createdAt: string;
+      [key: string]: unknown;
+    }[];
+  };
+  const { default: allWords }: AllWordsImport = await import("../src/lib/dataset/words.json", { with: { type: "json" }});
 
-  /** @type {{ [key:string]: { [key:string]: unknown }[]}} */
-  const history = {};
+  const history: Record<string, Record<string, unknown>[]> = {};
 
   for (const word of allWords) {
     const createdAt = DateTime.fromISO(word.createdAt);
