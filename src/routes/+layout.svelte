@@ -4,8 +4,9 @@
   import Spacer from "$lib/components/Spacer.svelte";
   import { m } from "$lib/paraglide/messages.js";
   import "$lib/styles/global.css";
+  import type { LayoutProps } from "./$types";
 
-  const { children } = $props();
+  const { data, children }: LayoutProps = $props();
 </script>
 
 <style lang="scss">
@@ -50,6 +51,8 @@
   <meta property="og:description" content={m.indexTitleDesc()} />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content={m.siteTitle()} />
+
+  <meta name="robots" content={data.allowIndex ? "index, follow" : "noindex, nofollow"} />
 </svelte:head>
 
 <div>
