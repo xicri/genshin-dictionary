@@ -1,11 +1,11 @@
 #
 # Project-specific
 #
-/dataset/
 /functions/
 /static/_redirects
 
 ## dataset
+/src/lib/dataset/
 /static/dataset/
 
 ## inlang / Paraglide JS

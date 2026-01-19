@@ -1,7 +1,7 @@
 import { Readable } from "node:stream";
 import { SitemapStream, streamToPromise } from "sitemap";
-import tags from "../../../dataset/tags.json" with { type: "json" };
-import words from "../../../dataset/words.json" with { type: "json" };
+import tags from "$lib/dataset/tags.json" with { type: "json" };
+import words from "$lib/dataset/words.json" with { type: "json" };
 import { locales } from "$lib/paraglide/runtime.js";
 import type { Word } from "$lib/types";
 

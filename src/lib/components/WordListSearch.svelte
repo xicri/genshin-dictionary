@@ -1,5 +1,5 @@
 <script lang="ts">
-  import allTags from "../../../dataset/tags.json";
+  import allTags from "$lib/dataset/tags.json";
   import ClosingLayer from "$lib/components/ClosingLayer.svelte";
   import ElasticSearchBox from "$lib/components/ElasticSearchBox.svelte";
   import { m } from "$lib/paraglide/messages.js";

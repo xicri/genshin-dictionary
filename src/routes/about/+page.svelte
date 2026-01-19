@@ -1,7 +1,7 @@
 <script lang="ts">
   import { m } from "$lib/paraglide/messages.js";
   import { getLocale } from "$lib/paraglide/runtime";
-  import words from "../../../dataset/words.json";
+  import words from "$lib/dataset/words.json";
 
   const locale = getLocale();
   const title = `${ m.aboutTitle() } | ${ m.siteTitle() }`;

@@ -19,7 +19,7 @@
     // Cloudflare
     ".wrangler/**",
     // Dataset from genshin-langdata
-    "./dataset/**",
+    "./src/lib/dataset/**",
     "./static/dataset/**"
   ]
 }
