@@ -1,7 +1,7 @@
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import tagRedirects from "../dataset/redirect/tags.json";
-import wordRedirects from "../dataset/redirect/words.json";
+import tagRedirects from "../src/lib/dataset/redirect/tags.json";
+import wordRedirects from "../src/lib/dataset/redirect/words.json";
 
 const buildRedirectConf = async () => {
   const cfPagesRedirectConf: string = [
