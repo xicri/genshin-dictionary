@@ -12,6 +12,7 @@ import "dotenv/config";
 import { DateTime } from "luxon";
 import { fetch } from "undici";
 
+const datasetDestDirPath = resolve(import.meta.dirname, "../src/lib/dataset");
 const staticDatasetDestDirPath = resolve(import.meta.dirname, "../static/dataset");
 
 /**
@@ -32,7 +33,7 @@ Status code: ${ res.status }`);
 }
 
 async function downloadDataset() {
-  await mkdir(resolve(import.meta.dirname, "../dataset/redirect/"), { recursive: true });
+  await mkdir(resolve(datasetDestDirPath, "redirect/"), { recursive: true });
 
   if (env.LANGDATA_PATH) {
     console.info(`Copying dataset from ${ env.LANGDATA_PATH }`);
@@ -40,27 +41,27 @@ async function downloadDataset() {
     await Promise.all([
       copyFile(
         resolve(env.LANGDATA_PATH, "dist/words.json"),
-        resolve(import.meta.dirname, "../dataset/words.json"),
+        resolve(datasetDestDirPath, "words.json"),
       ),
       copyFile(
         resolve(env.LANGDATA_PATH, "dist/words.csv"),
-        resolve(import.meta.dirname, "../dataset/words.csv"),
+        resolve(datasetDestDirPath, "words.csv"),
       ),
       copyFile(
         resolve(env.LANGDATA_PATH, "dist/words-sjis.csv"),
-        resolve(import.meta.dirname, "../dataset/words-sjis.csv"),
+        resolve(datasetDestDirPath, "words-sjis.csv"),
       ),
       copyFile(
         resolve(env.LANGDATA_PATH, "dist/tags.json"),
-        resolve(import.meta.dirname, "../dataset/tags.json"),
+        resolve(datasetDestDirPath, "tags.json"),
       ),
       copyFile(
         resolve(env.LANGDATA_PATH, "dist/redirect/words.json"),
-        resolve(import.meta.dirname, "../dataset/redirect/words.json"),
+        resolve(datasetDestDirPath, "redirect/words.json"),
       ),
       copyFile(
         resolve(env.LANGDATA_PATH, "dist/redirect/tags.json"),
-        resolve(import.meta.dirname, "../dataset/redirect/tags.json"),
+        resolve(datasetDestDirPath, "redirect/tags.json"),
       ),
     ]);
 
@@ -71,27 +72,27 @@ async function downloadDataset() {
     await Promise.all([
       copyFromURL(
         "https://dataset.genshin-dictionary.com/words.json",
-        resolve(import.meta.dirname, "../dataset/words.json"),
+        resolve(datasetDestDirPath, "words.json"),
       ),
       copyFromURL(
         "https://dataset.genshin-dictionary.com/words.csv",
-        resolve(import.meta.dirname, "../dataset/words.csv"),
+        resolve(datasetDestDirPath, "words.csv"),
       ),
       copyFromURL(
         "https://dataset.genshin-dictionary.com/words-sjis.csv",
-        resolve(import.meta.dirname, "../dataset/words-sjis.csv"),
+        resolve(datasetDestDirPath, "words-sjis.csv"),
       ),
       copyFromURL(
         "https://dataset.genshin-dictionary.com/tags.json",
-        resolve(import.meta.dirname, "../dataset/tags.json"),
+        resolve(datasetDestDirPath, "tags.json"),
       ),
       copyFromURL(
         "https://dataset.genshin-dictionary.com/redirect/words.json",
-        resolve(import.meta.dirname, "../dataset/redirect/words.json"),
+        resolve(datasetDestDirPath, "redirect/words.json"),
       ),
       copyFromURL(
         "https://dataset.genshin-dictionary.com/redirect/tags.json",
-        resolve(import.meta.dirname, "../dataset/redirect/tags.json"),
+        resolve(datasetDestDirPath, "redirect/tags.json"),
       ),
     ]);
 
@@ -104,19 +105,19 @@ async function downloadDataset() {
 
   await Promise.all([
     copyFile(
-      resolve(import.meta.dirname, "../dataset/words.json"),
+      resolve(datasetDestDirPath, "words.json"),
       resolve(staticDatasetDestDirPath, "words.json"),
     ),
     copyFile(
-      resolve(import.meta.dirname, "../dataset/words.csv"),
+      resolve(datasetDestDirPath, "words.csv"),
       resolve(staticDatasetDestDirPath, "words.csv"),
     ),
     copyFile(
-      resolve(import.meta.dirname, "../dataset/words-sjis.csv"),
+      resolve(datasetDestDirPath, "words-sjis.csv"),
       resolve(staticDatasetDestDirPath, "words-sjis.csv"),
     ),
     copyFile(
-      resolve(import.meta.dirname, "../dataset/tags.json"),
+      resolve(datasetDestDirPath, "tags.json"),
       resolve(staticDatasetDestDirPath, "tags.json"),
     ),
   ]);
@@ -142,7 +143,7 @@ async function generateHistoryJson() {
   }
 
   /** @type {{ default: { createdAt: string, [key:string]: unknown }[] }} */
-  const { default: allWords } = await import("../dataset/words.json", { with: { type: "json" }});
+  const { default: allWords } = await import("../src/lib/dataset/words.json", { with: { type: "json" }});
 
   /** @type {{ [key:string]: { [key:string]: unknown }[]}} */
   const history = {};
@@ -171,7 +172,7 @@ async function generateHistoryJson() {
     }
   }
 
-  const builtDatasetDirPath = resolve(import.meta.dirname, "../dataset/build");
+  const builtDatasetDirPath = resolve(datasetDestDirPath, "build");
   await mkdir(builtDatasetDirPath, { recursive: true });
 
   await writeFile(resolve(builtDatasetDirPath, "history.ts"), `

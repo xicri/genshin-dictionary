@@ -1,4 +1,4 @@
-import allWords from "../../dataset/words.json";
+import allWords from "$lib/dataset/words.json";
 import { candidate } from "$lib/utils.ts";
 import type { Locale } from "$lib/paraglide/runtime.js";
 import type { TagID, Word } from "$lib/types.ts";

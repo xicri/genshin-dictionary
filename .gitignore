@@ -1,7 +1,7 @@
 #
 # Project-specific
 #
-/dataset/
+/src/lib/dataset/
 
 /static/dataset/
 

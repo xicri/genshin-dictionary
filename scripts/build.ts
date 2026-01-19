@@ -2,10 +2,10 @@ import { rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { simpleSitemapAndIndex } from "sitemap";
 import { headers, supportedLocales } from "../src/app.config.ts";
-import words from "../dataset/words.json" with { type: "json" };
-import tags from "../dataset/tags.json" with { type: "json" };
-import tagRedirects from "../dataset/redirect/tags.json";
-import wordRedirects from "../dataset/redirect/words.json";
+import words from "../src/lib/dataset/words.json" with { type: "json" };
+import tags from "../src/lib/dataset/tags.json" with { type: "json" };
+import tagRedirects from "../src/lib/dataset/redirect/tags.json";
+import wordRedirects from "../src/lib/dataset/redirect/words.json";
 
 const buildRedirectConf = async () => {
   const cfPagesRedirectConf: string = [

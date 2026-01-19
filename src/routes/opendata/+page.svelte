@@ -1,7 +1,7 @@
 <script lang="ts">
   import { m } from "$lib/paraglide/messages";
   import { getLocale } from "$lib/paraglide/runtime.js";
-  import tags from "../../../dataset/tags.json";
+  import tags from "$lib/dataset/tags.json";
   import type { Locale } from "$lib/types.ts";
 
   const locale = getLocale();
