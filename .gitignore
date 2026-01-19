@@ -2,7 +2,7 @@
 # Project-specific
 #
 /functions/
-/static/_redirects
+/_redirects
 
 ## dataset
 /src/lib/dataset/

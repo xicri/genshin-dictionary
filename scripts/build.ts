@@ -15,7 +15,7 @@ const buildRedirectConf = async () => {
     ),
   ].join("\n");
 
-  await writeFile(join(import.meta.dirname, "../static/_redirects"), cfPagesRedirectConf);
+  await writeFile(join(import.meta.dirname, "../_redirects"), cfPagesRedirectConf);
 };
 
 await buildRedirectConf();
