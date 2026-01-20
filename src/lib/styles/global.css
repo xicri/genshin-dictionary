@@ -42,7 +42,7 @@
   }
 
   a {
-    @apply no-underline;
+    @apply underline;
   }
 
   a:link {
