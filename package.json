@@ -33,7 +33,6 @@
     "prepare": "node ./scripts/postinstall.mjs && pnpm build"
   },
   "dependencies": {
-    "@escapace/accept-language-parser": "^1.6.7",
     "@nuxt/devtools": "^2.6.3",
     "@nuxt/eslint": "1.13.0",
     "@nuxtjs/i18n": "^9.4.0",
