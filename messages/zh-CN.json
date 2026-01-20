@@ -18,14 +18,15 @@
   "siteTitleL1": "原神",
   "siteTitleL2": "中英日辞典",
 
-  "aboutIntro": "本站是一个在线的中日英三语词典，收录了《{genshinLink}》中使用的专有词汇。",
+  "aboutIntro1": "本站是一个在线的中日英三语词典，收录了《",
+  "genshinImpact": "原神",
+  "aboutIntro2":"》中使用的专有词汇。",
   "wordCount": "截至目前，本站已收集了 {count} 个专有词汇。",
   "precautionsTitle": "使用注意事项及免责声明",
   "precautions1": "由于本站收录的是《原神》中的专有词汇，因此大多数单词并非直译。",
   "precautions2": "本站是一个由《原神》玩家制作并运营的网站，与开发商上海米哈游网络科技股份有限公司及 Cognosphere Pte., Ltd. (HoYoverse) 无关。",
   "contactBlueskyChatAvailable": "可发送私信",
   "creditsTitle": "致谢",
-  "genshinImpact": "原神",
   "logoTypeGothic": "Logo Type Gothic 字体",
 
   "updatedOn": "更新于{createdAt}",
