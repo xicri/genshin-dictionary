@@ -2,6 +2,7 @@
   import { m } from "$lib/paraglide/messages.js";
   import { getLocale } from "$lib/paraglide/runtime";
   import words from "$lib/dataset/words.json";
+  import "$lib/styles/articles.css";
 
   const locale = getLocale();
   const title = `${ m.aboutTitle() } | ${ m.siteTitle() }`;
@@ -50,8 +51,6 @@
     logoTypeGothicLink: createLink("http://www.fontna.com/blog/1226/", m.logoTypeGothic()),
   });
 </script>
-
-<style lang="scss" src="~/assets/styles/articles.scss"></style>
 
 <svelte:head>
   <title>{title}</title>
