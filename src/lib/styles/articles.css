@@ -1,19 +1,5 @@
 @use "$lib/styles/variables.scss" as vars;
 
-.article__wrapper-outer {
-  display: flex;
-  justify-content: center;
-
-  $margin: 12px;
-  margin-left: $margin;
-  margin-right: $margin;
-  width: calc(100% - #{ $margin * 2 });
-}
-.article__wrapper-inner {
-  max-width: vars.$max-width;
-  width: 100%;
-}
-
 * {
   color: vars.$color-dark;
   line-height: 1.5em;

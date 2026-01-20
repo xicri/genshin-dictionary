@@ -1,6 +1,7 @@
 <script lang="ts">
   import { m } from "$lib/paraglide/messages";
   import { getLocale } from "$lib/paraglide/runtime.js";
+  import Article from "$lib/components/Article.svelte";
   import tags from "$lib/dataset/tags.json";
   import "$lib/styles/articles.css";
   import type { Locale } from "$lib/types.ts";
@@ -62,100 +63,98 @@
   <meta property="og:title" content={title} />
 </svelte:head>
 
-<div class="article__wrapper-outer">
-  <div class="article__wrapper-inner">
-    <h2>{ m.opendataTitle() }</h2>
+<Article>
+  <h2>{ m.opendataTitle() }</h2>
 
-    <main>
-      <p>{ m.introText() }</p>
+  <main>
+    <p>{ m.introText() }</p>
 
-      <h3>{ m.csvTitle() }</h3>
-      <ul>
-        <li>
-          <a href="https://dataset.genshin-dictionary.com/words.csv" target="_blank">
-            { m.csvDownloadUtf8() }
-          </a>
-        </li>
-        <li>
-          <a href="https://dataset.genshin-dictionary.com/words-sjis.csv" target="_blank">
-            { m.csvDownloadShiftJis() }
-          </a>
-        </li>
-      </ul>
-      {#if locale === "ja"}
-        <p>
-          Excel を用いて CSV を開く場合は、Shift_JIS 版の利用を推奨します。UTF-8 版を用いると文字化けする可能性があります。<br />
-          その他のソフトウェアを用いる場合についても、文字化けが発生する場合は UTF-8 版と Shift_JIS 版の両方を試してみて下さい。
-        </p>
-      {/if}
-
-      <h3>{ m.jsonTitle() }</h3>
-
-      <h4>{ m.jsonUrlTitle() }</h4>
+    <h3>{ m.csvTitle() }</h3>
+    <ul>
+      <li>
+        <a href="https://dataset.genshin-dictionary.com/words.csv" target="_blank">
+          { m.csvDownloadUtf8() }
+        </a>
+      </li>
+      <li>
+        <a href="https://dataset.genshin-dictionary.com/words-sjis.csv" target="_blank">
+          { m.csvDownloadShiftJis() }
+        </a>
+      </li>
+    </ul>
+    {#if locale === "ja"}
       <p>
-        {@html downloadLink}
+        Excel を用いて CSV を開く場合は、Shift_JIS 版の利用を推奨します。UTF-8 版を用いると文字化けする可能性があります。<br />
+        その他のソフトウェアを用いる場合についても、文字化けが発生する場合は UTF-8 版と Shift_JIS 版の両方を試してみて下さい。
       </p>
+    {/if}
 
-      <h4>{ m.jsonFormatTitle() }</h4>
-      <p>{ m.jsonFormatText() }</p>
-      <code>
-        <pre>{ jsonExample }</pre>
-      </code>
+    <h3>{ m.jsonTitle() }</h3>
 
-      <p>{ m.propertyTitle() }</p>
-      <ul>
-        <li><code>id</code> ― { m.propertyId() }</li>
-        <li><code>en</code> ― { m.propertyEn() }</li>
-        <li><code>ja</code> ― { m.propertyJa() }</li>
-        <li><code>zhCN</code> ― { m.propertyZhCN() }</li>
-        <li><code>pronunciationJa</code> ― { m.propertyPronunciationJa() }</li>
-        <li><code>notes</code> ― { m.propertyNotes() }</li>
-        <li><code>notesZh</code> ― { m.propertyNotesZh() }</li>
-        <li><code>notesZhTW</code> ― { m.propertyNotesZhTW() }</li>
-        <li><code>variants</code> ― { m.propertyVariants() }</li>
-        <li><code>variants.en</code> ― { m.propertyVariantsEn() }</li>
-        <li><code>variants.ja</code> ― { m.propertyVariantsJa() }</li>
-        <li><code>examples</code> ― { m.propertyExamples() }</li>
-        <li><code>examples[].en</code> ― { m.propertyExamplesEn() }</li>
-        <li><code>examples[].ja</code> ― { m.propertyExamplesJa() }</li>
-        <li><code>examples[].ref</code> ― { m.propertyExamplesRef() }</li>
-        <li><code>examples[].refURL</code> ― { m.propertyExamplesRefURL() }</li>
-        <li><code>createdAt</code> ― { m.propertyCreatedAt() }</li>
-        <li><code>updatedAt</code> ― { m.propertyUpdatedAt() }</li>
-        <li>
-          <code>tags</code> ― { m.propertyTags() }
-          <ul>
-            {#each Object.entries(tags) as [ tagID, tag ] (tagID)}
-              <li>
-                <code>{ tagID }</code> ― { tag[locale as Locale] }
-              </li>
-            {/each}
-          </ul>
-        </li>
-      </ul>
+    <h4>{ m.jsonUrlTitle() }</h4>
+    <p>
+      {@html downloadLink}
+    </p>
 
-      <h4>{ m.compatibilityTitle() }</h4>
-      <p>{ m.compatibilityText() }</p>
+    <h4>{ m.jsonFormatTitle() }</h4>
+    <p>{ m.jsonFormatText() }</p>
+    <code>
+      <pre>{ jsonExample }</pre>
+    </code>
 
-      <h3>{ m.usageNotesTitle() }</h3>
-      <p>{ m.lastUpdated() }</p>
-      <ul class="usage-notes mb-4">
-        <li>{ m.usageNotesBasic() }</li>
-        <li>{ m.usageNotesCitation() }</li>
-        <li>
-          { m.usageNotesRevocationIntro() }
-          <ul>
-            <li>{ m.usageNotesRevocationRights() }</li>
-            <li>{ m.usageNotesRevocationTerms() }</li>
-            <li>{ m.usageNotesRevocationLaws() }</li>
-            <li>{ m.usageNotesRevocationRequest() }</li>
-          </ul>
-        </li>
-        <li>{ m.usageNotesDisclaimer() }</li>
-      </ul>
-      <p>
-        {@html contactText}
-      </p>
-    </main>
-  </div>
-</div>
+    <p>{ m.propertyTitle() }</p>
+    <ul>
+      <li><code>id</code> ― { m.propertyId() }</li>
+      <li><code>en</code> ― { m.propertyEn() }</li>
+      <li><code>ja</code> ― { m.propertyJa() }</li>
+      <li><code>zhCN</code> ― { m.propertyZhCN() }</li>
+      <li><code>pronunciationJa</code> ― { m.propertyPronunciationJa() }</li>
+      <li><code>notes</code> ― { m.propertyNotes() }</li>
+      <li><code>notesZh</code> ― { m.propertyNotesZh() }</li>
+      <li><code>notesZhTW</code> ― { m.propertyNotesZhTW() }</li>
+      <li><code>variants</code> ― { m.propertyVariants() }</li>
+      <li><code>variants.en</code> ― { m.propertyVariantsEn() }</li>
+      <li><code>variants.ja</code> ― { m.propertyVariantsJa() }</li>
+      <li><code>examples</code> ― { m.propertyExamples() }</li>
+      <li><code>examples[].en</code> ― { m.propertyExamplesEn() }</li>
+      <li><code>examples[].ja</code> ― { m.propertyExamplesJa() }</li>
+      <li><code>examples[].ref</code> ― { m.propertyExamplesRef() }</li>
+      <li><code>examples[].refURL</code> ― { m.propertyExamplesRefURL() }</li>
+      <li><code>createdAt</code> ― { m.propertyCreatedAt() }</li>
+      <li><code>updatedAt</code> ― { m.propertyUpdatedAt() }</li>
+      <li>
+        <code>tags</code> ― { m.propertyTags() }
+        <ul>
+          {#each Object.entries(tags) as [ tagID, tag ] (tagID)}
+            <li>
+              <code>{ tagID }</code> ― { tag[locale as Locale] }
+            </li>
+          {/each}
+        </ul>
+      </li>
+    </ul>
+
+    <h4>{ m.compatibilityTitle() }</h4>
+    <p>{ m.compatibilityText() }</p>
+
+    <h3>{ m.usageNotesTitle() }</h3>
+    <p>{ m.lastUpdated() }</p>
+    <ul class="usage-notes mb-4">
+      <li>{ m.usageNotesBasic() }</li>
+      <li>{ m.usageNotesCitation() }</li>
+      <li>
+        { m.usageNotesRevocationIntro() }
+        <ul>
+          <li>{ m.usageNotesRevocationRights() }</li>
+          <li>{ m.usageNotesRevocationTerms() }</li>
+          <li>{ m.usageNotesRevocationLaws() }</li>
+          <li>{ m.usageNotesRevocationRequest() }</li>
+        </ul>
+      </li>
+      <li>{ m.usageNotesDisclaimer() }</li>
+    </ul>
+    <p>
+      {@html contactText}
+    </p>
+  </main>
+</Article>
