@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import type { FormEventHandler, FullAutoFill } from "svelte/elements";
+  import { twMerge } from "tailwind-merge";
 
   type Props = {
     value: string;
@@ -8,6 +9,7 @@
     placeholder?: string;
     autocomplete?: FullAutoFill;
     oninput?: FormEventHandler<HTMLInputElement>;
+    class: string;
   };
 
   let { value = $bindable(), ...props }: Props = $props();
@@ -16,6 +18,7 @@
     placeholder,
     autocomplete,
     oninput: onInputFromParent,
+    class: twClass,
   } = props;
 
   let searchBox: HTMLInputElement;
@@ -56,27 +59,14 @@
   };
 </script>
 
-<style lang="scss">
-@use "$lib/assets/styles/variables.scss" as vars;
-
-.elastic-searchbox {
-  border-width: 0;
-  border-style: none;
-  font-size: vars.$search-font-size;
-  background-color: transparent;
-
-  &:focus-visible {
-    outline-style: none;
-    outline-width: 0;
-  }
-}
-</style>
-
 <input
   bind:this={searchBox}
   bind:value={value}
   type="search"
-  class="elastic-searchbox"
+  class={twMerge(
+    "border-0 border-none text-base bg-transparent focus-visible:outline-none focus-visible:outline-0",
+    twClass,
+  )}
   {name}
   {placeholder}
   {autocomplete}
