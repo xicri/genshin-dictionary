@@ -137,12 +137,12 @@ When writing search tests or fixing search bugs, understand [src/lib/words.ts](s
 
 ### Unit Tests (Vitest)
 
-- Location: tests/*.test.ts
+- Location: *.test.ts
 - Mock data: Uses actual `words.json` dataset
 
 ### E2E Tests (Playwright)
 
-- Location: tests/*.pwtest.ts
+- Location: e2e/*.e2e.ts
 - Tests across 3 browsers: Chromium (desktop/mobile), Safari (mobile)
 - Deployment: CI runs E2E on each PR
 
