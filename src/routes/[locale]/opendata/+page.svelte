@@ -2,6 +2,7 @@
   import { m } from "$lib/paraglide/messages";
   import { getLocale } from "$lib/paraglide/runtime.js";
   import tags from "$lib/dataset/tags.json";
+  import "$lib/styles/articles.css";
   import type { Locale } from "$lib/types.ts";
 
   const locale = getLocale();
@@ -60,8 +61,6 @@
   <title>{title}</title>
   <meta property="og:title" content={title} />
 </svelte:head>
-
-<style lang="scss" src="~/assets/styles/articles.scss"></style>
 
 <div class="article__wrapper-outer">
   <div class="article__wrapper-inner">
