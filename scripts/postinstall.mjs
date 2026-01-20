@@ -12,6 +12,8 @@ import "dotenv/config";
 import { DateTime } from "luxon";
 import { fetch } from "undici";
 
+const staticDatasetDestDirPath = resolve(import.meta.dirname, "../static/dataset");
+
 /**
  * Copy file from URL and save it on local disk.
  * @param {string} src - URL of the source file
@@ -98,24 +100,24 @@ async function downloadDataset() {
 
   console.info("Copying dataset into the public directory for Web API compatibility...");
 
-  await mkdir(resolve(import.meta.dirname, "../public/dataset/"), { recursive: true });
+  await mkdir(staticDatasetDestDirPath, { recursive: true });
 
   await Promise.all([
     copyFile(
       resolve(import.meta.dirname, "../dataset/words.json"),
-      resolve(import.meta.dirname, "../public/dataset/words.json"),
+      resolve(staticDatasetDestDirPath, "words.json"),
     ),
     copyFile(
       resolve(import.meta.dirname, "../dataset/words.csv"),
-      resolve(import.meta.dirname, "../public/dataset/words.csv"),
+      resolve(staticDatasetDestDirPath, "words.csv"),
     ),
     copyFile(
       resolve(import.meta.dirname, "../dataset/words-sjis.csv"),
-      resolve(import.meta.dirname, "../public/dataset/words-sjis.csv"),
+      resolve(staticDatasetDestDirPath, "words-sjis.csv"),
     ),
     copyFile(
       resolve(import.meta.dirname, "../dataset/tags.json"),
-      resolve(import.meta.dirname, "../public/dataset/tags.json"),
+      resolve(staticDatasetDestDirPath, "tags.json"),
     ),
   ]);
 
