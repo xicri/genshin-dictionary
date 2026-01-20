@@ -12,7 +12,6 @@
   --color-lightest: #96b8dd;
 
   --max-width: 840px;
-  --side-margin: 12px;
   --search-font-size: 15px;
 }
 
@@ -56,4 +55,14 @@
   h2, h3 {
     @apply text-dark mb-2
   }
+}
+
+.padding-side {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.margin-side {
+  margin-left: 12px;
+  margin-right: 12px;
 }
