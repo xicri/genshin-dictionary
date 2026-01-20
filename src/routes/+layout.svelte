@@ -48,7 +48,7 @@
   <div class="layout-default__nav-wrapper">
     <nav class="layout-default__nav">
       <h1>
-        <a href={resolve("/")} class="flex flex-wrap font-light text-3xl text-dark tracking-wider">
+        <a href={resolve("/")} class="flex flex-wrap font-light no-underline text-3xl text-dark tracking-wider">
           <span>{ m.siteTitleL1() }</span><span>{ m.siteTitleL2() }</span>
         </a>
       </h1>
