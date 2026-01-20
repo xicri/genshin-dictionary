@@ -4,14 +4,37 @@
   color: vars.$color-dark;
   line-height: 1.5em;
 }
+
+h2 {
+  font-size: x-large;
+  font-weight: 600;
+}
+
 h3 {
+  font-size: large;
+  font-weight: 600;
+
   padding-bottom: 0.2em;
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: vars.$color-light;
 }
 h4 {
+  font-size: medium;
+  font-weight: 600;
+
   margin-bottom: 0.4em;
+}
+
+ul {
+  list-style-type: disc;
+  list-style-position: inside;
+
+  padding-inline-start: 2rem;
+}
+
+li {
+  display: list-item;
 }
 
 :deep(a) {
