@@ -148,11 +148,16 @@ a {
         {/each}
       </div>
 
-      <div class="menu__bottomline">
+      <div class="menu__bottomline mb-2.5">
         <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
         <a href="https://bsky.app/profile/xicri.genshin-dictionary.com" target="_blank" rel="noopener">Bluesky</a>
         <a href="https://focalorus.io/@xicri" target="_blank" rel="noopener">Misskey</a>
       </div>
+
+      <p class="text-xs">
+        Copyright &copy; 2021-present Xicri & the Genshin Dictionary contributors<br />
+        Genshin Impact is a registered trademark of miHoYo, Inc., COGNOSPHERE PTE. LTD., and their affiliated subsidiaries.
+      </p>
     </div>
   </nav>
   <ClosingLayer enabled={open} onclose={closeMenu} />
