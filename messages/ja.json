@@ -18,7 +18,9 @@
   "siteTitleL1": "原神 英語・",
   "siteTitleL2": "中国語辞典",
 
-  "aboutIntro": "このサイトはゲーム「{genshinLink}」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
+  "aboutIntro1": "このサイトはゲーム「",
+  "genshinImpact": "原神",
+  "aboutIntro2": "」で用いられる固有名詞等の日本語・英語・中国語対訳表です。",
   "wordCount": "現在の収録単語数は{count}語です。",
   "precautionsTitle": "ご利用にあたっての注意・免責事項",
   "precautions1": "本サイトはゲームの固有名詞等の対訳を掲載している都合上、意訳が多く、一般的な意味とは訳が異なる場合がありますので、ご注意下さい。",
@@ -32,7 +34,6 @@
   "creditsContributorsIntro": "原神 英語・中国語辞典の開発にご協力頂いた方の一部を、下記に一覧として掲載しています。",
   "creditsContributorsWebsite": "Web サイト本体への貢献者",
   "creditsContributorsWordData": "単語データへの貢献者",
-  "genshinImpact": "原神",
   "creditsResourcesIntro": "本サイトの構築にあたり、下記のリソースを利用しています。",
   "creditsOcticonsLicensing": "GitHub, Inc. 提供; MIT ライセンス",
   "logoTypeGothic": "ロゴたいぷゴシック",

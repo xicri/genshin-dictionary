@@ -9,15 +9,6 @@
   const description = m.aboutDescription();
 
   const wordCount = words.length;
-
-  const createLink = (url: string, text: string) => `<a href="${ url }" target="_blank" rel="noopener">${ text }</a>`;
-
-  const aboutIntroText = m.aboutIntro({
-    genshinLink: createLink(
-      locale === "zh-CN" ? "https://ys.mihoyo.com" : "https://genshin.hoyoverse.com",
-      m.genshinImpact(),
-    ),
-  });
 </script>
 
 <svelte:head>
@@ -32,7 +23,9 @@
     <h2>{ m.aboutTitle() }</h2>
 
     <main>
-      <p>{@html aboutIntroText}</p>
+      <p>
+        {m.aboutIntro1()}<a href={locale === "zh-CN" ? "https://ys.mihoyo.com" : "https://genshin.hoyoverse.com"} target="_blank" rel="noopener">{m.genshinImpact()}</a>{m.aboutIntro2()}
+      </p>
       <p>{ m.wordCount({ count: wordCount }) }</p>
 
       <h3>{ m.precautionsTitle() }</h3>
