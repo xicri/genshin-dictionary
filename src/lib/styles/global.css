@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: ui-sans-serif, sans-serif, system-ui, -apple-system, "Noto Sans CJK";
+  --font-serif: ui-serif, serif, "Noto Serif CJK", system-ui, -apple-system;
+  --font-mono: ui-monospace, monospace, "Noto Mono", system-ui, -apple-system;
+
   --color-dark: #013770;
   --color-darkest: #001f48;
   --color-light: #7fa3c8;
@@ -14,7 +18,6 @@
 
 @layer base {
   html {
-    font-family: sans-serif, system-ui, -apple-system, "Noto Sans CJK";
     font-size: 16px;
     word-spacing: 1px;
     -ms-text-size-adjust: 100%;
