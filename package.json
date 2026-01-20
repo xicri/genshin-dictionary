@@ -49,6 +49,7 @@
     "pinia": "^3.0.1",
     "sass": "^1.97.2",
     "sitemap": "^9.0.0",
+    "tailwind-merge": "^3.4.0",
     "undici": "^7.19.0"
   },
   "devDependencies": {

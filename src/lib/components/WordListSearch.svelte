@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { twMerge } from "tailwind-merge";
   import allTags from "$lib/dataset/tags.json";
   import ClosingLayer from "$lib/components/ClosingLayer.svelte";
   import ElasticSearchBox from "$lib/components/ElasticSearchBox.svelte";
@@ -10,12 +11,14 @@
     query: string;
     queryTagSlugs: TagID[];
     maxWords: number;
+    class: string;
   };
 
   let {
     query = $bindable(),
     queryTagSlugs = $bindable(),
     maxWords = $bindable(),
+    class: twClass,
   }: Props = $props();
 
   const locale = getLocale();
@@ -73,8 +76,6 @@
 @use "$lib/styles/variables.scss" as vars;
 
 .search {
-  width: 100%;
-
   & * {
     z-index: 11; // Higher than closing-layer (z-index: 10)
   }
@@ -138,9 +139,6 @@
     cursor: pointer;
   }
 
-  &__input {
-    flex-shrink: 0;
-  }
   &__taglist {
     border: 0;
   }
@@ -253,7 +251,7 @@
 }
 </style>
 
-<div class="search">
+<div class={twMerge("w-full", twClass)}>
   <div class="search__box">
     <div class="search__scrollable" onclick={focusOnSearchBox} ondblclick={selectAll}>
       <div class="search__active-tags">
@@ -268,7 +266,7 @@
       <ElasticSearchBox
         bind:this={searchBox}
         bind:value={query}
-        class="search__input"
+        class="shrink-0"
         name="searchbox"
         placeholder={m.enterSearchTerms()}
         autocomplete="off"
