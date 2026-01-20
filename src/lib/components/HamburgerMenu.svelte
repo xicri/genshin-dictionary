@@ -128,7 +128,7 @@ a {
         {#each locales as locale, index (index) }
           <button
             onclick={() => setLocale(locale)}
-            class="text-dark cursor-pointer"
+            class="text-dark cursor-pointer text-left"
           >
             { langNames[locale] }
           </button>
