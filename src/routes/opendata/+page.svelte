@@ -8,45 +8,45 @@
   const locale = getLocale();
   const title = `${ m.opendataTitle() } | ${ m.siteTitle() }`;
 
-  const jsonExample = `[
+  const jsonExample = JSON.stringify([
     {
-      "id": "zhongli",
-      "en": "Zhongli",
-      "ja": "鍾離",
-      "zhCN": "钟离",
-      "zhTW": "鍾離",
-      "pronunciationJa": "しょうり",
-      "notes": "読みは「ヂョンリー」(<a href=\\"https://youtu.be/p10yiwULJA8?t=118\\" target=\\"_blank\\" rel=\\"noopener\\">参考動画</a>)",
-      "notesZh": "「锺离」（曾经简化字写作「钟离」）是中国古代早已有之的汉字复姓。…",
-      "notesZhTW": "「鍾離」是中國古代早已有之的漢字複姓。…",
-      "variants": {
-        "ja": [ "鐘離" ]
+      id: "zhongli",
+      en: "Zhongli",
+      ja: "鍾離",
+      zhCN: "钟离",
+      zhTW: "鍾離",
+      pronunciationJa: "しょうり",
+      notes: "読みは「ヂョンリー」(<a href=\"https://youtu.be/p10yiwULJA8?t=118\" target=\"_blank\" rel=\"noopener\">参考動画</a>)",
+      notesZh: "「锺离」（曾经简化字写作「钟离」）是中国古代早已有之的汉字复姓。…",
+      notesZhTW: "「鍾離」是中國古代早已有之的漢字複姓。…",
+      variants: {
+        ja: [ "鐘離" ],
       },
-      "createdAt": "2022-01-01",
-      "updatedAt": "2025-01-01",
-      "tags": [ "liyue", "character-main" ]
+      createdAt: "2022-01-01",
+      updatedAt: "2025-01-01",
+      tags: [ "liyue", "character-main" ],
     },
     {
-      "id": "inazuman",
-      "en": "Inazuman",
-      "ja": "稲妻人 / 稲妻の",
-      "zhCN": "稻妻人 / 稻妻的",
-      "zhTW": "稻妻人 / 稻妻的",
-      "pronunciationJa": "いなずまじん / いなずまの",
-      "notes": "元々 Inazuman は非公式にプレイヤーの間で使われる言葉であったが…(以下略)",
-      "examples": [{
-        "en": "Inazumans are definitely more particular about etiquette than Mondstadters!",
-        "ja": "モンド人よりも、稲妻人の方が礼儀に対して気を配っている。",
-        "zhCN": "比起蒙德人，稻妻人更加在意礼节。",
-        "zhTW": "比起蒙德人，稻妻人更加在意禮節。",
-        "ref": "トーマ, キャラクター実戦紹介 トーマ「烈炎の守護」",
-        "refURL": "https://www.youtube.com/watch?v=HPoeE5PRWTw&t=15s"
+      id: "inazuman",
+      en: "Inazuman",
+      ja: "稲妻人 / 稲妻の",
+      zhCN: "稻妻人 / 稻妻的",
+      zhTW: "稻妻人 / 稻妻的",
+      pronunciationJa: "いなずまじん / いなずまの",
+      notes: "元々 Inazuman は非公式にプレイヤーの間で使われる言葉であったが…(以下略)",
+      examples: [{
+        en: "Inazumans are definitely more particular about etiquette than Mondstadters!",
+        ja: "モンド人よりも、稲妻人の方が礼儀に対して気を配っている。",
+        zhCN: "比起蒙德人，稻妻人更加在意礼节。",
+        zhTW: "比起蒙德人，稻妻人更加在意禮節。",
+        ref: "トーマ, キャラクター実戦紹介 トーマ「烈炎の守護」",
+        refURL: "https://www.youtube.com/watch?v=HPoeE5PRWTw&t=15s",
       }],
-      "createdAt": "2022-01-01",
-      "updatedAt": "2025-01-01",
-      "tags": [ "inazuma" ]
-    }
-  ]`;
+      createdAt: "2022-01-01",
+      updatedAt: "2025-01-01",
+      tags: [ "inazuma" ],
+    },
+  ], undefined, 2);
 
   const downloadLink = m.jsonUrlText({
     url: "<a href=\"https://dataset.genshin-dictionary.com/words.json\" target=\"_blank\" rel=\"noopener\">https://dataset.genshin-dictionary.com/words.json</a>",
