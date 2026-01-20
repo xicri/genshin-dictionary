@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { debounce } from "es-toolkit";
+  import IntersectionObserver from "$lib/components/IntersectionObserver.svelte";
   import WordListSearch from "$lib/components/WordListSearch.svelte";
   import WordCard from "$lib/components/WordCard.svelte";
   import { searchWords } from "$lib/search.ts";
@@ -29,25 +30,6 @@
 
   let resultsElement: HTMLElement;
 
-  const observer = new IntersectionObserver((entries, observer) => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) {
-        return;
-      }
-
-      observer.unobserve(entry.target);
-      maxWords += 100;
-    }
-  });
-
-  const addIntersectionObserver = (): void => {
-    const wordEls = resultsElement.children;
-
-    if (wordEls && 0 < wordEls.length) {
-      observer?.observe(wordEls[wordEls.length - 1]); // add observer to the last word element
-    }
-  };
-
   onMount(() => {
     const reset = () => {
       query = "";
@@ -57,11 +39,7 @@
 
     // Reset on browser back
     window.onpopstate = reset;
-
-    addIntersectionObserver();
   });
-
-  $effect(() => addIntersectionObserver());
 </script>
 
 <style lang="scss">
@@ -114,6 +92,17 @@
       {#each words as word (word.en)}
         <WordCard {word} />
       {/each}
+
+      {#if words.length < maxWords}
+        <!-- Do not add observer -->
+      {:else}
+        <IntersectionObserver
+          onintersect={() => maxWords += 100}
+          class="text-center"
+        >
+          {m.loading()}
+        </IntersectionObserver>
+      {/if}
     </main>
   </div>
 
