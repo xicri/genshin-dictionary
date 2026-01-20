@@ -8,7 +8,7 @@ const debugOptions = {
 };
 
 export default defineConfig({
-  testMatch: /.*(pwtest)\.(js|ts|mjs)/,
+  testMatch: /.*\.(e2e)\.(js|ts|mjs)/,
   workers: 1, // disable concurrent tests
 
   projects: [

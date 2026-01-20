@@ -302,7 +302,7 @@
     </div>
 
     <img
-      src="~/assets/vendor/octicons/tag.svg"
+      src="/vendor/octicons/tag.svg"
       width="24"
       height="24"
       :alt="t('openListOfTags')"
@@ -320,7 +320,7 @@
     </div>
 
     <img
-      src="~/assets/vendor/octicons/x.svg"
+      src="/vendor/octicons/x.svg"
       width="24"
       height="24"
       :alt="t('closeListOfTags')"

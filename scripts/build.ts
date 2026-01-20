@@ -16,7 +16,7 @@ const buildRedirectConf = async () => {
     ),
   ].join("\n");
 
-  await writeFile(join(import.meta.dirname, "../public/_redirects"), cfPagesRedirectConf);
+  await writeFile(join(import.meta.dirname, "../static/_redirects"), cfPagesRedirectConf);
 };
 
 const buildLocaleJson = async () => {

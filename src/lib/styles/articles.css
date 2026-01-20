@@ -1,4 +1,4 @@
-@use "~/assets/styles/variables.scss" as vars;
+@use "$lib/styles/variables.scss" as vars;
 
 .article__wrapper-outer {
   display: flex;
