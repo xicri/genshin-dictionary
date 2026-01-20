@@ -4,6 +4,3 @@
   Cross-Origin-Resource-Policy: same-site
   Cross-Origin-Opener-Policy: same-origin
   X-Content-Type-Options: nosniff
-
-/locale-redirect
-  Cache-Control: no-cache

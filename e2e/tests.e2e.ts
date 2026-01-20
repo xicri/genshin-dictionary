@@ -333,7 +333,7 @@ describe("redirection by language settings works properly", () => {
 
   for (const { code, localeDir } of langs) {
     test(`/ (${ code })`, async () => {
-      const res = await fetch(`${ rootURL }/locale-redirect?path=%2F`, { // `%2F` === `/`
+      const res = await fetch(`${ rootURL }`, {
         headers: {
           "Accept-Language": code,
         },
@@ -343,8 +343,8 @@ describe("redirection by language settings works properly", () => {
       expect(res.url).toBe(`${ rootURL }/${ localeDir }`);
     });
 
-    test(`/[wordid] (${ code })`, async () => {
-      const res = await fetch(`${ rootURL }/locale-redirect?path=%2Flumine`, { // `%2F` === `/`
+    test(`/[wordSlug] (${ code })`, async () => {
+      const res = await fetch(`${ rootURL }/lumine`, {
         headers: {
           "Accept-Language": code,
         },
