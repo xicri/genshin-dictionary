@@ -78,7 +78,9 @@
 
       <h3>{ m.operatorTitle() }</h3>
       <ul>
-        <li>{@html m.operator({ blueskyLink, githubLink })}</li>
+        <li>
+          {m.operator()} (<a href="https://bsky.app/profile/xicri.genshin-dictionary.com" target="_blank" rel="noopener">Bluesky</a> / <a href="https://github.com/xicri" target="_blank" rel="noopener">GitHub</a>)
+        </li>
         <li>{@html contributorText}</li>
       </ul>
 
