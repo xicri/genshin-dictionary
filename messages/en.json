@@ -18,7 +18,9 @@
   "siteTitleL1": "Genshin",
   "siteTitleL2": "Dictionary",
 
-  "aboutIntro": "This website is an online English-Chinese-Japanese dictionary for the proprietary terms used in a computer game {genshinLink}.",
+  "aboutIntro1": "This website is an online English-Chinese-Japanese dictionary for the proprietary terms used in a computer game ",
+  "genshinImpact": "Genshin Impact",
+  "aboutIntro2": ".",
   "wordCount": "Currently, this dictionary has {count} words.",
   "precautionsTitle": "Notice and Disclaimer",
   "precautions1": "Since the translations on this website are the proprietary terms for a computer game, the most of the words are not literally translated.",
@@ -32,7 +34,6 @@
   "creditsContributorsIntro": "You can see the list of the part of the Genshin Dictionary contributors from the following links:",
   "creditsContributorsWebsite": "The contributors for the website core system",
   "creditsContributorsWordData": "The contributors for the word dataset",
-  "genshinImpact": "Genshin Impact",
   "creditsResourcesIntro": "This website uses the following resources:",
   "creditsOcticonsLicensing": "provided by GitHub, Inc. under MIT license",
   "logoTypeGothic": "Logo Type Gothic",
