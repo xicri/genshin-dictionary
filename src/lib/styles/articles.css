@@ -32,8 +32,19 @@ h4 {
   text-decoration: underline;
 }
 
-p, ul, code > pre {
-  margin-bottom: 1em;
+h2, h3, h4, h5, h6 {
+  margin-top: 1em;
+}
+p, ul {
+  margin-top: 0.75em;
+}
+code > pre {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+li > ul {
+  margin-top: 0;
 }
 
 code > pre, p code, li code {

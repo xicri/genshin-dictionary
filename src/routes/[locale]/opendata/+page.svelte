@@ -139,7 +139,7 @@
 
       <h3>{ m.usageNotesTitle() }</h3>
       <p>{ m.lastUpdated() }</p>
-      <ul class="usage-notes">
+      <ul class="usage-notes mb-4">
         <li>{ m.usageNotesBasic() }</li>
         <li>{ m.usageNotesCitation() }</li>
         <li>
