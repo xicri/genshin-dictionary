@@ -249,17 +249,18 @@ h5.linebreak {
           height="12"
           alt={ m.permalinkAlt({ word: wordInCurrentLocale }) }
           decoding="async"
-          class="results__permalink--icon"
+          class="results__permalink--icon inline -translate-y-0.5"
         />
         <span class="results__permalink--text">{m.permalink()}</span>
       </a>
+      &nbsp;&nbsp;
       <img
         src="/vendor/octicons/copy.svg"
         width="12"
         height="12"
         alt={ m.copyLink({ word: wordInCurrentLocale }) }
         decoding="async"
-        class="results__permalink--copy"
+        class="results__permalink--copy inline -translate-y-0.5"
         onclick={(evt) => copyLink(word.id, evt)}
       />
       <img
@@ -268,7 +269,7 @@ h5.linebreak {
         height="12"
         alt={ m.copyLinkDone({ word: wordInCurrentLocale }) }
         decoding="async"
-        class="results__permalink--copied"
+        class="results__permalink--copied inline -translate-y-0.5"
         style="display: none;"
       />
     </div>
