@@ -103,7 +103,7 @@
 <div class="word-list">
   <div class="word-list__wrapper">
     <WordListSearch
-      class="z-1 pt-4 pb-4 padding-side md:pl-0 md:pr-0 fixed md:static bottom-0 md:bottom-auto w-full md:w-auto bg-lightest md:bg-transparent shadow-md md:shadow-none"
+      class="pt-4 pb-4 padding-side md:pl-0 md:pr-0 fixed md:static bottom-0 md:bottom-auto w-full md:w-auto bg-lightest md:bg-transparent shadow-md md:shadow-none"
       bind:query={query}
       bind:queryTagSlugs={queryTagSlugs}
       bind:maxWords={maxWords}
