@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { debounce } from "lodash-es";
   import WordListSearch from "$lib/components/WordListSearch.svelte";
   import WordCard from "$lib/components/WordCard.svelte";
   import { searchWords } from "$lib/search.ts";
@@ -104,7 +105,7 @@
   <div class="word-list__wrapper">
     <WordListSearch
       class="pt-4 pb-4 padding-side md:pl-0 md:pr-0 fixed md:static bottom-0 md:bottom-auto w-full md:w-auto bg-lightest md:bg-transparent shadow-md md:shadow-none"
-      bind:query={query}
+      bind:query={() => query, debounce((newQuery) => query = newQuery, 500) }
       bind:queryTagSlugs={queryTagSlugs}
       bind:maxWords={maxWords}
     />
