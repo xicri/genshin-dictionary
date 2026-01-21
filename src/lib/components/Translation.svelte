@@ -82,7 +82,7 @@
 <div class="results__translation">
   <span class="results__langname results__translation-item">{ langName }: </span>
   <div class="results__translation-item">
-    <div class="results__ja">
+    <div class="results__ja font-bold">
       <span lang={lang} data-e2e={lang}>
         {#if wordWithPinyin}
           {#each wordWithPinyin as { char, pron }, index (index)}

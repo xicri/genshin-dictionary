@@ -12,4 +12,8 @@
   <meta property="og:description" content={data.description} />
 </svelte:head>
 
-<WordCard word={data.word} />
+<div class="flex justify-center pl-6 pr-6">
+  <div class="max-w-3xl w-full">
+    <WordCard word={data.word} />
+  </div>
+</div>
