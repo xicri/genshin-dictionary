@@ -1,0 +1,2 @@
+- sleep を delay に移行
+- prerender / ssr https://svelte.dev/docs/kit/page-options
