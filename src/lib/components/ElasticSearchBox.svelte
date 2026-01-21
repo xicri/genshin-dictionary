@@ -54,9 +54,6 @@
       onInputFromParent(evt);
     }
   };
-  const stopPropagation = (evt: MouseEvent): void => {
-    evt.stopPropagation();
-  };
 </script>
 
 <style lang="scss">
@@ -84,5 +81,5 @@
   {placeholder}
   {autocomplete}
   oninput={onInput}
-  onclick={stopPropagation}
+  onclick={(evt) => evt.stopPropagation()}
 />
