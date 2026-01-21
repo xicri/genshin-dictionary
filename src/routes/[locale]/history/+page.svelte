@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { isEmpty } from "lodash-es";
+  import { isEmptyObject } from "es-toolkit";
   import { m } from "$lib/paraglide/messages.js";
   import WordCard from "$lib/components/WordCard.svelte";
   import _history from "$lib/dataset/build/history.ts";
@@ -7,7 +7,7 @@
   const title = `${ m.historyTitle() } | ${ m.siteTitle() }`;
 
   const history = _history;
-  const empty = isEmpty(_history);
+  const empty = isEmptyObject(_history);
 </script>
 
 <style lang="scss">
