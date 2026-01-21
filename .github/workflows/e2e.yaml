@@ -22,7 +22,7 @@ jobs:
           - 2
           - 3
     env:
-      SERVER_ENV: local
+      SERVER_ENV: development
       SHARD_INDEX: ${{ matrix.shardIndex }}
       SHARD_TOTAL: 3
     steps:
