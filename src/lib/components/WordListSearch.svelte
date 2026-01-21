@@ -2,7 +2,6 @@
   import { twMerge } from "tailwind-merge";
   import allTags from "$lib/dataset/tags.json";
   import ClosingLayer from "$lib/components/ClosingLayer.svelte";
-  import ElasticSearchBox from "$lib/components/ElasticSearchBox.svelte";
   import { m } from "$lib/paraglide/messages.js";
   import { getLocale } from "$lib/paraglide/runtime.js";
   import type { TagID } from "$lib/types.ts";
@@ -23,7 +22,6 @@
 
   const locale = getLocale();
 
-  let searchBox: typeof ElasticSearchBox.prototype | undefined;
   let activeTagIDs: TagID[] = $state([]);
   let displayTagListOnMobile = $state(false);
 
@@ -40,20 +38,6 @@
   //
   // Event handlers
   //
-  const focusOnSearchBox = (): void => {
-    if (searchBox) {
-      const searchBoxTextLength = searchBox.getTextLength() ?? null;
-
-      searchBox.setSelectionRange(searchBoxTextLength, searchBoxTextLength);
-      searchBox.focus();
-    }
-  };
-  const selectAll = (): void => {
-    if (searchBox) {
-      searchBox.setSelectionRange(0, searchBox.getTextLength() ?? null);
-      searchBox.focus();
-    }
-  };
   const closeTagList = (): void => {
     displayTagListOnMobile = false;
   };
@@ -249,7 +233,7 @@
 
 <div class={twMerge("w-full z-20", twClass)}>
   <div class="search__box">
-    <div class="search__scrollable" onclick={focusOnSearchBox} ondblclick={selectAll}>
+    <div class="search__scrollable content-stretch">
       <div class="search__active-tags">
         {#each queryTagSlugs as queryTagSlug, i (queryTagSlug)}
           <div class="search__active-tag">
@@ -259,14 +243,13 @@
         {/each}
       </div>
 
-      <ElasticSearchBox
-        bind:this={searchBox}
-        bind:value={query}
-        class="shrink-0"
-        name="searchbox"
+      <div
+        bind:innerText={query}
+        class="min-w-fit w-full text-nowrap p-1 border-none text-base bg-transparent focus-visible:outline-none focus-visible:outline-0"
         placeholder={m.enterSearchTerms()}
-        autocomplete="off"
-      />
+        onclick={(evt) => evt.stopPropagation()}
+        contenteditable="plaintext-only"
+      ></div>
     </div>
 
     <img
