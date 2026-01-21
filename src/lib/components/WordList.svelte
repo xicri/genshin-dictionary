@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { debounce } from "lodash-es";
+  import { debounce } from "es-toolkit";
   import WordListSearch from "$lib/components/WordListSearch.svelte";
   import WordCard from "$lib/components/WordCard.svelte";
   import { searchWords } from "$lib/search.ts";
