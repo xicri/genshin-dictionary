@@ -33,17 +33,11 @@
     "prepare": "svelte-kit sync && jiti ./scripts/prepare.ts && pnpm build"
   },
   "dependencies": {
-    "@nuxt/devtools": "^2.6.3",
-    "@nuxt/eslint": "1.13.0",
-    "@nuxtjs/i18n": "^9.4.0",
-    "@nuxtjs/robots": "^5.7.0",
-    "@nuxtjs/sitemap": "^7.6.0",
     "@types/luxon": "^3.7.1",
     "dotenv": "^17.2.2",
     "es-toolkit": "^1.44.0",
     "jiti": "^2.5.1",
     "luxon": "^3.7.2",
-    "nuxt": "^3.17.1",
     "sass": "^1.97.3",
     "sitemap": "^9.0.0",
     "tailwind-merge": "^3.4.0",
@@ -79,7 +73,6 @@
     "vite": "^7.2.6",
     "vite-plugin-devtools-json": "^1.0.0",
     "vitest": "^4.0.18",
-    "vue-tsc": "^3.2.4",
     "wrangler": "^4.61.1",
     "xml2js": "^0.6.2"
   },
