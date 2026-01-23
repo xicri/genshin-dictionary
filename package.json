@@ -19,7 +19,7 @@
     "preview": "pnpm build && wrangler dev .svelte-kit/cloudflare/_worker.js --port 4173",
     "test": "pnpm sync && vitest run",
     "e2e": "pnpm sync && playwright test --shard=\"${SHARD_INDEX}/${SHARD_TOTAL}\"",
-    "e2e:server": "wrangler pages dev --local --show-interactive-dev-session=false --port=5678",
+    "e2e:server": "wrangler dev --show-interactive-dev-session=false --port=5678",
     "e2e:prepare": "playwright install chromium webkit --with-deps",
     "vrt": "pnpm e2e:prepare && concurrently --kill-others --success=first \"npm:e2e:server\" \"npm:vrt:screenshot\" && npm run vrt:reg",
     "vrt:screenshot": "sleep 5 && jiti ./scripts/vrt-screenshot.ts",
