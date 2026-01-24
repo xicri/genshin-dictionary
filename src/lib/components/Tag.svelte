@@ -35,5 +35,5 @@
 </style>
 
 <div class="tag">
-  <span>{ tagName }</span>
+  <span data-e2e="tag-name">{ tagName }</span>
 </div>
