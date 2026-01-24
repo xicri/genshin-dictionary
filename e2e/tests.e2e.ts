@@ -31,24 +31,24 @@ describe("The Genshin English Dictionary", () => {
     await page.goto(rootURL);
     await page.waitForTimeout(1400); // Wait for page initialization process
 
-    const searchBox = await page.$("input[name='searchbox']");
+    const searchBox = await page.$("*[data-e2e='search-text']");
     await searchBox!.fill("Dull Blade");
 
     await page.waitForTimeout(1400); // Wait for the search results to be shown
 
-    const words = await page.$$(".results__word");
+    const words = await page.$$("*[data-e2e='word-card']");
     expect(words).toHaveLength(1);
 
     const word = words[0];
     const ja = await word.$("span[data-e2e='ja']");
     const en = await word.$("*[data-e2e='en']");
-    const pronunciationJa = await word.$(".results__pronunciation-ja");
+    const pronunciationJa = await word.$("*[data-e2e='translation-kana']");
 
     expect(await ja!.innerText()).toBe("無鋒の剣");
     expect(await en!.innerText()).toBe("Dull Blade");
     expect(await pronunciationJa!.innerText()).toBe("(むほうのけん)");
 
-    const tags = await word.$$(".results__tags > a");
+    const tags = await word.$$("*[data-e2e='word-card-tag-link']");
     expect(tags).toHaveLength(2);
 
     // error message is NOT shown
@@ -61,12 +61,12 @@ describe("The Genshin English Dictionary", () => {
     await page.goto(rootURL);
     await page.waitForTimeout(1400); // Wait for page initialization process
 
-    const searchBox = await page.$("input[name='searchbox']");
+    const searchBox = await page.$("*[data-e2e='search-text']");
     await searchBox!.fill("炽烈的炎之魔女");
 
     await page.waitForTimeout(1400); // Wait for the search results to be shown
 
-    const words = await page.$$(".results__word");
+    const words = await page.$$("*[data-e2e='word-card']");
     expect(words).toHaveLength(1);
 
     const word = words[0];
@@ -74,7 +74,7 @@ describe("The Genshin English Dictionary", () => {
     const en = await word.$("*[data-e2e='en']");
     const zhCN = await word.$("*[data-e2e='zh-CN']");
     const zhTW = await word.$("*[data-e2e='zh-TW']");
-    const pronunciationJa = await word.$(".results__pronunciation-ja");
+    const pronunciationJa = await word.$("*[data-e2e='translation-kana']");
 
     expect(await ja!.innerText()).toBe("燃え盛る炎の魔女");
     expect(await en!.innerText()).toBe("Crimson Witch of Flames");
@@ -82,7 +82,7 @@ describe("The Genshin English Dictionary", () => {
     expect(await zhTW!.innerText()).toBe("熾烈的炎之魔女");
     expect(await pronunciationJa!.innerText()).toBe("(もえさかるほのおのまじょ)");
 
-    const tags = await word.$$(".results__tags > a");
+    const tags = await word.$$("*[data-e2e='word-card-tag-link']");
     expect(tags).toHaveLength(1);
 
     // error message is NOT shown
@@ -102,7 +102,7 @@ describe("The Genshin English Dictionary", () => {
 
     await page.waitForTimeout(1400); // Wait for additional words loaded
 
-    const words = await page.$$(".results__word");
+    const words = await page.$$("*[data-e2e='word-card']");
     expect(words.length).toBe(200);
 
     return;
@@ -124,10 +124,10 @@ describe("The Genshin English Dictionary", () => {
     await firstTag.click();
     await page.waitForTimeout(1400); // Wait for words loaded
 
-    const words = page.locator(".results__word");
+    const words = page.locator("*[data-e2e='word-card']");
 
     for (let i = 0; i < await words.count(); i++) {
-      const tagEls = words.nth(i).locator(".results__tags > a");
+      const tagEls = words.nth(i).locator("*[data-e2e='word-card-tag-link']");
       const resultTagNames = (await tagEls.allInnerTexts()).map((resultTagName) => resultTagName.trim());
 
       expect(resultTagNames).toContain(selectedTagName);
@@ -156,7 +156,7 @@ describe("The Genshin English Dictionary", () => {
     await page.goto(`http://${ ip }:${ port }/zh-CN/pearl-galley`);
 
     const chinese = await page.$("[data-e2e='zh-CN']");
-    expect(await chinese!.innerHTML()).toBe("珠<ruby>钿<rp>(</rp><rt class=\"results__pinyin\">diàn</rt><rp>)</rp></ruby><ruby>舫<rp>(</rp><rt class=\"results__pinyin\">fǎng</rt><rp>)</rp></ruby>");
+    expect(await chinese!.innerHTML()).toBe("珠<ruby>钿<rp>(</rp><rt class=\"font-light\">diàn</rt><rp>)</rp></ruby><ruby>舫<rp>(</rp><rt class=\"font-light\">fǎng</rt><rp>)</rp></ruby>");
 
     return;
   });
@@ -168,19 +168,19 @@ describe("The Genshin English Dictionary", () => {
       await page.goto(rootURL);
       await page.waitForTimeout(1400); // Wait for page initialization process
 
-      const searchBox = await page.$("input[name='searchbox']");
+      const searchBox = await page.$("*[data-e2e='search-text']");
       await searchBox!.fill("狂戦士の仮面");
 
       await page.waitForTimeout(1400); // Wait for the search results to be shown
 
-      const words = await page.$$(".results__word");
+      const words = await page.$$("*[data-e2e='word-card']");
       expect(words).toHaveLength(1);
 
       const word = words[0];
       const ja = await word.$("span[data-e2e='ja']");
       const en = await word.$("*[data-e2e='en']");
-      const pronunciationJa = await word.$(".results__pronunciation-ja");
-      const permalink = await word.$(".results__permalink > a");
+      const pronunciationJa = await word.$("*[data-e2e='translation-kana']");
+      const permalink = await word.$("*[data-e2e='word-card-permalink-icon-text']");
 
       expect(await ja!.innerText()).toBe("狂戦士の仮面");
       expect(await en!.innerText()).toBe("Berserker's Battle Mask");
@@ -192,11 +192,11 @@ describe("The Genshin English Dictionary", () => {
         expect(await notes!.innerText()).toBe("聖遺物セット「狂戦士」(Berserker) の1つ");
       }
 
-      const tags = await word.$$(".results__tags > a");
+      const tags = await word.$$("*[data-e2e='word-card-tag-link']");
       expect(tags).toHaveLength(1);
 
       const tag = tags[0];
-      const tagName = await tag.$(".tag > span");
+      const tagName = await tag.$("*[data-e2e='tag-name']");
 
       if (lang === "en") {
         expect(await tagName!.innerText()).toBe("A Piece of Artifacts");
@@ -219,7 +219,7 @@ describe("The Genshin English Dictionary", () => {
     test(`if note is shown by the specified language (${ lang })`, async ({ page }) => {
       await page.goto(`${ rootURL }/rosalyne-kruzchka-lohefalter`);
 
-      const words = await page.$$(".results__word");
+      const words = await page.$$("*[data-e2e='word-card']");
       const word = words[0];
 
       if (lang === "ja") {
@@ -253,16 +253,16 @@ describe("The Genshin English Dictionary", () => {
       await page.goto(rootURL);
       await page.waitForTimeout(1400); // Wait for page initialization process
 
-      const searchBox = await page.$("input[name='searchbox']");
+      const searchBox = await page.$("div[data-e2e='search-text']");
       await searchBox!.fill("存在しない語彙");
 
       await page.waitForTimeout(1400); // Wait for the search results to be shown
 
-      const words = await page.$$(".results__word");
+      const words = await page.$$("*[data-e2e='word-card']");
       expect(words).toHaveLength(0);
 
       // Check if searchbox is not disappeared
-      const searchBox2 = await page.$("input[name='searchbox']");
+      const searchBox2 = await page.$("div[data-e2e='search-text']");
       expect(searchBox2).not.toBeNull();
       // search text is not deleted
       expect(await searchBox2!.inputValue()).toBe("存在しない語彙");

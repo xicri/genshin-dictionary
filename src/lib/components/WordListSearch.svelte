@@ -249,6 +249,7 @@
         placeholder={m.enterSearchTerms()}
         onclick={(evt) => evt.stopPropagation()}
         contenteditable="plaintext-only"
+        data-e2e="search-text"
       ></div>
     </div>
 
