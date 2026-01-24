@@ -100,7 +100,7 @@
       </span>
 
       {#if kana}
-        <span class="results__pronunciation-ja">({ kana })</span>
+        <span class="results__pronunciation-ja" data-e2e="translation-kana">({ kana })</span>
       {/if}
     </div>
   </div>
