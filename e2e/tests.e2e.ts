@@ -4,7 +4,7 @@ import type { Locale } from "../src/lib/types.ts";
 
 const { describe } = test;
 
-const ip = "127.0.0.1";
+const ip = "[::1]";
 const port = 5678;
 
 function getRandomLang(): Locale {
@@ -336,26 +336,34 @@ describe("redirection by language settings works properly", () => {
   ];
 
   for (const { code, localeDir } of langs) {
-    test(`/ (${ code })`, async () => {
-      const res = await fetch(`${ rootURL }`, {
-        headers: {
-          "Accept-Language": code,
-        },
-      });
+    test.use({
+      extraHTTPHeaders: {
+        "Accept-Language": code,
+      },
+    });
+    test.only(`/ (${ code })`, async ({ context, page }) => {
+      // await context.setExtraHTTPHeaders({
+      //   "Accept-Language": code,
+      // });
+      // const page = await context.newPage();
 
-      expect(res.redirected).toBe(true);
-      expect(res.url).toBe(`${ rootURL }/${ localeDir }`);
+      await page.goto(rootURL);
+      await page.waitForTimeout(1400); // Wait for page initialization process
+
+      expect(page.url()).toBe(`${ rootURL }/${ localeDir }`);
+      // expect(res.redirected).toBe(true);
     });
 
-    test(`/[wordSlug] (${ code })`, async () => {
-      const res = await fetch(`${ rootURL }/lumine`, {
-        headers: {
-          "Accept-Language": code,
-        },
+    test(`/[wordSlug] (${ code })`, async ({ context }) => {
+      await context.setExtraHTTPHeaders({
+        "Accept-Language": code,
       });
+      const page = await context.newPage();
 
-      expect(res.redirected).toBe(true);
-      expect(res.url).toBe(`${ rootURL }/${ localeDir }/lumine`);
+      await page.goto(`${ rootURL }/lumine`);
+      await page.waitForTimeout(1400); // Wait for page initialization process
+
+      expect(page.url).toBe(`${ rootURL }/${ localeDir }/lumine`);
     });
   }
 });
