@@ -1,0 +1,58 @@
+h2 {
+  font-size: x-large;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: large;
+  font-weight: 600;
+
+  padding-bottom: 0.2em;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: vars.$color-light;
+}
+h4 {
+  font-size: medium;
+  font-weight: 600;
+
+  margin-bottom: 0.4em;
+}
+
+ul {
+  list-style-type: disc;
+  list-style-position: inside;
+
+  padding-inline-start: 2rem;
+}
+
+li {
+  display: list-item;
+}
+
+h2, h3, h4, h5, h6 {
+  margin-top: 1em;
+}
+p, ul {
+  margin-top: 0.75em;
+}
+code > pre {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+li > ul {
+  margin-top: 0;
+}
+
+code > pre, p code, li code {
+  background-color: rgb(175, 184, 193, 0.2);
+  font-family: "Consolas", "Monaco", "Ubuntu Mono", monospace;
+  padding: 0.2em 0.4em;
+  border-radius: 0.5em;
+}
+
+code > pre {
+  width: 100%;
+  overflow: auto;
+}

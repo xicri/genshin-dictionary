@@ -1,0 +1,20 @@
+{
+  "servers": {
+    "svelte": {
+      "command": "pnpm",
+      "args": [ "exec", "@sveltejs/mcp" ]
+    },
+    "playwright": {
+      "command": "pnpm",
+      "args": [ "exec", "@playwright/mcp" ]
+    },
+    "eslint": {
+      "command": "pnpm",
+      "args": [ "exec", "eslint", "--mcp" ]
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    }
+  }
+}
