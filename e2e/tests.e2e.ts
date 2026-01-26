@@ -155,8 +155,8 @@ describe("The Genshin English Dictionary", () => {
   test("pinyin is properly displayed on Chinese", async ({ page }) => {
     await page.goto(`http://${ ip }:${ port }/zh-CN/pearl-galley`);
 
-    const chinese = await page.$("[data-e2e='zh-CN']");
-    expect(await chinese!.innerHTML()).toBe("珠<ruby>钿<rp>(</rp><rt class=\"font-light\">diàn</rt><rp>)</rp></ruby><ruby>舫<rp>(</rp><rt class=\"font-light\">fǎng</rt><rp>)</rp></ruby>");
+    const zhCN = await page.$("[data-e2e='zh-CN']");
+    expect(await zhCN!.innerHTML()).toBe("珠<ruby>钿<rp>(</rp><rt class=\"font-light\">diàn</rt><rp>)</rp></ruby><ruby>舫<rp>(</rp><rt class=\"font-light\">fǎng</rt><rp>)</rp></ruby>");
 
     return;
   });
