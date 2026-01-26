@@ -336,34 +336,37 @@ describe("redirection by language settings works properly", () => {
   ];
 
   for (const { code, localeDir } of langs) {
-    test.use({
-      extraHTTPHeaders: {
-        "Accept-Language": code,
-      },
-    });
-    test.only(`/ (${ code })`, async ({ context, page }) => {
-      // await context.setExtraHTTPHeaders({
-      //   "Accept-Language": code,
-      // });
-      // const page = await context.newPage();
+    test(`/ (${ code })`, async ({ browser }) => {
+      const context = await browser.newContext({
+        extraHTTPHeaders: {
+          "Accept-Language": code,
+        },
+      });
+      const page = await context.newPage();
 
       await page.goto(rootURL);
       await page.waitForTimeout(1400); // Wait for page initialization process
 
       expect(page.url()).toBe(`${ rootURL }/${ localeDir }`);
       // expect(res.redirected).toBe(true);
+
+      await context.close();
     });
 
-    test(`/[wordSlug] (${ code })`, async ({ context }) => {
-      await context.setExtraHTTPHeaders({
-        "Accept-Language": code,
+    test(`/[wordSlug] (${ code })`, async ({ browser }) => {
+      const context = await browser.newContext({
+        extraHTTPHeaders: {
+          "Accept-Language": code,
+        },
       });
       const page = await context.newPage();
 
       await page.goto(`${ rootURL }/lumine`);
       await page.waitForTimeout(1400); // Wait for page initialization process
 
-      expect(page.url).toBe(`${ rootURL }/${ localeDir }/lumine`);
+      expect(page.url()).toBe(`${ rootURL }/${ localeDir }/lumine`);
+
+      await context.close();
     });
   }
 });
