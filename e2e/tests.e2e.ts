@@ -269,7 +269,7 @@ describe("The Genshin English Dictionary", () => {
       const searchBox2 = await page.$("div[data-e2e='search-text']");
       expect(searchBox2).not.toBeNull();
       // search text is not deleted
-      expect(await searchBox2!.inputValue()).toBe("存在しない語彙");
+      expect(await searchBox2!.innerHTML()).toBe("存在しない語彙");
 
       // error message is shown
       const notFoundMessage = (await page.textContent("p[data-e2e='empty']"))!.trim();
