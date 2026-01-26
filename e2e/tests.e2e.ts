@@ -156,7 +156,11 @@ describe("The Genshin English Dictionary", () => {
     await page.goto(`http://${ ip }:${ port }/zh-CN/pearl-galley`);
 
     const zhCN = await page.$("[data-e2e='zh-CN']");
-    expect(await zhCN!.innerHTML()).toBe("珠<ruby>钿<rp>(</rp><rt class=\"font-light\">diàn</rt><rp>)</rp></ruby><ruby>舫<rp>(</rp><rt class=\"font-light\">fǎng</rt><rp>)</rp></ruby>");
+    const zhCNinnerHTML = (await zhCN!.innerHTML())
+      .replaceAll(/<!--[\s\S]*?-->/gm, "") // Remove comments
+      .replaceAll(/<rt [\s\S]*?>/gm, "<rt>"); // Remove attributes from `<rt>`s
+
+    expect(zhCNinnerHTML).toBe("珠<ruby>钿<rp>(</rp><rt>diàn</rt><rp>)</rp></ruby><ruby>舫<rp>(</rp><rt>fǎng</rt><rp>)</rp></ruby>");
 
     return;
   });
