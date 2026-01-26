@@ -321,7 +321,7 @@ describe("The Genshin English Dictionary", () => {
   }
 });
 
-describe("redirection by language settings works properly", () => {
+describe.only("redirection by language settings works properly", () => {
   const rootURL = `http://${ ip }:${ port }`;
   const langs = [
     { code: "ja", localeDir: "ja" },
@@ -343,6 +343,11 @@ describe("redirection by language settings works properly", () => {
         },
       });
       const page = await context.newPage();
+
+      page.on("response", (response) => {
+        console.log(`Response status: ${ response.status() }, URL: ${ response.url() }, response object: ${ JSON.stringify(response.headers()) }`);
+      });
+      page.on("request", async (req) => console.log("allHeaders", await req.allHeaders()));
 
       await page.goto(rootURL);
       await page.waitForTimeout(1400); // Wait for page initialization process
