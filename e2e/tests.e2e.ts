@@ -257,7 +257,7 @@ describe("The Genshin English Dictionary", () => {
       await page.goto(rootURL);
       await page.waitForTimeout(1400); // Wait for page initialization process
 
-      const searchBox = await page.$("*[data-e2e='search-text']");
+      const searchBox = await page.$("div[data-e2e='search-text']");
       await searchBox!.fill("存在しない語彙");
 
       await page.waitForTimeout(1400); // Wait for the search results to be shown
@@ -266,7 +266,7 @@ describe("The Genshin English Dictionary", () => {
       expect(words).toHaveLength(0);
 
       // Check if searchbox is not disappeared
-      const searchBox2 = await page.$("*[data-e2e='search-text']");
+      const searchBox2 = await page.$("div[data-e2e='search-text']");
       expect(searchBox2).not.toBeNull();
       // search text is not deleted
       expect(await searchBox2!.inputValue()).toBe("存在しない語彙");
