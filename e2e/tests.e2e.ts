@@ -338,36 +338,33 @@ describe.only("redirection by language settings works properly", () => {
   for (const { code, localeDir } of langs) {
     test(`/ (${ code })`, async ({ browser }) => {
       const context = await browser.newContext({
-        extraHTTPHeaders: {
-          "Accept-Language": code,
-        },
+        locale: code,
       });
       const page = await context.newPage();
 
-      page.on("response", (response) => {
-        console.log(`Response status: ${ response.status() }, URL: ${ response.url() }, response object: ${ JSON.stringify(response.headers()) }`);
-      });
-      page.on("request", async (req) => console.log("allHeaders", await req.allHeaders()));
+      page.on("request", async (req) => req.url() === "/" ? console.log("allHeaders", await req.allHeaders()) : "");
 
-      await page.goto(rootURL);
-      await page.waitForTimeout(1400); // Wait for page initialization process
+      await page.goto(rootURL, { waitUntil: "load" });
 
       expect(page.url()).toBe(`${ rootURL }/${ localeDir }`);
-      // expect(res.redirected).toBe(true);
 
       await context.close();
     });
 
     test(`/[wordSlug] (${ code })`, async ({ browser }) => {
       const context = await browser.newContext({
-        extraHTTPHeaders: {
-          "Accept-Language": code,
-        },
+        locale: code,
       });
       const page = await context.newPage();
 
-      await page.goto(`${ rootURL }/lumine`);
-      await page.waitForTimeout(1400); // Wait for page initialization process
+      page.on("request", async (req) => {
+        if (req.url().endsWith("lumine")) console.log(req.url(), await req.allHeaders());
+      });
+      page.on("response", async (res) => {
+        if (res.url().endsWith("lumine")) console.log(res.url(), res.status(), await res.allHeaders());
+      });
+      await page.goto(`${ rootURL }/lumine`, { waitUntil: "load" });
+      // await page.waitForTimeout(1400); // Wait for page initialization process
 
       expect(page.url()).toBe(`${ rootURL }/${ localeDir }/lumine`);
 

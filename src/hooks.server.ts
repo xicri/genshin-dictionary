@@ -6,16 +6,24 @@ export const handle: Handle = ({ event, resolve }) => {
     "Cross-Origin-Resource-Policy": "same-origin",
     "Cross-Origin-Opener-Policy": "same-origin",
     "X-Content-Type-Options": "nosniff",
-
-    // max-age: 4 hours, s-maxage: 1 year
-    "Cache-Control": "max-age=14400, s-maxage=31536000, public",
   });
 
-  return paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
+  return paraglideMiddleware(event.request, async ({ request: localizedRequest, locale }) => {
     event.request = localizedRequest;
 
-    return resolve(event, {
+    console.log("りだいれくと", localizedRequest.redirect, "←", event.url.href);
+
+    const res = await resolve(event, {
       transformPageChunk: ({ html }) => html.replace("%lang%", locale),
     });
+
+    if (res.status === 200) {
+      event.setHeaders({
+        // max-age: 4 hours, s-maxage: 1 year
+        "Cache-Control": "max-age=14400, s-maxage=31536000, public", // TODO 307までキャッシュされてる
+      });
+    }
+
+    return res;
   });
 };
