@@ -42,7 +42,7 @@
     "@pinia/nuxt": "0.11.3",
     "@types/lodash-es": "^4.17.9",
     "@types/luxon": "^3.7.1",
-    "@types/node": "^24.3.1",
+    "@types/node": "^25.1.0",
     "dotenv": "^17.2.2",
     "jiti": "^2.5.1",
     "klona": "^2.0.4",
