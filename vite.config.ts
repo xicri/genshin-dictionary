@@ -3,7 +3,8 @@ import tailwindcss from "@tailwindcss/vite";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
 import devtoolsJson from "vite-plugin-devtools-json";
-import { locales } from "./project.inlang/settings.json";
+import { getRedirectedLocale } from "./src/lib/i18n.ts";
+import inlangSettings from "./project.inlang/settings.json" with { type: "json" };
 
 export default defineConfig({
   plugins: [
@@ -14,6 +15,7 @@ export default defineConfig({
       project: "./project.inlang",
       outdir: "./src/lib/paraglide",
       strategy: [
+        "custom-locale-alias",
         "url",
         "cookie",
         "preferredLanguage",
@@ -22,16 +24,16 @@ export default defineConfig({
       urlPatterns: [
         {
           pattern: "/",
-          localized: locales.map((locale) => ([
+          localized: inlangSettings.locales.map((locale) => ([
             locale,
-            `/${ locale }`,
+            `/${ getRedirectedLocale(locale) }`,
           ])),
         },
         {
           pattern: "/:path(.*)?",
-          localized: locales.map((locale) => ([
+          localized: inlangSettings.locales.map((locale) => ([
             locale,
-            `/${ locale }/:path(.*)?`,
+            `/${ getRedirectedLocale(locale) }/:path(.*)?`,
           ])),
         },
       ],

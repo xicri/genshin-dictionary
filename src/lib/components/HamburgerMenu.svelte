@@ -1,7 +1,8 @@
 <script lang="ts">
   import ClosingLayer from "$lib/components/ClosingLayer.svelte";
   import { m } from "$lib/paraglide/messages.js";
-  import { locales, localizeHref, setLocale } from "$lib/paraglide/runtime.js";
+  import { localizeHref, setLocale } from "$lib/paraglide/runtime.js";
+  import { supportedLocales } from "../../app.config.ts";
 
   const langNames = {
     en: "English",
@@ -137,7 +138,7 @@ a {
         Languages
       </h2>
       <div class="menu__languages-list">
-        {#each locales as locale, index (index) }
+        {#each supportedLocales as locale, index (index) }
           <button
             onclick={() => setLocale(locale)}
             class="menu__languages-item"
