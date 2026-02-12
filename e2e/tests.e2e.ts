@@ -1,5 +1,4 @@
 import { test, expect } from "@playwright/test";
-import { fetch } from "undici";
 import type { Locale } from "../src/lib/paraglide/runtime.js";
 
 const { describe } = test;
@@ -336,26 +335,28 @@ describe("redirection by language settings works properly", () => {
   ];
 
   for (const { code, localeDir } of langs) {
-    test(`/ (${ code })`, async () => {
-      const res = await fetch(`${ rootURL }`, {
-        headers: {
-          "Accept-Language": code,
-        },
+    test(`/ (${ code })`, async ({ browser }) => {
+      const context = await browser.newContext({
+        locale: code,
       });
+      const page = await context.newPage();
 
-      expect(res.redirected).toBe(true);
-      expect(res.url).toBe(`${ rootURL }/${ localeDir }`);
+      await page.goto(rootURL, { waitUntil: "load" });
+      expect(page.url()).toBe(`${ rootURL }/${ localeDir }`);
+
+      await context.close();
     });
 
-    test(`/[wordSlug] (${ code })`, async () => {
-      const res = await fetch(`${ rootURL }/lumine`, {
-        headers: {
-          "Accept-Language": code,
-        },
+    test(`/[wordSlug] (${ code })`, async ({ browser }) => {
+      const context = await browser.newContext({
+        locale: code,
       });
+      const page = await context.newPage();
 
-      expect(res.redirected).toBe(true);
-      expect(res.url).toBe(`${ rootURL }/${ localeDir }/lumine`);
+      await page.goto(`${ rootURL }/lumine`, { waitUntil: "load" });
+      expect(page.url()).toBe(`${ rootURL }/${ localeDir }/lumine`);
+
+      await context.close();
     });
   }
 });
