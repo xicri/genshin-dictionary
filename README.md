@@ -9,13 +9,13 @@ If you want to contribute this project by adding new words or fixing wrong trans
 
 ## Development
 
-Genshin Dictionary is a website based on Nuxt 3.
-You may need experience in (or need to learn) following technology stack to contribute this project:
+We use the following technology stack in this project:
 
-- JavaScript (ES2015+)
-- Nuxt 3
-- Vue 3 (Composition API)
-- Scss (Understanding for BEM is required)
+- TypeScript v5
+- Svelte v5
+- SvelteKit v2
+- Tailwind CSS
+  - with some legacy BEM-styled SCSS
 
 ### Requirements
 
