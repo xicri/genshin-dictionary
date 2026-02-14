@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { fetch } from "undici";
-import type { Locale } from "../src/lib/types.ts";
+import type { Locale } from "../src/lib/paraglide/runtime.js";
 
 const { describe } = test;
 

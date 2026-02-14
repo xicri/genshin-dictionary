@@ -1,7 +1,4 @@
-import type { locales } from "$lib/paraglide/runtime.js";
 import type allTags from "../../dataset/tags.json";
-
-export type Locale = typeof locales[number];
 
 export type TagID = keyof typeof allTags;
 
