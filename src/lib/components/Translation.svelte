@@ -1,7 +1,7 @@
 <script lang="ts">
   import { m } from "$lib/paraglide/messages.js";
   import { escapeHtmlString } from "$lib/utils.ts";
-  import type { Locale } from "$lib/types.ts";
+  import type { Locale } from "$lib/paraglide/runtime.js";
 
   type Props = {
     lang: Locale;
