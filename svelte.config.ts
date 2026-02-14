@@ -7,6 +7,9 @@ const config: Config = {
 
   kit: {
     adapter: adapter(),
+    paths: {
+      relative: false,
+    },
   },
 };
 
