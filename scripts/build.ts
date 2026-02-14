@@ -1,5 +1,6 @@
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import { headers } from "../config.ts";
 import tagRedirects from "../dataset/redirect/tags.json";
 import wordRedirects from "../dataset/redirect/words.json";
 
@@ -18,4 +19,15 @@ const buildRedirectConf = async () => {
   await writeFile(join(import.meta.dirname, "../_redirects"), cfPagesRedirectConf);
 };
 
-await buildRedirectConf();
+const buildHeaders = async () => {
+  const _headersText = "/*\n" + Object.entries(headers)
+    .map(([ header, val ]) => `  ${ header }: ${ val }`)
+    .join("\n");
+
+  await writeFile(join(import.meta.dirname, "../_headers"), _headersText);
+};
+
+await Promise.all([
+  buildRedirectConf(),
+  buildHeaders(),
+]);
