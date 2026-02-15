@@ -3,6 +3,10 @@
   "javascript.preferences.quoteStyle": "double",
   "typescript.preferences.preferTypeOnlyAutoImports": true,
 
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
   "eslint.useFlatConfig": true,
   "eslint.validate": [
     "javascript",
@@ -15,7 +19,7 @@
     "html",
     "json",
     "jsonc",
-    "json5",
+    "json5"
   ],
 
   "editor.formatOnSave": true,
@@ -32,7 +36,8 @@
     "@stylistic/semi",
     "@stylistic/space-before-blocks",
     "@stylistic/space-before-function-paren",
-    "@stylistic/space-in-parens"
+    "@stylistic/space-in-parens",
+    "svelte/indent"
   ],
 
   "prettier.enable": false

@@ -12,7 +12,7 @@ jobs:
   vrt:
     timeout-minutes: 15
     env:
-      SERVER_ENV: local
+      SERVER_ENV: development
       AWS_REGION: auto # Cloudflare R2's region should be `auto`.
       AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}

@@ -2,9 +2,20 @@
   "$schema": "node_modules/wrangler/config-schema.json",
 
   "name": "genshin-dictionary",
-  "compatibility_date": "2025-11-17",
-  "compatibility_flags": [ "nodejs_compat" ],
-  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-01-20",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "nodejs_als"
+  ],
+
+  "preview_urls": true,
+  "workers_dev": true,
+
+  "main": ".svelte-kit/cloudflare/_worker.js",
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".svelte-kit/cloudflare"
+  },
 
   // Smart Placement
   // https://developers.cloudflare.com/pages/functions/smart-placement/#smart-placement
@@ -16,15 +27,13 @@
     "production": {
       "vars": {
         "NODE_ENV": "production",
-        "SERVER_ENV": "production",
-        "NODE_VERSION": "24"
+        "SERVER_ENV": "production"
       }
     },
-    "preview": {
+    "staging": {
       "vars": {
         "NODE_ENV": "production", // To omit devDependencies
-        "SERVER_ENV": "preview",
-        "NODE_VERSION": "24"
+        "SERVER_ENV": "staging"
       }
     }
   },

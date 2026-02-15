@@ -15,7 +15,7 @@ jobs:
   test:
     timeout-minutes: 5
     env:
-      SERVER_ENV: local
+      SERVER_ENV: development
     runs-on: ubuntu-latest
 
     steps:
