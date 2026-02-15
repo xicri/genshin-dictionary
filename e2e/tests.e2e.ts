@@ -317,6 +317,31 @@ describe("The Genshin English Dictionary", () => {
 
       return;
     });
+
+    for (const path of [ "/", "/lumine" ]) {
+      test(`language switcher works on index page (${ lang }${ path })`, async ({ page }) => {
+        await page.goto(`http://${ ip }:${ port }/${ lang === "en" ? "zh-CN" : "en" }${ path }`);
+        await page.waitForLoadState("load");
+
+        const hamburgerMenu = page.getByTestId("hamburger");
+        await hamburgerMenu.waitFor();
+        await hamburgerMenu.click();
+
+        await page.waitForTimeout(1400);
+
+        const localeSwitchLink = page.getByTestId(`locale-switch-${ lang }`);
+        await localeSwitchLink.waitFor();
+        await localeSwitchLink.click();
+
+        // Wait for the switching to new locale
+        await page.waitForTimeout(1400);
+        await page.waitForLoadState("load");
+
+        expect(page.url()).toBe(`http://${ ip }:${ port }/${ lang }${ path }`);
+
+        return;
+      });
+    }
   }
 });
 
