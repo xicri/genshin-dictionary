@@ -4,7 +4,7 @@
   import Article from "$lib/components/Article.svelte";
   import tags from "$lib/dataset/tags.json";
   import "$lib/styles/articles.css";
-  import type { Locale } from "$lib/types.ts";
+  import type { SupportedLocale } from "$lib/i18n.ts";
 
   const locale = getLocale();
   const title = `${ m.opendataTitle() } | ${ m.siteTitle() }`;
@@ -127,7 +127,7 @@
         <ul>
           {#each Object.entries(tags) as [ tagID, tag ] (tagID)}
             <li>
-              <code>{ tagID }</code> ― { tag[locale as Locale] }
+              <code>{ tagID }</code> ― { tag[locale as SupportedLocale] }
             </li>
           {/each}
         </ul>
