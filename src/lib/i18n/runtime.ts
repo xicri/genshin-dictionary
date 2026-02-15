@@ -1,8 +1,16 @@
 // Don't use `$lib/` path here because this file is imported by vite.config.ts
 import { localeRedirections, supportedLocales } from "../../app.config.ts";
-import type { Locale } from "$lib/paraglide/runtime.js";
+import { getLocale, type Locale } from "$lib/paraglide/runtime.js";
 
 export type SupportedLocale = typeof supportedLocales[number];
+
+const isSupportedLocale = (maybeLocale: string): maybeLocale is SupportedLocale =>
+  (supportedLocales as string[]).includes(maybeLocale);
+
+export const getSupportedLocale = (): SupportedLocale => {
+  const locale = getLocale();
+  return isSupportedLocale(locale) ? locale : "en";
+};
 
 export type LocaleRedirection = {
   from: Locale;

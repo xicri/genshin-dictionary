@@ -1,12 +1,11 @@
 <script lang="ts">
   import { m } from "$lib/paraglide/messages";
-  import { getLocale } from "$lib/paraglide/runtime.js";
   import Article from "$lib/components/Article.svelte";
   import tags from "$lib/dataset/tags.json";
   import "$lib/styles/articles.css";
-  import type { Locale } from "$lib/types.ts";
+  import { getSupportedLocale } from "$lib/i18n/runtime.ts";
 
-  const locale = getLocale();
+  const locale = getSupportedLocale();
   const title = `${ m.opendataTitle() } | ${ m.siteTitle() }`;
 
   const jsonExample = JSON.stringify([
@@ -127,7 +126,7 @@
         <ul>
           {#each Object.entries(tags) as [ tagID, tag ] (tagID)}
             <li>
-              <code>{ tagID }</code> ― { tag[locale as Locale] }
+              <code>{ tagID }</code> ― { tag[locale] }
             </li>
           {/each}
         </ul>

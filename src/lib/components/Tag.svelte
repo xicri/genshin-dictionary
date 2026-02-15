@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getLocale } from "$lib/paraglide/runtime.js";
+  import { getSupportedLocale } from "$lib/i18n/runtime.ts";
   import allTags from "$lib/dataset/tags.json";
   import type { TagID } from "$lib/types";
 
@@ -8,7 +8,7 @@
   };
 
   const { tagid }: Props = $props();
-  const currentLocale = getLocale();
+  const currentLocale = getSupportedLocale();
 
   const tagName = allTags[tagid][currentLocale];
 </script>
