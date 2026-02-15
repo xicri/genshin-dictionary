@@ -2,7 +2,8 @@
   import Tag from "$lib/components/Tag.svelte";
   import Translation from "$lib/components/Translation.svelte";
   import { m } from "$lib/paraglide/messages.js";
-  import { getLocale, localizeHref } from "$lib/paraglide/runtime.js";
+  import { localizeHref } from "$lib/paraglide/runtime.js";
+  import { getSupportedLocale } from "$lib/i18n/runtime.ts";
   import { sleep } from "$lib/utils.ts";
   import type { Word } from "$lib/types.ts";
 
@@ -12,7 +13,7 @@
 
   const { word }: Props = $props();
 
-  const locale = getLocale();
+  const locale = getSupportedLocale();
   const wordInCurrentLocale = $derived(word[
     locale === "zh-CN" ? "zhCN"
       : locale === "zh-TW" ? "zhTW"

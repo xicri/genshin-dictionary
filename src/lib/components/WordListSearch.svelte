@@ -3,7 +3,7 @@
   import allTags from "$lib/dataset/tags.json";
   import ClosingLayer from "$lib/components/ClosingLayer.svelte";
   import { m } from "$lib/paraglide/messages.js";
-  import { getLocale } from "$lib/paraglide/runtime.js";
+  import { getSupportedLocale } from "$lib/i18n/runtime.ts";
   import type { TagID } from "$lib/types.ts";
 
   type Props = {
@@ -20,7 +20,7 @@
     class: twClass,
   }: Props = $props();
 
-  const locale = getLocale();
+  const locale = getSupportedLocale();
 
   let activeTagIDs: TagID[] = $state([]);
   let displayTagListOnMobile = $state(false);
