@@ -161,7 +161,7 @@ describe("The Genshin English Dictionary", () => {
     return;
   });
 
-  for (const lang of [ "en", "ja", "zh-CN", "zh-TW" ]) {
+  for (const lang of [ "en", "ja", "zh-CN", "zh-TW" ] as const) {
     const rootURL = `http://${ ip }:${ port }/${ lang }`;
 
     test(`search by Japanese (${ lang })`, async ({ page }) => {
