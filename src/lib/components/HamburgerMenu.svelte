@@ -103,7 +103,7 @@ a {
 
 <div>
   <input id="menu-switch" type="checkbox" checked={open} style="display: none;" onclick={toggleMenu} />
-  <label class="menu__icon" for="menu-switch">
+  <label class="menu__icon" for="menu-switch" data-testid="hamburger">
     <div class="menu__icon-line"></div>
     <div class="menu__icon-line"></div>
     <div class="menu__icon-line"></div>
@@ -130,6 +130,7 @@ a {
           <button
             onclick={() => setLocale(locale)}
             class="text-dark cursor-pointer text-left"
+            data-testid={`locale-switch-${ locale }`}
           >
             { langNames[locale] }
           </button>
