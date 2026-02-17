@@ -181,7 +181,7 @@ h5.linebreak {
     <div class="results__tags results__description-section">
       {#each word.tags || [] as tag (tag)}
         <a href={localizeHref(`/tags/${ tag }`)} data-e2e="word-card-tag-link">
-          <Tag tagid={tag} />
+          <Tag slug={tag} />
         </a>
       {/each}
     </div>

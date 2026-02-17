@@ -32,7 +32,7 @@ const buildHeaders = async () => {
 
 const buildSitemapXml = async () => {
   const sitemapDirPath = join(import.meta.dirname, "../static/sitemaps");
-  const tagIDs = Object.keys(tags);
+  const tagSlugs = Object.keys(tags);
 
   await rm(sitemapDirPath, {
     recursive: true,
@@ -51,7 +51,7 @@ const buildSitemapXml = async () => {
         url: `/${ locale }/${ wordId }`,
         lastmod,
       }))),
-      ...(tagIDs.map((tagID) => ({ url: `/${ locale }/tags/${ tagID }` }))),
+      ...(tagSlugs.map((tagSlug) => ({ url: `/${ locale }/tags/${ tagSlug }` }))),
     ]).flat(),
 
     // DEBUG: remove comment to generate sitemap with text (non-gziped XML) format

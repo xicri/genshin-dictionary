@@ -124,9 +124,9 @@
       <li>
         <code>tags</code> ― { m.propertyTags() }
         <ul>
-          {#each Object.entries(tags) as [ tagID, tag ] (tagID)}
+          {#each Object.entries(tags) as [ tagSlug, tag ] (tagSlug)}
             <li>
-              <code>{ tagID }</code> ― { tag[locale] }
+              <code>{ tagSlug }</code> ― { tag[locale] }
             </li>
           {/each}
         </ul>

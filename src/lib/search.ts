@@ -1,14 +1,14 @@
 import allWords from "$lib/dataset/words.json";
 import { candidate } from "$lib/utils.ts";
 import type { Locale } from "$lib/paraglide/runtime.js";
-import type { TagID, Word } from "$lib/types.ts";
+import type { TagSlug, Word } from "$lib/types.ts";
 
 export const getWordFromID = (wordID: string) =>
   allWords.find((word) => word.id === wordID);
 
 type SearchWordsOptions = {
   query?: string;
-  queryTagSlugs?: TagID[];
+  queryTagSlugs?: TagSlug[];
   maxWords?: number;
   locale: Locale;
 };
