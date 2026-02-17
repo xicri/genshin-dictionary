@@ -1,9 +1,6 @@
-import { rm, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { simpleSitemapAndIndex } from "sitemap";
-import { headers, supportedLocales } from "../src/app.config.ts";
-import words from "../src/lib/dataset/words.json" with { type: "json" };
-import tags from "../src/lib/dataset/tags.json" with { type: "json" };
+import { headers } from "../src/app.config.ts";
 import tagRedirects from "../src/lib/dataset/redirect/tags.json";
 import wordRedirects from "../src/lib/dataset/redirect/words.json";
 
@@ -30,37 +27,7 @@ const buildHeaders = async () => {
   await writeFile(join(import.meta.dirname, "../_headers"), _headersText);
 };
 
-const buildSitemapXml = async () => {
-  const sitemapDirPath = join(import.meta.dirname, "../static/sitemaps");
-  const tagSlugs = Object.keys(tags);
-
-  await rm(sitemapDirPath, {
-    recursive: true,
-    force: true,
-  });
-
-  await simpleSitemapAndIndex({
-    hostname: "https://genshin-dictionary.com",
-    destinationDir: sitemapDirPath,
-    sourceData: supportedLocales.map((locale) => [
-      { url: `/${ locale }` },
-      { url: `/${ locale }/history` },
-      { url: `/${ locale }/about` },
-      { url: `/${ locale }/opendata` },
-      ...(words.map(({ id: wordId, updatedAt: lastmod }) => ({
-        url: `/${ locale }/${ wordId }`,
-        lastmod,
-      }))),
-      ...(tagSlugs.map((tagSlug) => ({ url: `/${ locale }/tags/${ tagSlug }` }))),
-    ]).flat(),
-
-    // DEBUG: remove comment to generate sitemap with text (non-gziped XML) format
-    // gzip: false,
-  });
-};
-
 await Promise.all([
   buildRedirectConf(),
   buildHeaders(),
-  buildSitemapXml(),
 ]);
