@@ -1,16 +1,16 @@
 <script lang="ts">
   import { getSupportedLocale } from "$lib/i18n/runtime.ts";
   import allTags from "$lib/dataset/tags.json";
-  import type { TagID } from "$lib/types";
+  import type { TagSlug } from "$lib/types";
 
   type Props = {
-    tagid: TagID;
+    slug: TagSlug;
   };
 
-  const { tagid }: Props = $props();
+  const { slug }: Props = $props();
   const currentLocale = getSupportedLocale();
 
-  const tagName = allTags[tagid][currentLocale];
+  const tagName = allTags[slug][currentLocale];
 </script>
 
 <style lang="scss">

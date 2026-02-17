@@ -7,16 +7,16 @@
   import { searchWords } from "$lib/search.ts";
   import { m } from "$lib/paraglide/messages.js";
   import { getLocale } from "$lib/paraglide/runtime.js";
-  import type { TagID } from "$lib/types.ts";
+  import type { TagSlug } from "$lib/types.ts";
 
   type Props = {
-    tagSlug?: TagID;
+    tagSlug?: TagSlug;
   };
 
   const { tagSlug }: Props = $props();
 
   let query: string = $state("");
-  let queryTagSlugs: TagID[] = $state(tagSlug ? [ tagSlug ] : []);
+  let queryTagSlugs: TagSlug[] = $state(tagSlug ? [ tagSlug ] : []);
   let maxWords: number = $state(100);
 
   const locale = getLocale();

@@ -4,11 +4,11 @@
   import ClosingLayer from "$lib/components/ClosingLayer.svelte";
   import { m } from "$lib/paraglide/messages.js";
   import { getSupportedLocale } from "$lib/i18n/runtime.ts";
-  import type { TagID } from "$lib/types.ts";
+  import type { TagSlug } from "$lib/types.ts";
 
   type Props = {
     query: string;
-    queryTagSlugs: TagID[];
+    queryTagSlugs: TagSlug[];
     maxWords: number;
     class: string;
   };
@@ -22,14 +22,14 @@
 
   const locale = getSupportedLocale();
 
-  let activeTagIDs: TagID[] = $state([]);
+  let activeTagSlugs: TagSlug[] = $state([]);
   let displayTagListOnMobile = $state(false);
 
   const inactiveTags = $derived.by(() => {
     const _inactiveTags = structuredClone(allTags);
 
-    for (const activeTagID of activeTagIDs) {
-      delete _inactiveTags[activeTagID];
+    for (const activeTagSlug of activeTagSlugs) {
+      delete _inactiveTags[activeTagSlug];
     }
 
     return _inactiveTags;
@@ -44,8 +44,8 @@
   const toggleTagList = (): void => {
     displayTagListOnMobile = !displayTagListOnMobile;
   };
-  const addTag = (tagID: TagID): void => {
-    queryTagSlugs.push(tagID);
+  const addTag = (slug: TagSlug): void => {
+    queryTagSlugs.push(slug);
     maxWords = 100;
 
     closeTagList();

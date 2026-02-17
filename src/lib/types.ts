@@ -1,6 +1,6 @@
 import type allTags from "$lib/dataset/tags.json";
 
-export type TagID = keyof typeof allTags;
+export type TagSlug = keyof typeof allTags;
 
 export type Word = {
   id: string;
@@ -17,7 +17,7 @@ export type Word = {
   notesEn?: string;
   notesZh?: string;
   notesZhTW?: string;
-  tags?: TagID[];
+  tags?: TagSlug[];
   examples?: {
     en: string;
     ja: string;
