@@ -1,4 +1,4 @@
-import type allTags from "$lib/dataset/tags.json";
+import allTags from "$lib/dataset/tags.json";
 
 export type TagSlug = keyof typeof allTags;
 
@@ -41,3 +41,6 @@ export type Word = {
     };
   };
 };
+
+export const isTagSlug = (maybeTagSlug: string): maybeTagSlug is TagSlug =>
+  Object.keys(allTags).includes(maybeTagSlug);
