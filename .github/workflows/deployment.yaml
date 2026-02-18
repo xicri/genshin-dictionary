@@ -41,3 +41,4 @@ jobs:
         run: "gh pr comment ${{ github.event.number }} --edit-last --create-if-none --body 'Deployed to staging:\n${{ steps.deployment.outputs.pages-deployment-alias-url && steps.deployment.outputs.pages-deployment-alias-url || steps.deployment.outputs.deployment-url }}'"
         env:
           GH_TOKEN: ${{ github.token }}
+        if: github.event_name != 'release'
