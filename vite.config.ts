@@ -3,7 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
 import devtoolsJson from "vite-plugin-devtools-json";
-import { getRedirectedLocale } from "./src/lib/i18n.ts";
+import { getRedirectedLocale } from "./src/lib/i18n/setup.ts";
 import inlangSettings from "./project.inlang/settings.json" with { type: "json" };
 
 export default defineConfig({
