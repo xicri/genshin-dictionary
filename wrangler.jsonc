@@ -23,6 +23,10 @@
     "mode": "smart"
   },
 
+  "vars": {
+    "NODE_VERSION": 24
+  },
+
   "env": {
     "production": {
       "routes": [
