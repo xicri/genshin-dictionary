@@ -26,14 +26,14 @@ export default defineConfig({
           pattern: "/",
           localized: inlangSettings.locales.map((locale) => ([
             locale,
-            `/${ getRedirectedLocale(locale) }`,
+            `/${ getRedirectedLocale(locale, { fallback: false }) }`,
           ])),
         },
         {
           pattern: "/:path(.*)?",
           localized: inlangSettings.locales.map((locale) => ([
             locale,
-            `/${ getRedirectedLocale(locale) }/:path(.*)?`,
+            `/${ getRedirectedLocale(locale, { fallback: false }) }/:path(.*)?`,
           ])),
         },
       ],
