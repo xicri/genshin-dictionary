@@ -318,8 +318,8 @@ describe("The Genshin English Dictionary", () => {
       return;
     });
 
-    for (const path of [ "/", "/lumine" ]) {
-      test(`language switcher works on index page (${ lang }${ path })`, async ({ page }) => {
+    for (const path of [ "", "/lumine" ]) {
+      test(`language switcher works on index page (/${ lang }${ path })`, async ({ page }) => {
         await page.goto(`http://${ ip }:${ port }/${ lang === "en" ? "zh-CN" : "en" }${ path }`);
         await page.waitForLoadState("load");
 
