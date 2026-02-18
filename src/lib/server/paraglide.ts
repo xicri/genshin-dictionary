@@ -1,4 +1,4 @@
-import { getRedirectedLocale } from "$lib/i18n.ts";
+import { getRedirectedLocale } from "$lib/i18n/setup.ts";
 import {
   defineCustomServerStrategy,
   extractLocaleFromRequest,
