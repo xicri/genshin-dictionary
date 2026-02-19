@@ -25,6 +25,9 @@
 
   "env": {
     "production": {
+      "routes": [
+        "genshin-dictionary.com/*"
+      ],
       "vars": {
         "NODE_ENV": "production",
         "SERVER_ENV": "production"
