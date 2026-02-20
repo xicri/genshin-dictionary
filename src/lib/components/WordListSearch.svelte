@@ -244,7 +244,7 @@
       </div>
 
       <div
-        bind:innerText={query}
+        bind:textContent={query}
         class="min-w-fit w-full text-nowrap p-1 border-none text-base bg-transparent focus-visible:outline-none focus-visible:outline-0"
         placeholder={m.enterSearchTerms()}
         onclick={(evt) => evt.stopPropagation()}
