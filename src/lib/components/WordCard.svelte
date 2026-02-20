@@ -44,10 +44,6 @@
 <style lang="scss">
 @use "$lib/styles/variables.scss" as vars;
 
-a {
-  text-decoration: none;
-}
-
 h5 {
   font-size: 12px;
 }
@@ -180,7 +176,11 @@ h5.linebreak {
   <div class="results__description">
     <div class="results__tags results__description-section">
       {#each word.tags || [] as tag (tag)}
-        <a href={localizeHref(`/tags/${ tag }`)} data-e2e="word-card-tag-link">
+        <a
+          href={localizeHref(`/tags/${ tag }`)}
+          class="no-underline"
+          data-e2e="word-card-tag-link"
+        >
           <Tag slug={tag} />
         </a>
       {/each}
@@ -239,7 +239,11 @@ h5.linebreak {
       </div>
     {/if}
     <div class="results__permalink">
-      <a href={localizeHref(`/${ word.id }`)} data-e2e="word-card-permalink-icon-text">
+      <a
+        href={localizeHref(`/${ word.id }`)}
+        class="no-underline"
+        data-e2e="word-card-permalink-icon-text"
+      >
         <!--
           Approximate values of width & height are specified in HTML to mitigate Comulative Layout Shift,
           but actual values are specified in SCSS.
@@ -252,7 +256,7 @@ h5.linebreak {
           decoding="async"
           class="results__permalink--icon inline -translate-y-0.5"
         />
-        <span class="results__permalink--text">{m.permalink()}</span>
+        <span class="results__permalink--text underline">{m.permalink()}</span>
       </a>
       &nbsp;&nbsp;
       <img

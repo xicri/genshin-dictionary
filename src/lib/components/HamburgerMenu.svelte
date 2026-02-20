@@ -34,10 +34,6 @@ li {
   list-style: none;
 }
 
-a {
-  text-decoration: none;
-}
-
 .menu {
   &__icon {
     display: block;
@@ -112,13 +108,13 @@ a {
     <div class="menu__nav-padding">
       <ul class="menu__items">
         <li class="menu__item">
-          <a href={localizeHref("/about")}>{ m.about() }</a>
+          <a href={localizeHref("/about")} class="no-underline hover:underline">{ m.about() }</a>
         </li>
         <li class="menu__item">
-          <a href={localizeHref("/opendata")}>{ m.opendata() }</a>
+          <a href={localizeHref("/opendata")} class="no-underline hover:underline">{ m.opendata() }</a>
         </li>
         <li class="menu__item">
-          <a href={localizeHref("/history")}>{ m.history() }</a>
+          <a href={localizeHref("/history")} class="no-underline hover:underline">{ m.history() }</a>
         </li>
       </ul>
 
