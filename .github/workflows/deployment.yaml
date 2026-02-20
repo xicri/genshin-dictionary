@@ -13,11 +13,12 @@ permissions:
   pull-requests: write
 
 jobs:
-  deploy:
+  preview:
+    if: github.event_name != 'release'
     timeout-minutes: 5
     runs-on: ubuntu-latest
     env:
-      SERVER_ENV: ${{ github.event_name == 'release' && 'production' || 'staging'  }}
+      SERVER_ENV: staging
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
@@ -29,16 +30,39 @@ jobs:
       - run: pnpm install --frozen-lockfile
       # `pnpm build` is not required because it runs on `prepare` process
 
-      - name: deploy Cloudflare Worker
-        id: deployment
+      - name: "[preview] deploy Cloudflare Worker"
+        id: preview
         uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3.14.1
         with:
-          environment: ${{ github.event_name == 'release' && 'production' || 'staging'  }}
+          command: versions upload --message "Branch - ${{ github.ref_name }}"
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-      - name: Add comment for deployment URL
-        run: "gh pr comment ${{ github.event.number }} --edit-last --create-if-none --body 'Deployed to staging:\n${{ steps.deployment.outputs.pages-deployment-alias-url && steps.deployment.outputs.pages-deployment-alias-url || steps.deployment.outputs.deployment-url }}'"
+      - name: "[preview] Add comment for deployment URL"
+        run: "gh pr comment ${{ github.event.number }} --edit-last --create-if-none --body 'Deployed to preview:\n${{ steps.preview.outputs.pages-deployment-alias-url && steps.preview.outputs.pages-deployment-alias-url || steps.preview.outputs.deployment-url }}'"
         env:
           GH_TOKEN: ${{ github.token }}
-        if: github.event_name != 'release'
+
+  production:
+    if: github.event_name == 'release'
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+      SERVER_ENV: production
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      # `pnpm build` is not required because it runs on `prepare` process
+
+      - name: "[production] deploy Cloudflare Worker"
+        uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3.14.1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
