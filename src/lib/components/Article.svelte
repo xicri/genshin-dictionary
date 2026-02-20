@@ -8,7 +8,7 @@
   const { children }: Props = $props();
 </script>
 
-<div class="flex justify-center pl-6 pr-6">
+<div class="flex justify-center pl-3 pr-3">
   <div class="max-w-3xl w-full">
     {@render children()}
   </div>
