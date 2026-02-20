@@ -77,3 +77,12 @@ test("search order", () => {
 
   expect(partialMatchIndex).toBeLessThan(partialMatchNotesIndex);
 });
+
+test("show all words if search query is empty", () => {
+  const words = searchWords({
+    query: "",
+    locale: "ja",
+  });
+
+  expect(words.length).toBe(100);
+});
