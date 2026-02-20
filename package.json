@@ -59,7 +59,7 @@
     "eslint": "^9.39.2",
     "eslint-plugin-jsonc": "^2.21.0",
     "eslint-plugin-svelte": "^3.13.1",
-    "globals": "^16.5.0",
+    "globals": "^17.3.0",
     "playwright": "^1.58.1",
     "reg-notify-github-plugin": "^0.14.5",
     "reg-publish-s3-plugin": "^0.14.4",
