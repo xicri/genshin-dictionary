@@ -24,12 +24,16 @@
     @apply hidden;
   }
 
+  * {
+    @apply text-dark;
+  }
+
   a {
     @apply underline;
   }
 
   h2, h3 {
-    @apply text-dark mb-2
+    @apply mb-2;
   }
 }
 
