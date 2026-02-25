@@ -46,7 +46,7 @@
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.980.0",
     "@eslint/compat": "^2.0.1",
-    "@eslint/js": "^9.39.2",
+    "@eslint/js": "^9.39.3",
     "@inlang/paraglide-js": "^2.8.0",
     "@playwright/test": "^1.58.1",
     "@stylistic/eslint-plugin": "^5.7.0",
