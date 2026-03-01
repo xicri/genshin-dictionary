@@ -51,10 +51,6 @@
   const downloadLink = m.jsonUrlText({
     url: "<a href=\"https://dataset.genshin-dictionary.com/words.json\" target=\"_blank\" rel=\"noopener\">https://dataset.genshin-dictionary.com/words.json</a>",
   });
-
-  const contactText = m.contactText({
-    blueskyLink: "<a href=\"https://bsky.app/profile/xicri.genshin-dictionary.com\" target=\"_blank\" rel=\"noopener\">Bluesky</a>",
-  });
 </script>
 
 <svelte:head>
@@ -152,8 +148,5 @@
       </li>
       <li>{ m.usageNotesDisclaimer() }</li>
     </ul>
-    <p>
-      {@html contactText}
-    </p>
   </main>
 </Article>

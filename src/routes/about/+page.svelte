@@ -43,11 +43,6 @@
     </p>
     <ul>
       <li>
-        <a href="https://bsky.app/profile/xicri.genshin-dictionary.com" target="_blank" rel="noopener">
-          Bluesky
-        </a> ({m.contactBlueskyChatAvailable()})
-      </li>
-      <li>
         <a href="https://github.com/xicri/genshin-dictionary/issues" target="_blank" rel="noopener">
           GitHub Issues
         </a> ({m.contactGHIssuesFor()})

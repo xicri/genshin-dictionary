@@ -135,8 +135,6 @@ li {
 
       <div class="menu__bottomline mb-2.5">
         <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://bsky.app/profile/xicri.genshin-dictionary.com" target="_blank" rel="noopener">Bluesky</a>
-        <a href="https://focalorus.io/@xicri" target="_blank" rel="noopener">Misskey</a>
       </div>
 
       <p class="text-xs">

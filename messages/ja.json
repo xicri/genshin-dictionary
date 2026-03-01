@@ -27,7 +27,6 @@
   "precautions2": "このサイトは一プレイヤーが運営しているファンサイトであり、開発元である HoYoverse (Cognosphere 社) 及び miHoYo 社とは関係ありません。",
   "contact": "お問い合わせ",
   "contactInstruction": "以下のいずれかの方法にて、運営者シクリ (Xicri) にお問い合わせ下さい。お問い合わせの際は、できるだけ日本語又は英語でお願いします。",
-  "contactBlueskyChatAvailable": "チャットメッセージ可",
   "contactGHIssuesFor": "技術者向け: バグ報告用",
   "contactGHDiscussionsFor": "技術者向け: その他のお問い合わせ用",
   "creditsTitle": "クレジット",
@@ -83,7 +82,6 @@
   "usageNotesRevocationLaws": "本データを掲載・再配布することで、日本法又はあなたの居住国の法令に違反する場合",
   "usageNotesRevocationRequest": "当サイトの運営者が本データの再配布停止を求めた場合",
   "usageNotesDisclaimer": "本データの利用・加工・掲載・再配布に伴い、あなたや第三者に何らかの損害が生じた場合、当サイトの運営者及び本データへの開発貢献者は一切の責任を負いません。",
-  "contactText": "ご不明点があれば、{blueskyLink} にてお問い合わせ下さい。(フォロー外から DM をお送り頂くことも可能です。)",
 
   "about": "このサイトについて",
   "opendata": "オープンデータ・API",

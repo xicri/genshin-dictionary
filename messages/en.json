@@ -27,7 +27,6 @@
   "precautions2": "This website is fanmade and not affiliated or endorsed by miHoYo and HoYoverse (Cognosphere).",
   "contact": "Contact",
   "contactInstruction": "Contact me with one of the following methods. The site owner Xicri will reply to your inquiry. English or Japanese are preferrable for the contact messages.",
-  "contactBlueskyChatAvailable": "Chat messages available",
   "contactGHIssuesFor": "For software engineers: bug reportings",
   "contactGHDiscussionsFor": "For software engineers: other contacts",
   "creditsTitle": "Credits",
@@ -83,7 +82,6 @@
   "usageNotesRevocationLaws": "you violate Japanese law or the law of the country you live.",
   "usageNotesRevocationRequest": "the owner of this website request to stop redistribution.",
   "usageNotesDisclaimer": "The owner of this website and the contributors of The Data assumes no responsibility for any damages while you use, modify, publish, or redistribute The Data.",
-  "contactText": "If you have any questions, contact via {blueskyLink}. (You don't have to follow me to send me the DMs.)",
 
   "about": "About",
   "opendata": "Opendata / API",

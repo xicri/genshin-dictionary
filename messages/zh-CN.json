@@ -25,7 +25,6 @@
   "precautionsTitle": "使用注意事项及免责声明",
   "precautions1": "由于本站收录的是《原神》中的专有词汇，因此大多数单词并非直译。",
   "precautions2": "本站是一个由《原神》玩家制作并运营的网站，与开发商上海米哈游网络科技股份有限公司及 Cognosphere Pte., Ltd. (HoYoverse) 无关。",
-  "contactBlueskyChatAvailable": "可发送私信",
   "creditsTitle": "致谢",
   "logoTypeGothic": "Logo Type Gothic 字体",
 
@@ -73,7 +72,6 @@
   "usageNotesRevocationLaws": "您违反了日本法律或您所在国家/地区的法律。",
   "usageNotesRevocationRequest": "本站运营者要求您停止再分发数据。",
   "usageNotesDisclaimer": "本站运营者及数据贡献者对您在使用、修改、发布或再分发数据过程中造成的任何损失概不负责。",
-  "contactText": "如有任何问题，请通过 {blueskyLink} 联系运营者。（无需关注即可发送私信）",
 
   "about": "关于",
   "opendata": "开放数据与 API (β)",
