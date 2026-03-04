@@ -35,7 +35,7 @@
   "dependencies": {
     "@types/luxon": "^3.7.1",
     "dotenv": "^17.2.2",
-    "es-toolkit": "^1.44.0",
+    "es-toolkit": "^1.45.1",
     "jiti": "^2.5.1",
     "luxon": "^3.7.2",
     "sass": "^1.97.3",
@@ -44,10 +44,10 @@
     "undici": "^7.20.0"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.998.0",
+    "@aws-sdk/client-s3": "^3.1001.0",
     "@eslint/compat": "^2.0.1",
     "@eslint/js": "^9.39.3",
-    "@inlang/paraglide-js": "^2.8.0",
+    "@inlang/paraglide-js": "^2.13.1",
     "@playwright/test": "^1.58.1",
     "@stylistic/eslint-plugin": "^5.7.0",
     "@sveltejs/adapter-cloudflare": "^7.2.4",
@@ -59,13 +59,13 @@
     "eslint": "^10.0.2",
     "eslint-plugin-jsonc": "^3.1.1",
     "eslint-plugin-svelte": "^3.13.1",
-    "globals": "^17.3.0",
+    "globals": "^17.4.0",
     "playwright": "^1.58.1",
     "reg-notify-github-plugin": "^0.14.5",
     "reg-publish-s3-plugin": "^0.14.4",
     "reg-simple-keygen-plugin": "^0.14.2",
     "reg-suit": "^0.14.5",
-    "svelte": "^5.53.5",
+    "svelte": "^5.53.7",
     "svelte-check": "^4.4.3",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3",
@@ -73,7 +73,7 @@
     "vite": "^7.2.6",
     "vite-plugin-devtools-json": "^1.0.0",
     "vitest": "^4.0.18",
-    "wrangler": "^4.68.1",
+    "wrangler": "^4.70.0",
     "xml2js": "^0.6.2"
   },
   "engines": {
