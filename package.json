@@ -41,7 +41,7 @@
     "sass": "^1.98.0",
     "super-sitemap": "^1.0.7",
     "tailwind-merge": "^3.4.0",
-    "undici": "^7.24.2"
+    "undici": "^7.24.3"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1009.0",
