@@ -44,7 +44,7 @@
     "undici": "^7.24.4"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.1009.0",
+    "@aws-sdk/client-s3": "^3.1011.0",
     "@eslint/compat": "^2.0.3",
     "@eslint/js": "^9.39.3",
     "@inlang/paraglide-js": "^2.15.0",
@@ -65,15 +65,15 @@
     "reg-publish-s3-plugin": "^0.14.4",
     "reg-simple-keygen-plugin": "^0.14.2",
     "reg-suit": "^0.14.5",
-    "svelte": "^5.53.12",
+    "svelte": "^5.54.0",
     "svelte-check": "^4.4.5",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.0",
+    "typescript-eslint": "^8.57.1",
     "vite": "^7.2.6",
     "vite-plugin-devtools-json": "^1.0.0",
     "vitest": "^4.1.0",
-    "wrangler": "^4.73.0",
+    "wrangler": "^4.75.0",
     "xml2js": "^0.6.2"
   },
   "engines": {
