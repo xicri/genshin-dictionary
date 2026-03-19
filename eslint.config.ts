@@ -107,6 +107,9 @@ export default defineConfig(
     },
 
     rules: {
+      // This rule does not work with `$bindable()`
+      "no-useless-assignment": "off",
+
       "svelte/indent": [ "error", {
         indent: 2,
         switchCase: 1,
