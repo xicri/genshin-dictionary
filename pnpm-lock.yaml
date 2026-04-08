@@ -33,8 +33,8 @@ importers:
         specifier: ^3.4.0
         version: 3.5.0
       undici:
-        specifier: ^7.24.7
-        version: 7.24.7
+        specifier: ^8.0.2
+        version: 8.0.2
     devDependencies:
       '@aws-sdk/client-s3':
         specifier: ^3.1021.0
@@ -3456,9 +3456,9 @@ packages:
     resolution: {integrity: sha512-BM/JzwwaRXxrLdElV2Uo6cTLEjhSb3WXboncJamZ15NgUURmvlXvxa6xkwIOILIjPNo9i8ku136ZvWV0Uly8+w==}
     engines: {node: '>=20.18.1'}
 
-  undici@7.24.7:
-    resolution: {integrity: sha512-H/nlJ/h0ggGC+uRL3ovD+G0i4bqhvsDOpbDv7At5eFLlj2b41L8QliGbnl2H7SnDiYhENphh1tQFJZf+MyfLsQ==}
-    engines: {node: '>=20.18.1'}
+  undici@8.0.2:
+    resolution: {integrity: sha512-B9MeU5wuFhkFAuNeA19K2GDFcQXZxq33fL0nRy2Aq30wdufZbyyvxW3/ChaeipXVfy/wUweZyzovQGk39+9k2w==}
+    engines: {node: '>=22.19.0'}
 
   unenv@2.0.0-rc.24:
     resolution: {integrity: sha512-i7qRCmY42zmCwnYlh9H2SvLEypEFGye5iRmEMKjcGi7zk9UquigRjFtTLz0TYqr0ZGLZhaMHl/foy1bZR+Cwlw==}
@@ -7437,7 +7437,7 @@ snapshots:
 
   undici@7.24.4: {}
 
-  undici@7.24.7: {}
+  undici@8.0.2: {}
 
   unenv@2.0.0-rc.24:
     dependencies:
