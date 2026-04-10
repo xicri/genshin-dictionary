@@ -51,7 +51,7 @@
     "@playwright/test": "^1.59.0",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@sveltejs/adapter-cloudflare": "^7.2.4",
-    "@sveltejs/kit": "^2.55.0",
+    "@sveltejs/kit": "^2.57.1",
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "@tailwindcss/vite": "^4.2.1",
     "@types/node": "^24.12.0",
