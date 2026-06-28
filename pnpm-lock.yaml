@@ -27,8 +27,8 @@ importers:
         specifier: ^1.99.0
         version: 1.101.0
       super-sitemap:
-        specifier: ^1.0.12
-        version: 1.0.12(svelte@5.56.3(@typescript-eslint/types@8.61.1))
+        specifier: ^2.0.0
+        version: 2.0.4
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.6.0
@@ -3026,10 +3026,8 @@ packages:
   strnum@2.4.1:
     resolution: {integrity: sha512-M9eUSMT2dCB2cTNPG7UYj6KuK7RJR2SN2+yCV/fTW3xzTCS6EaGZ5pSMgDIjB7r8zSfTGk+dvvn9rTjpVS9Mwg==}
 
-  super-sitemap@1.0.12:
-    resolution: {integrity: sha512-C3gfAS1RZxL5bbZGtgnIOitMhfqAt8RmhW8AWTia6c8n9RW3Zx7f/SxVeFWZD0I1nUAx2pkxuWazVtev0Nmb5w==}
-    peerDependencies:
-      svelte: '>=4.0.0 <6.0.0'
+  super-sitemap@2.0.4:
+    resolution: {integrity: sha512-GVoa8ZcORd4jjDWl9Tz3MRMXYBnM4q5jX9vaK9LAoWrdXLWjYLB3e5innjul1RS/Ih5+x5vBpIf8bCyoW20yJQ==}
 
   supports-color@10.2.2:
     resolution: {integrity: sha512-SS+jx45GF1QjgEXQx4NJZV9ImqmO2NPz5FNsIHrsDjh2YsHnawpan7SNQ1o8NuhrbHZy9AZhIoCUiCeaW/C80g==}
@@ -6459,9 +6457,7 @@ snapshots:
     dependencies:
       anynum: 1.0.1
 
-  super-sitemap@1.0.12(svelte@5.56.3(@typescript-eslint/types@8.61.1)):
-    dependencies:
-      svelte: 5.56.3(@typescript-eslint/types@8.61.1)
+  super-sitemap@2.0.4: {}
 
   supports-color@10.2.2: {}
 
