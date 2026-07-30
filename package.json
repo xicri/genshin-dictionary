@@ -30,7 +30,7 @@
     "clean": "git clean -dX --exclude=\"!.env\" --force",
     "refresh": "pnpm clean && rm --force ./pnpm-lock.yaml && corepack up && pnpm install",
     "sync": "wrangler types && svelte-kit sync",
-    "prepare": "svelte-kit sync && jiti ./scripts/prepare.ts && pnpm build"
+    "prepare": "wrangler telemetry disable; svelte-kit sync && jiti ./scripts/prepare.ts && pnpm build"
   },
   "dependencies": {
     "@types/luxon": "^3.7.4",
