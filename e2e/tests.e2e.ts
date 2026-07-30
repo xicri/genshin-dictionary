@@ -3,7 +3,7 @@ import type { Locale } from "../src/lib/paraglide/runtime.js";
 
 const { describe } = test;
 
-const ip = "127.0.0.1";
+const ip = "localhost";
 const port = 5678;
 
 function getRandomLang(): Locale {
