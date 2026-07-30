@@ -3,7 +3,8 @@ import type { Locale } from "../src/lib/paraglide/runtime.js";
 
 const { describe } = test;
 
-const endpoint = "http://localhost:5678";
+const ip = "localhost";
+const port = 5678;
 
 function getRandomLang(): Locale {
   const random = Math.floor(Math.random() * 4);
@@ -21,7 +22,7 @@ function getRandomLang(): Locale {
 
 describe("The Genshin English Dictionary", () => {
   const lang = getRandomLang();
-  const rootURL = `${ endpoint }/${ lang }`;
+  const rootURL = `http://${ ip }:${ port }/${ lang }`;
 
   console.log(`Testing in ${ lang } locale.`);
 
@@ -151,7 +152,7 @@ describe("The Genshin English Dictionary", () => {
   });
 
   test("pinyin is properly displayed on Chinese", async ({ page }) => {
-    await page.goto(`${ endpoint }/zh-CN/pearl-galley`);
+    await page.goto(`http://${ ip }:${ port }/zh-CN/pearl-galley`);
 
     const zhCN = await page.$("[data-e2e='zh-CN']");
     const zhCNinnerHTML = (await zhCN!.innerHTML())
@@ -164,7 +165,7 @@ describe("The Genshin English Dictionary", () => {
   });
 
   for (const lang of [ "en", "ja", "zh-CN", "zh-TW" ] as const) {
-    const rootURL = `${ endpoint }/${ lang }`;
+    const rootURL = `http://${ ip }:${ port }/${ lang }`;
 
     test(`search by Japanese (${ lang })`, async ({ page }) => {
       await page.goto(rootURL);
@@ -319,7 +320,7 @@ describe("The Genshin English Dictionary", () => {
 
     for (const path of [ "", "/lumine" ]) {
       test(`language switcher works on index page (/${ lang }${ path })`, async ({ page }) => {
-        await page.goto(`${ endpoint }/${ lang === "en" ? "zh-CN" : "en" }${ path }`);
+        await page.goto(`http://${ ip }:${ port }/${ lang === "en" ? "zh-CN" : "en" }${ path }`);
         await page.waitForLoadState("load");
 
         const hamburgerMenu = page.getByTestId("hamburger");
@@ -336,7 +337,7 @@ describe("The Genshin English Dictionary", () => {
         await page.waitForTimeout(1400);
         await page.waitForLoadState("load");
 
-        expect(page.url()).toBe(`${ endpoint }/${ lang }${ path }`);
+        expect(page.url()).toBe(`http://${ ip }:${ port }/${ lang }${ path }`);
 
         return;
       });
@@ -345,7 +346,7 @@ describe("The Genshin English Dictionary", () => {
 });
 
 describe("redirection by language settings works properly", () => {
-  const rootURL = `${ endpoint }`;
+  const rootURL = `http://${ ip }:${ port }`;
   const langs = [
     { code: "ja", localeDir: "ja" },
     { code: "ja-JP", localeDir: "ja" },
