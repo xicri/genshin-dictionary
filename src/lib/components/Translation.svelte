@@ -19,11 +19,13 @@
     pinyins = [],
   }: Props = $props();
 
-  const langName = lang === "en" ? m.langNameEn()
-    : lang === "ja" ? m.langNameJa()
-    : lang === "zh-CN" ? m.langNameZhCN()
-    : lang === "zh-TW" ? m.langNameZhTW()
-    : "";
+  const langName = $derived(
+    lang === "en" ? m.langNameEn()
+      : lang === "ja" ? m.langNameJa()
+      : lang === "zh-CN" ? m.langNameZhCN()
+      : lang === "zh-TW" ? m.langNameZhTW()
+      : "",
+  );
 
   const wordWithPinyin = $derived(
     0 < pinyins.length ? word
