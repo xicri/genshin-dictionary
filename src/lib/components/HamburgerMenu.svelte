@@ -100,9 +100,7 @@ li {
 <div>
   <input id="menu-switch" type="checkbox" checked={open} style="display: none;" onclick={toggleMenu} />
   <label class="menu__icon" for="menu-switch" data-testid="hamburger">
-    <div class="menu__icon-line"></div>
-    <div class="menu__icon-line"></div>
-    <div class="menu__icon-line"></div>
+    <img src="/images/menu-button.svg" alt="Open the menu" width={35} height={27} decoding="async" />
   </label>
   <nav class="menu__nav">
     <div class="menu__nav-padding">

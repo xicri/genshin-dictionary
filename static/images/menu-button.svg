@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Original: https://thenounproject.com/icon/menu-195031/ (Public Domain) -->
+
+<svg width="350" height="270" viewBox="0 0 350 270" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <style>
+    path {
+      fill: #001f48;
+      stroke: #001f48;
+      stroke-width: 50px;
+    }
+  </style>
+
+  <path d="m 0  25 h 350" />
+  <path d="m 0 135 h 350" />
+  <path d="m 0 245 h 350" />
+</svg>
