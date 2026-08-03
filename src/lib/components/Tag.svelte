@@ -10,7 +10,7 @@
   const { slug }: Props = $props();
   const currentLocale = getSupportedLocale();
 
-  const tagName = allTags[slug][currentLocale];
+  const tagName = $derived(allTags[slug][currentLocale]);
 </script>
 
 <style lang="scss">
