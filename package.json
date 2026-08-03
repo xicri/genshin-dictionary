@@ -19,7 +19,7 @@
     "preview": "pnpm build && wrangler dev .svelte-kit/cloudflare/_worker.js --port 4173",
     "test": "pnpm sync && vitest run",
     "e2e": "pnpm sync && playwright test --shard=\"${SHARD_INDEX:-1}/${SHARD_TOTAL:-1}\"",
-    "e2e:server": "pnpm build && wrangler dev .svelte-kit/cloudflare/_worker.js --show-interactive-dev-session=false --port=5678",
+    "e2e:server": "vite dev --port=5678",
     "e2e:prepare": "playwright install chromium webkit --with-deps",
     "vrt": "pnpm e2e:prepare && concurrently --kill-others --success=first \"npm:e2e:server\" \"npm:vrt:screenshot\" && npm run vrt:reg",
     "vrt:screenshot": "sleep 5 && jiti ./scripts/vrt-screenshot.ts",
@@ -30,7 +30,7 @@
     "clean": "git clean -dX --exclude=\"!.env\" --force",
     "refresh": "pnpm clean && rm --force ./pnpm-lock.yaml && corepack up && pnpm install",
     "sync": "wrangler types && svelte-kit sync",
-    "prepare": "svelte-kit sync && jiti ./scripts/prepare.ts && pnpm build"
+    "prepare": "wrangler telemetry disable; svelte-kit sync && jiti ./scripts/prepare.ts && pnpm build"
   },
   "dependencies": {
     "@types/luxon": "^3.7.1",
@@ -79,5 +79,5 @@
   "engines": {
     "node": "^24.0.0"
   },
-  "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be"
+  "packageManager": "pnpm@11.19.0+sha512.7881f3ed590d472c4a955e2b88b2121791116066dcc88cbca3849ec9b60f1bbaa6d2ccb221fa91da4e1c65bef2bcbe379365aea7ac539c7bf86dedc3a1b22dce"
 }
