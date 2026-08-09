@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { JSDOM } from "jsdom";
 import type { Locale } from "../src/lib/paraglide/runtime.js";
 
 const { describe } = test;
@@ -155,11 +156,32 @@ describe("The Genshin English Dictionary", () => {
     await page.goto(`http://${ ip }:${ port }/zh-CN/pearl-galley`);
 
     const zhCN = await page.$("[data-e2e='zh-CN']");
-    const zhCNinnerHTML = (await zhCN!.innerHTML())
-      .replaceAll(/<!--[\s\S]*?-->/gm, "") // Remove comments
-      .replaceAll(/<rt [\s\S]*?>/gm, "<rt>"); // Remove attributes from `<rt>`s
 
-    expect(zhCNinnerHTML).toBe("珠<ruby>钿<rp>(</rp><rt>diàn</rt><rp>)</rp></ruby><ruby>舫<rp>(</rp><rt>fǎng</rt><rp>)</rp></ruby>");
+    const jsdom = new JSDOM();
+    const parser = new jsdom.window.DOMParser();
+    const zhCnInnerHTML = await zhCN!.innerHTML();
+    const html = parser.parseFromString(zhCnInnerHTML, "text/html");
+    const zhCnTranslationWithRuby = [ ...html.body.childNodes ]
+      // Remove comments
+      .filter((child) => child.nodeType !== jsdom.window.Node.COMMENT_NODE)
+      .map((child) => {
+        if (child.nodeType === jsdom.window.Node.TEXT_NODE) {
+          return child.textContent;
+        } else if (child.nodeType === jsdom.window.Node.ELEMENT_NODE) {
+          // TODO: don't cast `child` repeatedly. Only cast once!
+          (child as Element).removeAttribute("class");
+
+          for (const grandChildren of (child as Element).children) {
+            grandChildren.removeAttribute("class");
+          }
+
+          return (child as Element).outerHTML;
+        } else {
+          throw new Error();
+        }
+      }).join("");
+
+    expect(zhCnTranslationWithRuby).toBe("珠<ruby>钿<rp>(</rp><rt>diàn</rt><rp>)</rp></ruby><ruby>舫<rp>(</rp><rt>fǎng</rt><rp>)</rp></ruby>");
 
     return;
   });
