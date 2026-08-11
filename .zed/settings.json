@@ -1,0 +1,74 @@
+{
+  "line_ending": "enforce_lf",
+
+  "languages": {
+    "JavaScript": {
+      "formatter": "none",
+      "format_on_save": "on",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "TypeScript": {
+      "formatter": "none",
+      "format_on_save": "on",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "TSX": {
+      "formatter": "none",
+      "format_on_save": "on",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "JSON": {
+      "language_servers": [
+        "json-language-server",
+        "eslint"
+      ],
+      "formatter": "none",
+      "format_on_save": "on",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "JSONC": {
+      "language_servers": [
+        "json-language-server",
+        "eslint"
+      ],
+      "formatter": "none",
+      "format_on_save": "on",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "JSON5": {
+      "language_servers": [
+        "json-language-server",
+        "eslint"
+      ],
+      "formatter": "none",
+      "format_on_save": "on",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "TOML": {
+      "formatter": "none",
+      "format_on_save": "off"
+    }
+  },
+  "lsp": {
+    "eslint": {
+      "settings": {
+        "codeActionOnSave": true
+      }
+    }
+  },
+  "prettier": {
+    "allowed": false
+  }
+}
