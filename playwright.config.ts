@@ -45,7 +45,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: "pnpm e2e:server",
+    command: "pnpm exec vite dev --port=5678",
     url: "http://localhost:5678/ja",
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,
