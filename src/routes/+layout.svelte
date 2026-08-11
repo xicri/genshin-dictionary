@@ -57,13 +57,9 @@
       </h1>
 
       <Spacer />
-      <button class="menu__icon" command="show-modal" commandfor="hamburger-menu" data-testid="hamburger">
-        <img src="/images/menu-button.svg" alt="Open the menu" width={35} height={27} decoding="async" />
-      </button>
+      <HamburgerMenu />
     </nav>
   </div>
 
   {@render children()}
-
-  <HamburgerMenu />
 </div>

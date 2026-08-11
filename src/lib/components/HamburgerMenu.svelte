@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ClosingLayer from "$lib/components/ClosingLayer.svelte";
   import { m } from "$lib/paraglide/messages.js";
   import { localizeHref, setLocale } from "$lib/paraglide/runtime.js";
   import { supportedLocales } from "../../app.config.ts";
@@ -10,7 +11,20 @@
     "zh-TW": "繁體中文",
   };
 
-  let menu: HTMLDialogElement | undefined = $state();
+  //
+  // states
+  //
+  let open: boolean = $state(false);
+
+  //
+  // event handlers
+  //
+  const toggleMenu = (evt: MouseEvent): void => {
+    open = (evt.target as HTMLInputElement)?.checked;
+  };
+  const closeMenu = (): void => {
+    open = false;
+  };
 </script>
 
 <style lang="scss">
@@ -34,12 +48,12 @@ li {
   }
 
   &__nav {
-    visibility: visible;
+    visibility: hidden;
     position: fixed;
     top: 0;
     right: 0;
 
-    width: 240px;
+    width: 0;
     height: 100vh;
 
     transition: width 300ms, visibility 300ms;
@@ -48,6 +62,10 @@ li {
     box-shadow: -5px 0 5px #c0c0c0;
 
     z-index: 15;
+  }
+  #menu-switch:checked ~ &__nav {
+    visibility: visible;
+    width: 240px;
   }
 
   &__nav-padding {
@@ -79,45 +97,49 @@ li {
 }
 </style>
 
-  <dialog id="hamburger-menu" bind:this={menu} class="menu__nav">
-    <form method="dialog">
-      <nav class="menu__nav-padding">
-        <ul class="menu__items">
-          <li class="menu__item">
-            <a href={localizeHref("/about")} class="no-underline hover:underline">{ m.about() }</a>
-          </li>
-          <li class="menu__item">
-            <a href={localizeHref("/opendata")} class="no-underline hover:underline">{ m.opendata() }</a>
-          </li>
-          <li class="menu__item">
-            <a href={localizeHref("/history")} class="no-underline hover:underline">{ m.history() }</a>
-          </li>
-        </ul>
+<div>
+  <input id="menu-switch" type="checkbox" checked={open} style="display: none;" onclick={toggleMenu} />
+  <label class="menu__icon" for="menu-switch" data-testid="hamburger">
+    <img src="/images/menu-button.svg" alt="Open the menu" width={35} height={27} decoding="async" />
+  </label>
+  <nav class="menu__nav">
+    <div class="menu__nav-padding">
+      <ul class="menu__items">
+        <li class="menu__item">
+          <a href={localizeHref("/about")} class="no-underline hover:underline">{ m.about() }</a>
+        </li>
+        <li class="menu__item">
+          <a href={localizeHref("/opendata")} class="no-underline hover:underline">{ m.opendata() }</a>
+        </li>
+        <li class="menu__item">
+          <a href={localizeHref("/history")} class="no-underline hover:underline">{ m.history() }</a>
+        </li>
+      </ul>
 
-        <h2 class="menu__languages-title">
-          Languages
-        </h2>
-        <div class="flex flex-col gap-y-2 pl-6 mb-8">
-          {#each supportedLocales as locale, index (index) }
-            <button
-              onclick={() => setLocale(locale)}
-              class="text-dark cursor-pointer text-left"
-              data-testid={`locale-switch-${ locale }`}
-            >
-              { langNames[locale] }
-            </button>
-          {/each}
-        </div>
+      <h2 class="menu__languages-title">
+        Languages
+      </h2>
+      <div class="flex flex-col gap-y-2 pl-6 mb-8">
+        {#each supportedLocales as locale, index (index) }
+          <button
+            onclick={() => setLocale(locale)}
+            class="text-dark cursor-pointer text-left"
+            data-testid={`locale-switch-${ locale }`}
+          >
+            { langNames[locale] }
+          </button>
+        {/each}
+      </div>
 
-        <div class="menu__bottomline mb-2.5">
-          <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
-        </div>
+      <div class="menu__bottomline mb-2.5">
+        <a href="https://github.com/xicri?tab=repositories" target="_blank" rel="noopener">GitHub</a>
+      </div>
 
-        <p class="text-xs">
-          This is an unofficial fan-made website. <br />
-          Copyright &copy; 2021-present Xicri & the Genshin Dictionary contributors<br />
-          Genshin Impact is a registered trademark of miHoYo, Inc., COGNOSPHERE PTE. LTD., and their affiliated subsidiaries.
-        </p>
-      </nav>
-    </form>
-  </dialog>
+      <p class="text-xs">
+        Copyright &copy; 2021-present Xicri & the Genshin Dictionary contributors<br />
+        Genshin Impact is a registered trademark of miHoYo, Inc., COGNOSPHERE PTE. LTD., and their affiliated subsidiaries.
+      </p>
+    </div>
+  </nav>
+  <ClosingLayer enabled={open} onclose={closeMenu} />
+</div>
