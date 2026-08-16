@@ -1,4 +1,4 @@
-import { response as sitemapResponse } from "super-sitemap";
+import { response as sitemapResponse } from "super-sitemap/sveltekit";
 import type { RequestHandler } from "@sveltejs/kit";
 import words from "$lib/dataset/words.json" with { type: "json" };
 import tags from "$lib/dataset/tags.json" with { type: "json" };
