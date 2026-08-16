@@ -39,7 +39,7 @@
     "jiti": "^2.7.0",
     "luxon": "^3.7.2",
     "sass": "^1.102.0",
-    "super-sitemap": "^1.0.12",
+    "super-sitemap": "^2.0.0",
     "tailwind-merge": "^3.6.0",
     "undici": "^8.10.0"
   },
