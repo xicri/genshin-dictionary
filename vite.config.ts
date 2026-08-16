@@ -37,6 +37,9 @@ export default defineConfig({
           ])),
         },
       ],
+      routeStrategies: [
+        { match: "/sitemap.xml", exclude: true },
+      ],
     }),
   ],
   server: {
