@@ -74,7 +74,7 @@
     "typescript-eslint": "^8.67.0",
     "vite": "^8.2.1",
     "vite-plugin-devtools-json": "^1.1.0",
-    "vitest": "^4.1.10",
+    "vitest": "^5.0.0",
     "wrangler": "^4.123.0",
     "xml2js": "^0.6.2"
   },
