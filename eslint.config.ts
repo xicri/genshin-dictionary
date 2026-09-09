@@ -14,6 +14,7 @@ const gitignorePath = fileURLToPath(new URL("./.gitignore", import.meta.url));
 export default defineConfig(
   includeIgnoreFile(gitignorePath),
   globalIgnores([
+    "./project.inlang/cache/**",
     "./project.inlang/.*.json",
   ]),
 
