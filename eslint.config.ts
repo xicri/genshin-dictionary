@@ -1,10 +1,9 @@
 import { fileURLToPath } from "node:url";
-import { includeIgnoreFile } from "@eslint/compat";
 import js from "@eslint/js";
 import stylistic from "@stylistic/eslint-plugin";
 import jsonc from "eslint-plugin-jsonc";
 import svelte from "eslint-plugin-svelte";
-import { defineConfig, globalIgnores } from "eslint/config";
+import { defineConfig, globalIgnores, includeIgnoreFile } from "eslint/config";
 import globals from "globals";
 import ts from "typescript-eslint";
 import svelteConfig from "./svelte.config.js";
