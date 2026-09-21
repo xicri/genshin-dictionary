@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@types/luxon": "^3.7.4",
-    "dotenv": "^17.4.2",
+    "dotenv": "^18.0.0",
     "es-toolkit": "^1.50.0",
     "jiti": "^2.7.0",
     "luxon": "^3.7.2",
