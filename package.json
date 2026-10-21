@@ -50,7 +50,7 @@
     "@inlang/paraglide-js": "^2.25.0",
     "@playwright/test": "^1.62.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "@sveltejs/adapter-cloudflare": "^7.2.9",
+    "@sveltejs/adapter-cloudflare": "^8.0.0",
     "@sveltejs/kit": "^2.70.2",
     "@sveltejs/vite-plugin-svelte": "^7.3.0",
     "@tailwindcss/vite": "^4.3.3",
