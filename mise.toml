@@ -1,9 +1,6 @@
 [tools]
-node = { version = "24", corepack = true }
-
-[hooks]
-postinstall = "corepack enable"
+node = "24"
+pnpm = "11"
 
 [settings]
 jobs = 8
-experimental = true
