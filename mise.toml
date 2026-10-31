@@ -1,5 +1,5 @@
 [tools]
-node = { version = "24", corepack = true }
+node = { version = "26", corepack = true }
 
 [hooks]
 postinstall = "corepack enable"
