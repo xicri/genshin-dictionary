@@ -1,5 +1,5 @@
 // Don't use `$lib/` path here because this file is imported by vite.config.ts
-import { localeRedirections, supportedLocales } from "../../app.config";
+import { localeRedirections, supportedLocales } from "../../app.config.ts";
 import type { SupportedLocale } from "./runtime.ts";
 
 export const isSupportedLocale = (maybeLocale: string): maybeLocale is SupportedLocale =>
