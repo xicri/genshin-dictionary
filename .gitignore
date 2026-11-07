@@ -116,6 +116,9 @@ worker-configuration.d.ts
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
+# inlang / Paraglide
+/project.inlang/cache/
+
 # ESLint
 .eslintcache
 
