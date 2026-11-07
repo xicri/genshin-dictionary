@@ -1,14 +1,22 @@
 import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
 import stylistic from "@stylistic/eslint-plugin";
+import { loadConfig } from "@sveltejs/load-config";
 import jsonc from "eslint-plugin-jsonc";
 import svelte from "eslint-plugin-svelte";
 import { defineConfig, globalIgnores, includeIgnoreFile } from "eslint/config";
 import globals from "globals";
 import ts from "typescript-eslint";
-import svelteConfig from "./svelte.config.js";
 
 const gitignorePath = fileURLToPath(new URL("./.gitignore", import.meta.url));
+const svelteConfigLoader = await loadConfig("./", { traverse: false }) ?? {};
+
+if (!("config" in svelteConfigLoader)) {
+  if ("error" in svelteConfigLoader) {
+    console.error(svelteConfigLoader?.error ?? "");
+  }
+  throw new Error("Failed to load Svelte config from vite.config.ts.");
+}
 
 export default defineConfig(
   includeIgnoreFile(gitignorePath),
@@ -102,7 +110,7 @@ export default defineConfig(
         projectService: true,
         extraFileExtensions: [ ".svelte" ],
         parser: ts.parser,
-        svelteConfig,
+        svelteConfig: svelteConfigLoader.config,
       },
     },
 
