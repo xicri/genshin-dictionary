@@ -1,4 +1,4 @@
-import { SERVER_ENV } from "$env/static/private";
+import { SERVER_ENV } from "$app/env/private";
 import type { LayoutServerLoad } from "./$types";
 
 export const load: LayoutServerLoad = () => {
