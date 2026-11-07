@@ -1,3 +1,5 @@
+import adapter from "@sveltejs/adapter-cloudflare";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import tailwindcss from "@tailwindcss/vite";
 import { sveltekit } from "@sveltejs/kit/vite";
@@ -9,7 +11,11 @@ import inlangSettings from "./project.inlang/settings.json" with { type: "json" 
 export default defineConfig({
   plugins: [
     tailwindcss(),
-    sveltekit(),
+    sveltekit({
+      preprocess: vitePreprocess(),
+      adapter: adapter(),
+      paths: { relative: false },
+    }),
     devtoolsJson(),
     paraglideVitePlugin({
       project: "./project.inlang",
