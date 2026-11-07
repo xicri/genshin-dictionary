@@ -1,4 +1,5 @@
 import { defineParaglideStrategies } from "$lib/server/paraglide";
+import { getTextDirection } from "$lib/paraglide/runtime.js";
 import { paraglideMiddleware } from "$lib/paraglide/server";
 import { headers } from "./app.config.ts";
 import type { Handle } from "@sveltejs/kit";
@@ -14,10 +15,16 @@ export const handle: Handle = ({ event, resolve }) => {
   defineParaglideStrategies();
 
   return paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
-    event.request = localizedRequest;
-
-    return resolve(event, {
-      transformPageChunk: ({ html }) => html.replace("%lang%", locale),
-    });
+    return resolve(
+      {
+        ...event,
+        request: localizedRequest,
+      },
+      {
+        transformPageChunk: ({ html }) => html
+          .replace("%lang%", locale)
+          .replace("%dir%", getTextDirection(locale)),
+      },
+    );
   });
 };
