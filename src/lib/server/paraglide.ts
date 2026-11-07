@@ -1,8 +1,8 @@
-import { getRedirectedLocale } from "$lib/i18n/setup.ts";
+import { getRedirectedLocale } from "#lib/i18n/setup.ts";
 import {
   defineCustomServerStrategy,
   extractLocaleFromRequest,
-} from "$lib/paraglide/runtime.js";
+} from "#lib/paraglide/runtime.js";
 
 export const defineParaglideStrategies = () =>
   defineCustomServerStrategy("custom-locale-alias", {

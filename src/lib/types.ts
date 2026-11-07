@@ -1,4 +1,4 @@
-import allTags from "$lib/dataset/tags.json";
+import allTags from "#lib/dataset/tags.json";
 
 export type TagSlug = keyof typeof allTags;
 

@@ -1,11 +1,11 @@
 <script lang="ts">
-  import Tag from "$lib/components/Tag.svelte";
-  import Translation from "$lib/components/Translation.svelte";
-  import { m } from "$lib/paraglide/messages.js";
-  import { localizeHref } from "$lib/paraglide/runtime.js";
-  import { getSupportedLocale } from "$lib/i18n/runtime.ts";
-  import { sleep } from "$lib/utils.ts";
-  import type { Word } from "$lib/types.ts";
+  import Tag from "#lib/components/Tag.svelte";
+  import Translation from "#lib/components/Translation.svelte";
+  import { m } from "#lib/paraglide/messages.js";
+  import { localizeHref } from "#lib/paraglide/runtime.js";
+  import { getSupportedLocale } from "#lib/i18n/runtime.ts";
+  import { sleep } from "#lib/utils.ts";
+  import type { Word } from "#lib/types.ts";
 
   type Props = {
     word: Word;

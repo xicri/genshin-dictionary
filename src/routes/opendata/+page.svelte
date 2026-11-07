@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { m } from "$lib/paraglide/messages";
-  import Article from "$lib/components/Article.svelte";
-  import tags from "$lib/dataset/tags.json";
-  import "$lib/styles/articles.css";
-  import { getSupportedLocale } from "$lib/i18n/runtime.ts";
+  import { m } from "#lib/paraglide/messages.js";
+  import Article from "#lib/components/Article.svelte";
+  import tags from "#lib/dataset/tags.json";
+  import "#lib/styles/articles.css";
+  import { getSupportedLocale } from "#lib/i18n/runtime.ts";
 
   const locale = getSupportedLocale();
   const title = `${ m.opendataTitle() } | ${ m.siteTitle() }`;

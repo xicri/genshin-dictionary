@@ -1,6 +1,6 @@
-import { defineParaglideStrategies } from "$lib/server/paraglide.ts";
-import { getTextDirection } from "$lib/paraglide/runtime.js";
-import { paraglideMiddleware } from "$lib/paraglide/server.js";
+import { defineParaglideStrategies } from "#lib/server/paraglide.ts";
+import { getTextDirection } from "#lib/paraglide/runtime.js";
+import { paraglideMiddleware } from "#lib/paraglide/server.js";
 import { headers } from "./app.config.ts";
 import type { Handle } from "@sveltejs/kit/hooks";
 
