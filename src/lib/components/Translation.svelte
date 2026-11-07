@@ -40,7 +40,7 @@
 </script>
 
 <style lang="scss">
-@use "$lib/styles/variables.scss" as vars;
+@use "../styles/variables.scss" as vars;
 
 .results {
   &__translation {

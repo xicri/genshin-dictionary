@@ -4,7 +4,7 @@
 </script>
 
 <style lang="scss">
-@use "$lib/styles/variables.scss" as vars;
+@use "../lib/styles/variables.scss" as vars;
 
 h1, h2 {
   display: block;
