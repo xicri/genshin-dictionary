@@ -1,7 +1,7 @@
-import allWords from "$lib/dataset/words.json";
-import { candidate } from "$lib/utils.ts";
-import type { Locale } from "$lib/paraglide/runtime.js";
-import type { TagSlug, Word } from "$lib/types.ts";
+import allWords from "#lib/dataset/words.json";
+import { candidate } from "#lib/utils.ts";
+import type { Locale } from "#lib/paraglide/runtime.js";
+import type { TagSlug, Word } from "#lib/types.ts";
 
 export const getWordFromID = (wordID: string) =>
   allWords.find((word) => word.id === wordID);

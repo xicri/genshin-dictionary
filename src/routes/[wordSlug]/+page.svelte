@@ -1,5 +1,5 @@
 <script lang="ts">
-  import WordCard from "$lib/components/WordCard.svelte";
+  import WordCard from "#lib/components/WordCard.svelte";
   import type { PageProps } from "./$types";
 
   const { data }: PageProps = $props();

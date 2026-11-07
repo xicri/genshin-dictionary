@@ -1,10 +1,10 @@
 <script lang="ts">
   import { twMerge } from "tailwind-merge";
-  import allTags from "$lib/dataset/tags.json";
-  import ClosingLayer from "$lib/components/ClosingLayer.svelte";
-  import { m } from "$lib/paraglide/messages.js";
-  import { getSupportedLocale } from "$lib/i18n/runtime.ts";
-  import type { TagSlug } from "$lib/types.ts";
+  import allTags from "#lib/dataset/tags.json";
+  import ClosingLayer from "#lib/components/ClosingLayer.svelte";
+  import { m } from "#lib/paraglide/messages.js";
+  import { getSupportedLocale } from "#lib/i18n/runtime.ts";
+  import type { TagSlug } from "#lib/types.ts";
 
   type Props = {
     query: string;

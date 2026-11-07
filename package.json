@@ -13,6 +13,10 @@
   "homepage": "https://genshin-dictionary.com",
   "private": true,
   "type": "module",
+  "imports": {
+    "#lib": "./src/lib/index.js",
+    "#lib/*": "./src/lib/*"
+  },
   "scripts": {
     "dev": "pnpm sync && vite dev",
     "build": "pnpm sync && jiti ./scripts/build.ts && vite build",

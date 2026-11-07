@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { m } from "$lib/paraglide/messages.js";
-  import { getLocale } from "$lib/paraglide/runtime";
-  import Article from "$lib/components/Article.svelte";
-  import words from "$lib/dataset/words.json";
-  import "$lib/styles/articles.css";
+  import { m } from "#lib/paraglide/messages.js";
+  import { getLocale } from "#lib/paraglide/runtime.js";
+  import Article from "#lib/components/Article.svelte";
+  import words from "#lib/dataset/words.json";
+  import "#lib/styles/articles.css";
 
   const locale = getLocale();
   const title = `${ m.aboutTitle() } | ${ m.siteTitle() }`;

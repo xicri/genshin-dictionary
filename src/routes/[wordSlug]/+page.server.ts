@@ -1,8 +1,8 @@
 import { error } from "@sveltejs/kit";
-import { m } from "$lib/paraglide/messages.js";
-import { getLocale } from "$lib/paraglide/runtime.js";
-import words from "$lib/dataset/words.json";
-import type { Word } from "$lib/types";
+import { m } from "#lib/paraglide/messages.js";
+import { getLocale } from "#lib/paraglide/runtime.js";
+import words from "#lib/dataset/words.json";
+import type { Word } from "#lib/types.ts";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ params }) => {

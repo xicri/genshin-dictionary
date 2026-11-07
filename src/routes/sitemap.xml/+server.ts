@@ -1,7 +1,7 @@
 import { response as sitemapResponse } from "super-sitemap/sveltekit";
 import type { RequestHandler } from "@sveltejs/kit";
-import words from "$lib/dataset/words.json" with { type: "json" };
-import tags from "$lib/dataset/tags.json" with { type: "json" };
+import words from "#lib/dataset/words.json" with { type: "json" };
+import tags from "#lib/dataset/tags.json" with { type: "json" };
 import { supportedLocales } from "../../app.config";
 
 export const prerender = true;

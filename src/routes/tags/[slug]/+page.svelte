@@ -1,5 +1,5 @@
 <script lang="ts">
-  import WordList from "$lib/components/WordList.svelte";
+  import WordList from "#lib/components/WordList.svelte";
   import type { PageProps } from "./$types";
 
   let { data }: PageProps = $props();

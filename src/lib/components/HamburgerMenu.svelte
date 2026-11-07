@@ -1,7 +1,7 @@
 <script lang="ts">
-  import ClosingLayer from "$lib/components/ClosingLayer.svelte";
-  import { m } from "$lib/paraglide/messages.js";
-  import { localizeHref, setLocale } from "$lib/paraglide/runtime.js";
+  import ClosingLayer from "#lib/components/ClosingLayer.svelte";
+  import { m } from "#lib/paraglide/messages.js";
+  import { localizeHref, setLocale } from "#lib/paraglide/runtime.js";
   import { supportedLocales } from "../../app.config.ts";
 
   const langNames = {

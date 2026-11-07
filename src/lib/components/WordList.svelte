@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { debounce } from "es-toolkit";
-  import IntersectionObserver from "$lib/components/IntersectionObserver.svelte";
-  import WordListSearch from "$lib/components/WordListSearch.svelte";
-  import WordCard from "$lib/components/WordCard.svelte";
-  import { searchWords } from "$lib/search.ts";
-  import { m } from "$lib/paraglide/messages.js";
-  import { getLocale } from "$lib/paraglide/runtime.js";
-  import type { TagSlug } from "$lib/types.ts";
+  import IntersectionObserver from "#lib/components/IntersectionObserver.svelte";
+  import WordListSearch from "#lib/components/WordListSearch.svelte";
+  import WordCard from "#lib/components/WordCard.svelte";
+  import { searchWords } from "#lib/search.ts";
+  import { m } from "#lib/paraglide/messages.js";
+  import { getLocale } from "#lib/paraglide/runtime.js";
+  import type { TagSlug } from "#lib/types.ts";
 
   type Props = {
     tagSlug?: TagSlug;

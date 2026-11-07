@@ -1,9 +1,9 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import HamburgerMenu from "$lib/components/HamburgerMenu.svelte";
-  import Spacer from "$lib/components/Spacer.svelte";
-  import { m } from "$lib/paraglide/messages.js";
-  import "$lib/styles/global.css";
+  import HamburgerMenu from "#lib/components/HamburgerMenu.svelte";
+  import Spacer from "#lib/components/Spacer.svelte";
+  import { m } from "#lib/paraglide/messages.js";
+  import "#lib/styles/global.css";
   import type { LayoutProps } from "./$types";
 
   const { data, children }: LayoutProps = $props();

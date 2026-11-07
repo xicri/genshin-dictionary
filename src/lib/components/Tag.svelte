@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { getSupportedLocale } from "$lib/i18n/runtime.ts";
-  import allTags from "$lib/dataset/tags.json";
-  import type { TagSlug } from "$lib/types";
+  import { getSupportedLocale } from "#lib/i18n/runtime.ts";
+  import allTags from "#lib/dataset/tags.json";
+  import type { TagSlug } from "#lib/types.ts";
 
   type Props = {
     slug: TagSlug;

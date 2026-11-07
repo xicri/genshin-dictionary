@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { m } from "$lib/paraglide/messages.js";
-  import type { SupportedLocale } from "$lib/i18n/runtime.ts";
+  import { m } from "#lib/paraglide/messages.js";
+  import type { SupportedLocale } from "#lib/i18n/runtime.ts";
 
   type Props = {
     lang: SupportedLocale;
